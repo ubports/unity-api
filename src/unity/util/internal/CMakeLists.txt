@@ -16,6 +16,8 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
-file(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
+set(UTIL_INTERNAL_SRC
+    ${CMAKE_CURRENT_SOURCE_DIR}/DaemonImpl.cpp
+)
 
-install(FILES ${headers} DESTINATION include/unity/util)
+set(UNITY_API_LIB_SRC ${UNITY_API_LIB_SRC} ${UTIL_INTERNAL_SRC} PARENT_SCOPE)

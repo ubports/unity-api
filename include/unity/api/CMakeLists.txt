@@ -18,4 +18,10 @@
 
 file(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
 
-install(FILES ${headers} DESTINATION include/unity/util)
+#
+# Generated headers
+#
+configure_file(Version.h.cmake Version.h)
+set(headers ${headers} ${CMAKE_CURRENT_BINARY_DIR}/Version.h)
+
+install(FILES ${headers} DESTINATION include/unity/api)

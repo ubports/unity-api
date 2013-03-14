@@ -16,4 +16,3 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
-add_subdirectory(Version)

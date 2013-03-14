@@ -16,6 +16,7 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
+add_subdirectory(api)
 add_subdirectory(scopes)
 add_subdirectory(util)
 

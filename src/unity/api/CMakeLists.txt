@@ -16,6 +16,13 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
-file(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
+add_subdirectory(internal)
+add_subdirectory(scopes)
 
-install(FILES ${headers} DESTINATION include/unity/util)
+set(API_SRC
+    ${CMAKE_CURRENT_SOURCE_DIR}/Exception.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/UnityExceptions.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Version.cpp
+)
+
+set(UNITY_API_LIB_SRC ${UNITY_API_LIB_SRC} ${API_SRC} PARENT_SCOPE)

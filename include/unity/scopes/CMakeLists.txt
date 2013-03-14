@@ -16,17 +16,6 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
-#
-# List of all public headers. Do not include:
-#
-# - Anything in internal.
-#
+file(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
 
-set (SCOPES_PUBLIC_HEADERS
-    Version.h
-)
-
-#
-# Generated headers
-#
-configure_file(Version.h.cmake ${CMAKE_CURRENT_SOURCE_DIR}/Version.h)
+install(FILES ${headers} DESTINATION include/unity/scopes)

@@ -29,8 +29,8 @@ endif()
 # Project
 #
 
-project(scopes)
-set(PROJECT_NAME "scopes")
+project(unity-api)
+set(PROJECT_NAME "unity-api")
 
 include(cmake/coverage.cmake)
 
@@ -38,10 +38,10 @@ include(cmake/coverage.cmake)
 # Version
 #
 
-set(UNITY_SCOPES_MAJOR 0)
-set(UNITY_SCOPES_MINOR 1)
-set(UNITY_SCOPES_MICRO 0)
-set(UNITY_SCOPES_VERSION "${UNITY_SCOPES_MAJOR}.${UNITY_SCOPES_MINOR}.${UNITY_SCOPES_MICRO}")
+set(UNITY_API_MAJOR 0)
+set(UNITY_API_MINOR 1)
+set(UNITY_API_MICRO 0)
+set(UNITY_API_VERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}.${UNITY_API_MICRO}")
 
 #
 # Compiler flags
@@ -78,16 +78,14 @@ add_custom_target(coverage-build
 # Names of the libraries we create and link against.
 #
 
-set(SCOPES_LIB unity-scopes)
+set(UNITY_API_LIB unity-api)
 set(OTHER_LIBS )
-
-set(SCOPES_LIBS ${SCOPES_LIB})
 
 #
 # All the libraries we need to link a normal executable.
 #
 
-set(LIBS ${SCOPES_LIBS} ${OTHER_LIBS})
+set(LIBS ${UNITY_API_LIB} ${OTHER_LIBS})
 
 #
 # Location where gtest source is installed.
@@ -187,12 +185,12 @@ add_custom_target(doc
 
 include_directories(
     include
+    ${CMAKE_BINARY_DIR}/include
 )
 
-add_subdirectory(include)
 add_subdirectory(src)
+add_subdirectory(include)
 add_subdirectory(test)
-add_subdirectory(examples)
 
 #
 # Used by some of the test scripts to filter out files that are generated as part of a build. Build directories (for

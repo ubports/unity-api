@@ -17,3 +17,7 @@
 #
 
 add_subdirectory(unity)
+
+add_library(${UNITY_API_LIB} SHARED ${UNITY_API_LIB_SRC})
+
+install(TARGETS ${UNITY_API_LIB} LIBRARY DESTINATION lib)

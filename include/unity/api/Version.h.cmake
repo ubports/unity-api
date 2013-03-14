@@ -20,19 +20,19 @@
  * Authored by: Michi Henning <michi.henning@canonical.com>
  */
 
-#ifndef UNITY_SCOPES_VERSION_H
-#define UNITY_SCOPES_VERSION_H
+#ifndef UNITY_API_VERSION_H
+#define UNITY_API_VERSION_H
 
-#define UNITY_SCOPES_VERSION_MAJOR @UNITY_SCOPES_MAJOR@
-#define UNITY_SCOPES_VERSION_MINOR @UNITY_SCOPES_MINOR@
-#define UNITY_SCOPES_VERSION_MICRO @UNITY_SCOPES_MICRO@
+#define UNITY_API_VERSION_MAJOR @UNITY_API_MAJOR@
+#define UNITY_API_VERSION_MINOR @UNITY_API_MINOR@
+#define UNITY_API_VERSION_MICRO @UNITY_API_MICRO@
 
-#define UNITY_SCOPES_VERSION_STRING "@UNITY_SCOPES_VERSION@"
+#define UNITY_API_VERSION_STRING "@UNITY_API_VERSION@"
 
 namespace unity
 {
 
-namespace scopes
+namespace api
 {
 
 /**
@@ -86,7 +86,7 @@ private:
     ~Version() = delete;
 };
 
-} // namespace scopes
+} // namespace api
 
 } // namespace unity
 

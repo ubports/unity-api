@@ -16,6 +16,9 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
-file(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
+set(UNITY_INTERNAL_SRC
+    ${CMAKE_CURRENT_SOURCE_DIR}/ExceptionImpl.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/UnityExceptionsImpl.cpp
+)
 
-install(FILES ${headers} DESTINATION include/unity/util)
+set(UNITY_API_LIB_SRC ${UNITY_API_LIB_SRC} ${UNITY_INTERNAL_SRC} PARENT_SCOPE)

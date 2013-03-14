@@ -16,44 +16,44 @@
  * Authored by: Michi Henning <michi.henning@canonical.com>
  */
 
-#include <unity/scopes/Version.h>
+#include <unity/api/Version.h>
 
 using namespace std;
 
 namespace unity
 {
 
-namespace scopes
+namespace api
 {
 
 int
 Version::
 major_version()
 {
-    return UNITY_SCOPES_VERSION_MAJOR;
+    return UNITY_API_VERSION_MAJOR;
 }
 
 int
 Version::
 minor_version()
 {
-    return UNITY_SCOPES_VERSION_MINOR;
+    return UNITY_API_VERSION_MINOR;
 }
 
 int
 Version::
 micro_version()
 {
-    return UNITY_SCOPES_VERSION_MICRO;
+    return UNITY_API_VERSION_MICRO;
 }
 
 char const*
 Version::
 str()
 {
-    return UNITY_SCOPES_VERSION_STRING;
+    return UNITY_API_VERSION_STRING;
 }
 
-} // namespace scopes
+} // namespace api
 
 } // namespace unity

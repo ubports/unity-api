@@ -16,6 +16,11 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
-file(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
+add_subdirectory(internal)
 
-install(FILES ${headers} DESTINATION include/unity/util)
+set(UTIL_SRC
+    ${CMAKE_CURRENT_SOURCE_DIR}/Daemon.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/FileIO.cpp
+)
+
+set(UNITY_API_LIB_SRC ${UNITY_API_LIB_SRC} ${UTIL_SRC} PARENT_SCOPE)

@@ -16,16 +16,16 @@
  * Authored by: Michi Henning <michi.henning@canonical.com>
  */
 
-#include <unity/scopes/Version.h>
+#include <unity/api/Version.h>
 
 #include <gtest/gtest.h>
 
-using namespace unity::scopes;
+using namespace unity::api;
 
 TEST(Version, basic)
 {
-    EXPECT_EQ(Version::major_version(), UNITY_SCOPES_VERSION_MAJOR);
-    EXPECT_EQ(Version::minor_version(), UNITY_SCOPES_VERSION_MINOR);
-    EXPECT_EQ(Version::micro_version(), UNITY_SCOPES_VERSION_MICRO);
-    EXPECT_STREQ(Version::str(), UNITY_SCOPES_VERSION_STRING);
+    EXPECT_EQ(Version::major_version(), UNITY_API_VERSION_MAJOR);
+    EXPECT_EQ(Version::minor_version(), UNITY_API_VERSION_MINOR);
+    EXPECT_EQ(Version::micro_version(), UNITY_API_VERSION_MICRO);
+    EXPECT_STREQ(Version::str(), UNITY_API_VERSION_STRING);
 }

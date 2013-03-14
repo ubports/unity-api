@@ -16,41 +16,7 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
-set(UNITY_SRC
-    Exception.cpp
-    UnityExceptions.cpp
-)
+add_subdirectory(api)
+add_subdirectory(util)
 
-set(UNITY_INTERNAL_SRC
-    internal/ExceptionImpl.cpp
-    internal/UnityExceptionsImpl.cpp
-)
-
-set(UTIL_SRC
-    util/Daemon.cpp
-    util/FileIO.cpp
-)
-
-set(UTIL_INTERNAL_SRC
-    util/internal/DaemonImpl.cpp
-)
-
-set(SCOPES_SRC
-    scopes/Version.cpp
-)
-
-set(SCOPES_INTERNAL_SRC
-)
-
-set(SCOPES_LIB_SRC
-    ${UNITY_SRC}
-    ${UNITY_INTERNAL_SRC}
-    ${UTIL_SRC}
-    ${UTIL_INTERNAL_SRC}
-    ${SCOPES_SRC}
-    ${SCOPES_INTERNAL_SRC}
-)
-
-add_library(${SCOPES_LIB} SHARED ${SCOPES_LIB_SRC})
-
-install(TARGETS ${SCOPES_LIB} LIBRARY DESTINATION lib)
+set(UNITY_API_LIB_SRC ${UNITY_API_LIB_SRC} PARENT_SCOPE)
