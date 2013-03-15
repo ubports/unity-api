@@ -16,6 +16,10 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
+if (NOT DEFINED GTEST_SRC_DIR)
+    set(GTEST_SRC_DIR /usr/src/gtest)
+endif()
+
 include(ExternalProject)
 
 ExternalProject_Add(gtest

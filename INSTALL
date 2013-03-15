@@ -54,23 +54,13 @@ By default, the code is built in release mode. To build a debug version, use
     $ cmake -DCMAKE_BUILD_TYPE=debug ..
     $ make
 
-or simply
-
-    $ make debug-build
-    $ make
-
-For a release version, use -DCMAKE_BUILD_TYPE=release (or "make release-build; make").
+For a release version, use -DCMAKE_BUILD_TYPE=release
 
 To build with the flags for coverage testing enabled:
 
     $ mkdir buildcoverage
     $ cd makecoverage
     $ cmake -DCMAKE_BUILD_TYPE=coverage
-    $ make
-
-or simply
-
-    $ make coverage_build
     $ make
 
 
@@ -90,25 +80,16 @@ To run the tests with valgrind:
 
     $ make valgrind
 
-To run the coverage tests:
+To get coverage output:
 
     $ make test
-    $ make coverage
+    $ make coverage-html
 
-(The coverage target is available only if the code was build with -DCMAKE_BUILD_TYPE=coverage.)
+(The coverage-html target is available only if the code was built with -DCMAKE_BUILD_TYPE=coverage.)
 
 
-Note that, with gcc 4.7.2 and cmake 2.8.10, you get a bunch of
-warnings. Until cmake fixes this problem, the second step of coverage
-testing (which lists all files that have unexpected uncovered source
-lines) does not happen.
-
-As a work around, run the following command from the build directory
-after running make coverage:
-
-    $ ../test/gcov/gcov.py Testing/CoverageInfo/ ../test/gcov/expected
-
-Alternatively, you can build cmake 2.8.10 with the following patch:
+Note that, with gcc 4.7.2 and cmake 2.8.10, you may get a bunch of
+warnings. To fix this, you can build cmake 2.8.10 with the following patch:
 
 http://cmake.org/gitweb?p=cmake.git;a=commitdiff;h=61ace1df2616e472d056b302e4269cbf112fb020#patch1
 
@@ -133,22 +114,7 @@ into the old coverage output. You can get rid of this problem by running
 
 This deletes all the .gcda files, allowing the merge to succeed again.
 
-The file test/gcov/expected contains the expected number of uncovered
-source lines for each source and header file. Files with a number
-of uncovered lines that differ (or that are not mentioned and have
-non-zero uncovered lines) are reported. After checking that a file
-only contains uncovered lines that cannot be reached by the tests,
-you can add a suppression line the file, so "make coverage" only
-alerts you if the number of uncovered lines changes.
-
-To get a nicely formatted HTML report of the coverage, run
-
-    $ make lcov
-
-This creates a coverage report in build/lcov/index.html. Note that the report
-contains the bogus uncovered lines that are produced by gcov.
-
-If lcov complains about unrecognized lines lines, apply this patch
+If lcov complains about unrecognized lines, apply this patch
 to /usr/bin/geninfo:
 
 https://bugzilla.redhat.com/attachment.cgi?id=590034

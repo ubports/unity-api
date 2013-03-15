@@ -78,7 +78,7 @@ read_file(string const& filename)
         }
         msg << " from \"" << filename << "\": " << strerror(errno);
         throw FileException(msg.str(), errno);
-        // LCOV_EXCL_END
+        // LCOV_EXCL_STOP
     }
 
     return buf;

@@ -72,7 +72,8 @@ error(string const& file, int line, string const& msg)
     }
     s << endl;
     string l = s.str();
-    write(fd, l.c_str(), l.size());
+    int bytes __attribute__((unused))
+        = write(fd, l.c_str(), l.size()); // Need to use return value to stop warning from gcc.
     close(fd);
 }
 

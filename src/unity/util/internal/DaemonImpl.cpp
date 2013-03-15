@@ -149,7 +149,7 @@ daemonize_me()
             // LCOV_EXCL_START
             sigaction(SIGHUP, &old_action, nullptr);         // Strong exception guarantee
             throw SyscallException("fork() failed", errno);  // Better than trying to muddle on despite the problem.
-            // LCOV_EXCL_END
+            // LCOV_EXCL_STOP
         }
         case 0:
         {

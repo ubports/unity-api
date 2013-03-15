@@ -18,7 +18,7 @@
 
 set(TESTLIBDIR ${CMAKE_BINARY_DIR}/test/gtest/libgtest/build)
 set(LIBGTEST ${TESTLIBDIR}/libgtest_main.a ${TESTLIBDIR}/libgtest.a)
-set(TESTLIBS ${LIBGTEST} boost_regex boost_thread-mt pthread gcov)
+set(TESTLIBS ${LIBGTEST} ${Boost_LIBRARIES} pthread)
 
 add_subdirectory(libgtest)
 add_subdirectory(unity)

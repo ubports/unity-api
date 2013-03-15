@@ -32,8 +32,6 @@ endif()
 project(unity-api)
 set(PROJECT_NAME "unity-api")
 
-include(cmake/coverage.cmake)
-
 #
 # Version
 #
@@ -47,32 +45,24 @@ set(UNITY_API_VERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}.${UNITY_API_MICRO}"
 # Compiler flags
 #
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -fno-permissive -pedantic -Wall -Wextra")
-set(CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_DEBUG} "-g3")
-set(CMAKE_CXX_FLAGS_RELEASE ${CMAKE_CXX_RELEASE} "-g3 -Werror")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-permissive -pedantic -Wall -Wextra")
 
-#
-# Select debug or release mode.
-#
+if (${CMAKE_BUILD_TYPE} STREQUAL "release" OR ${CMAKE_BUILD_TYPE} STREQUAL "relwithdebinfo")
+    option(Werror "Treat warnings as errors" ON)
+else()
+    option(Werror "Treat warnings as errors" OFF)
+endif()
 
-add_custom_target(debug-build
-    COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE:STRING=debug ${PROJECT_SOURCE_DIR}
-)
-
-add_custom_target(release-build
-    ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE:STRING=release ${PROJECT_SOURCE_DIR}
-)
-
-add_custom_target(coverage-build
-    ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE:STRING=coverage ${PROJECT_SOURCE_DIR}
-)
+if (Werror)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
+endif()
 
 #
 # Packages we depend on. TODO: Lots of prerequisites need to be added here, but there doesn't appear
 # to be a Find<name> module for most of them.
 #
 
-#find_package(whatever)
+find_package(Boost 1.49.0 COMPONENTS thread-mt regex REQUIRED)
 
 #
 # Names of the libraries we create and link against.
@@ -88,46 +78,24 @@ set(OTHER_LIBS )
 set(LIBS ${UNITY_API_LIB} ${OTHER_LIBS})
 
 #
-# Location where gtest source is installed.
-#
-
-set(GTEST_SRC_DIR /usr/src/gtest)
-
-#
 # Definitions for testing with valgrind.
 #
 
 find_program(MEMORYCHECK_COMMAND NAMES valgrind)
-if(MEMORYCHECK_COMMAND)
+if (MEMORYCHECK_COMMAND)
     set(MEMORYCHECK_COMMAND_OPTIONS
         "--suppressions=${CMAKE_SOURCE_DIR}/valgrind-suppress --leak-check=full
         --num-callers=40 --error-exitcode=3"
   )
 endif()
 
-add_custom_target(valgrind COMMAND make NightlyMemCheck)
+add_custom_target(valgrind DEPENDS NightlyMemCheck)
 
 #
 # Definitions for coverage testing
 #
 
-find_program(COVERAGE_COMMAND NAMES gcov)
-if(COVERAGE_COMMAND)
-    set(COVERAGE_COMMAND_OPTIONS "")
-endif()
-
-if("${CMAKE_BUILD_TYPE}" STREQUAL "coverage")
-    add_custom_target(coverage
-        COMMAND ${CMAKE_SOURCE_DIR}/test/gcov/gcov.py -i ${CMAKE_SOURCE_DIR}/include
-                    ${CMAKE_BINARY_DIR}/Testing/CoverageInfo ${CMAKE_SOURCE_DIR}/test/gcov/expected
-        DEPENDS NightlyCoverage
-    )
-else()
-    add_custom_target(coverage
-        COMMAND echo "Coverage testing is available only for coverage builds" >&2
-        COMMAND false
-    )
-endif()
+include(cmake/coverage.cmake)
 
 # This gets rid of any stale .gcda files. Run this if a running a binary causes lots of messages about
 # about a "merge mismatch for summaries".
@@ -135,24 +103,6 @@ endif()
 add_custom_target(clean-coverage
         COMMAND find ${CMAKE_BINARY_DIR} -name '*.gcda' | xargs rm -f
 )
-
-set(lcov_dir ${CMAKE_BINARY_DIR}/lcov)
-
-file(MAKE_DIRECTORY ${lcov_dir})
-
-if("${CMAKE_BUILD_TYPE}" STREQUAL "coverage")
-    add_custom_target(lcov
-        COMMAND lcov --quiet --no-compat-libtool --capture --directory ${CMAKE_BINARY_DIR} --output-file ${lcov_dir}/coverage.info
-        COMMAND lcov --quiet --remove ${lcov_dir}/coverage.info 'test/*' -o ${lcov_dir}/coverage.info
-        COMMAND lcov --quiet --remove ${lcov_dir}/coverage.info 'boost/*' -o ${lcov_dir}/coverage.info
-        COMMAND lcov --quiet --remove ${lcov_dir}/coverage.info '/usr/include/*' -o ${lcov_dir}/coverage.info
-        COMMAND genhtml ${lcov_dir}/coverage.info --output-directory ${lcov_dir} --demangle-cpp)
-else()
-    add_custom_target(lcov
-        COMMAND echo "Coverage testing is available only for coverage builds" >&2
-        COMMAND false
-    )
-endif()
 
 add_custom_target(cppcheck COMMAND cppcheck --enable=all -q --error-exitcode=2
                       ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/test)
@@ -186,6 +136,7 @@ add_custom_target(doc
 include_directories(
     include
     ${CMAKE_BINARY_DIR}/include
+    ${Boost_INCLUDE_DIR}
 )
 
 add_subdirectory(src)

@@ -29,7 +29,8 @@ using namespace unity::util;
 
 TEST(FileIO, basic)
 {
-    system("rm -f testfile; echo \"some chars\" >testfile");
+    int i __attribute__((unused))
+        = system("rm -f testfile; echo \"some chars\" >testfile");
 
     string s = read_text_file("testfile");
     EXPECT_EQ("some chars\n", s);
@@ -54,7 +55,8 @@ TEST(FileIO, exceptions)
 
     try
     {
-        system("rm -f noperm; >noperm; chmod u-r noperm");
+        int i __attribute__((unused))
+            = system("rm -f noperm; >noperm; chmod u-r noperm");
         read_text_file("noperm");
         FAIL();
     }
@@ -65,7 +67,8 @@ TEST(FileIO, exceptions)
 
     try
     {
-        system("rm -fr testdir; mkdir testdir");
+        int i __attribute__((unused))
+            = system("rm -fr testdir; mkdir testdir");
         read_text_file("testdir");
         FAIL();
     }
@@ -76,7 +79,8 @@ TEST(FileIO, exceptions)
 
     try
     {
-        system("rm -fr empty; >empty");
+        int i __attribute__((unused))
+            = system("rm -fr empty; >empty");
         read_text_file("empty");
         FAIL();
     }
