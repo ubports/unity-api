@@ -37,7 +37,7 @@ using namespace unity::util;
 // that were detected.
 //
 
-char const* error_file = "/tmp/Daemon_test.out";
+char const* error_file = "Daemon_test.out";
 
 int
 clear_error_file()
@@ -339,7 +339,7 @@ TEST(Daemon, dir)
 
 TEST(Daemon, tty)
 {
-    // Check that the process cannot reacquire a control terminal
+    // Check that the process cannot re-acquire a control terminal
 
     Daemon::UPtr d = Daemon::create();
 

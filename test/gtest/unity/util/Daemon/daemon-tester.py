@@ -49,10 +49,10 @@ progname = parser.prog
 daemon = args.Daemon_test[0]
 run_daemon(daemon)
 
-size = os.stat("/tmp/Daemon_test.out").st_size
+size = os.stat("Daemon_test.out").st_size
 if size == 0:
     exit(0)
 
-with open("/tmp/Daemon_test.out", 'r') as file:
+with open("Daemon_test.out", 'r') as file:
     sys.stderr.write(file.read())
     exit(1)
