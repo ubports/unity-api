@@ -16,9 +16,13 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
+find_package(Threads)
+if(NOT Threads_FOUND)
+  message(FATAL_ERROR "Thread library not found.")
+endif()
 set(TESTLIBDIR ${CMAKE_BINARY_DIR}/test/gtest/libgtest/build)
 set(LIBGTEST ${TESTLIBDIR}/libgtest_main.a ${TESTLIBDIR}/libgtest.a)
-set(TESTLIBS ${LIBGTEST} ${Boost_LIBRARIES} pthread)
+set(TESTLIBS ${LIBGTEST} ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
 add_subdirectory(libgtest)
 add_subdirectory(unity)
