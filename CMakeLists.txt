@@ -120,14 +120,13 @@ enable_testing()
 
 find_package(Doxygen)
 if (NOT DOXYGEN_FOUND)
-    message(FATAL_ERROR "Cannot generate documentation: doxygen not found")
+    message(Warning "Cannot generate documentation: doxygen not found")
+else()
+  configure_file(${PROJECT_SOURCE_DIR}/doc/Doxyfile.in ${PROJECT_BINARY_DIR}/doc/Doxyfile @ONLY IMMEDIATE)
+  add_custom_target(doc
+      COMMAND ${DOXYGEN_EXECUTABLE} ${PROJECT_BINARY_DIR}/doc/Doxyfile
+      SOURCES ${PROJECT_BINARY_DIR}/doc/Doxyfile)
 endif()
-
-configure_file(${PROJECT_SOURCE_DIR}/doc/Doxyfile.in ${PROJECT_BINARY_DIR}/doc/Doxyfile @ONLY IMMEDIATE)
-
-add_custom_target(doc
-    COMMAND ${DOXYGEN_EXECUTABLE} ${PROJECT_BINARY_DIR}/doc/Doxyfile
-    SOURCES ${PROJECT_BINARY_DIR}/doc/Doxyfile)
 
 #
 # Directories
