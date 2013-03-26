@@ -16,7 +16,7 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
-add_subdirectory(Daemon)
-add_subdirectory(DefinesPtrs)
-add_subdirectory(FileIO)
-add_subdirectory(ResourcePtr)
+add_executable(DefinesPtrs_test DefinesPtrs_test.cpp)
+target_link_libraries(DefinesPtrs_test ${LIBS} ${TESTLIBS})
+
+add_test(DefinesPtrs DefinesPtrs_test)
