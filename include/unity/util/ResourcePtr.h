@@ -94,6 +94,8 @@ and supplies the display parameter.
 Use <code>std::unique_ptr</code> instead, which is better suited to the task.
 */
 
+// TODO: Discuss throwing deleters and requirements (copy constructible, etc.) on deleter.
+
 template<typename R, typename D>
 class ResourcePtr : private NonCopyable
 {
@@ -106,8 +108,8 @@ public:
 
     /**
     \typedef deleter_type
-    A function object or lvalue reference to a function or function object, which is called by this ResourcePtr
-    to deallocate the resource
+    A function object or lvalue reference to a function or function object. The ResourcePtr
+    calls this to deallocate the resource.
     */
     typedef D deleter_type;
 
@@ -217,8 +219,11 @@ ResourcePtr(R r, D d)
 
 /**
 Constructs a ResourcePtr by transferring ownership from <code>r</code> to <code>this</code>.
+
+If the resource's move or copy constructor throws, the exception is propagated to the caller.
+The strong exception guarantee is preserved if it is provided by the resource.
 */
-// TODO: Only provide this if resource has move constructor
+// TODO: Mark as nothrow if the resource has a nothrow move constructor or nothrow copy constructor
 
 template<typename R, typename D>
 ResourcePtr<R, D>::
@@ -307,6 +312,15 @@ swap(ResourcePtr& other)
 // The non-member swap() must be in the same namespace as ResourcePtr, so it will work with ADL. And, once it is
 // defined here, there is no point in adding a specialization to namespace std any longer, because ADL
 // will find it here anyway.
+
+/**
+Swaps the resource and deleter of <code>lhs</code> with the resource and deleter of <code>rhs</code>
+by calling <code>lhs.swap(rhs)</code>.
+
+If the underlying swap throws an exception, that exception is propagated to the caller, and the resource
+held by the ResourcePtr is unchanged.
+*/
+// TODO Split this into throw and no-throw versions depending on the underlying swap?
 
 template<typename R, typename D>
 void
@@ -425,7 +439,6 @@ ResourcePtr<R, D>::
 has_resource() const noexcept
 {
     AutoLock lock(m_);
-
     return initialized_;
 }
 
