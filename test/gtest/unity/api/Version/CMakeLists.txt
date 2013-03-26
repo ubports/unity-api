@@ -17,7 +17,6 @@
 #
 
 add_executable(Version_test Version_test.cpp)
-add_dependencies(Version_test ${LIBGTEST})
 target_link_libraries(Version_test ${LIBS} ${TESTLIBS})
 
 add_test(Version Version_test)

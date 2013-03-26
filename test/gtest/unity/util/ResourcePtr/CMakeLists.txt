@@ -17,7 +17,6 @@
 #
 
 add_executable(ResourcePtr_test ResourcePtr_test.cpp)
-add_dependencies(ResourcePtr_test ${LIBGTEST})
 target_link_libraries(ResourcePtr_test ${LIBS} ${TESTLIBS})
 
 add_test(ResourcePtr ResourcePtr_test)

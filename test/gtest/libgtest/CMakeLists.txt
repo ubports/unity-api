@@ -16,16 +16,16 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
-if (NOT DEFINED GTEST_SRC_DIR)
-    set(GTEST_SRC_DIR /usr/src/gtest)
+if (NOT DEFINED GTEST_ROOT)
+    set(GTEST_ROOT /usr/src/gtest)
 endif()
 
-include(ExternalProject)
+set(GTEST_SRC_DIR "${GTEST_ROOT}/src")
+set(GTEST_INCLUDE_DIR ${GTEST_ROOT})
 
-ExternalProject_Add(gtest
-    SOURCE_DIR ${GTEST_SRC_DIR}
-    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}
-    BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/build
-    INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}
-    INSTALL_COMMAND ""
+add_library(gtest STATIC
+${GTEST_SRC_DIR}/gtest-all.cc
+${GTEST_SRC_DIR}/gtest_main.cc
 )
+
+set_target_properties(gtest PROPERTIES INCLUDE_DIRECTORIES ${GTEST_INCLUDE_DIR})
