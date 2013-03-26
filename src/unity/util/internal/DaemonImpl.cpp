@@ -213,7 +213,7 @@ close_open_files() noexcept
         ResourcePtr<DIR*, decltype(&closedir)> dir(opendir(proc_self_fd), closedir);
         if (dir.get() == nullptr)
         {
-            throw SyscallException("opendir(\"/proc/self/fd\") failed", errno); // LCOV_EXCL_LINE
+            return;  // This should never happen but, for diligence, we check anyway. // LCOV_EXCL_LINE
         }
 
         vector<int> descriptors; // We collect the file descriptors to close here
