@@ -119,7 +119,7 @@ public:
     \brief Returns the name of the exception.
 
     Derived classes must override what() to return <i>only</i> the (fully-qualified) name of the derived
-    exception. If the derived class sets a reason string (or contains other details, it should <i>not</i>
+    exception. If the derived class sets a reason string (or contains other details), it should <i>not</i>
     include the reason or details as part of the string return returned by what().
     */
     virtual char const* what() const noexcept = 0;
