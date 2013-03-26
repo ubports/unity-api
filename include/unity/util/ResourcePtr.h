@@ -40,8 +40,7 @@ as <code>XCreateDisplay</code>/<code>XDestroyDisplay</code>.
 The resource managed by this class must be default-constructible, copy-constructible, and assignable.
 
 ResourcePtr essentially does what <code>std::unique_ptr</code> does, but it works with opaque types
-and resource allocation functions that do not return a pointer type, such as <code>open()</code>
-and <code>close()</code>.
+and resource allocation functions that do not return a pointer type, such as <code>open()</code>.
 
 ResourcePtr is thread-safe.
 
@@ -51,7 +50,7 @@ ResourcePtr is thread-safe.
       for it. If you use reset() to install a "no resource allocated" value for
       for the resource, the deleter will eventually be called with this value
       as its argument. Whether this is benign or not depends on the deleter. For
-      example, XFree() must not be called with a <code>nullptr</code> argument.
+      example, <code>XFree()</code> must not be called with a <code>nullptr</code> argument.
 
 \note Do not call get() or release() if no resource is currently allocated.
       Doing so throws <code>std::logic_error</code>.
@@ -176,21 +175,21 @@ ResourcePtr(D d)
 Constructs a ResourcePtr with the specified resource and deleter. has_resource() returns <code>true</code> after
 calling this constructor.
 
-\note It is legal to pass a resource resource that represents the "not allocated" state. For example, the
-      following code can pass the value <code>-1</code> as the resource if the call to <code>open()</code> fails:
+\note It is legal to pass a resource that represents the "not allocated" state. For example, the
+      following code passes the value <code>-1</code> to <code>close()</code> if the call to <code>open()</code> fails:
 
 ~~~
-ResourcePtr<int, decltype(&::close)> fd(open("/somefile", O_RDONLY), ::close);
+ResourcePtr<int, decltype(&::close)> fd(::open("/somefile", O_RDONLY), ::close);
 ~~~
       When the ResourcePtr goes out of scope, this results in a call to <code>close(-1)</code>. In this case,
       the call with an invalid file descriptor is harmless (but causes noise from diagnostic tools, such as
-      <code>valgrind</code>). Depending on the specific deleter, passing an invalid value to the deleter may
+      <code>valgrind</code>). However, depending on the specific deleter, passing an invalid value to the deleter may
       have more serious consequences.
 
       To avoid the problem, you can delay initialization of the ResourcePtr until you know that the
       resource was successfully allocated, for example:
 ~~~
-      int tmp_fd = open(filename.c_str(), O_RDONLY);
+      int tmp_fd = ::open(filename.c_str(), O_RDONLY);
       if (tmp_fd == -1)
       {
           throw FileException(filename.c_str());
@@ -206,9 +205,8 @@ ResourcePtr<int, decltype(&::close)> fd(open("/somefile", O_RDONLY), ::close);
       );
 ~~~
       Note that, with the second approach, a call to get() will succeed and return -1 rather than throwing an
-      exception.
+      exception, so the first approach is the recommended one.
 */
-// TODO: document exception safety behavior
 
 template<typename R, typename D>
 ResourcePtr<R, D>::
@@ -220,7 +218,7 @@ ResourcePtr(R r, D d)
 /**
 Constructs a ResourcePtr by transferring ownership from <code>r</code> to <code>this</code>.
 */
-// TODO: document exception safety behavior
+// TODO: Only provide this if resource has move constructor
 
 template<typename R, typename D>
 ResourcePtr<R, D>::
@@ -263,7 +261,6 @@ operator=(ResourcePtr&& r)
 /**
 Destroys the ResourcePtr. If a resource is held, it calls the deleter for the current resource (if any).
 */
-// TODO: document exception safety behavior
 
 template<typename R, typename D>
 ResourcePtr<R, D>::
@@ -281,9 +278,10 @@ ResourcePtr<R, D>::
 /**
 Swaps the resource and deleter of <code>this</code> with the resource and deleter of <code>other</code>
 using argument dependent lookup (ADL).
-\throw Any exception thrown by the underlying <code>swap()</code>.
+
+If the underlying swap throws an exception, that exception is propagated to the caller, and the resource
+held by the ResourcePtr is unchanged.
 */
-// TODO document exception safety.
 // TODO Split this into throw and no-throw versions depending on the underlying swap?
 
 template<typename R, typename D>
@@ -323,9 +321,7 @@ Assigns a new resource to <code>this</code>, first deallocating the current reso
 If the deleter for the current resource throws an exception, the exception is propagated to the caller. In this
 case, the transfer of <code>r</code> to <code>this</code> is still carried out so, after the call to reset(),
 <code>this</code> manages <code>r</code>, whether the deleter throws or not. (If the deleter <i>does</i> throw,
-no attempt is made to call the deleter again for the same resource.
-
-\throw Any exception thrown by the deleter.
+no attempt is made to call the deleter again for the same resource.)
 */
 
 template<typename R, typename D>
@@ -374,9 +370,9 @@ release()
 
 /**
 Calls the deleter for the current resource.
-\throw Any exception thrown by the deleter.
-       If the deleter throws, the resource is considered in the "not allocated" state,
-       that is, no attempt is made to call the deleter again for this resource.
+
+If the deleter throws, the resource is considered in the "not allocated" state,
+that is, no attempt is made to call the deleter again for this resource.
 */
 
 template<typename R, typename D>
@@ -397,9 +393,11 @@ dealloc()
 /**
 Returns the current resource. If no resource is currently held, get() throws <code>std::logic_error</code>.
 \return The current resource (if any).
+
+If the resource's copy constructor throws an exception, that exception is propagated to the caller.
+
 \throw std::logic_error if has_resource() is false.
 */
-// TODO: document exception safety behavior
 
 template<typename R, typename D>
 inline
@@ -476,7 +474,9 @@ get_deleter() const noexcept
 
 Two instances that do not hold a resource are equal. An instance that does not hold a resource is not equal
 to any instance that holds a resource.
-\throw Any exception thrown by the corresponding operator on the resource.
+
+If the underlying operator throws an exception, that exception is propagated to the caller.
+
 \note This operator is available only if the underlying resource provides <code>operator==</code>.
 */
 
@@ -510,7 +510,9 @@ operator==(ResourcePtr<R, D> const& rhs) const
 
 /**
 \brief Compares two instances for inequality by calling the corresponding operator on the resource.
-\throw Any exception thrown by the corresponding operator on the resource.
+
+If the underlying operator throws an exception, that exception is propagated to the caller.
+
 \note This operator is available only if the underlying resource provides <code>operator!=</code>.
 */
 
@@ -528,7 +530,9 @@ operator!=(ResourcePtr<R, D> const& rhs) const
 corresponding operator on the resource.
 
 An instance that does not hold a resource is less than any instance that holds a resource.
-\throw Any exception thrown by the corresponding operator on the resource.
+
+If the underlying operator throws an exception, that exception is propagated to the caller.
+
 \note This operator is available only if the underlying resource provides <code>operator\<</code>.
 */
 
@@ -566,7 +570,9 @@ corresponding operator on the resource.
 
 An instance that does not hold a resource is less than any instance that holds a resource.
 Two instances that do not hold a resource are equal.
-\throw Any exception thrown by the corresponding operator on the resource.
+
+If the underlying operator throws an exception, that exception is propagated to the caller.
+
 \note This operator is available only if the underlying resource provides <code>operator\<=</code>.
 */
 
@@ -599,7 +605,9 @@ operator<=(ResourcePtr<R, D> const& rhs) const
 corresponding operator on the resource.
 
 An instance that holds a resource is greater than any instance that does not hold a resource.
-\throw Any exception thrown by the corresponding operator on the resource.
+
+If the underlying operator throws an exception, that exception is propagated to the caller.
+
 \note This operator is available only if the underlying resource provides <code>operator\></code>.
 */
 
@@ -618,7 +626,9 @@ corresponding operator on the resource.
 
 An instance that holds a resource is greater than any instance that does not hold a resource.
 Two instances that do not hold a resource are equal.
-\throw Any exception thrown by the corresponding operator on the resource.
+
+If the underlying operator throws an exception, that exception is propagated to the caller.
+
 \note This operator is available only if the underlying resource provides <code>operator\>=</code>.
 */
 
