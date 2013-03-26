@@ -38,6 +38,10 @@ TEST(FileIO, basic)
     vector<uint8_t> v = read_binary_file("testfile");
     string contents("some chars\n");
     EXPECT_EQ(vector<uint8_t>(contents.begin(), contents.end()), v);
+
+    system("rm -fr empty; >empty");
+    s = read_text_file("empty");
+    EXPECT_TRUE(s.empty());
 }
 
 TEST(FileIO, exceptions)
@@ -75,17 +79,5 @@ TEST(FileIO, exceptions)
     catch (FileException const& e)
     {
         EXPECT_EQ("unity::FileException: \"testdir\" is not a regular file", e.to_string());
-    }
-
-    try
-    {
-        int i __attribute__((unused))
-            = system("rm -fr empty; >empty");
-        read_text_file("empty");
-        FAIL();
-    }
-    catch (FileException const& e)
-    {
-        EXPECT_EQ("unity::FileException: file \"empty\" is empty", e.to_string());
     }
 }

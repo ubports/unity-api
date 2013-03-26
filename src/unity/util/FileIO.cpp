@@ -61,12 +61,13 @@ read_file(string const& filename)
         throw FileException("\"" + filename + "\" is not a regular file", 0);
     }
 
+    vector<T> buf(st.st_size);
+
     if (st.st_size == 0)
     {
-        throw FileException("file \"" + filename + "\" is empty", 0);
+        return buf;
     }
 
-    vector<T> buf(st.st_size);
     if (read(fd.get(), &buf[0], st.st_size) != st.st_size)
     {
         // LCOV_EXCL_START
