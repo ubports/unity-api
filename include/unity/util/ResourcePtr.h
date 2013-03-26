@@ -759,6 +759,8 @@ struct greater_equal<unity::util::ResourcePtr<R, D>>
     }
 };
 
+// TODO: provide hash if std::hash<R> exists.
+
 } // namespace std
 
 #endif
