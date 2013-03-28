@@ -26,7 +26,7 @@ For instructions on how to build the code, see the INSTALL file.
 Build targets
 -------------
 
-The build produces the scopes library.
+The build produces the Unity API library (libunity-api).
 
 TODO: Flesh this out
 
