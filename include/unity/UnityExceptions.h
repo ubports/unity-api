@@ -51,12 +51,12 @@ public:
     /**
     \brief Returns the fully-qualified name of the exception.
     */
-    virtual char const* what() const noexcept;
+    virtual char const* what() const noexcept override;
 
     /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.
     */
-    virtual std::exception_ptr self() const;
+    virtual std::exception_ptr self() const override;
 };
 
 namespace internal
@@ -86,12 +86,12 @@ public:
     /**
     \brief Returns the fully-qualified name of the exception.
     */
-    virtual char const* what() const noexcept;
+    virtual char const* what() const noexcept override;
 
     /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.
     */
-    virtual std::exception_ptr self() const;
+    virtual std::exception_ptr self() const override;
 };
 
 namespace internal
@@ -125,12 +125,12 @@ public:
     /**
     \brief Returns the fully-qualified name of the exception.
     */
-    virtual char const* what() const noexcept;
+    virtual char const* what() const noexcept override;
 
     /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.
     */
-    virtual std::exception_ptr self() const;
+    virtual std::exception_ptr self() const override;
 };
 
 namespace internal
@@ -163,12 +163,12 @@ public:
     /**
     \brief Returns the fully-qualified name of the exception.
     */
-    virtual char const* what() const noexcept;
+    virtual char const* what() const noexcept override;
 
     /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.
     */
-    virtual std::exception_ptr self() const;
+    virtual std::exception_ptr self() const override;
 
     /**
     \return Returns the error number that was passed to the constructor.
@@ -206,12 +206,12 @@ public:
     /**
     \brief Returns the fully-qualified name of the exception.
     */
-    virtual char const* what() const noexcept;
+    virtual char const* what() const noexcept override;
 
     /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.
     */
-    virtual std::exception_ptr self() const;
+    virtual std::exception_ptr self() const override;
 
     /**
     \return Returns the error number that was passed to the constructor.
@@ -245,12 +245,12 @@ public:
     /**
     \brief Returns the fully-qualified name of the exception.
     */
-    virtual char const* what() const noexcept;
+    virtual char const* what() const noexcept override;
 
     /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.
     */
-    virtual std::exception_ptr self() const;
+    virtual std::exception_ptr self() const override;
 };
 
 } // namespace unity

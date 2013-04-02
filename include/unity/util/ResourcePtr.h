@@ -97,7 +97,7 @@ Use <code>std::unique_ptr</code> instead, which is better suited to the task.
 // TODO: Discuss throwing deleters and requirements (copy constructible, etc.) on deleter.
 
 template<typename R, typename D>
-class ResourcePtr : private NonCopyable
+class ResourcePtr final : private NonCopyable
 {
 public:
     /**
