@@ -62,7 +62,7 @@ endif()
 # to be a Find<name> module for most of them.
 #
 
-find_package(Boost 1.49.0 COMPONENTS thread-mt regex REQUIRED)
+find_package(Boost 1.49.0 COMPONENTS regex REQUIRED)
 
 #
 # Names of the libraries we create and link against.

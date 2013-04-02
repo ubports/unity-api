@@ -19,7 +19,7 @@
 find_package(Threads REQUIRED)
 set(TESTLIBDIR ${CMAKE_BINARY_DIR}/test/gtest/libgtest/build)
 set(LIBGTEST gtest)
-set(TESTLIBS ${LIBGTEST} ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+set(TESTLIBS ${LIBGTEST} ${CMAKE_THREAD_LIBS_INIT})
 
 add_subdirectory(libgtest)
 add_subdirectory(unity)

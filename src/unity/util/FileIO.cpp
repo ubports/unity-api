@@ -21,6 +21,7 @@
 #include <unity/UnityExceptions.h>
 
 #include <fcntl.h>
+#include <string.h>
 #include <sys/stat.h>
 
 using namespace std;

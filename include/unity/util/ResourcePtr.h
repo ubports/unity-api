@@ -21,14 +21,36 @@
 
 #include <unity/util/NonCopyable.h>
 
-#include <boost/thread/mutex.hpp>
 #include <boost/type_traits.hpp>
+
+#include <mutex>
 
 namespace unity
 {
 
 namespace util
 {
+
+namespace
+{
+
+// Simple helper class so we can adopt a lock without inconvenient syntax.
+
+template<typename T>
+class LockAdopter
+{
+public:
+    LockAdopter(T& mutex) noexcept
+        : m_(mutex, std::adopt_lock)
+    {
+        assert(!mutex.try_lock()); // Mutex must be locked to be adoptable.
+    }
+
+private:
+    std::unique_lock<T> m_;
+};
+
+} // namespace
 
 /**
 \brief Class to guarantee deallocation of arbitrary resources.
@@ -155,10 +177,10 @@ private:
     R resource_;                   // The managed resource.
     D delete_;                     // The deleter to call.
     bool initialized_;             // True while we have a resource assigned.
-    mutable boost::mutex m_;       // Protects this instance.
+    mutable std::mutex m_;         // Protects this instance.
 
-    typedef boost::lock_guard<decltype(m_)>  AutoLock;
-    typedef boost::unique_lock<decltype(m_)> AdoptLock;
+    typedef std::lock_guard<decltype(m_)>  AutoLock;
+    typedef LockAdopter<decltype(m_)>      AdoptLock;
 };
 
 /**
@@ -299,9 +321,9 @@ swap(ResourcePtr& other)
         return;
     }
 
-    boost::lock(m_, other.m_);
-    AdoptLock left(m_, boost::adopt_lock);
-    AdoptLock right(other.m_, boost::adopt_lock);
+    std::lock(m_, other.m_);
+    AdoptLock left(m_);
+    AdoptLock right(other.m_);
 
     using std::swap; // Enable ADL
     swap(resource_, other.resource_);
@@ -503,9 +525,9 @@ operator==(ResourcePtr<R, D> const& rhs) const
         return true;
     }
 
-    boost::lock(m_, rhs.m_);
-    AdoptLock left(m_, boost::adopt_lock);
-    AdoptLock right(rhs.m_, boost::adopt_lock);
+    std::lock(m_, rhs.m_);
+    AdoptLock left(m_);
+    AdoptLock right(rhs.m_);
 
     if (!initialized_)
     {
@@ -559,9 +581,9 @@ operator<(ResourcePtr<R, D> const& rhs) const
         return false;
     }
 
-    boost::lock(m_, rhs.m_);
-    AdoptLock left(m_, boost::adopt_lock);
-    AdoptLock right(rhs.m_, boost::adopt_lock);
+    std::lock(m_, rhs.m_);
+    AdoptLock left(m_);
+    AdoptLock right(rhs.m_);
 
     if (!initialized_)
     {
@@ -606,9 +628,9 @@ operator<=(ResourcePtr<R, D> const& rhs) const
     // because that creates a race condition: the locks would be released and
     // re-aquired in between the two comparisons.
 
-    boost::lock(m_, rhs.m_);
-    AdoptLock left(m_, boost::adopt_lock);
-    AdoptLock right(rhs.m_, boost::adopt_lock);
+    std::lock(m_, rhs.m_);
+    AdoptLock left(m_);
+    AdoptLock right(rhs.m_);
 
     return resource_ < rhs.resource_ || resource_ == rhs.resource_;
 }
