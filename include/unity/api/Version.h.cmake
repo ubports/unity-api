@@ -36,7 +36,7 @@ namespace api
 {
 
 /**
-\brief Class to obtain version information for the Scopes API at run time.
+\brief Class to obtain version information for the Unity API at run time.
 
 Version information is represented as
 <i>&lt;<code>major</code>&gt;</i>.<i>&lt;<code>minor</code>&gt;</i>.<i>&lt;<code>micro</code>&gt;</i>.
@@ -59,23 +59,23 @@ class Version
 {
 public:
     /**
-    \return The major version number.
+    \brief Returns the major version number of the Unity API library.
     */
     static int major_version();
 
     /**
-    \return The minor version number.
+    \brief Returns the minor version number of the Unity API library.
     */
     static int minor_version();
 
     /**
-    \return The micro version number.
+    \brief Returns the micro version number of the Unity API library.
     */
     static int micro_version();
 
     /**
-    \return The version string in the format
-            <i>&lt;<code>major</code>&gt;</i>.<i>&lt;<code>minor</code>&gt;</i>.<i>&lt;<code>micro</code>&gt;</i>.
+    \brief Returns the Unity API version as a string in the format
+    <i>&lt;<code>major</code>&gt;</i>.<i>&lt;<code>minor</code>&gt;</i>.<i>&lt;<code>micro</code>&gt;</i>.
     */
     static const char* str();    // Returns "major.minor.micro"
 
