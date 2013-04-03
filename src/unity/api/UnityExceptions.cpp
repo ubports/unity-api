@@ -33,12 +33,17 @@ InvalidArgumentException(string const& reason)
 InvalidArgumentException::
 InvalidArgumentException(InvalidArgumentException const&) = default;
 
+//! @cond
+
 InvalidArgumentException&
 InvalidArgumentException::
 operator=(InvalidArgumentException const&) = default;
 
+
 InvalidArgumentException::
 ~InvalidArgumentException() noexcept = default;
+
+//! @endcond
 
 char const*
 InvalidArgumentException::
@@ -63,12 +68,16 @@ LogicException(string const& reason)
 LogicException::
 LogicException(LogicException const&) = default;
 
+//! @cond
+
 LogicException&
 LogicException::
 operator=(LogicException const&) = default;
 
 LogicException::
 ~LogicException() noexcept = default;
+
+//! @endcond
 
 char const*
 LogicException::
@@ -93,12 +102,16 @@ ShutdownException(string const& reason)
 ShutdownException::
 ShutdownException(ShutdownException const&) = default;
 
+//! @cond
+
 ShutdownException&
 ShutdownException::
 operator=(ShutdownException const&) = default;
 
 ShutdownException::
 ~ShutdownException() noexcept = default;
+
+//! @endcond
 
 char const*
 ShutdownException::
@@ -123,12 +136,16 @@ FileException(string const& reason, int err)
 FileException::
 FileException(FileException const&) = default;
 
+//! @cond
+
 FileException&
 FileException::
 operator=(FileException const&) = default;
 
 FileException::
 ~FileException() noexcept = default;
+
+//! @endcond
 
 char const*
 FileException::
@@ -160,12 +177,16 @@ SyscallException(string const& reason, int err)
 SyscallException::
 SyscallException(SyscallException const&) = default;
 
+//! @cond
+
 SyscallException&
 SyscallException::
 operator=(SyscallException const&) = default;
 
 SyscallException::
 ~SyscallException() noexcept = default;
+
+//! @endcond
 
 char const*
 SyscallException::
@@ -197,12 +218,16 @@ ResourceException(string const& reason)
 ResourceException::
 ResourceException(ResourceException const&) = default;
 
+//! @cond
+
 ResourceException&
 ResourceException::
 operator=(ResourceException const&) = default;
 
 ResourceException::
 ~ResourceException() noexcept = default;
+
+//! @endcond
 
 char const*
 ResourceException::
