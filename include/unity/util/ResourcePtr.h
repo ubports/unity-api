@@ -119,7 +119,7 @@ Use <code>std::unique_ptr</code> instead, which is better suited to the task.
 // TODO: Discuss throwing deleters and requirements (copy constructible, etc.) on deleter.
 
 template<typename R, typename D>
-class ResourcePtr : private NonCopyable
+class ResourcePtr final : private NonCopyable
 {
 public:
     /**
@@ -250,7 +250,7 @@ The strong exception guarantee is preserved if it is provided by the resource.
 template<typename R, typename D>
 ResourcePtr<R, D>::
 ResourcePtr(ResourcePtr<R, D>&& r)
-    : resource_(r.resource_), delete_(r.delete_), initialized_(r.initialized_)
+    : resource_(std::move(r.resource_)), delete_(r.delete_), initialized_(r.initialized_)
 {
     r.initialized_ = false; // Stop r from deleting its resource, if it held any. No need to lock: r is a temporary.
 }
@@ -277,7 +277,7 @@ operator=(ResourcePtr&& r)
 
     // r is a temporary, so we don't need to lock it.
 
-    resource_ = r.resource_;
+    resource_ = std::move(r.resource_);
     initialized_ = r.initialized_;
     r.initialized_ = false;             // Stop r from deleting its resource, if it held any.
     delete_ = r.delete_;

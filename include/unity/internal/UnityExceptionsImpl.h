@@ -37,7 +37,7 @@ class InvalidArgumentExceptionImpl : public ExceptionImpl
 public:
     InvalidArgumentExceptionImpl(std::string const& reason);
 
-    virtual char const* what() const noexcept;
+    virtual char const* what() const noexcept override;
 };
 
 class LogicExceptionImpl : public ExceptionImpl
@@ -45,7 +45,7 @@ class LogicExceptionImpl : public ExceptionImpl
 public:
     LogicExceptionImpl(std::string const& reason);
 
-    virtual char const* what() const noexcept;
+    virtual char const* what() const noexcept override;
 };
 
 class ShutdownExceptionImpl : public ExceptionImpl
@@ -53,7 +53,7 @@ class ShutdownExceptionImpl : public ExceptionImpl
 public:
     ShutdownExceptionImpl(std::string const& reason);
 
-    virtual char const* what() const noexcept;
+    virtual char const* what() const noexcept override;
 };
 
 class FileExceptionImpl : public ExceptionImpl
@@ -61,7 +61,7 @@ class FileExceptionImpl : public ExceptionImpl
 public:
     FileExceptionImpl(std::string const& reason, int err);
 
-    virtual char const* what() const noexcept;
+    virtual char const* what() const noexcept override;
     int error() const noexcept;
 
 private:
@@ -73,7 +73,7 @@ class SyscallExceptionImpl : public ExceptionImpl
 public:
     SyscallExceptionImpl(std::string const& reason, int err);
 
-    virtual char const* what() const noexcept;
+    virtual char const* what() const noexcept override;
     int error() const noexcept;
 
 private:
@@ -85,7 +85,7 @@ class ResourceExceptionImpl : public ExceptionImpl
 public:
     ResourceExceptionImpl(std::string const& reason);
 
-    virtual char const* what() const noexcept;
+    virtual char const* what() const noexcept override;
 };
 
 } // namespace internal

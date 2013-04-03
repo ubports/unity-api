@@ -63,7 +63,7 @@ is in any other file system, that file system cannot be unmounted while the daem
 Note: This class is not async signal-safe. Do not call daemonize_me() from a a signal handler.
 */
 
-class Daemon : public util::DefinesPtrs<Daemon>, private NonCopyable
+class Daemon final : public util::DefinesPtrs<Daemon>, private NonCopyable
 {
 public:
     /**
@@ -76,18 +76,18 @@ public:
     \brief Causes daemonize_me() to close all open file descriptors other than the standard file
            descriptors (which are connected <code>/dev/null</code>).
     */
-    virtual void close_fds() noexcept;
+    void close_fds() noexcept;
 
     /**
     \brief Causes daemonize_me() to reset all signals to their default behavior.
     */
-    virtual void reset_signals() noexcept;
+    void reset_signals() noexcept;
 
     /**
     \brief Causes daemonize_me() to set the umask.
     \param mask The umask for the daemon process.
     */
-    virtual void set_umask(mode_t mask) noexcept;
+    void set_umask(mode_t mask) noexcept;
 
     /**
     \brief Causes daemonize_me() to set the working directory.
@@ -97,7 +97,7 @@ public:
           Otherwise, the file system containing the daemon's working directory cannot be unmounted without first
           killing the daemon process.
     */
-    virtual void set_working_directory(std::string const& working_directory);
+    void set_working_directory(std::string const& working_directory);
 
     /**
     \brief Turns the calling process into a daemon.
@@ -112,7 +112,7 @@ public:
     the normal use pattern is to create a Daemon instance, select the desired settings, call daemonize_me(),
     and let the instance go out of scope.
     */
-    virtual void daemonize_me();
+    void daemonize_me();
 
     ~Daemon() noexcept;
 

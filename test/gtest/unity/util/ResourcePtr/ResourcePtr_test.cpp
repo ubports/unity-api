@@ -304,6 +304,46 @@ TEST(ResourcePtr, get_deleter)
     EXPECT_EQ(rp_const.get_deleter(), &dealloc_int);
 }
 
+class Comparable
+{
+public:
+    Comparable()
+        : i_(0)
+    {
+    }
+
+    Comparable(int i)
+        : i_(i)
+    {
+    }
+
+    bool operator<(Comparable const& rhs) const
+    {
+        return i_ < rhs.i_;
+    }
+
+    bool operator==(Comparable const& rhs) const
+    {
+        return i_ == rhs.i_;
+    }
+
+    int get() const
+    {
+        return i_;
+    }
+
+private:
+    int i_;
+};
+
+void no_op(Comparable) {}   // Dummy deallocation function
+
+ResourcePtr<Comparable, decltype(&no_op)>
+make_comparable(int i)
+{
+    return ResourcePtr<Comparable, decltype(&no_op)>(Comparable(i), no_op);
+}
+
 //
 // Check move constructor and move assignment operator
 //
@@ -358,41 +398,19 @@ TEST(ResourcePtr, move)
         EXPECT_EQ(allocated.size(), 1);
         EXPECT_NE(allocated.find((int*)42), allocated.end());
     }
+
+    {
+        ResourcePtr<Comparable, decltype(&no_op)> r(make_comparable(53));
+        EXPECT_EQ(53, r.get().get());
+    }
+
+    {
+        ResourcePtr<Comparable, decltype(&no_op)> r(no_op);
+        r = make_comparable(44);
+
+        EXPECT_EQ(44, r.get().get());
+    }
 }
-
-class Comparable
-{
-public:
-    Comparable()
-        : i_(0)
-    {
-    }
-
-    Comparable(int i)
-        : i_(i)
-    {
-    }
-
-    bool operator<(Comparable const& rhs) const
-    {
-        return i_ < rhs.i_;
-    }
-
-    bool operator==(Comparable const& rhs) const
-    {
-        return i_ == rhs.i_;
-    }
-
-    int get() const
-    {
-        return i_;
-    }
-
-private:
-    int i_;
-};
-
-void no_op(Comparable) {}   // Dummy deallocation function
 
 TEST(ResourcePtr, comparisons)
 {
