@@ -60,22 +60,30 @@ class Version
 public:
     /**
     \brief Returns the major version number of the Unity API library.
+
+    The major version number is also available as the macro <code>UNITY_API_VERSION_MAJOR</code>.
     */
     static int major_version();
 
     /**
     \brief Returns the minor version number of the Unity API library.
+
+    The minor version number is also available as the macro <code>UNITY_API_VERSION_MINOR</code>.
     */
     static int minor_version();
 
     /**
     \brief Returns the micro version number of the Unity API library.
+
+    The micro version number is also available as the macro <code>UNITY_API_VERSION_MICRO</code>.
     */
     static int micro_version();
 
     /**
     \brief Returns the Unity API version as a string in the format
     <i>&lt;<code>major</code>&gt;</i>.<i>&lt;<code>minor</code>&gt;</i>.<i>&lt;<code>micro</code>&gt;</i>.
+
+    The version string is also available as the macro <code>UNITY_API_VERSION_STRING</code>.
     */
     static const char* str();    // Returns "major.minor.micro"
 
