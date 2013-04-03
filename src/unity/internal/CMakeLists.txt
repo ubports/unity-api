@@ -16,7 +16,9 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
-set(API_INTERNAL_SRC
+set(UNITY_INTERNAL_SRC
+    ${CMAKE_CURRENT_SOURCE_DIR}/ExceptionImpl.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/UnityExceptionsImpl.cpp
 )
 
-set(UNITY_API_LIB_SRC ${UNITY_API_LIB_SRC} ${API_INTERNAL_SRC} PARENT_SCOPE)
+set(UNITY_API_LIB_SRC ${UNITY_API_LIB_SRC} ${UNITY_INTERNAL_SRC} PARENT_SCOPE)
