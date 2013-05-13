@@ -30,3 +30,9 @@ Depends: ${misc:Depends},
          libunity-api (= ${binary:Version}),
 Description: Header files for Unity API
  Library to integrate with the Unity shell (dev files)
+
+Package: libunity-api-doc
+Architecture: all
+Depends: ${misc:Depends},
+Description: Documentation for Unity API
+ Library to integrate with the Unity shell (documentation)

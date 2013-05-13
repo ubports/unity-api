@@ -17,7 +17,7 @@
  */
 
 #include <unity/util/internal/DaemonImpl.h>
-#include <unity/util/ResourcePtr.h>
+#include <unity/util/internal/ResourcePtr.h>
 
 #include <dirent.h>
 #include <fcntl.h>
@@ -210,7 +210,7 @@ close_open_files() noexcept
 
         char const* proc_self_fd = "/proc/self/fd";
 
-        ResourcePtr<DIR*, decltype(&closedir)> dir(opendir(proc_self_fd), closedir);
+        internal::ResourcePtr<DIR*, decltype(&closedir)> dir(opendir(proc_self_fd), closedir);
         if (dir.get() == nullptr)
         {
             return;  // This should never happen but, for diligence, we check anyway. // LCOV_EXCL_LINE

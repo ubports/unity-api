@@ -34,7 +34,7 @@ class InvalidArgumentExceptionImpl;
        when the function expects the argument to be non-null.
 */
 
-class InvalidArgumentException : public Exception
+class UNITY_API InvalidArgumentException : public Exception
 {
 public:
     /**
@@ -69,7 +69,7 @@ class LogicExceptionImpl;
        in the wrong worder.
 */
 
-class LogicException : public Exception
+class UNITY_API LogicException : public Exception
 {
 public:
     /**
@@ -105,10 +105,10 @@ class ShutdownExceptionImpl;
        Usually, it is not possible to handle or recover
        from errors that arise during shutdown. This exception is thrown once all possible shutdown actions
        have been carried out and provides information about anything that went wrong via the exception
-       chaining mechanism of the Unity::Exception base class.
+       chaining mechanism of the unity::Exception base class.
 */
 
-class ShutdownException : public Exception
+class UNITY_API ShutdownException : public Exception
 {
 public:
     /**
@@ -142,7 +142,7 @@ class FileExceptionImpl;
 \brief Exception to indicate file I/O errors, such as failure to open or write to a file.
 */
 
-class FileException : public Exception
+class UNITY_API FileException : public Exception
 {
 public:
     /**
@@ -185,7 +185,7 @@ class SyscallExceptionImpl;
 \brief Exception to indicate system or library call errors that set <code>errno</code>.
 */
 
-class SyscallException : public Exception
+class UNITY_API SyscallException : public Exception
 {
 public:
     /**
@@ -228,7 +228,7 @@ class ResourceExceptionImpl;
 \brief Exception for miscellaneous errors, such as failure of a third-party library or hitting resource limitations.
 */
 
-class ResourceException : public Exception
+class UNITY_API ResourceException : public Exception
 {
 public:
     /**

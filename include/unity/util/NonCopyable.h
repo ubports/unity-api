@@ -31,6 +31,8 @@
 #ifndef UNITY_UTIL_NONCOPYABLE_H
 #define UNITY_UTIL_NONCOPYABLE_H
 
+#include <unity/config.h>
+
 namespace unity
 {
 
@@ -65,7 +67,7 @@ To use the class, use private inheritance:
 
 */
 
-class NonCopyable
+class UNITY_API NonCopyable
 {
 protected:
     NonCopyable() = default;

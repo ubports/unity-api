@@ -1,49 +1,80 @@
-#
-# Copyright (C) 2013 Canonical Ltd
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License version 3 as
-# published by the Free Software Foundation.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-# Authored by: Michi Henning <michi.henning@canonical.com>
-#
-
 cmake_minimum_required(VERSION 2.8.10)
 
-#
 # Default install location. Must be set here, before setting the project.
-#
 if (NOT DEFINED CMAKE_INSTALL_PREFIX)
     set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install CACHE PATH "" FORCE)
 endif()
 
+project(unity-api C CXX)
+
+if(${PROJECT_BINARY_DIR} STREQUAL ${PROJECT_SOURCE_DIR})
+   message(FATAL_ERROR "In-tree build attempt detected, aborting. Set your build dir outside your source dir, delete CMakeCache.txt from source root and try again.")
+endif()
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+
+string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower) # Build types should always be lowercase but sometimes they are not.
+
+include(EnableCoverageReport)
+#####################################################################
+# Enable code coverage calculation with gcov/gcovr/lcov
+# Usage:
+#  * Switch build type to coverage (use ccmake or cmake-gui)
+#  * Invoke make, make test, make coverage (or ninja if you use that backend)
+#  * Find html report in subdir coveragereport
+#  * Find xml report feasible for jenkins in coverage.xml
+#####################################################################
+if(cmake_build_type_lower MATCHES coverage)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage" )
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage" )
+  set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} --coverage" )
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} --coverage" )
+endif()
+
+# Make sure we have all the needed symbols
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,defs")
+set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,-z,defs")
+
+# Static C++ checks
+add_custom_target(cppcheck COMMAND cppcheck --enable=all -q --error-exitcode=2
+                                       ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/test)
+
 #
-# Project
+# Definitions for testing with valgrind.
 #
 
-project(unity-api)
-set(PROJECT_NAME "unity-api")
+configure_file(CTestCustom.cmake.in CTestCustom.cmake) # Tests in CTestCustom.cmake are skipped for valgrind
 
-#
-# Version
-#
+find_program(MEMORYCHECK_COMMAND NAMES valgrind)
+if (MEMORYCHECK_COMMAND)
+    set(MEMORYCHECK_COMMAND_OPTIONS
+        "--suppressions=${CMAKE_SOURCE_DIR}/valgrind-suppress --leak-check=full --num-callers=40 --error-exitcode=3"
+    )
+    add_custom_target(valgrind DEPENDS NightlyMemCheck)
+else()
+    message(WARNING "Cannot find valgrind: valgrind target will not be available")
+endif()
 
-set(UNITY_API_MAJOR 0)
-set(UNITY_API_MINOR 1)
-set(UNITY_API_MICRO 0)
-set(UNITY_API_VERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}.${UNITY_API_MICRO}")
 
-#
-# Compiler flags
-#
+include(FindPkgConfig)
+find_package(Boost 1.49.0 COMPONENTS regex REQUIRED)
+
+# Standard install paths
+include(GNUInstallDirs)
+
+include_directories(
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_CURRENT_BINARY_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    )
+
+# When building the library, we set the default symbol visibility
+# to "hidden", so we don't export things by default.
+# Exported functions and classes are prefixed by a UNITY_API macro,
+# which explicitly exports a symbol if UNITY_DLL_EXPORTS is defined.
+add_definitions(-DUNITY_DLL_EXPORTS)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-permissive -pedantic -Wall -Wextra")
 
@@ -57,93 +88,51 @@ if (Werror)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 endif()
 
-#
-# Packages we depend on. TODO: Lots of prerequisites need to be added here, but there doesn't appear
-# to be a Find<name> module for most of them.
-#
+# API version
+set(UNITY_API_MAJOR 0)
+set(UNITY_API_MINOR 1)
+set(UNITY_API_MICRO 0)
+set(UNITY_API_VERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}.${UNITY_API_MICRO}")
 
-find_package(Boost 1.49.0 COMPONENTS regex REQUIRED)
-
-#
-# Names of the libraries we create and link against.
-#
-
+# API library
 set(UNITY_API_LIB unity-api)
-set(OTHER_LIBS )
 
-#
-# All the libraries we need to link a normal executable.
-#
+# Other libraries we depend on
+set(OTHER_API_LIBS )
 
-set(LIBS ${UNITY_API_LIB} ${OTHER_LIBS})
+# All the libraries we need to link a normal executable that uses the Unity API
+set(LIBS ${UNITY_API_LIB} ${OTHER_API_LIBS})
 
-#
-# Definitions for testing with valgrind.
-#
-
-find_program(MEMORYCHECK_COMMAND NAMES valgrind)
-if (MEMORYCHECK_COMMAND)
-    set(MEMORYCHECK_COMMAND_OPTIONS
-        "--suppressions=${CMAKE_SOURCE_DIR}/valgrind-suppress --leak-check=full
-        --num-callers=40 --error-exitcode=3"
-  )
-endif()
-
-add_custom_target(valgrind DEPENDS NightlyMemCheck)
-
-#
-# Definitions for coverage testing
-#
-
-include(cmake/coverage.cmake)
-
-# This gets rid of any stale .gcda files. Run this if a running a binary causes lots of messages about
-# about a "merge mismatch for summaries".
-
-add_custom_target(clean-coverage
-        COMMAND find ${CMAKE_BINARY_DIR} -name '*.gcda' | xargs rm -f
-)
-
-add_custom_target(cppcheck COMMAND cppcheck --enable=all -q --error-exitcode=2
-                      ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/test)
-
-#
-# Enable tests
-#
-
+# Tests
 include(CTest)
 enable_testing()
+
+# add subdirectories to build
+add_subdirectory(include)
+add_subdirectory(src)
+add_subdirectory(test)
+
+if (cmake_build_type_lower MATCHES coverage)
+  ENABLE_COVERAGE_REPORT(TARGETS ${UNITY_API_LIB} FILTER /usr/include ${CMAKE_SOURCE_DIR}/test/* ${CMAKE_BINARY_DIR}/*)
+endif()
 
 #
 # Documentation
 #
 
 find_package(Doxygen)
-if (NOT DOXYGEN_FOUND)
-    message(Warning "Cannot generate documentation: doxygen not found")
+find_program(DOT_EXECUTABLE dot /usr/bin)
+if (NOT DOXYGEN_FOUND OR NOT DOT_EXECUTABLE)
+    message(WARNING "Cannot generate documentation: doxygen and/or graphviz not found")
 else()
-  configure_file(${PROJECT_SOURCE_DIR}/doc/Doxyfile.in ${PROJECT_BINARY_DIR}/doc/Doxyfile @ONLY IMMEDIATE)
-  add_custom_target(doc
-      COMMAND ${DOXYGEN_EXECUTABLE} ${PROJECT_BINARY_DIR}/doc/Doxyfile
-      SOURCES ${PROJECT_BINARY_DIR}/doc/Doxyfile)
+    configure_file(${PROJECT_SOURCE_DIR}/doc/Doxyfile.in ${PROJECT_BINARY_DIR}/doc/Doxyfile @ONLY IMMEDIATE)
+    add_custom_command(OUTPUT ${PROJECT_BINARY_DIR}/doc/lib${UNITY_API_LIB}/index.html
+                       COMMAND ${DOXYGEN_EXECUTABLE} ${PROJECT_BINARY_DIR}/doc/Doxyfile
+                       DEPENDS ${PROJECT_BINARY_DIR}/doc/Doxyfile
+                               ${UNITY_API_LIB_SRC}
+                               ${UNITY_API_LIB_HDRS})
+    add_custom_target(doc ALL
+                       DEPENDS ${PROJECT_BINARY_DIR}/doc/lib${UNITY_API_LIB}/index.html)
+    install(DIRECTORY ${PROJECT_BINARY_DIR}/doc/lib${UNITY_API_LIB}
+            DESTINATION ${CMAKE_INSTALL_PREFIX}/share/doc)
 endif()
-
-#
-# Directories
-#
-
-include_directories(
-    include
-    ${CMAKE_BINARY_DIR}/include
-    ${Boost_INCLUDE_DIR}
-)
-
-add_subdirectory(src)
-add_subdirectory(include)
-add_subdirectory(test)
-
-#
-# Used by some of the test scripts to filter out files that are generated as part of a build. Build directories (for
-# in-tree builds) are expected to include this string in their name, for example, "build-debug" or "debug-build".
-#
-set(BUILD_DIR_NAME build)

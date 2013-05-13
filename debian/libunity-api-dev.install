@@ -1,1 +1,3 @@
 usr/include/unity/*
+usr/lib/libunity-api.so
+usr/lib/pkgconfig/libunity-api.pc

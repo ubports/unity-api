@@ -33,30 +33,23 @@ usage()
 [ $# -lt 1 ] && usage
 [ $# -gt 2 ] && usage
 
-ignore="grep -v CMakeFile"
+ignore_pat="\\.sci$"
 
-[ $# -eq 2 ] && {
-    ignore="$ignore | grep -v \"$2\""
-}
+#
+# We don't use the -i option of licensecheck to add ignore_dir to the pattern because Jenkins creates directories
+# with names that contain regex meta-characters, such as "." and "+". Instead, if ingnore_dir is set, we post-filter
+# the output with grep -F, so we don't get false positives from licensecheck.
+#
 
-err=no
-for file in `find "$1" \
-    -name '*.cpp' -o \
-    -name '*.h' -o \
-    -name '*.py' -o \
-    -name '*.sh' -o \
-    -name 'CMakeLists.txt' -o \
-    -name '*.cmake'  \
-    | grep -v CMakeFiles \
-    | eval $ignore`
-do
-    head -30 "$file" | grep -q -i Copyright
-    [ $? -ne 0 ] && {
-        echo "$file: no copyright header"
-        err=yes
-    }
-done
+[ $# -eq 2 ] && ignore_dir="$2"
 
-[ $err = yes ] && exit 1
+if [ -n "$ignore_dir" ]
+then
+    licensecheck -i "$ignore_pat" -r "$1" | grep -F "$ignore_dir" -v | grep 'No copyright'
+else
+    licensecheck -i "$ignore_pat" -r "$1" | grep 'No copyright'
+fi
+
+[ $? -eq 0 ] && exit 1
 
 exit 0

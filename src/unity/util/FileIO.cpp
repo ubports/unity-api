@@ -17,7 +17,7 @@
  */
 
 #include <unity/util/FileIO.h>
-#include <unity/util/ResourcePtr.h>
+#include <unity/util/internal/ResourcePtr.h>
 #include <unity/UnityExceptions.h>
 
 #include <fcntl.h>
@@ -44,8 +44,8 @@ template<typename T>
 vector<T>
 read_file(string const& filename)
 {
-    util::ResourcePtr<int, std::function<void(int)>> fd(::open(filename.c_str(), O_RDONLY),
-                                                        [](int fd) { if (fd != -1) ::close(fd); });
+    util::internal::ResourcePtr<int, std::function<void(int)>> fd(::open(filename.c_str(), O_RDONLY),
+                                                                  [](int fd) { if (fd != -1) ::close(fd); });
     if (fd.get() == -1)
     {
         throw FileException("cannot open \"" + filename + "\": " + strerror(errno), errno);

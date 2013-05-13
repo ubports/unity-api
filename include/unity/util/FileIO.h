@@ -19,6 +19,8 @@
 #ifndef UNITY_UTIL_FILEIO_H
 #define UNITY_UTIL_FILEIO_H
 
+#include <unity/config.h>
+
 #include <string>
 #include <vector>
 
@@ -28,8 +30,8 @@ namespace unity
 namespace util
 {
 
-std::string read_text_file(std::string const& filename);
-std::vector<uint8_t> read_binary_file(std::string const& filename);
+UNITY_API std::string read_text_file(std::string const& filename);
+UNITY_API std::vector<uint8_t> read_binary_file(std::string const& filename);
 
 } // namespace util
 

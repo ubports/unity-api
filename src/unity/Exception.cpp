@@ -83,9 +83,9 @@ Returns a string describing the exception, including any exceptions that were ne
 Nested exceptions are indented according to their nesting level. If the exception contains chained
 exceptions, these are shown in oldest-to-newest order.
 
-\param indent_level This controls the outermost indent level. The value <code>0</code> indicates
+\param indent_level This controls the indent level. The value <code>0</code> indicates
        the outermost level (no indent).
-\param indent This controls the amount of indenting per level. The pass string is prependended
+\param indent This controls the amount of indenting per level. The passed string is prependended
        <i><code>indent_level</code></i> times to each line.
 \return The string describing the exception.
 

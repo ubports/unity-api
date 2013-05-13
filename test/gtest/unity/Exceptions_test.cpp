@@ -500,49 +500,37 @@ TEST(ResourceException, state)
     }
 }
 
-// Dynamic allocataion to get around bogus function coverage reports by gcov.
+// Dynamic allocation to get around bogus function coverage reports by gcov.
 
 TEST(Exceptions, dynamic)
 {
     {
         SyscallException* ep = new SyscallException("Hello", 0);
         delete ep;
-        internal::SyscallExceptionImpl* eip = new internal::SyscallExceptionImpl("Hello", 0);
-        delete eip;
     }
 
     {
         InvalidArgumentException* ep = new InvalidArgumentException("Hello");
         delete ep;
-        internal::InvalidArgumentExceptionImpl* eip = new internal::InvalidArgumentExceptionImpl("Hello");
-        delete eip;
     }
 
     {
         LogicException* ep = new LogicException("Hello");
         delete ep;
-        internal::LogicExceptionImpl* eip = new internal::LogicExceptionImpl("Hello");
-        delete eip;
     }
 
     {
         ShutdownException* ep = new ShutdownException("Hello");
         delete ep;
-        internal::ShutdownExceptionImpl* eip = new internal::ShutdownExceptionImpl("Hello");
-        delete eip;
     }
 
     {
         FileException* ep = new FileException("Hello", 0);
         delete ep;
-        internal::FileExceptionImpl* eip = new internal::FileExceptionImpl("Hello", 0);
-        delete eip;
     }
 
     {
         ResourceException* ep = new ResourceException("Hello");
         delete ep;
-        internal::ResourceExceptionImpl* eip = new internal::ResourceExceptionImpl("Hello");
-        delete eip;
     }
 }

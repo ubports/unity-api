@@ -1,16 +1,9 @@
-#
-# Ignore cmake noise
-#
-cmake_install.cmake
-CMakeCache.txt
-CMakeFiles
-Makefile
-Testing
-install_manifest.txt
-CTestTestfile.cmake
-
-#
-# Ignore generated files
-#
-build*
-build*/*
+# default build dir
+/build
+# QtCreator project files
+/*.user
+# Eclipse project files
+/.project
+/.cproject
+/.settings
+/.pydevproject
