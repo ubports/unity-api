@@ -47,7 +47,7 @@ set(UNITY_API_VERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}.${UNITY_API_MICRO}"
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fno-permissive -pedantic -Wall -Wextra")
 
-if (${CMAKE_BUILD_TYPE} STREQUAL "release" OR ${CMAKE_BUILD_TYPE} STREQUAL "relwithdebinfo")
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "relwithdebinfo")
     option(Werror "Treat warnings as errors" ON)
 else()
     option(Werror "Treat warnings as errors" OFF)
