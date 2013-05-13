@@ -18,6 +18,7 @@ Vcs-Browser: https://code.launchpad.net/unity-api
 
 Package: libunity-api0
 Architecture: any
+Pre-Depends: ${misc:Pre-Depends},
 Depends: ${misc:Depends},
          ${shlibs:Depends},
 Description: API for shell integration
