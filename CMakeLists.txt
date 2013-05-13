@@ -88,10 +88,6 @@ if (Werror)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 endif()
 
-# gtk and unity-core (actually sigc++) do not like Qt defining macros named
-# "signals" and "slots"
-add_definitions(-DQT_NO_KEYWORDS)
-
 # API version
 set(UNITY_API_MAJOR 0)
 set(UNITY_API_MINOR 1)
