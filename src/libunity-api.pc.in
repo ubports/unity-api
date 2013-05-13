@@ -16,6 +16,8 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
-set(EXAMPLE_LIBS )
-
-#add_subdirectory(whatever)
+Name: lib@UNITY_API_LIB@
+Description: Unity API library
+Version: @UNITY_API_MAJOR@.@UNITY_API_MINOR@
+Libs: -L@CMAKE_INSTALL_PREFIX@/lib -lunity-api
+Cflags: -I@CMAKE_INSTALL_PREFIX@/include

@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 #
 # Copyright (C) 2013 Canonical Ltd
@@ -32,31 +32,33 @@ import os
 import sys
 import re
 
-progname = sys.argv[0]
+#
+# Write the supplied message to stderr, preceded by the program name.
+#
+def error(msg):
+    print(os.path.basename(sys.argv[0]) + ": " + msg, file=sys.stderr)
 
 #
-# Write the supplied message to the specified stream, followed by a newline.
+# Write the supplied message to stdout, preceded by the program name.
 #
-def error(stream, msg):
-    print >> stream, progname + ": " + msg + "\n"
+def message(msg):
+    print(os.path.basename(sys.argv[0]) + ": " + msg)
 
 #
 # For each of the supplied headers, check whether that header includes something in an internal directory.
 # Return the count of headers that do this.
 #
-def test_files(dir, hdrs):
-    errs = 0
+def test_files(hdr_dir, hdrs):
+    num_errs = 0
     for hdr in hdrs:
         try:
-            hdr_name = dir + "/" + hdr
+            hdr_name = os.path.join(hdr_dir, hdr)
             file = open(hdr_name, "r")
-        except OSError:
-            msg = "cannot open \"" + hdr_name + "\": " + e.strerror
-            error(sys.stderr, msg)
-            exit(1)
+        except OSError as e:
+            error("cannot open \"" + hdr_name + "\": " + e.strerror)
+            sys.exit(1)
 
-        include_pat = re.compile(r'^#[ \t]*include[ \t]+[<"](.*)[>"]')
-        internal_pat = re.compile(r'.*internal/')
+        include_pat = re.compile(r'#[ \t]*include[ \t]+[<"](.*?)[>"]')
 
         lines = file.readlines()
         line_num = 0
@@ -64,36 +66,34 @@ def test_files(dir, hdrs):
             line_num += 1
             include_mo = include_pat.match(l)
             if include_mo:
-                header_path = include_mo.group(1)
-                internal_mo = internal_pat.match(header_path)
-                if internal_mo:
-                    errs += 1
-                    error(sys.stderr, hdr_name + " includes an internal header at line " + str(line_num) + ": " + header_path)
-    return errs
+                hdr_path = include_mo.group(1)
+                if 'internal/' in hdr_path:
+                    num_errs += 1
+                    # Yes, write to stdout because this is expected output
+                    message(hdr_name + " includes an internal header at line " + str(line_num) + ": " + hdr_path)
+    return num_errs
 
-#
-# Main program.
-#
+def run():
+    #
+    # Parse arguments.
+    #
+    parser = argparse.ArgumentParser(description = 'Test that no public header includes an internal header.')
+    parser.add_argument('dir', nargs = 1, help = 'The directory to look for header files ending in ".h"')
+    args = parser.parse_args()
 
-#
-# Parse arguments.
-#
-parser = argparse.ArgumentParser(description = 'Test that no public header includes an internal header.')
-parser.add_argument('dir', nargs = 1, help = 'The directory to look for header files ending in ".h"')
-args = parser.parse_args()
-progname = parser.prog
+    #
+    # Find all the .h files in specified directory and look for #include directives that mention "internal/".
+    #
+    hdr_dir = args.dir[0]
+    try:
+        files = os.listdir(hdr_dir)
+    except OSError as e:
+        error("cannot open \"" + hdr_dir + "\": " + e.strerror)
+        sys.exit(1)
+    hdrs = [hdr for hdr in files if hdr.endswith('.h')]
 
-#
-# Find all the .h files in specified directory and look for #include directives that mention "internal".
-#
-dir = args.dir[0]
-try:
-    files = os.listdir(dir)
-except OSError as e:
-    msg = "cannot open \"" + dir + "\": " + e.strerror
-    error(sys.stderr, msg)
-    sys.exit(1)
-pat = re.compile(r'.+\.h$')
-hdrs = [hdr for hdr in files if pat.match(hdr)]
+    if test_files(hdr_dir, hdrs) != 0:
+        sys.exit(1)                     # Errors were reported earlier
 
-sys.exit(test_files(dir, hdrs))
+if __name__ == '__main__':
+   run()

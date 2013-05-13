@@ -16,30 +16,15 @@
  * Authored by: Michi Henning <michi.henning@canonical.com>
  */
 
-#include <unity/util/DefinesPtrs.h>
-#include <unity/util/NonCopyable.h>
+#ifndef UNITY_CONFIG_H
+#define UNITY_CONFIG_H
 
-#include <gtest/gtest.h>
+#define UNITY_HELPER_DLL_EXPORT __attribute__ ((visibility ("default")))
 
-using namespace unity::util;
+#ifdef UNITY_DLL_EXPORTS                          // Defined if we are building the Unity API library
+    #define UNITY_API UNITY_HELPER_DLL_EXPORT
+#else
+    #define UNITY_API /**/
+#endif
 
-class MyClass : public DefinesPtrs<MyClass>, private NonCopyable
-{
-public:
-    static SPtr create()
-    {
-        return SPtr(new MyClass);
-    }
-
-private:
-    MyClass()
-    {
-    }
-};
-
-TEST(DefinesPtrs, basic)
-{
-    // No real test here. This is just so we get function coverage for the coverage tests.
-
-    MyClass::SPtr p = MyClass::create();
-}
+#endif

@@ -60,18 +60,6 @@ TEST(FileIO, exceptions)
     try
     {
         int i __attribute__((unused))
-            = system("rm -f noperm; >noperm; chmod u-r noperm");
-        read_text_file("noperm");
-        FAIL();
-    }
-    catch (FileException const& e)
-    {
-        EXPECT_EQ("unity::FileException: cannot open \"noperm\": Permission denied (errno = 13)", e.to_string());
-    }
-
-    try
-    {
-        int i __attribute__((unused))
             = system("rm -fr testdir; mkdir testdir");
         read_text_file("testdir");
         FAIL();

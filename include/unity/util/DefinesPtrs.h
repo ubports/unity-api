@@ -40,7 +40,7 @@ being defined ("curiously recurring template pattern").
 * class MyClass : public util::DefinesPtrs<MyClass>
 * {
 * public:
-*     // MyClass now provides public typedefs for Ptr, CPtr, UPtr, and UCPtr.
+*     // MyClass now provides public typedefs for SPtr, SCPtr, UPtr, and UCPtr.
 *     // ...
 * };
 ~~~
@@ -60,12 +60,12 @@ public:
     /**
     A <code>std::shared_ptr</code> to a non-constant instance.
     */
-    typedef std::shared_ptr<T> Ptr;
+    typedef std::shared_ptr<T> SPtr;
 
     /**
     A <code>std::shared_ptr</code> to a constant instance.
     */
-    typedef std::shared_ptr<T const> CPtr;
+    typedef std::shared_ptr<T const> SCPtr;
 
     /**
     A <code>std::unique_ptr</code> to a non-constant instance.

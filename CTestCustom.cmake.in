@@ -1,0 +1,16 @@
+#
+# Tests listed here will not be run by the valgrind target.
+#
+
+SET(CTEST_CUSTOM_MEMCHECK_IGNORE
+    cleanincludes
+    testAnimationControllerWithSignals
+    testCarousel
+    testClock
+    testCrossFadeImage
+    testIndicatorItem
+    testMathLocal
+    testRatingStars
+    testSideStage
+    testTimeLocal
+    whitespace)

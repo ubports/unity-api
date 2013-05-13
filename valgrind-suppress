@@ -1,20 +1,13 @@
 {
-   get_cwd-bogus-potential-leak
-   Memcheck:Leak
-   fun:_Znwm
-   fun:_ZNSs4_Rep9_S_createEmmRKSaIcE
-   fun:_ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag
-   fun:_ZNSsC1EPKcRKSaIcE
-   fun:_Z7get_cwdv
-   fun:_ZN15Daemon_dir_Test8TestBodyEv
-}
-
-{
-   string-constructor-bogus-potential-leak
-   Memcheck:Leak
-   fun:_Znwm
-   fun:_ZNSs4_Rep9_S_createEmmRKSaIcE
-   fun:_ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag
-   fun:_ZNSsC1EPKcRKSaIcE
-   fun:_ZN15Daemon_dir_Test8TestBodyEv
+    g_main_leak
+    Memcheck:Leak
+    fun:memalign
+    fun:posix_memalign
+    obj:/lib/x86_64-linux-gnu/libglib-2.0.so.0.3600.0
+    fun:g_slice_alloc
+    fun:g_slice_alloc0
+    fun:g_thread_self
+    fun:g_main_context_acquire
+    fun:g_main_context_push_thread_default
+    ...
 }

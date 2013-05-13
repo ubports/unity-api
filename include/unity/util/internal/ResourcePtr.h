@@ -16,8 +16,8 @@
  * Authored by: Michi Henning <michi.henning@canonical.com>
  */
 
-#ifndef UNITY_UTIL_RESOURCEPTR_H
-#define UNITY_UTIL_RESOURCEPTR_H
+#ifndef UNITY_UTIL_INTERNAL_RESOURCEPTR_H
+#define UNITY_UTIL_INTERNAL_RESOURCEPTR_H
 
 #include <unity/util/NonCopyable.h>
 
@@ -29,6 +29,9 @@ namespace unity
 {
 
 namespace util
+{
+
+namespace internal
 {
 
 namespace
@@ -218,12 +221,12 @@ ResourcePtr<int, decltype(&::close)> fd(::open("/somefile", O_RDONLY), ::close);
       {
           throw FileException(filename.c_str());
       }
-      util::ResourcePtr<int, decltype(&::close)> fd(tmp_fd, ::close(fd));
+      util::internal::ResourcePtr<int, decltype(&::close)> fd(tmp_fd, ::close(fd));
 ~~~
       Alternatively, you can use a deleter function that tests the resource value
       for validity and avoids calling the deleter with an invalid value:
 ~~~
-      util::ResourcePtr<int, std::function<void(int)>> fd(
+      util::internal::ResourcePtr<int, std::function<void(int)>> fd(
           ::open(filename.c_str(), O_RDONLY),
           [](int fd) { if (fd != -1) ::close(fd); }
       );
@@ -346,7 +349,7 @@ held by the ResourcePtr is unchanged.
 
 template<typename R, typename D>
 void
-swap(unity::util::ResourcePtr<R, D>& lhs, unity::util::ResourcePtr<R, D>& rhs)
+swap(unity::util::internal::ResourcePtr<R, D>& lhs, unity::util::internal::ResourcePtr<R, D>& rhs)
 {
     lhs.swap(rhs);
 }
@@ -676,6 +679,8 @@ operator>=(ResourcePtr<R, D> const& rhs) const
     return !(*this < rhs);
 }
 
+} // namespace internal
+
 } // namespace util
 
 } // namespace unity
@@ -690,12 +695,12 @@ namespace std
 */
 
 template<typename R, typename D>
-struct equal_to<unity::util::ResourcePtr<R, D>>
+struct equal_to<unity::util::internal::ResourcePtr<R, D>>
 {
     /**
     Invokes <code>operator==</code> on <code>lhs</code>.
     */
-    bool operator()(unity::util::ResourcePtr<R, D> const& lhs, unity::util::ResourcePtr<R, D> const& rhs) const
+    bool operator()(unity::util::internal::ResourcePtr<R, D> const& lhs, unity::util::internal::ResourcePtr<R, D> const& rhs) const
     {
         return lhs == rhs;
     }
@@ -706,12 +711,12 @@ struct equal_to<unity::util::ResourcePtr<R, D>>
 */
 
 template<typename R, typename D>
-struct not_equal_to<unity::util::ResourcePtr<R, D>>
+struct not_equal_to<unity::util::internal::ResourcePtr<R, D>>
 {
     /**
     Invokes <code>operator!=</code> on <code>lhs</code>.
     */
-    bool operator()(unity::util::ResourcePtr<R, D> const& lhs, unity::util::ResourcePtr<R, D> const& rhs) const
+    bool operator()(unity::util::internal::ResourcePtr<R, D> const& lhs, unity::util::internal::ResourcePtr<R, D> const& rhs) const
     {
         return lhs != rhs;
     }
@@ -722,12 +727,12 @@ struct not_equal_to<unity::util::ResourcePtr<R, D>>
 */
 
 template<typename R, typename D>
-struct less<unity::util::ResourcePtr<R, D>>
+struct less<unity::util::internal::ResourcePtr<R, D>>
 {
     /**
     Invokes <code>operator\<</code> on <code>lhs</code>.
     */
-    bool operator()(unity::util::ResourcePtr<R, D> const& lhs, unity::util::ResourcePtr<R, D> const& rhs) const
+    bool operator()(unity::util::internal::ResourcePtr<R, D> const& lhs, unity::util::internal::ResourcePtr<R, D> const& rhs) const
     {
         return lhs < rhs;
     }
@@ -738,12 +743,12 @@ struct less<unity::util::ResourcePtr<R, D>>
 */
 
 template<typename R, typename D>
-struct less_equal<unity::util::ResourcePtr<R, D>>
+struct less_equal<unity::util::internal::ResourcePtr<R, D>>
 {
     /**
     Invokes <code>operator\<=</code> on <code>lhs</code>.
     */
-    bool operator()(unity::util::ResourcePtr<R, D> const& lhs, unity::util::ResourcePtr<R, D> const& rhs) const
+    bool operator()(unity::util::internal::ResourcePtr<R, D> const& lhs, unity::util::internal::ResourcePtr<R, D> const& rhs) const
     {
         return lhs <= rhs;
     }
@@ -754,12 +759,12 @@ struct less_equal<unity::util::ResourcePtr<R, D>>
 */
 
 template<typename R, typename D>
-struct greater<unity::util::ResourcePtr<R, D>>
+struct greater<unity::util::internal::ResourcePtr<R, D>>
 {
     /**
     Invokes <code>operator\></code> on <code>lhs</code>.
     */
-    bool operator()(unity::util::ResourcePtr<R, D> const& lhs, unity::util::ResourcePtr<R, D> const& rhs) const
+    bool operator()(unity::util::internal::ResourcePtr<R, D> const& lhs, unity::util::internal::ResourcePtr<R, D> const& rhs) const
     {
         return lhs > rhs;
     }
@@ -770,12 +775,12 @@ struct greater<unity::util::ResourcePtr<R, D>>
 */
 
 template<typename R, typename D>
-struct greater_equal<unity::util::ResourcePtr<R, D>>
+struct greater_equal<unity::util::internal::ResourcePtr<R, D>>
 {
     /**
     Invokes <code>operator\>=</code> on <code>lhs</code>.
     */
-    bool operator()(unity::util::ResourcePtr<R, D> const& lhs, unity::util::ResourcePtr<R, D> const& rhs) const
+    bool operator()(unity::util::internal::ResourcePtr<R, D> const& lhs, unity::util::internal::ResourcePtr<R, D> const& rhs) const
     {
         return lhs >= rhs;
     }

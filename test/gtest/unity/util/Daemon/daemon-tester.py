@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 #
 # Copyright (C) 2013 Canonical Ltd
@@ -36,23 +36,22 @@ def run_daemon(path):
         exit("cannot run " + path)
     time.sleep(1)                   # Give process time to complete
 
-#
-# Main program.
-#
+def run():
+    parser = argparse.ArgumentParser(description = 'Test driver for Daemon_test')
+    parser.add_argument('Daemon_test', nargs = 1, help = 'Full path to Daemon_test executable')
 
-parser = argparse.ArgumentParser(description = 'Test driver for Daemon_test')
-parser.add_argument('Daemon_test', nargs = 1, help = 'Full path to Daemon_test executable')
+    args = parser.parse_args()
 
-args = parser.parse_args()
-progname = parser.prog
+    daemon = args.Daemon_test[0]
+    run_daemon(daemon)
 
-daemon = args.Daemon_test[0]
-run_daemon(daemon)
+    size = os.stat("Daemon_test.out").st_size
+    if size == 0:
+        exit(0)
 
-size = os.stat("Daemon_test.out").st_size
-if size == 0:
-    exit(0)
+    with open("Daemon_test.out", 'r') as file:
+        sys.stderr.write(file.read())
+        exit(1)
 
-with open("Daemon_test.out", 'r') as file:
-    sys.stderr.write(file.read())
-    exit(1)
+if __name__ == '__main__':
+   run()

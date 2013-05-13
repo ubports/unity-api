@@ -19,6 +19,8 @@
 #ifndef UNITY_EXCEPTION_H
 #define UNITY_EXCEPTION_H
 
+#include <unity/config.h>
+
 #include <exception>
 #include <string>
 #include <memory>
@@ -47,7 +49,7 @@ a number of exceptions to be remembered before throwing a new exception.
 The exception nesting is provided by the derivation from <code>std::nested_exception</code>. If you
 catch an exception and throw another exception from the catch handler, the caught exception
 is automatically preserved; you can access nested exceptions by calling the <code>nested_ptr()</code> and
-<code>rethrow_nested()</code> member functions of <code>nested_exception</code>.
+<code>rethrow_nested()</code> member functions of <code>std::nested_exception</code>.
 
 In addition, you can remember one or more exceptions by calling remember(). This is useful in situations
 where you need perform a number of actions that may fail with an error code, and you do not want to
@@ -106,7 +108,7 @@ chained).
 
 */
 
-class Exception : public std::exception, public std::nested_exception
+class UNITY_API Exception : public std::exception, public std::nested_exception
 {
 public:
     //! @cond

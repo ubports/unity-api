@@ -1,23 +1,14 @@
-#
-# Copyright (C) 2013 Canonical Ltd
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License version 3 as
-# published by the Free Software Foundation.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-# Authored by: Michi Henning <michi.henning@canonical.com>
-#
-
 add_subdirectory(unity)
 
 add_library(${UNITY_API_LIB} SHARED ${UNITY_API_LIB_SRC})
+set_target_properties(${UNITY_API_LIB} PROPERTIES
+    VERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}"
+    SOVERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}"
+)
 
 install(TARGETS ${UNITY_API_LIB} LIBRARY DESTINATION lib)
+
+configure_file(lib${UNITY_API_LIB}.pc.in lib${UNITY_API_LIB}.pc @ONLY)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/lib${UNITY_API_LIB}.pc DESTINATION lib/pkgconfig)
+
+set(UNITY_API_LIB_SRC ${UNITY_API_LIB_SRC} ${UNITY_SRC} PARENT_SCOPE)
