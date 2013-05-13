@@ -13,3 +13,5 @@ set(qmltest_DEFAULT_IMPORT_PATHS
 set(qmltest_DEFAULT_PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal")
 
 add_qml_test(modules/TestUtil TestUtil)
+
+add_qml_test(unity/shell/notifications Notifications)
