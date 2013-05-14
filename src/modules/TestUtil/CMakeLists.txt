@@ -5,8 +5,12 @@ set(CMAKE_AUTOMOC ON)
 add_definitions(-DQT_NO_KEYWORDS)
 
 set(TestUtilQML_SOURCES
-    testutil.cpp
-    testutil_plugin.cpp
+    TestUtil.cpp
+    TestUtilPlugin.cpp
+)
+
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 add_library(TestUtilQml MODULE ${TestUtilQML_SOURCES})

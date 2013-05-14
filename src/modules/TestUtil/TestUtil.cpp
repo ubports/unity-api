@@ -15,10 +15,10 @@
  */
 
 
-#include "testutil.h"
+#include <TestUtil.h>
 
 TestUtil::TestUtil(QObject *parent)
-:   QObject(parent)
+    : QObject(parent)
 {
 }
 
@@ -31,9 +31,11 @@ TestUtil::isInstanceOf(QObject *obj, QString name)
 {
     if (!obj) return false;
     bool result = obj->inherits(name.toUtf8());
-    if (!result) {
+    if (!result)
+    {
         const QMetaObject *metaObject = obj->metaObject();
-        while (!result && metaObject) {
+        while (!result && metaObject)
+        {
             const QString className = metaObject->className();
             const QString qmlName = className.left(className.indexOf("_QMLTYPE_"));
             result = qmlName == name;
