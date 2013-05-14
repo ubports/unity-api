@@ -59,9 +59,7 @@ TODO: More explanation of the namespaces used and for what.
 Header file conventions
 -----------------------
 
-TODO: Is include/unity/scopes the correct place?
-
-All header files are underneath include/unity/scopes. Source code always includes
+All header files are underneath include/unity. Source code always includes
 headers using the full pathname, for example:
 
   #include <unity/internal/ExceptionImpl.h>
@@ -73,7 +71,8 @@ in the tree. (Not that this should happen, but it's better to be safe. If
 there are no duplicate names, inclusion with angle brackets behaves the
 same way as inclusion with double quotes.)
 
-All headers that are for public consumption appear in unity/scopes.
+All headers that are for public consumption appear in include/unity/*
+(provided the path does not include "internal").
 
 Public header directories contain a private header directory called
 "internal". This directory contains all the headers that are private

@@ -24,18 +24,7 @@ NOTE: Before making changes to the code, please read the README file in its enti
 Build dependencies
 ------------------
 
-List of packages required to build and test the code:
-
-- cmake (cmake, 2.8.10 with patch (see below) or later)
-- gcovr (gcovr, 2.4-0ubuntu1 or later)
-- lcov (lcov, 1.9-3 with patch (see below) or later)
-- gtest (libgtest-dev, 1.6.0 or later)
-- cppcheck (cppcheck, 1.55-1 or later)
-- doxygen (doxygen, 1.8.1.2-1 or later)
-- graphviz (graphviz, 2.26.3-12ubuntu1 or later)
-- libboost (libboost1.49-dev or later)
-- libboost-thread (libbost-thread1.49-dev or later)
-- libboost-regex-dev (libbost-regex1.49-dev or later)
+See debian/control for the list of packages required to build and test the code.
 
 
 Building the code
@@ -59,7 +48,7 @@ For a release version, use -DCMAKE_BUILD_TYPE=release
 To build with the flags for coverage testing enabled:
 
     $ mkdir buildcoverage
-    $ cd makecoverage
+    $ cd buildcoverage
     $ cmake -DCMAKE_BUILD_TYPE=coverage
     $ make
 
@@ -85,8 +74,8 @@ To get coverage output:
     $ make test
     $ make coverage-html
 
-(The coverage-html target is available only if the code was built with -DCMAKE_BUILD_TYPE=coverage.)
-
+This drops the coverage tests into the coveragereport directory. (The coverage-html target is available
+only if the code was built with -DCMAKE_BUILD_TYPE=coverage.)
 
 Note that, with gcc 4.7.2 and cmake 2.8.10, you may get a bunch of
 warnings. To fix this, you can build cmake 2.8.10 with the following patch:
@@ -114,10 +103,10 @@ into the old coverage output. You can get rid of this problem by running
 
 This deletes all the .gcda files, allowing the merge to succeed again.
 
-If lcov complains about unrecognized lines, apply this patch
-to /usr/bin/geninfo:
+If lcov complains about unrecognized lines involving '=====',
+you can patch geninfo and gcovr as explained here:
 
-https://bugzilla.redhat.com/attachment.cgi?id=590034
+https://bugs.launchpad.net/gcovr/+bug/1086695/comments/2
 
 To run the static C++ checks:
 
