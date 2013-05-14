@@ -9,7 +9,7 @@ Build-Depends: debhelper (>= 9),
                libboost1.49-dev (>= 1.49),
                libgtest-dev,
                pkg-config,
-               python,
+               python3,
                qt5-default,
                qtbase5-dev,
                qtdeclarative5-dev,
@@ -21,22 +21,25 @@ Homepage: https://launchpad.net/unity-api
 Vcs-Bzr: lp:unity-api
 Vcs-Browser: https://code.launchpad.net/unity-api
 
-Package: libunity-api
-Architecture: all
+Package: libunity-api0
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends},
 Depends: ${misc:Depends},
          ${shlibs:Depends},
 Description: API for shell integration
  Library to integrate with the Unity shell
 
 Package: libunity-api-dev
-Architecture: all
+Section: libdevel
+Architecture: any
 Depends: ${misc:Depends},
          libboost1.49-dev (>= 1.49),
-         libunity-api (= ${binary:Version}),
+         libunity-api0 (= ${binary:Version}),
 Description: Header files for Unity API
  Library to integrate with the Unity shell (dev files)
 
 Package: libunity-api-doc
+Section: doc
 Architecture: all
 Depends: ${misc:Depends},
 Description: Documentation for Unity API

@@ -103,6 +103,9 @@ set(OTHER_API_LIBS )
 # All the libraries we need to link a normal executable that uses the Unity API
 set(LIBS ${UNITY_API_LIB} ${OTHER_API_LIBS})
 
+# Library install prefix
+set(LIB_INSTALL_PREFIX lib/${CMAKE_LIBRARY_ARCHITECTURE})
+
 # Tests
 include(CTest)
 enable_testing()
