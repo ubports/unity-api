@@ -23,7 +23,7 @@
 
 #include <unity/config.h>
 
-#include <unity/shell/notifications/model.h>
+#include <unity/shell/notifications/ModelInterface.h>
 
 #include <QtCore/QList>
 #include <QtCore/QVariantMap>
@@ -45,13 +45,17 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const;
 
-    bool confirmationPlaceholder() const { return m_confirmationPlaceholder; }
+    bool confirmationPlaceholder() const
+    {
+        return m_confirmationPlaceholder;
+    }
 
     void setConfirmationPlaceholder(bool confirmationPlaceholder);
 
     void add(MockNotification* notification);
 
-    enum RoleEnum {
+    enum RoleEnum
+    {
         Summary = Qt::DisplayRole,
         Notification = Qt::UserRole,
         Id,

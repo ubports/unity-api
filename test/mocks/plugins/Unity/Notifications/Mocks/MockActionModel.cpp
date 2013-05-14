@@ -18,8 +18,8 @@
  */
 
 
-#include <Mocks/mockactionmodel.h>
-#include <Mocks/mocknotification.h>
+#include <Mocks/MockActionModel.h>
+#include <Mocks/MockNotification.h>
 
 #include <QtCore/QVariantList>
 #include <QtCore/QVariantMap>
@@ -35,7 +35,8 @@ MockActionModel::MockActionModel(QObject* parent)
 int
 MockActionModel::rowCount(const QModelIndex& /* parent */) const
 {
-    if (m_notification && m_notification->m_data.contains("actions")) {
+    if (m_notification && m_notification->m_data.contains("actions"))
+    {
         QVariantList actions = m_notification->m_data["actions"].value<QVariantList>();
         return actions.count();
     }
@@ -46,11 +47,16 @@ QVariant
 MockActionModel::data(const QModelIndex &index, int role) const
 {
     QVariantMap action = m_notification->m_data["actions"].value<QVariantList>()[index.row()].value<QVariantMap>();
-    if (role == Label) {
+    if (role == Label)
+    {
         return action["label"];
-    } else if (role == Id) {
+    }
+    else if (role == Id)
+    {
         return action["id"];
-    } else {
+    }
+    else
+    {
         return QVariant();
     }
 }

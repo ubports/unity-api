@@ -18,12 +18,11 @@
  */
 
 
-#include <Mocks/mocksource.h>
+#include <Mocks/MockSource.h>
+#include <Mocks/MockModel.h>
+#include <Mocks/MockNotification.h>
 
-#include <Mocks/mockmodel.h>
-#include <Mocks/mocknotification.h>
-
-#include <unity/shell/notifications/notification.h>
+#include <unity/shell/notifications/NotificationInterface.h>
 
 using namespace unity::shell::notifications;
 
@@ -43,7 +42,8 @@ void
 MockSource::setModel(ModelInterface* model)
 {
     MockModel* mockModel = qobject_cast<MockModel*>(model);
-    if (m_model != mockModel) {
+    if (m_model != mockModel)
+    {
         m_model = mockModel;
         Q_EMIT modelChanged(m_model);
     }
@@ -57,7 +57,8 @@ MockSource::send(QVariantMap data)
 
     connect(notification, SIGNAL(completed()), SLOT(onCompleted()));
 
-    if(m_model) {
+    if(m_model)
+    {
         m_model->add(notification);
     }
 }

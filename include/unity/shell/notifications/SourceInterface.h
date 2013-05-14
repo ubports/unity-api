@@ -18,16 +18,22 @@
  */
 
 
-#ifndef SOURCE_H
-#define SOURCE_H
+#ifndef UNITY_SHELL_NOTIFICATIONS_SOURCEINTERFACE_H
+#define UNITY_SHELL_NOTIFICATIONS_SOURCEINTERFACE_H
 
 #include <unity/config.h>
 
 #include <QtCore/QObject>
 
-namespace unity {
-namespace shell {
-namespace notifications {
+namespace unity
+{
+
+namespace shell
+{
+
+namespace notifications
+{
+
 
 class ModelInterface;
 
@@ -49,7 +55,9 @@ Q_SIGNALS:
 };
 
 } // namespace notifications
+
 } // namespace shell
+
 } // namespace unity
 
-#endif // SOURCE_H
+#endif // UNITY_SHELL_NOTIFICATIONS_SOURCEINTERFACE_H

@@ -23,13 +23,16 @@
 
 #include <unity/config.h>
 
-#include <unity/shell/notifications/source.h>
+#include <unity/shell/notifications/SourceInterface.h>
 
 #include <QtCore/QVariantMap>
 
-namespace unity {
-namespace shell {
-namespace notifications {
+namespace unity
+{
+namespace shell
+{
+namespace notifications
+{
 
 class ModelInterface;
 

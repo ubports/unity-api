@@ -18,19 +18,12 @@
  */
 
 
-#include <Mocks/mocknotificationsplugin.h>
-#include <Mocks/mocksource.h>
+#include <Mocks/MockNotification.h>
+#include <Mocks/MockActionModel.h>
 
-#include <unity/shell/notifications/source.h>
-
-#include <qqml.h>
-
-using namespace unity::shell::notifications;
-
-void MockNotificationsPlugin::registerTypes(const char *uri)
+MockNotification::MockNotification(QObject* parent)
+    : NotificationInterface(parent)
+    , m_actions(new MockActionModel(this))
 {
-    // @uri Unity.Notifications.Mocks
-    qmlRegisterUncreatableType<SourceInterface>(uri, 0, 1, "SourceInterface", "SourceInterface is an abstract base class");
-
-    qmlRegisterType<MockSource>(uri, 0, 1, "MockSource");
+    connect(this, SIGNAL(dismissed()), SIGNAL(completed()));
 }

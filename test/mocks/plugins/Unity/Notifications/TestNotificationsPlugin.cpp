@@ -18,15 +18,15 @@
  */
 
 
-#include <testnotificationsplugin.h>
-#include <Mocks/mockmodel.h>
-#include <Mocks/mocksource.h>
-#include <Mocks/mocknotification.h>
+#include <TestNotificationsPlugin.h>
+#include <Mocks/MockModel.h>
+#include <Mocks/MockSource.h>
+#include <Mocks/MockNotification.h>
 
-#include <unity/shell/notifications/enums.h>
-#include <unity/shell/notifications/model.h>
-#include <unity/shell/notifications/source.h>
-#include <unity/shell/notifications/notification.h>
+#include <unity/shell/notifications/Enums.h>
+#include <unity/shell/notifications/ModelInterface.h>
+#include <unity/shell/notifications/SourceInterface.h>
+#include <unity/shell/notifications/NotificationInterface.h>
 
 #include <qqml.h>
 

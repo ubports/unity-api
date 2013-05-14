@@ -18,13 +18,13 @@
  */
 
 
-#include <Mocks/mockmodel.h>
-#include <Mocks/mocknotification.h>
-#include <Mocks/mockactionmodel.h>
+#include <Mocks/MockModel.h>
+#include <Mocks/MockNotification.h>
+#include <Mocks/MockActionModel.h>
 
-#include <unity/shell/notifications/enums.h>
-#include <unity/shell/notifications/source.h>
-#include <unity/shell/notifications/notification.h>
+#include <unity/shell/notifications/Enums.h>
+#include <unity/shell/notifications/SourceInterface.h>
+#include <unity/shell/notifications/NotificationInterface.h>
 
 #include <QtCore/QUrl>
 
@@ -57,37 +57,62 @@ MockModel::rowCount(const QModelIndex &parent) const
 QVariant
 MockModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid()) {
+    if (!index.isValid())
+    {
         return QVariant();
     }
 
     MockNotification* notification = m_list.at(index.row());
 
-    if (role == Summary) {
+    if (role == Summary)
+    {
         return QVariant("");
-    } else if (role == Notification) {
+    }
+    else if (role == Notification)
+    {
         return QVariant::fromValue(notification);
-    } else if (role == Id) {
+    }
+    else if (role == Id)
+    {
         return QVariant(index.row());
-    } else if (role == Type) {
-        if (notification->m_data.contains("type")) {
+    }
+    else if (role == Type)
+    {
+        if (notification->m_data.contains("type"))
+        {
             return notification->m_data["type"];
-        } else {
+        }
+        else
+        {
             return QVariant((int)unity::shell::notifications::Type::TypeEnum::Invalid);
         }
-    } else if (role == Urgency) {
+    }
+    else if (role == Urgency)
+    {
         return QVariant((int)unity::shell::notifications::Urgency::UrgencyEnum::Invalid);
-    } else if (role == Body) {
+    }
+    else if (role == Body)
+    {
         return QVariant("");
-    } else if (role == Value) {
+    }
+    else if (role == Value)
+    {
         return QVariant(0);
-    } else if (role == Icon) {
+    }
+    else if (role == Icon)
+    {
         return QVariant::fromValue(QUrl(""));
-    } else if (role == SecondaryIcon) {
+    }
+    else if (role == SecondaryIcon)
+    {
         return QVariant::fromValue(QUrl(""));
-    } else if (role == Hints) {
+    }
+    else if (role == Hints)
+    {
         return QVariant(unity::shell::notifications::Hint::Invalid);
-    } else if (role == Actions) {
+    }
+    else if (role == Actions)
+    {
         return QVariant::fromValue(notification->m_actions);
     }
 
@@ -103,10 +128,12 @@ MockModel::roleNames() const
 void
 MockModel::setConfirmationPlaceholder(bool confirmationPlaceholder)
 {
-    if (m_confirmationPlaceholder != confirmationPlaceholder) {
+    if (m_confirmationPlaceholder != confirmationPlaceholder)
+    {
         m_confirmationPlaceholder = confirmationPlaceholder;
 
-        if (m_confirmationPlaceholder) {
+        if (m_confirmationPlaceholder)
+        {
             MockNotification* notification = new MockNotification(this);
 
             notification->m_data.insert("type", (int)unity::shell::notifications::Type::TypeEnum::Placeholder);
@@ -115,10 +142,13 @@ MockModel::setConfirmationPlaceholder(bool confirmationPlaceholder)
             beginInsertRows(QModelIndex(), 0, 0);
             m_list.insert(0, notification);
             endInsertRows();
-        } else {
+        }
+        else
+        {
             if (m_list.count() > 0
                     && m_list.at(0)->m_data.contains("type")
-                    && m_list.at(0)->m_data["type"] == (int)unity::shell::notifications::Type::TypeEnum::Placeholder) {
+                    && m_list.at(0)->m_data["type"] == (int)unity::shell::notifications::Type::TypeEnum::Placeholder)
+            {
                 MockNotification* notification = m_list.at(0);
                 beginRemoveRows(QModelIndex(), 0, 0);
                 m_list.removeAt(0);
@@ -138,17 +168,23 @@ MockModel::add(MockNotification* notification)
     int row = -1;
     if (m_confirmationPlaceholder
             && notification->m_data.contains("type")
-            && notification->m_data["type"] == (int)unity::shell::notifications::Type::TypeEnum::Confirmation) {
+            && notification->m_data["type"] == (int)unity::shell::notifications::Type::TypeEnum::Confirmation)
+    {
         MockNotification* placeholder = m_list.at(0);
         placeholder->m_data["type"] = (int)unity::shell::notifications::Type::TypeEnum::Confirmation;
         Q_EMIT dataChanged(index(0), index(0));
-    } else if (m_confirmationPlaceholder) {
+    }
+    else if (m_confirmationPlaceholder)
+    {
         row = 1;
-    } else {
+    }
+    else
+    {
         row = 0;
     }
 
-    if (row >= 0) {
+    if (row >= 0)
+    {
         beginInsertRows(QModelIndex(), row, row);
         m_list.insert(row, notification);
         endInsertRows();
@@ -160,13 +196,17 @@ MockModel::onDismissed()
 {
     MockNotification* notification = qobject_cast<MockNotification*>(sender());
     int row = m_list.indexOf(notification);
-    if (row >= 0) {
+    if (row >= 0)
+    {
         if (m_confirmationPlaceholder
                 && notification->m_data.contains("type")
-                && notification->m_data["type"] == (int)unity::shell::notifications::Type::TypeEnum::Confirmation) {
+                && notification->m_data["type"] == (int)unity::shell::notifications::Type::TypeEnum::Confirmation)
+        {
             notification->m_data["type"] = (int)unity::shell::notifications::Type::TypeEnum::Placeholder;
             Q_EMIT dataChanged(index(0), index(0));
-        } else {
+        }
+        else
+        {
             beginRemoveRows(QModelIndex(), row, row);
             m_list.removeAt(row);
             endRemoveRows();

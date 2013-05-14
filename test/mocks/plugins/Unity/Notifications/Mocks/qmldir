@@ -1,2 +1,2 @@
 module Unity.Notifications.Mocks
-plugin NotificationsMocks
+plugin MockNotificationsPlugin

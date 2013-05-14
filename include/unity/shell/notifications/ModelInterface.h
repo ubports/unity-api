@@ -18,72 +18,45 @@
  */
 
 
-#ifndef ENUMS_H
-#define ENUMS_H
+#ifndef UNITY_SHELL_NOTIFICATIONS_MODELINTERFACE_H
+#define UNITY_SHELL_NOTIFICATIONS_MODELINTERFACE_H
 
 #include <unity/config.h>
 
-#include <QtCore/QObject>
+#include <QtCore/QAbstractListModel>
 
-namespace unity {
-namespace shell {
-namespace notifications {
+namespace unity
+{
+
+namespace shell
+{
+
+namespace notifications
+{
 
 
-class UNITY_API Urgency : public QObject
+class UNITY_API ModelInterface : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_ENUMS(UrgencyEnum)
+    Q_PROPERTY(bool confirmationPlaceholder READ confirmationPlaceholder WRITE setConfirmationPlaceholder NOTIFY confirmationPlaceholderChanged)
 
 public:
-    enum class UrgencyEnum {
-        Invalid = 0,
-        Low,
-        Normal,
-        Critical
-    };
+    explicit ModelInterface(QObject* parent = 0) : QAbstractListModel(parent) { }
+    virtual ~ModelInterface() { }
+
+    virtual bool confirmationPlaceholder() const = 0;
+
+    virtual void setConfirmationPlaceholder(bool confirmationPlaceholder) = 0;
+
+Q_SIGNALS:
+    void confirmationPlaceholderChanged(bool confirmationPlaceholder);
 };
-
-
-class UNITY_API Type : public QObject
-{
-    Q_OBJECT
-
-    Q_ENUMS(TypeEnum)
-
-public:
-    enum class TypeEnum {
-        Invalid = 0,
-        Confirmation,
-        Ephemeral,
-        Interactive,
-        SnapDecision,
-        Placeholder
-    };
-};
-
-
-class UNITY_API Hint : public QObject
-{
-    Q_OBJECT
-
-    Q_FLAGS(HintEnum)
-
-public:
-    enum HintEnum {
-        Invalid    = 1 << 0,
-        ButtonTint = 1 << 1,
-        IconOnly   = 1 << 2
-    };
-
-    Q_DECLARE_FLAGS(Hints, HintEnum)
-};
-
-Q_DECLARE_OPERATORS_FOR_FLAGS(Hint::Hints)
 
 } // namespace notifications
+
 } // namespace shell
+
 } // namespace unity
 
-#endif // ENUMS_H
+#endif // UNITY_SHELL_NOTIFICATIONS_MODELINTERFACE_H

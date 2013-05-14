@@ -18,44 +18,38 @@
  */
 
 
-#ifndef MOCKNOTIFICATION_H
-#define MOCKNOTIFICATION_H
+#ifndef MOCKACTIONMODEL_H
+#define MOCKACTIONMODEL_H
 
 #include <unity/config.h>
 
-#include <unity/shell/notifications/notification.h>
+#include <QtCore/QAbstractListModel>
 
-#include <QtCore/QVariantMap>
+class MockNotification;
 
-using namespace unity::shell::notifications;
-
-class MockSource;
-class MockModel;
-class MockActionModel;
-
-class UNITY_API MockNotification : public NotificationInterface
+class UNITY_API MockActionModel : public QAbstractListModel
 {
-    friend class MockSource;
-    friend class MockModel;
-    friend class MockActionModel;
-
     Q_OBJECT
+
+    Q_ENUMS(RoleEnum)
 public:
-    explicit MockNotification(QObject *parent = 0);
+    explicit MockActionModel(QObject *parent = 0);
 
-public Q_SLOTS:
-    void onHovered() { }
-    void onDisplayed() { }
-    void invokeAction(const QString& /* id */) { }
+    int rowCount(const QModelIndex& parent) const;
+    QVariant data(const QModelIndex &index, int role) const;
+    QHash<int, QByteArray> roleNames() const;
 
-Q_SIGNALS:
-    void completed();
+    enum RoleEnum
+    {
+        Label = Qt::DisplayRole,
+        Id = Qt::UserRole
+    };
 
 private:
-    QVariantMap m_data;
-    MockActionModel* m_actions;
+    QHash<int, QByteArray> m_roles;
+    MockNotification* m_notification;
 };
 
-Q_DECLARE_METATYPE(MockNotification*)
+Q_DECLARE_METATYPE(MockActionModel*)
 
-#endif // MOCKNOTIFICATION_H
+#endif // MOCKACTIONMODEL_H

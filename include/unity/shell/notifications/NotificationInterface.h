@@ -18,16 +18,22 @@
  */
 
 
-#ifndef NOTIFICATION_H
-#define NOTIFICATION_H
+#ifndef UNITY_SHELL_NOTIFICATIONS_NOTIFICATIONINTERFACE_H
+#define UNITY_SHELL_NOTIFICATIONS_NOTIFICATIONINTERFACE_H
 
 #include <unity/config.h>
 
 #include <QtCore/QObject>
 
-namespace unity {
-namespace shell {
-namespace notifications {
+namespace unity
+{
+
+namespace shell
+{
+
+namespace notifications
+{
+
 
 class UNITY_API NotificationInterface : public QObject
 {
@@ -46,7 +52,9 @@ Q_SIGNALS:
 };
 
 } // namespace notifications
+
 } // namespace shell
+
 } // namespace unity
 
-#endif // NOTIFICATION_H
+#endif // UNITY_SHELL_NOTIFICATIONS_NOTIFICATIONINTERFACE_H

@@ -1,2 +1,2 @@
 module Unity.Notifications
-plugin Notifications
+plugin TestNotificationsPlugin
