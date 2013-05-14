@@ -9,7 +9,7 @@ Build-Depends: debhelper (>= 9),
                libboost1.49-dev (>= 1.49),
                libgtest-dev,
                pkg-config,
-               python,
+               python3,
 Standards-Version: 3.9.4
 Section: libs
 Homepage: https://launchpad.net/unity-api
