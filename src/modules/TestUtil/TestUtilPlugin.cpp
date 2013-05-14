@@ -15,8 +15,8 @@
  */
 
 
-#include "testutil_plugin.h"
-#include "testutil.h"
+#include <TestUtilPlugin.h>
+#include <TestUtil.h>
 
 #include <qqml.h>
 
