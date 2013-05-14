@@ -28,18 +28,29 @@ forbidden = ['boost',
              'dbus.h',
              ]
 
-def check_file(filename):
+#
+# List of exceptions. For each of the directory prefixes in the list, allow the #include directive to start
+# with one of the specified prefixes.
+#
+allowed = [
+    [ 'unity/shell', [ 'Qt' ] ] # Anything under unity/shell can include anything starting with Qt
+]
+
+def check_file(filename, permitted_includes):
     errors_found = False
     linenum = 0
     for line in open(filename):
         line = line.strip()
         if line.startswith('#include'):
             for f in forbidden:
-                if f in line:
-                    msg = 'Forbidden include: %s:%d - %s'\
-                        % (filename, linenum, line)
-                    print(msg)
-                    errors_found = True;
+                for prefix in permitted_includes:
+                    if f.startswith(prefix):
+                        continue
+                    if f in line:
+                        msg = 'Forbidden include: %s:%d - %s'\
+                            % (filename, linenum, line)
+                        print(msg)
+                        errors_found = True;
         linenum += 1
     return errors_found
 
@@ -58,7 +69,11 @@ def check_headers(incdir):
             suffix = filename.split('.')[-1]
             if suffix in suffixes:
                 fullname = os.path.join(root, filename)
-                if check_file(fullname):
+                for skip in allowed:
+                    permitted_includes = []
+                    if fullname.startswith(os.path.join(incdir, skip[0])):
+                        permitted_includes = skip[1]
+                if check_file(fullname, permitted_includes):
                     errors_found = True
     return errors_found
 
