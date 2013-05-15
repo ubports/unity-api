@@ -1,7 +1,5 @@
 add_subdirectory(unity)
 
-add_subdirectory(modules)
-
 add_library(${UNITY_API_LIB} SHARED ${UNITY_API_LIB_SRC})
 set_target_properties(${UNITY_API_LIB} PROPERTIES
     VERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}"
