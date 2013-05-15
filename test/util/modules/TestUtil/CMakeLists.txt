@@ -23,3 +23,12 @@ file(GLOB QML_JS_FILES *.js *.qml)
 file(COPY qmldir ${QML_JS_FILES}
     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
     )
+
+
+# tests
+include(QmlTest)
+
+add_qml_test(test TestUtil
+    IMPORT_PATHS ${CMAKE_BINARY_DIR}/test/util/modules
+    PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal"
+)
