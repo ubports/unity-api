@@ -1,7 +1,9 @@
 # default build dir
-/build
+/build*
+
 # QtCreator project files
 /*.user
+
 # Eclipse project files
 /.project
 /.cproject
