@@ -61,7 +61,7 @@ macro(add_qml_test SUBPATH COMPONENT_NAME)
     if("${qmltest_NO_ADD_TEST}" STREQUAL FALSE AND NOT "${qmltest_DEFAULT_NO_ADD_TEST}" STREQUAL "TRUE")
         add_test(${qmltest_TARGET} ${qmltest_command})
 
-        if(NOT "${qmltest_UNPARSED_ARGUMENTS}" STREQUAL "")
+        if(NOT "${qmltest_PROPERTIES}" STREQUAL "")
             set_tests_properties(${qmltest_TARGET} PROPERTIES ${qmltest_PROPERTIES})
         elseif(NOT "${qmltest_DEFAULT_PROPERTIES}" STREQUAL "")
             set_tests_properties(${qmltest_TARGET} PROPERTIES ${qmltest_DEFAULT_PROPERTIES})
