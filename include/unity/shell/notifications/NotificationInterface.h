@@ -51,33 +51,34 @@ public:
     virtual ~NotificationInterface() { }
     /// @endcond
 
-public Q_SLOTS:
+Q_SIGNALS:
     /**
     Will be called whenever the mouse hover status of a notification changes.
 
     \param hovered Mouse hover status of this notification.
     */
-    virtual void onHovered(bool hovered) = 0;
+    void hovered(bool hovered);
+
     /**
     Will be called whenever the display status of a notification changes.
 
     \param displayed Visible/hidden status of this notification.
     */
-    virtual void onDisplayed(bool displayed) = 0;
-    /**
-    Will be called whenever an action of this notification is to be invoked.
+    void displayed(bool displayed);
 
-    \param id Id of the invoked action.
-    */
-    virtual void invokeAction(const QString& id) = 0;
-
-Q_SIGNALS:
     /**
     Should be emitted whenever the notification was dismissed. This can be called internally
     by the notification implementation (e.g. timeout) or from the UI when the user dismisses
     a notification.
     */
     void dismissed();
+
+    /**
+    Will be called whenever an action of this notification is to be invoked.
+
+    \param id Id of the invoked action.
+    */
+    void actionInvoked(const QString& id);
 };
 
 } // namespace notifications

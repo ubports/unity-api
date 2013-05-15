@@ -180,9 +180,9 @@ Item {
        function test_notification_members_data() {
             return [
                 { tag: "Notification.dismissed", signal: "dismissed" },
-                { tag: "Notification.onHovered", slot: "onHovered" },
-                { tag: "Notification.onDisplayed", slot: "onDisplayed" },
-                { tag: "Notification.invokeAction", method: "invokeAction" }
+                { tag: "Notification.hovered", signal: "hovered" },
+                { tag: "Notification.displayed", signal: "displayed" },
+                { tag: "Notification.actionInvoked", signal: "actionInvoked" }
             ];
        }
 
