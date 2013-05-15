@@ -37,20 +37,41 @@ namespace notifications
 
 class ModelInterface;
 
+/**
+\brief A source of notifications
+
+This should feed the model with new notifications from an implementation-specific
+source.
+*/
 class UNITY_API SourceInterface : public QObject
 {
     Q_OBJECT
 
+    /**
+    \brief The model to which to send incoming notifications.
+
+    \accessors %model(), setModel(ModelInterface* model)
+    \notifier modelChanged(ModelInterface* model)
+    */
     Q_PROPERTY(unity::shell::notifications::ModelInterface* model READ model WRITE setModel NOTIFY modelChanged)
+
 public:
+    /// @cond
     explicit SourceInterface(QObject* parent = 0) : QObject(parent) { }
     virtual ~SourceInterface() { }
+    /// @endcond
 
+    /// @cond
     virtual ModelInterface* model() const = 0;
-
     virtual void setModel(ModelInterface* model) = 0;
+    /// @endcond
 
 Q_SIGNALS:
+    /**
+    Emitted when value of the model property has changed.
+
+    \param model New value of the model property.
+    */
     void modelChanged(ModelInterface* model);
 };
 

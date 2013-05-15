@@ -35,21 +35,47 @@ namespace notifications
 {
 
 
+/**
+\brief A list of notifications to be displayed
+
+This model exposes all the notifications that are currently supposed to be on screen.
+Not all of them might actually get on screen due to screen size, in which case the
+Notification::displayed(true) signal will only be emitted after the Notification was
+actually displayed.
+*/
+
 class UNITY_API ModelInterface : public QAbstractListModel
 {
     Q_OBJECT
 
+    /**
+    \brief Whether a placeholder for confirmation should be kept at the beginning
+
+    When this is true, the model should hold a Placeholder type notification at the top
+    and update its data when an incoming Confirmation type notification is sent.
+
+    \accessors %confirmationPlaceholder(), setConfirmationPlaceholder(bool confirmationPlaceholder)
+    \notifier confirmationPlaceholderChanged(bool confirmationPlaceholder)
+    */
     Q_PROPERTY(bool confirmationPlaceholder READ confirmationPlaceholder WRITE setConfirmationPlaceholder NOTIFY confirmationPlaceholderChanged)
 
 public:
+    /// @cond
     explicit ModelInterface(QObject* parent = 0) : QAbstractListModel(parent) { }
     virtual ~ModelInterface() { }
+    /// @endcond
 
+    /// @cond
     virtual bool confirmationPlaceholder() const = 0;
-
     virtual void setConfirmationPlaceholder(bool confirmationPlaceholder) = 0;
+    /// @endcond
 
 Q_SIGNALS:
+    /**
+    Emitted when value of the confirmationPlaceholder property has changed.
+
+    \param confirmationPlaceholder New value of the confirmationPlaceholder property.
+    */
     void confirmationPlaceholderChanged(bool confirmationPlaceholder);
 };
 

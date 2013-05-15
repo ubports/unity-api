@@ -35,6 +35,10 @@ namespace notifications
 {
 
 
+/**
+\brief Wraps Notification's urgency enumeration
+*/
+
 class UNITY_API Urgency : public QObject
 {
     Q_OBJECT
@@ -42,15 +46,24 @@ class UNITY_API Urgency : public QObject
     Q_ENUMS(UrgencyEnum)
 
 public:
+    /**
+    \brief Notification's urgency enumeration
+
+    This determines the order in which the notifications are going to be displayed.
+    */
     enum class UrgencyEnum
     {
         Invalid = 0,
-        Low,
-        Normal,
-        Critical
+        Low,            /**< Displayed last. */
+        Normal,         /**< Displayed before Low, after Critical. */
+        Critical        /**< Displayed before Low and Normal. */
     };
 };
 
+
+/**
+\brief Wraps Notification's type enumeration
+*/
 
 class UNITY_API Type : public QObject
 {
@@ -59,17 +72,26 @@ class UNITY_API Type : public QObject
     Q_ENUMS(TypeEnum)
 
 public:
+    /**
+    \brief Notification's type enumeration
+
+    This determines the visual and interaction behavior of the displayed notification.
+    */
     enum class TypeEnum
     {
         Invalid = 0,
-        Confirmation,
-        Ephemeral,
-        Interactive,
-        SnapDecision,
-        Placeholder
+        Confirmation,   /**< Confirmation (synchronous). */
+        Ephemeral,      /**< Ephemeral (input-transparent). */
+        Interactive,    /**< Interactive (clickable). */
+        SnapDecision,   /**< Snap decision (multi-button). */
+        Placeholder     /**< Non-visible placeholder of default size. */
     };
 };
 
+
+/**
+\brief Wraps Notification's hint flags
+*/
 
 class UNITY_API Hint : public QObject
 {
@@ -78,11 +100,16 @@ class UNITY_API Hint : public QObject
     Q_FLAGS(HintEnum)
 
 public:
+    /**
+    \brief Notification's hint flags
+
+    This modifies some visual and interactive behavior of the displayed notification.
+    */
     enum HintEnum
     {
         Invalid    = 1 << 0,
-        ButtonTint = 1 << 1,
-        IconOnly   = 1 << 2
+        ButtonTint = 1 << 1,    /**< Use a colour tint on the positive button in a snap decision. */
+        IconOnly   = 1 << 2     /**< Only display the icon, no summary or body. */
     };
 
     Q_DECLARE_FLAGS(Hints, HintEnum)

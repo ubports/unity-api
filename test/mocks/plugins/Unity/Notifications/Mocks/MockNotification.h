@@ -44,8 +44,8 @@ public:
     explicit MockNotification(QObject *parent = 0);
 
 public Q_SLOTS:
-    void onHovered() { }
-    void onDisplayed() { }
+    void onHovered(bool /* hovered */) { }
+    void onDisplayed(bool /* displayed */) { }
     void invokeAction(const QString& /* id */) { }
 
 Q_SIGNALS:

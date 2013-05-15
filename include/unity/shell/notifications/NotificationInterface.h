@@ -34,20 +34,49 @@ namespace shell
 namespace notifications
 {
 
+/**
+\brief A Notification object
+
+This class exposes slots and signals used for the UI to communicate the state
+of a notification.
+*/
 
 class UNITY_API NotificationInterface : public QObject
 {
     Q_OBJECT
+
 public:
+    /// @cond
     explicit NotificationInterface(QObject* parent = 0) : QObject(parent) { }
     virtual ~NotificationInterface() { }
+    /// @endcond
 
 public Q_SLOTS:
-    virtual void onHovered() = 0;
-    virtual void onDisplayed() = 0;
+    /**
+    Will be called whenever the mouse hover status of a notification changes.
+
+    \param hovered Mouse hover status of this notification.
+    */
+    virtual void onHovered(bool hovered) = 0;
+    /**
+    Will be called whenever the display status of a notification changes.
+
+    \param displayed Visible/hidden status of this notification.
+    */
+    virtual void onDisplayed(bool displayed) = 0;
+    /**
+    Will be called whenever an action of this notification is to be invoked.
+
+    \param id Id of the invoked action.
+    */
     virtual void invokeAction(const QString& id) = 0;
 
 Q_SIGNALS:
+    /**
+    Should be emitted whenever the notification was dismissed. This can be called internally
+    by the notification implementation (e.g. timeout) or from the UI when the user dismisses
+    a notification.
+    */
     void dismissed();
 };
 
