@@ -7,7 +7,6 @@ set(root_inc_dir ${CMAKE_SOURCE_DIR}/include)
 set(subdirs
     unity
     unity/api
-    unity/scopes
     unity/util
 )
 
