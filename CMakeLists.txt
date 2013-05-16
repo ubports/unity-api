@@ -36,8 +36,15 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,defs")
 set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,-z,defs")
 
 # Static C++ checks
-add_custom_target(cppcheck COMMAND cppcheck --enable=all -q --error-exitcode=2
-                                       ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/test)
+
+set(cppcheck_flags --inline-suppr --enable=all -q --error-exitcode=2)
+set(cppcheck_flags ${cppcheck_flags} --template '{file}({line}): {severity} ({id}): {message}')
+
+add_custom_target(cppcheck COMMAND cppcheck ${cppcheck_flags}
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/test
+    ${CMAKE_BINARY_DIR}/test
+)
 
 #
 # Definitions for testing with valgrind.
