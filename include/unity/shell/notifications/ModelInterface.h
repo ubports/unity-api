@@ -59,10 +59,12 @@ class UNITY_API ModelInterface : public QAbstractListModel
     */
     Q_PROPERTY(bool confirmationPlaceholder READ confirmationPlaceholder WRITE setConfirmationPlaceholder NOTIFY confirmationPlaceholderChanged)
 
-public:
+protected:
     /// @cond
     explicit ModelInterface(QObject* parent = 0) : QAbstractListModel(parent) { }
     /// @endcond
+
+public:
     virtual ~ModelInterface() { }
 
     /// @cond

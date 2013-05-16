@@ -55,10 +55,12 @@ class UNITY_API SourceInterface : public QObject
     */
     Q_PROPERTY(unity::shell::notifications::ModelInterface* model READ model WRITE setModel NOTIFY modelChanged)
 
-public:
+protected:
     /// @cond
     explicit SourceInterface(QObject* parent = 0) : QObject(parent) { }
     /// @endcond
+
+public:
     virtual ~SourceInterface() { }
 
     /// @cond
