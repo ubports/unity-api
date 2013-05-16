@@ -40,7 +40,7 @@ namespace notifications
 
 This model exposes all the notifications that are currently supposed to be on screen.
 Not all of them might actually get on screen due to screen size, in which case the
-Notification::displayed(true) signal will only be emitted after the Notification was
+NotificationInterface::displayed() signal will only be emitted after the notification was
 actually displayed.
 */
 

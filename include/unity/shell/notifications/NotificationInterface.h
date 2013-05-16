@@ -37,7 +37,7 @@ namespace notifications
 /**
 \brief A Notification object
 
-This class exposes slots and signals used for the UI to communicate the state
+This class exposes signals used by the UI to communicate the state
 of a notification.
 */
 
@@ -67,7 +67,7 @@ Q_SIGNALS:
     void displayed(bool displayed);
 
     /**
-    Should be emitted whenever the notification was dismissed. This can be called internally
+    Will be called whenever the notification was dismissed. This can be called internally
     by the notification implementation (e.g. timeout) or from the UI when the user dismisses
     a notification.
     */

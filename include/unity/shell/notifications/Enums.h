@@ -34,9 +34,8 @@ namespace shell
 namespace notifications
 {
 
-
 /**
-\brief Wraps Notification's urgency enumeration
+\brief Wraps NotificationInterface's urgency enumeration.
 */
 
 class UNITY_API Urgency : public QObject
@@ -47,9 +46,9 @@ class UNITY_API Urgency : public QObject
 
 public:
     /**
-    \brief Notification's urgency enumeration
+    \brief NotificationInterface's urgency enumeration.
 
-    This determines the order in which the notifications are going to be displayed.
+    This determines the order in which notifications are displayed.
     */
     enum class UrgencyEnum
     {
@@ -62,7 +61,7 @@ public:
 
 
 /**
-\brief Wraps Notification's type enumeration
+\brief Wraps NotificationInterface's type enumeration.
 */
 
 class UNITY_API Type : public QObject
@@ -73,7 +72,7 @@ class UNITY_API Type : public QObject
 
 public:
     /**
-    \brief Notification's type enumeration
+    \brief NotificationInterface's type enumeration.
 
     This determines the visual and interaction behavior of the displayed notification.
     */
@@ -90,7 +89,7 @@ public:
 
 
 /**
-\brief Wraps Notification's hint flags
+\brief Wraps NotificationInterface's hint flags.
 */
 
 class UNITY_API Hint : public QObject
@@ -101,7 +100,7 @@ class UNITY_API Hint : public QObject
 
 public:
     /**
-    \brief Notification's hint flags
+    \brief NotificationInterface's hint flags.
 
     This modifies some visual and interactive behavior of the displayed notification.
     */
