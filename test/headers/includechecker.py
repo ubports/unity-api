@@ -38,7 +38,7 @@ allowed = {
 
 def check_file(filename, permitted_includes):
     errors_found = False
-    linenum = 0
+    linenum = 1
     for line in open(filename, encoding='utf-8'):
         line = line.strip()
         if line.startswith('#include'):
