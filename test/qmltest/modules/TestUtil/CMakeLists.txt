@@ -29,6 +29,6 @@ file(COPY qmldir ${QML_JS_FILES}
 include(QmlTest)
 
 add_qml_test(test TestUtil
-    IMPORT_PATHS ${CMAKE_BINARY_DIR}/test/util/modules
+    IMPORT_PATHS ${CMAKE_BINARY_DIR}/test/qmltest/modules
     PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal"
 )

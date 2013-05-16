@@ -1,8 +1,8 @@
 include(QmlTest)
 
 set(qmltest_DEFAULT_IMPORT_PATHS
-  ${CMAKE_BINARY_DIR}/test/util/modules
-  ${CMAKE_BINARY_DIR}/test/mocks/plugins
+  ${CMAKE_BINARY_DIR}/test/qmltest/modules
+  ${CMAKE_BINARY_DIR}/test/qmltest/mocks/plugins
 )
 set(qmltest_DEFAULT_PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=minimal")
 
