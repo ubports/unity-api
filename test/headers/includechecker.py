@@ -21,20 +21,28 @@ directory and scans them for forbidden includes."""
 
 import os, sys, stat
 
-forbidden = ['boost',
+forbidden = {'boost',
              'gobject',
              'gtk',
              'Qt',
              'dbus.h',
-             ]
+             }
 
-def check_file(filename):
+#
+# List of exceptions. For each of the directory prefixes in the list, allow the #include directive to start
+# with one of the specified prefixes.
+#
+allowed = {
+    'unity/shell': { 'Qt' } # Anything under unity/shell can include anything starting with Qt
+}
+
+def check_file(filename, permitted_includes):
     errors_found = False
     linenum = 0
-    for line in open(filename):
+    for line in open(filename, encoding='utf-8'):
         line = line.strip()
         if line.startswith('#include'):
-            for f in forbidden:
+            for f in (forbidden - permitted_includes):
                 if f in line:
                     msg = 'Forbidden include: %s:%d - %s'\
                         % (filename, linenum, line)
@@ -45,20 +53,25 @@ def check_file(filename):
 
 def check_headers(incdir):
     errors_found = False
-    suffixes = {'h': True,
-                'hpp': True,
-                'hh': True,
-                'hxx': True,
-                'H': True,
-                }
+    suffixes = ('h',
+                'hpp',
+                'hh',
+                'hxx',
+                'H',
+                'h.in',
+                )
     for root, dirs, files in os.walk(incdir):
         if 'internal' in dirs:
             dirs.remove('internal')
         for filename in files:
-            suffix = filename.split('.')[-1]
-            if suffix in suffixes:
+            if filename.endswith(suffixes):
                 fullname = os.path.join(root, filename)
-                if check_file(fullname):
+                permitted_includes = set()
+                for path, names in allowed.items():
+                    if fullname.startswith(os.path.join(incdir, path)):
+                        permitted_includes = names
+                        break
+                if check_file(fullname, permitted_includes):
                     errors_found = True
     return errors_found
 
