@@ -43,15 +43,14 @@ namespace api
 Version information is represented as
 <i>&lt;<code>major</code>&gt;</i>.<i>&lt;<code>minor</code>&gt;</i>.<i>&lt;<code>micro</code>&gt;</i>.
 
-Releases that differ in the major or minor version number are binary incompatible.
+Releases that differ in the major version number are binary incompatible.
 
-Releases of the library that differ only in the micro version number are binary compatible with older releases,
+Releases that differ in the minor or micro version number are binary compatible with older releases,
 so client code does not need to be recompiled to use the newer library version.
 
-A different minor version is compatible at the API level, that is, it may add new APIs, but does not change existing
-ones. API clients must be recompiled for a new minor version.
+Changes in the micro version number indicate bug fixes.
 
-A different major version indicates incompatible API changes.
+Changes in the minor version indicate feature additions that are binary compatible.
 */
 
 // Version could be a namespace instead of a class, but that requires a lower-case name,
