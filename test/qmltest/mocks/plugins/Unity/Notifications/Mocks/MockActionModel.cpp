@@ -33,6 +33,7 @@ MockActionModel::MockActionModel(QObject* parent)
 }
 
 int
+// cppcheck-suppress unusedFunction
 MockActionModel::rowCount(const QModelIndex& /* parent */) const
 {
     if (m_notification && m_notification->m_data.contains("actions"))
