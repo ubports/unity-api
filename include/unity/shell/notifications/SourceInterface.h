@@ -58,8 +58,8 @@ class UNITY_API SourceInterface : public QObject
 public:
     /// @cond
     explicit SourceInterface(QObject* parent = 0) : QObject(parent) { }
-    virtual ~SourceInterface() { }
     /// @endcond
+    virtual ~SourceInterface() { }
 
     /// @cond
     virtual ModelInterface* model() const = 0;

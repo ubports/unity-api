@@ -45,11 +45,13 @@ class UNITY_API NotificationInterface : public QObject
 {
     Q_OBJECT
 
-public:
+protected:
     /// @cond
     explicit NotificationInterface(QObject* parent = 0) : QObject(parent) { }
-    virtual ~NotificationInterface() { }
     /// @endcond
+
+public:
+    virtual ~NotificationInterface() { }
 
 Q_SIGNALS:
     /**

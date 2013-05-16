@@ -62,8 +62,8 @@ class UNITY_API ModelInterface : public QAbstractListModel
 public:
     /// @cond
     explicit ModelInterface(QObject* parent = 0) : QAbstractListModel(parent) { }
-    virtual ~ModelInterface() { }
     /// @endcond
+    virtual ~ModelInterface() { }
 
     /// @cond
     virtual bool confirmationPlaceholder() const = 0;
