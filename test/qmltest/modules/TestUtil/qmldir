@@ -1,0 +1,3 @@
+module TestUtil
+plugin TestUtilQml
+Verifier 0.1 Verifier.qml
