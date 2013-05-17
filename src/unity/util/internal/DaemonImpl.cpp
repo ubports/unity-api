@@ -87,9 +87,13 @@ daemonize_me()
 {
     // Let's start by changing the working directory because that is the most likely thing to fail. If it does
     // fail, we have not modified any other properties of the calling process.
+    // We save the current working dir in case we need to restore it if the first fork fails.
+    internal::ResourcePtr<int, std::function<void(int)>>
+        old_working_dir([](int fd) { if (fd != -1) { fchdir(fd); close(fd); } });
 
     if (!working_directory_.empty())
     {
+        old_working_dir.reset(open(".", 0));                // Doesn't matter if this fails
         if (chdir(working_directory_.c_str()) == -1)
         {
             ostringstream msg;
@@ -104,15 +108,22 @@ daemonize_me()
     {
         case -1:
         {
+            // Strong exception guarantee: if working dir was changed, old_working_dir
+            // destructor will try to restore it.
             throw SyscallException("fork() failed", errno); // LCOV_EXCL_LINE
         }
         case 0:
         {
-            break;                  // Child process
+            if (old_working_dir.has_resource())
+            {
+                close(old_working_dir.get());               // Re-claim file descriptor straight away
+                old_working_dir.release();                  // Don't restore previous working dir
+            }
+            break;                                          // Child process
         }
         default:
         {
-            exit(EXIT_SUCCESS);     // Parent process, we are done.
+            exit(EXIT_SUCCESS);                             // Parent process, we are done.
         }
     }
 
@@ -153,11 +164,11 @@ daemonize_me()
         }
         case 0:
         {
-            break;                  // Child process
+            break;                                           // Child process
         }
         default:
         {
-            exit(EXIT_SUCCESS);     // Parent process, we are done.
+            exit(EXIT_SUCCESS);                              // Parent process, we are done.
         }
     }
 
