@@ -33,8 +33,8 @@ using namespace unity::util;
 // as far as gtest is concerned, everything worked just fine.
 //
 // To deal with this, we create a file Daemon_test.out in the directory the test runs in. If the file is
-// empty after the test, we know that the test succeeded. Otherwise, it contains any failure messages
-// that were detected.
+// empty after the test, we know that the test succeeded. Otherwise, it contains messages
+// for any failure that were detected.
 //
 
 char const* error_file = "Daemon_test.out";
@@ -173,22 +173,13 @@ TEST(Daemon, basic)
         error(__FILE__, __LINE__, "test file closed, should be open");
     }
 
-    // Daemonize again, asking for open files to be closed. The file we opened earlier should be closed.
-
-    d->close_fds();
-    d->daemonize_me();
-    check_std_descriptors();
-
-    if (is_open(fd))
-    {
-        error(__FILE__, __LINE__, "test file open, should be closed");
-    }
+    close(fd);
 }
 
 // Dummy signal handler
 
 void
-usr2_handler(int)
+hup_handler(int)
 {
 }
 
@@ -198,7 +189,7 @@ TEST(Daemon, signals)
 
     Daemon::UPtr d = Daemon::create();
 
-    // Set SIGUSR1 to be ignored and set SIGUSR2 to be caught.
+    // Set SIGUSR1 to be ignored and set SIGHUP to be caught.
 
     struct sigaction usr1_action;
     memset(&usr1_action, 0, sizeof(usr1_action));           // To stop valgrind complaints
@@ -209,12 +200,12 @@ TEST(Daemon, signals)
         abort();
     }
 
-    struct sigaction usr2_action;
-    memset(&usr2_action, 0, sizeof(usr1_action));           // To stop valgrind complaints
-    usr2_action.sa_handler = usr2_handler;
-    if (sigaction(SIGUSR2, &usr2_action, nullptr) == -1)
+    struct sigaction hup_action;
+    memset(&hup_action, 0, sizeof(hup_action));           // To stop valgrind complaints
+    hup_action.sa_handler = hup_handler;
+    if (sigaction(SIGHUP, &hup_action, nullptr) == -1)
     {
-        error(__FILE__, __LINE__, "cannot catch SIGUSR2");
+        error(__FILE__, __LINE__, "cannot catch SIGHUP");
         abort();
     }
 
@@ -232,14 +223,14 @@ TEST(Daemon, signals)
         error(__FILE__, __LINE__, "SIGUSR1 should have been left alone, but wasn't");
     }
 
-    if (sigaction(SIGUSR2, &usr2_action, &prev_action) == -1)
+    if (sigaction(SIGHUP, &hup_action, &prev_action) == -1)
     {
-        error(__FILE__, __LINE__, "cannot restore SIGUSR2");
+        error(__FILE__, __LINE__, "cannot restore SIGHUP");
         abort();
     }
-    if (prev_action.sa_handler != usr2_action.sa_handler)
+    if (prev_action.sa_handler != hup_action.sa_handler)
     {
-        error(__FILE__, __LINE__, "SIGUSR2 should have been left alone, but wasn't");
+        error(__FILE__, __LINE__, "SIGHUP should have been left alone, but wasn't");
     }
 
     // Daemonize again, resetting signals, so we can check that they are at the defaults.
@@ -257,14 +248,14 @@ TEST(Daemon, signals)
         error(__FILE__, __LINE__, "SIGUSR1 should have been reset, but wasn't");
     }
 
-    if (sigaction(SIGUSR2, &usr2_action, &prev_action) == -1)
+    if (sigaction(SIGHUP, &hup_action, &prev_action) == -1)
     {
-        error(__FILE__, __LINE__, "cannot set SIGUSR2");
+        error(__FILE__, __LINE__, "cannot set SIGHUP");
         abort();
     }
     if (prev_action.sa_handler != SIG_DFL)
     {
-        error(__FILE__, __LINE__, "SIGUSR2 should have been reset, but wasn't");
+        error(__FILE__, __LINE__, "SIGHUP should have been reset, but wasn't");
     }
 }
 
@@ -351,3 +342,43 @@ TEST(Daemon, tty)
         error(__FILE__, __LINE__, "re-acquired control terminal but should not have been able to");
     }
 }
+
+// Test that file descriptors are closed.
+// We test this only when coverage is disabled because
+// closing descriptors interferes with coverage reporting.
+
+#if !defined(COVERAGE_ENABLED)
+
+TEST(Daemon, file_close)
+{
+    Daemon::UPtr d = Daemon::create();
+
+    // Open a file so we can check that the file is closed after daemonizing.
+
+    int fd = open(".", O_RDONLY);
+    if (fd == -1)
+    {
+        abort();
+    }
+
+    int fd2 = open(".", O_RDONLY);
+    if (fd2 == -1)
+    {
+        abort();
+    }
+
+    d->close_fds();
+    d->daemonize_me();
+    check_std_descriptors();
+
+    if (is_open(fd))
+    {
+        error(__FILE__, __LINE__, "fd open, should be closed");
+    }
+    if (is_open(fd2))
+    {
+        error(__FILE__, __LINE__, "fd2 open, should be closed");
+    }
+}
+
+#endif

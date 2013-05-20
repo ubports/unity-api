@@ -22,13 +22,18 @@ include(EnableCoverageReport)
 #  * Switch build type to coverage (use ccmake or cmake-gui)
 #  * Invoke make, make test, make coverage (or ninja if you use that backend)
 #  * Find html report in subdir coveragereport
-#  * Find xml report feasible for jenkins in coverage.xml
+#  * Find xml report suitable for jenkins in coverage.xml
 #####################################################################
 if(cmake_build_type_lower MATCHES coverage)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage" )
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage" )
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} --coverage" )
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} --coverage" )
+
+  # This allows us to skip the file descriptor closing test in Daemon_test
+  # when coverage is enabled. (Closing file descriptors
+  # in the test messes with coverage reporting.)
+  add_definitions(-DCOVERAGE_ENABLED)
 endif()
 
 # Make sure we have all the needed symbols

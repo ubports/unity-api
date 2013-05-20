@@ -39,7 +39,8 @@ TEST(FileIO, basic)
     string contents("some chars\n");
     EXPECT_EQ(vector<uint8_t>(contents.begin(), contents.end()), v);
 
-    system("rm -fr empty; >empty");
+    int rc __attribute__((unused))
+        = system("rm -fr empty; >empty");
     s = read_text_file("empty");
     EXPECT_TRUE(s.empty());
 }
