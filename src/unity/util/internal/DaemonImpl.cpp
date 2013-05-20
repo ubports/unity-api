@@ -266,36 +266,19 @@ close_open_files() noexcept
 
         vector<int> descriptors; // We collect the file descriptors to close here
 
-        bool finished = false;
-        while (!finished)
+        struct dirent* result_p;
+        while ((result_p = readdir(dir.get())) != nullptr)
         {
-            try
+            // Try to treat the file name as a number. If it doesn't look like a number, we are looking at "." or ".." or,
+            // otherwise, something is seriously wrong because /proc/self/fd is supposed to contain only open file
+            // descriptor numbers. Rather than giving up in that case, we keep going, closing as many file descriptors as we can.
+            size_t pos;
+            int fd = std::stoi(result_p->d_name, &pos);
+            if (result_p->d_name[pos] == '\0')              // The file name did parse as a number
             {
-                struct dirent* result_p;
-                while ((result_p = readdir(dir.get())) != nullptr)
-                {
-                    // Try to treat the file name as a number. If it doesn't look like a number, we are looking at "." or ".." or,
-                    // otherwise, something is seriously wrong because /proc/self/fd is supposed to contain only open file
-                    // descriptor numbers. Rather than giving up in that case, we keep going, closing as many file descriptors as we can.
-                    size_t pos;
-                    int fd = std::stoi(result_p->d_name, &pos);
-                    if (result_p->d_name[pos] == '\0')              // The file name did parse as a number
-                    {
-                        // We can't call close() here because that would modify the directory while we are iterating
-                        // over it, which has undefined behavior.
-                        descriptors.push_back(fd);
-                    }
-                }
-                finished = true;
-            }
-            catch (std::bad_alloc const& e)         // push_back() can throw on reallocation.
-            {
-                for (auto fd : descriptors)
-                {
-                    close(fd);
-                }
-                vector<int>().swap(descriptors);    // Clear and release memory
-                rewinddir(dir.get());               // Need to rewind to avoid undefined behavior
+                // We can't call close() here because that would modify the directory while we are iterating
+                // over it, which has undefined behavior.
+                descriptors.push_back(fd);
             }
         }
 
