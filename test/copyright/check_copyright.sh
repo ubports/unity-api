@@ -33,7 +33,7 @@ usage()
 [ $# -lt 1 ] && usage
 [ $# -gt 2 ] && usage
 
-ignore_pat="\\.sci$"
+ignore_pat="\\.sci$|CMakeFiles"
 
 #
 # We don't use the -i option of licensecheck to add ignore_dir to the pattern because Jenkins creates directories
@@ -45,9 +45,9 @@ ignore_pat="\\.sci$"
 
 if [ -n "$ignore_dir" ]
 then
-    licensecheck -i "$ignore_pat" -r "$1" | grep -F "$ignore_dir" -v | grep 'No copyright'
+    licensecheck -i "$ignore_pat" -r "$1" | grep -F "$ignore_dir" -v | grep -v 'GENERATED FILE' | grep 'No copyright'
 else
-    licensecheck -i "$ignore_pat" -r "$1" | grep 'No copyright'
+    licensecheck -i "$ignore_pat" -r "$1" | grep -v 'GENERATED FILE' | grep 'No copyright'
 fi
 
 [ $? -eq 0 ] && exit 1
