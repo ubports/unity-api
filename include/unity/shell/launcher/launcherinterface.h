@@ -29,17 +29,16 @@ namespace unity
 namespace shell
 {
 
-namespace notifications
+namespace launcher
 {
 
 class QuickListModelInterface;
+class ApplicationListModel;
 
 /**
-\brief A source of notifications
+  * @brief An interface that provides all the data needed by the launcher.
+  */
 
-This should feed the model with new notifications from an implementation-specific
-source.
-*/
 class UNITY_API LauncherInterface : public QObject
 {
     Q_OBJECT
@@ -52,47 +51,18 @@ protected:
 public:
     virtual ~LauncherInterface() { }
 
-    //TODO: Is QString ok for app id? How does an app id look like?
-    //TODO: Sync with Mir team on their understanding of an app id.
-    //TODO: Instead of working on appIds in this API, should we have an Application class that wraps the apps props?
     /**
       * @brief Returns a list of recent applications.
       * @returns A list of application IDs.
       */
-    virtual QStringList recentApplications() const = 0;
-
-    /**
-      * @brief Add an application to the list of recent applications.
-      * @param appId The ID of the application to be added.
-      */
-    virtual void addRecentApplication(const QString &appId) = 0;
-
-    /**
-      * @brief Remove an application from the list of recent applications.
-      * @param appId The ID of the application to be removed.
-      */
-    virtual void removeRecentApplication(const QString &appId) = 0;
+    virtual ApplicationListModel* recentApplications() const = 0;
 
     /**
       * @brief Returns a list of favorite applications.
       * @returns A list of application IDs.
       */
-    virtual QStringList favoriteApplications() const = 0;
+    virtual ApplicationListModel* favoriteApplications() const = 0;
 
-    /**
-      * @brief Add an application to the list of favorite applications.
-      * @param appId The ID of the application to be added.
-      */
-    virtual void addFavoriteApplication(const QString &appId) = 0;
-
-    /**
-      * @brief Remove an application from the list of favorite applications.
-      * @param appId The ID of the application to be removed.
-      */
-    virtual void removeFavoriteApplication(const QString &appId) = 0;
-
-
-    //TODO: What about translations? Translation happening in backend or in frontend?
     /**
       * @brief Get the user friendly name of an application.
       * @param appId The ID of the application.
@@ -100,8 +70,6 @@ public:
       */
     virtual void QString displayName(const QString &appId) = 0;
 
-    //TODO: Should we work on the full path of icons or just the identifier?
-    //      Probably some icon ID our ImageProvider can work with...
     /**
       * @brief Get the icon of an application.
       * @param appId The ID of the application.
@@ -118,26 +86,26 @@ public:
       */
     virtual QuickListModelInterface* quickList(const QString &appId) = 0;
 
-    //TODO: Is this good enough? Should it be wrapped in something that can emit signals on its own?
+    /**
+      * @brief Get the progress for the progress overlay of an application.
+      * @param appId The ID of the application.
+      * @returns The percentage of the overlay progress bar. -1 if no progress bar available.
+      */
     virtual int progress(const QString &appId) = 0;
+
+    /**
+      * @brief Get the count of the count overlay of an application.
+      * @param appId The ID of the application.
+      * @returns The number to be displayed in the overlay. -1 if no count overlay is available.
+      */
     virtual int count(const QStrign &appId) = 0;
 
 Q_SIGNALS:
-    void recentApplicationAdded(const QString &appId);
-    void recentApplicationRemoved(const QString &appId);
-
-    void favoriteApplicationAdded(const QString &appId);
-    void favoriteApplicationRemoved(const QString &appId);
-
     void progressChanged(const QString &appId, int progress);
     void countChanged(const QString &appId, int count);
-
-    //TODO: Discuss this. Is a single signal enough or does it need to be more granular?
-    //      Is it needed at all? Do .desktop files change? Is there any dynamic data at all (except the QuickList)?
-    void applicationChanged(const QString &appId);
 };
 
-} // namespace notifications
+} // namespace launcher
 
 } // namespace shell
 
