@@ -21,7 +21,7 @@
 #ifndef MOCKSOURCE_H
 #define MOCKSOURCE_H
 
-#include <unity/config.h>
+#include <unity/DllExport.h>
 
 #include <unity/shell/notifications/SourceInterface.h>
 

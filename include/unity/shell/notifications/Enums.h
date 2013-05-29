@@ -21,7 +21,7 @@
 #ifndef UNITY_SHELL_NOTIFICATIONS_ENUMS_H
 #define UNITY_SHELL_NOTIFICATIONS_ENUMS_H
 
-#include <unity/config.h>
+#include <unity/DllExport.h>
 
 #include <QtCore/QObject>
 

@@ -21,7 +21,7 @@
 #ifndef MOCKMODEL_H
 #define MOCKMODEL_H
 
-#include <unity/config.h>
+#include <unity/DllExport.h>
 
 #include <unity/shell/notifications/ModelInterface.h>
 

@@ -21,7 +21,7 @@
 #ifndef MOCKACTIONMODEL_H
 #define MOCKACTIONMODEL_H
 
-#include <unity/config.h>
+#include <unity/DllExport.h>
 
 #include <QtCore/QAbstractListModel>
 

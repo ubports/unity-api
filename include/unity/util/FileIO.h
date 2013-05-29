@@ -19,7 +19,7 @@
 #ifndef UNITY_UTIL_FILEIO_H
 #define UNITY_UTIL_FILEIO_H
 
-#include <unity/config.h>
+#include <unity/DllExport.h>
 
 #include <string>
 #include <vector>
