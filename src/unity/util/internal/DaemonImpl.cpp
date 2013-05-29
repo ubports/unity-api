@@ -17,7 +17,7 @@
  */
 
 #include <unity/util/internal/DaemonImpl.h>
-#include <unity/util/internal/ResourcePtr.h>
+#include <unity/util/ResourcePtr.h>
 
 #include <dirent.h>
 #include <fcntl.h>
@@ -96,7 +96,7 @@ daemonize_me()
     // fail, we have not modified any other properties of the calling process.
     // We save the current working dir in case we need to restore it if a fork fails.
 
-    internal::ResourcePtr<int, std::function<void(int)>> old_working_dir(
+    ResourcePtr<int, std::function<void(int)>> old_working_dir(
         [](int fd)
         {
             if (fd != -1)
@@ -262,7 +262,7 @@ close_open_files() noexcept
         {
             return;     // This should never happen but, for diligence, we handle it anyway.
         }
-        internal::ResourcePtr<DIR*, decltype(&closedir)> dir(dirp, closedir);
+        ResourcePtr<DIR*, decltype(&closedir)> dir(dirp, closedir);
 
         vector<int> descriptors; // We collect the file descriptors to close here
 
