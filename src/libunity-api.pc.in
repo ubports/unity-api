@@ -19,5 +19,6 @@
 Name: lib@UNITY_API_LIB@
 Description: Unity API library
 Version: @UNITY_API_MAJOR@.@UNITY_API_MINOR@
-Libs: -L@CMAKE_INSTALL_PREFIX@/lib/@CMAKE_LIBRARY_ARCHITECTURE@ -lunity-api
+libdir=@libdir@
+Libs: -L${libdir} -l@UNITY_API_LIB@
 Cflags: -I@CMAKE_INSTALL_PREFIX@/include

@@ -10,3 +10,6 @@ export DPKG_GENSYMBOLS_CHECK_LEVEL=4
 
 override_dh_install:
 	dh_install --fail-missing
+
+override_dh_auto_configure:
+    dh_auto_configure -- -DLIBDIR=/usr/lib/$(DEB_HOST_MULTI_ARCH)
