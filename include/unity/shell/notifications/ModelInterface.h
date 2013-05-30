@@ -21,7 +21,7 @@
 #ifndef UNITY_SHELL_NOTIFICATIONS_MODELINTERFACE_H
 #define UNITY_SHELL_NOTIFICATIONS_MODELINTERFACE_H
 
-#include <unity/DllExport.h>
+#include <unity/SymbolExport.h>
 
 #include <QtCore/QAbstractListModel>
 

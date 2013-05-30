@@ -21,7 +21,7 @@
 #ifndef MOCKNOTIFICATION_H
 #define MOCKNOTIFICATION_H
 
-#include <unity/DllExport.h>
+#include <unity/SymbolExport.h>
 
 #include <unity/shell/notifications/NotificationInterface.h>
 

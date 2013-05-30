@@ -16,8 +16,8 @@
  * Authored by: Michi Henning <michi.henning@canonical.com>
  */
 
-#ifndef UNITY_CONFIG_H
-#define UNITY_CONFIG_H
+#ifndef SYMBOL_EXPORT_H
+#define SYMBOL_EXPORT_H
 
 #define UNITY_HELPER_DLL_EXPORT __attribute__ ((visibility ("default")))
 

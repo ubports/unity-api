@@ -19,7 +19,7 @@
 #ifndef UNITY_EXCEPTION_H
 #define UNITY_EXCEPTION_H
 
-#include <unity/DllExport.h>
+#include <unity/SymbolExport.h>
 
 #include <exception>
 #include <string>
