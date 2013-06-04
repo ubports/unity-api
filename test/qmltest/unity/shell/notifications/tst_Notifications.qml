@@ -35,6 +35,7 @@ Item {
         function cleanup() {
             clear();
             Source.model = null;
+            Model.confirmationPlaceholder = false;
         }
 
         function test_types_data() {

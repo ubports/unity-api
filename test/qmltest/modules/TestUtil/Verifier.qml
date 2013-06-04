@@ -118,6 +118,7 @@ TestCase {
     /* verify that there's a writable $prop of $type */
     function writable(prop, type, value, msg1, msg2, msg3) {
         property(prop, type);
+        var tmp = object[prop];
         try {
             object[prop] = value;
         } catch(err) {
@@ -125,6 +126,7 @@ TestCase {
         }
         compare(object[prop], value, (msg2 || assignmentMsg.arg(name).arg(prop)));
         spy.wait();
+        object[prop] = tmp;
     }
 
     /* verify that there's a $role of $type exposed */

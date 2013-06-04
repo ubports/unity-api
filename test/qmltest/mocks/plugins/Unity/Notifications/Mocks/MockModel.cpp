@@ -32,6 +32,7 @@ using namespace unity::shell::notifications;
 
 MockModel::MockModel(QObject* parent)
     : ModelInterface(parent)
+    , m_confirmationPlaceholder(false)
 {
     m_roles.insert(Summary, "summary");
     m_roles.insert(Notification, "notification");
