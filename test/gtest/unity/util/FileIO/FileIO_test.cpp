@@ -29,8 +29,13 @@ using namespace unity::util;
 
 TEST(FileIO, basic)
 {
-    int i __attribute__((unused))
-        = system("rm -f testfile; echo \"some chars\" >testfile");
+    FILE* f;
+
+    remove("testfile");
+    f = fopen("testfile", "w");
+    EXPECT_NE(f, nullptr);
+    fputs("some chars\n", f);
+    fclose(f);
 
     string s = read_text_file("testfile");
     EXPECT_EQ("some chars\n", s);
@@ -39,7 +44,11 @@ TEST(FileIO, basic)
     string contents("some chars\n");
     EXPECT_EQ(vector<uint8_t>(contents.begin(), contents.end()), v);
 
-    system("rm -fr empty; >empty");
+    remove("empty");
+    f = fopen("empty", "w");
+    EXPECT_NE(f, nullptr);
+    fclose(f);
+
     s = read_text_file("empty");
     EXPECT_TRUE(s.empty());
 }
@@ -59,8 +68,9 @@ TEST(FileIO, exceptions)
 
     try
     {
-        int i __attribute__((unused))
-            = system("rm -fr testdir; mkdir testdir");
+        remove("testdir");
+        int rc = mkdir("testdir", 0777);
+        EXPECT_NE(-1, rc);
         read_text_file("testdir");
         FAIL();
     }
