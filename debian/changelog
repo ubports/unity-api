@@ -1,3 +1,9 @@
+unity-api (0.2) saucy; urgency=low
+
+  * Releasing for saucy.
+
+ -- Sergio Schvezov <sergio.schvezov@canonical.com>  Tue, 04 Jun 2013 02:16:12 -0300
+
 unity-api (0.1) raring; urgency=low
 
   * Initial release
