@@ -1,3 +1,10 @@
+unity-api (7.80.1) saucy; urgency=low
+
+  * This project forked from lp:unity/phablet. Updating the versioning to 
+    reflect that.
+
+ -- Sergio Schvezov <sergio.schvezov@canonical.com>  Tue, 04 Jun 2013 16:06:54 -0300
+
 unity-api (0.2) saucy; urgency=low
 
   * Releasing for saucy.
