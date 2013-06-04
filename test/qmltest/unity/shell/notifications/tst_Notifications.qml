@@ -129,9 +129,11 @@ Item {
            repeater.model = Model;
            dataSpy.target = Model;
            mockSource.model = Model;
+           console.debug("initTestCase", repeater.count);
        }
 
        function init() {
+           console.debug("init", repeater.count);
            tryCompare(repeater, "count", 0);
        }
 
