@@ -36,7 +36,7 @@ public:
 
     QVariant data(const QModelIndex &index, int role) const;
 
-    Q_INVOKABLE LauncherItemInterface* get(int index) const;
+    Q_INVOKABLE unity::shell::launcher::LauncherItemInterface* get(int index) const;
     Q_INVOKABLE void move(int oldIndex, int newIndex);
 private:
     QList<LauncherItemInterface*> m_list;

@@ -31,12 +31,10 @@ Item {
         }
 
         function initTestCase() {
-        }
-
-        function init() {
-        }
-
-        function cleanup() {
+            if (repeater.count < 4) {
+                print("This Test Suite requires at least 4 items in the model.")
+                fail()
+            }
         }
 
         /* make sure all the required roles are exposed on Model */
@@ -76,9 +74,9 @@ Item {
 
         function test_item_properties_data() {
             return [
-                        { tag: "Item.properties[desktopFile]", property: "desktopFile", type: "string" },
-                        { tag: "Item.properties[name]", property: "name", type: "string" },
-                        { tag: "Item.properties[icon]", property: "icon", type: "string" },
+                        { tag: "Item.properties[desktopFile]", constant: "desktopFile", type: "string" },
+                        { tag: "Item.properties[name]", constant: "name", type: "string" },
+                        { tag: "Item.properties[icon]", constant: "icon", type: "string" },
                         { tag: "Item.properties[favorite]", property: "favorite", type: "boolean" },
                         { tag: "Item.properties[recent]", property: "recent", type: "boolean" },
                         { tag: "Item.properties[running]", property: "running", type: "boolean" },
@@ -88,18 +86,27 @@ Item {
         function test_item_properties(data) {
             name = "LauncherItem"
             try {
-                print("### 1", LauncherModel)
-                print("### 2", LauncherModel["get"])
-                print("### 5", LauncherModel.get(0))
                 object = LauncherModel.get(0)
-                print("### 3", object)
             } catch(err) {
                 object = undefined;
-                print("### 4", object)
+                print(err)
             }
-            print("######################", object)
 
             verifyData(data)
+        }
+
+        function test_move() {
+            var item0 = LauncherModel.get(0)
+            var item1 = LauncherModel.get(1)
+            var item2 = LauncherModel.get(2)
+            var item3 = LauncherModel.get(3)
+
+            LauncherModel.move(2, 0);
+
+            compare(item2, LauncherModel.get(0), "Error moving Items im model")
+            compare(item0, LauncherModel.get(1), "Error moving Items im model")
+            compare(item1, LauncherModel.get(2), "Error moving Items im model")
+            compare(item3, LauncherModel.get(3), "Error moving Items im model")
         }
     }
 }

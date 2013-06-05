@@ -50,8 +50,8 @@ public:
     LauncherModelInterface(QObject *parent = 0) {}
     virtual ~LauncherModelInterface() {}
 
-    Q_INVOKABLE virtual LauncherItemInterface* get(int index) const = 0;
     Q_INVOKABLE virtual void move(int oldIndex, int newIndex) = 0;
+    Q_INVOKABLE virtual LauncherItemInterface* get(int index) const = 0;
 
     QHash<int, QByteArray> roleNames() const
     {
