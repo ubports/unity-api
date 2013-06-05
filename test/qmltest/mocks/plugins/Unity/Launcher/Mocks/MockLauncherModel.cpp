@@ -32,7 +32,7 @@ MockLauncherModel::MockLauncherModel(QObject *parent): LauncherModelInterface(pa
     m_list.append(item);
     item = new MockLauncherItem("/usr/share/applications/gallery-app.desktop", "Gallery", "gallery");
     m_list.append(item);
-/*    item = new MockLauncherItem("/usr/share/applications/facebook-webapp.desktop", "Facebook", "facebook");
+    item = new MockLauncherItem("/usr/share/applications/facebook-webapp.desktop", "Facebook", "facebook");
     m_list.append(item);
     item = new MockLauncherItem("/usr/share/applications/webbrowser-app.desktop", "Browser", "browser");
     m_list.append(item);
@@ -46,7 +46,6 @@ MockLauncherModel::MockLauncherModel(QObject *parent): LauncherModelInterface(pa
     m_list.append(item);
     item = new MockLauncherItem("/usr/share/applications/ubuntu-calendar-app.desktop","Calendar", "calendar");
     m_list.append(item);
-    */
 }
 
 MockLauncherModel::~MockLauncherModel()
