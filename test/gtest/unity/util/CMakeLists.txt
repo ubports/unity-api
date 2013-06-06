@@ -1,5 +1,6 @@
 add_subdirectory(Daemon)
 add_subdirectory(DefinesPtrs)
 add_subdirectory(FileIO)
+add_subdirectory(IniParser)
 add_subdirectory(ResourcePtr)
 add_subdirectory(internal)
