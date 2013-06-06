@@ -31,14 +31,19 @@
 
 #define UNITY_API_VERSION_STRING "@UNITY_API_VERSION@"
 
+/**
+\brief Top-level namespace for all things Unity-related.
+*/
 namespace unity
 {
 
+/**
+\brief Top-level namespace for public functionality of the Unity API.
+*/
 namespace api
 {
 
-/**
-\brief Class to obtain version information for the Unity API at run time.
+/** @name Version information
 
 Version information is represented as
 <i>&lt;<code>major</code>&gt;</i>.<i>&lt;<code>minor</code>&gt;</i>.<i>&lt;<code>micro</code>&gt;</i>.
@@ -53,47 +58,51 @@ Changes in the micro version number indicate bug fixes.
 Changes in the minor version indicate feature additions that are binary compatible.
 */
 
-// Version could be a namespace instead of a class, but that requires a lower-case name,
-// which is inconsistent with the remainder of the API.
+/**
+\brief Returns the major version number of the Unity API library.
 
-class UNITY_API Version
-{
-public:
-    /**
-    \brief Returns the major version number of the Unity API library.
+The major version number is also available as the macro <code>UNITY_API_VERSION_MAJOR</code>.
+*/
 
-    The major version number is also available as the macro <code>UNITY_API_VERSION_MAJOR</code>.
-    */
-    static int major_version();
+/// @cond
+UNITY_API
+/// @endcond
+int major_version();
 
-    /**
-    \brief Returns the minor version number of the Unity API library.
+/**
+\brief Returns the minor version number of the Unity API library.
 
-    The minor version number is also available as the macro <code>UNITY_API_VERSION_MINOR</code>.
-    */
-    static int minor_version();
+The minor version number is also available as the macro <code>UNITY_API_VERSION_MINOR</code>.
+*/
+/// @cond
+UNITY_API
+/// @endcond
+int minor_version();
 
-    /**
-    \brief Returns the micro version number of the Unity API library.
+/**
+\brief Returns the micro version number of the Unity API library.
 
-    The micro version number is also available as the macro <code>UNITY_API_VERSION_MICRO</code>.
-    */
-    static int micro_version();
+The micro version number is also available as the macro <code>UNITY_API_VERSION_MICRO</code>.
+*/
+/// @cond
+UNITY_API
+/// @endcond
+int micro_version();
 
-    /**
-    \brief Returns the Unity API version as a string in the format
-    <i>&lt;<code>major</code>&gt;</i>.<i>&lt;<code>minor</code>&gt;</i>.<i>&lt;<code>micro</code>&gt;</i>.
+/**
+\brief Returns the Unity API version as a string in the format
+<i>&lt;<code>major</code>&gt;</i>.<i>&lt;<code>minor</code>&gt;</i>.<i>&lt;<code>micro</code>&gt;</i>.
 
-    The version string is also available as the macro <code>UNITY_API_VERSION_STRING</code>.
-    */
-    static const char* str();    // Returns "major.minor.micro"
+The version string is also available as the macro <code>UNITY_API_VERSION_STRING</code>.
+*/
+/// @cond
+UNITY_API
+/// @endcond
+const char* str();    // Returns "major.minor.micro"
 
-    // TODO: Add methods to report compiler version and compiler flags
+/// }@
 
-private:
-    Version() = delete;
-    ~Version() = delete;
-};
+// TODO: Add methods to report compiler version and compiler flags
 
 } // namespace api
 

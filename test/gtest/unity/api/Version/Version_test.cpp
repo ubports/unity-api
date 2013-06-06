@@ -24,8 +24,8 @@ using namespace unity::api;
 
 TEST(Version, basic)
 {
-    EXPECT_EQ(Version::major_version(), UNITY_API_VERSION_MAJOR);
-    EXPECT_EQ(Version::minor_version(), UNITY_API_VERSION_MINOR);
-    EXPECT_EQ(Version::micro_version(), UNITY_API_VERSION_MICRO);
-    EXPECT_STREQ(Version::str(), UNITY_API_VERSION_STRING);
+    EXPECT_EQ(major_version(), UNITY_API_VERSION_MAJOR);
+    EXPECT_EQ(minor_version(), UNITY_API_VERSION_MINOR);
+    EXPECT_EQ(micro_version(), UNITY_API_VERSION_MICRO);
+    EXPECT_STREQ(str(), UNITY_API_VERSION_STRING);
 }
