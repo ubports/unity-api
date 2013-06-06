@@ -1,8 +1,11 @@
 add_subdirectory(unity)
 
+include_directories(${GLIB_INCLUDE_DIRS})
+
 set(UNITY_API_SOVERSION 0)
 
 add_library(${UNITY_API_LIB} SHARED ${UNITY_API_LIB_SRC})
+target_link_libraries(${UNITY_API_LIB} ${GLIB_LDFLAGS})
 set_target_properties(${UNITY_API_LIB} PROPERTIES
     VERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}"
     SOVERSION ${UNITY_API_SOVERSION}
