@@ -32,6 +32,30 @@ namespace util
 
 struct IniParserPrivate;
 
+/**
+\brief Helper class to read configuration files.
+
+This class reads configuration files in the .ini format
+and provides for a simple and type safe way of extracting
+information. A typical ini file looks like this:
+
+~~~
+[group1]
+
+key1 = value1
+key2 = value2
+
+[group2]
+
+key1 = othervalue1
+key2 = othervalue2
+~~~
+
+To obtain a value, simply specify the group and key names to
+the get* functions of this class.
+
+*/
+
 class UNITY_API IniParser final {
 public:
     IniParser(const char *filename);

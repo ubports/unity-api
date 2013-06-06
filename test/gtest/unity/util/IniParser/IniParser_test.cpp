@@ -88,6 +88,38 @@ TEST(IniParser, arrayQueries) {
     ASSERT_FALSE(boolArr[1]);
     ASSERT_FALSE(boolArr[2]);
 }
+
+TEST(IniParser, failingQueries) {
+    IniParser conf(INI_FILE);
+
+    try {
+        conf.getString("foo", "bar");
+        FAIL();
+    } catch(const InvalidArgumentException &e) {
+    }
+    try {
+        conf.getInt("foo", "bar");
+        FAIL();
+    } catch(const InvalidArgumentException &e) {
+    }
+    try {
+        conf.getBoolean("foo", "bar");
+        FAIL();
+    } catch(const InvalidArgumentException &e) {
+    }
+
+    try {
+        conf.getIntArray("first", "array");
+        FAIL();
+    } catch(const InvalidArgumentException &e) {
+    }
+
+    try {
+        conf.getBooleanArray("first", "array");
+        FAIL();
+    } catch(const InvalidArgumentException &e) {
+    }
+}
 /*
     arr = conf.getStringArray("first", "array");
     printf("First strarray size: %d\n", (int)arr.size());
