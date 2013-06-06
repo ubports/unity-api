@@ -120,11 +120,3 @@ TEST(IniParser, failingQueries) {
     } catch(const InvalidArgumentException &e) {
     }
 }
-/*
-    arr = conf.getStringArray("first", "array");
-    printf("First strarray size: %d\n", (int)arr.size());
-    intArr = conf.getIntArray("second", "intarray");
-    printf("Second intarray size: %d\n", (int)intArr.size());
-    boolArr = conf.getBooleanArray("first", "boolarray");
-    printf("First boolarray size: %d\n", (int)boolArr.size());
- */
