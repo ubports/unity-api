@@ -17,6 +17,7 @@
  */
 
 #include <gtest/gtest.h>
+#include <unity/UnityExceptions.h>
 #include <unity/util/IniParser.h>
 #include <unity-api-test-config.h>
 
@@ -24,6 +25,16 @@ using namespace std;
 using namespace unity;
 using namespace unity::util;
 
-TEST(IniParser, basic)
-{
+#define INI_FILE UNITY_API_TEST_DATADIR "/sample.ini"
+
+TEST(IniParser, basic) {
+    IniParser test(INI_FILE);
+}
+
+TEST(IniParser, missingFile) {
+    try {
+        IniParser("nonexistant");
+        FAIL();
+    } catch(const InvalidArgumentException &e) {
+    }
 }

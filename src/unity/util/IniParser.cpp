@@ -16,9 +16,9 @@
  * Authored by: Jussi Pakkanen <jussi.pakkanen@canonical.com>
  */
 
-#include<stdexcept>
-#include<glib.h>
+#include<unity/UnityExceptions.h>
 #include<unity/util/IniParser.h>
+#include<glib.h>
 
 using namespace std;
 
@@ -43,7 +43,7 @@ static void inspectError(GError *e, const char *prefix) {
         string message(prefix);
         message += e->message;
         g_error_free(e);
-        throw runtime_error(message);
+        throw InvalidArgumentException(message);
     }
 }
 
@@ -51,14 +51,14 @@ IniParser::IniParser(const char *filename) {
     GKeyFile *kf = g_key_file_new();
     GError *e = nullptr;
     if(!kf) {
-        throw runtime_error("Could not create keyfile parser.");
+        throw LogicException("Could not create keyfile parser.");
     }
     if(!g_key_file_load_from_file(kf, filename, G_KEY_FILE_NONE, &e)) {
         string message = "Could not load ini file: ";
         message += e->message;
         g_error_free(e);
         g_key_file_free(kf);
-        throw runtime_error(message);
+        throw InvalidArgumentException(message);
     }
     p = new IniParserPrivate();
     p->k = kf;

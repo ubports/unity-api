@@ -19,6 +19,8 @@
 #ifndef UNITY_UTIL_INIPARSER_H
 #define UNITY_UTIL_INIPARSER_H
 
+#include <unity/config.h>
+
 #include<string>
 #include<vector>
 
@@ -30,7 +32,7 @@ namespace util
 
 struct IniParserPrivate;
 
-class IniParser final {
+class UNITY_API IniParser final {
 public:
     IniParser(const char *filename);
     ~IniParser();
