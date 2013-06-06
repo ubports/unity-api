@@ -27,28 +27,24 @@ namespace api
 {
 
 int
-Version::
 major_version()
 {
     return UNITY_API_VERSION_MAJOR;
 }
 
 int
-Version::
 minor_version()
 {
     return UNITY_API_VERSION_MINOR;
 }
 
 int
-Version::
 micro_version()
 {
     return UNITY_API_VERSION_MICRO;
 }
 
 char const*
-Version::
 str()
 {
     return UNITY_API_VERSION_STRING;
