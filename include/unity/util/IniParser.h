@@ -64,19 +64,19 @@ public:
     IniParser(const IniParser &ip) = delete;
     IniParser() = delete;
 
-    bool hasGroup(const std::string &group) const;
-    bool hasKey(const std::string &group, const std::string &key) const;
-    std::string getString(const std::string &group, const std::string &key) const;
-    bool getBoolean(const std::string &group, const std::string &key) const;
-    int getInt(const std::string &group, const std::string &key) const;
+    bool has_group(const std::string &group) const;
+    bool has_key(const std::string &group, const std::string &key) const;
+    std::string get_string(const std::string &group, const std::string &key) const;
+    bool get_boolean(const std::string &group, const std::string &key) const;
+    int get_int(const std::string &group, const std::string &key) const;
 
-    std::vector<std::string> getStringArray(const std::string &group, const std::string &key) const;
-    std::vector<int> getIntArray(const std::string &group, const std::string &key) const;
-    std::vector<bool> getBooleanArray(const std::string &group, const std::string &key) const;
+    std::vector<std::string> get_string_array(const std::string &group, const std::string &key) const;
+    std::vector<int> get_int_array(const std::string &group, const std::string &key) const;
+    std::vector<bool> get_boolean_array(const std::string &group, const std::string &key) const;
 
-    std::string getStartGroup() const;
-    std::vector<std::string> getGroups() const;
-    std::vector<std::string> getKeys(const std::string &group) const;
+    std::string get_start_group() const;
+    std::vector<std::string> get_groups() const;
+    std::vector<std::string> get_keys(const std::string &group) const;
 
 private:
     IniParserPrivate *p;
