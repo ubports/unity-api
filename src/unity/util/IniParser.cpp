@@ -29,7 +29,8 @@ namespace unity
 namespace util
 {
 
-struct IniParserPrivate {
+struct IniParserPrivate
+{
     GKeyFile *k;
 };
 
@@ -38,7 +39,8 @@ struct IniParserPrivate {
  * a GError and we don't want to leak that.
  */
 
-static void inspectError(GError *e, const char *prefix) {
+static void inspectError(GError *e, const char *prefix)
+{
     if(e) {
         string message(prefix);
         message += e->message;
@@ -47,7 +49,8 @@ static void inspectError(GError *e, const char *prefix) {
     }
 }
 
-IniParser::IniParser(const char *filename) {
+IniParser::IniParser(const char *filename)
+{
     GKeyFile *kf = g_key_file_new();
     GError *e = nullptr;
     if(!kf) {
@@ -66,18 +69,21 @@ IniParser::IniParser(const char *filename) {
     p->k = kf;
 }
 
-IniParser::~IniParser() {
+IniParser::~IniParser()
+{
     g_key_file_free(p->k);
     delete p;
 }
 
-bool IniParser::has_group(const std::string &group) const {
+bool IniParser::has_group(const std::string &group) const
+{
     gboolean rval;
     rval = g_key_file_has_group(p->k, group.c_str());
     return rval;
 }
 
-bool IniParser::has_key(const std::string &group, const std::string &key) const {
+bool IniParser::has_key(const std::string &group, const std::string &key) const
+{
     gboolean rval;
     GError *e = nullptr;
     rval = g_key_file_has_key(p->k, group.c_str(), key.c_str(), &e);
@@ -85,7 +91,8 @@ bool IniParser::has_key(const std::string &group, const std::string &key) const 
     return rval;
 }
 
-std::string IniParser::get_string(const std::string &group, const std::string &key) const {
+std::string IniParser::get_string(const std::string &group, const std::string &key) const
+{
     gchar *value;
     GError *e = nullptr;
     string result;
@@ -96,7 +103,8 @@ std::string IniParser::get_string(const std::string &group, const std::string &k
     return result;
 }
 
-bool IniParser::get_boolean(const std::string &group, const std::string &key) const {
+bool IniParser::get_boolean(const std::string &group, const std::string &key) const
+{
     bool rval;
     GError *e = nullptr;
     rval = g_key_file_get_boolean(p->k, group.c_str(), key.c_str(), &e);
@@ -104,7 +112,8 @@ bool IniParser::get_boolean(const std::string &group, const std::string &key) co
     return rval;
 }
 
-int IniParser::get_int(const std::string &group, const std::string &key) const {
+int IniParser::get_int(const std::string &group, const std::string &key) const
+{
     int rval;
     GError *e = nullptr;
     rval = g_key_file_get_integer(p->k, group.c_str(), key.c_str(), &e);
@@ -112,7 +121,8 @@ int IniParser::get_int(const std::string &group, const std::string &key) const {
     return rval;
 }
 
-std::vector<std::string> IniParser::get_string_array(const std::string &group, const std::string &key) const {
+std::vector<std::string> IniParser::get_string_array(const std::string &group, const std::string &key) const
+{
     vector<string> result;
     GError *e = nullptr;
     gchar **strlist;
@@ -126,7 +136,8 @@ std::vector<std::string> IniParser::get_string_array(const std::string &group, c
     return result;
 }
 
-vector<int> IniParser::get_int_array(const std::string &group, const std::string &key) const {
+vector<int> IniParser::get_int_array(const std::string &group, const std::string &key) const
+{
     vector<int> result;
     GError *e = nullptr;
     gint *ints;
@@ -140,7 +151,8 @@ vector<int> IniParser::get_int_array(const std::string &group, const std::string
     return result;
 }
 
-vector<bool> IniParser::get_boolean_array(const std::string &group, const std::string &key) const {
+vector<bool> IniParser::get_boolean_array(const std::string &group, const std::string &key) const
+{
     vector<bool> result;
     GError *e = nullptr;
     gboolean *bools;
@@ -154,14 +166,16 @@ vector<bool> IniParser::get_boolean_array(const std::string &group, const std::s
     return result;
 }
 
-string IniParser::get_start_group() const {
+string IniParser::get_start_group() const
+{
     gchar *sg = g_key_file_get_start_group(p->k);
     string result(sg);
     g_free(sg);
     return result;
 }
 
-vector<string> IniParser::get_groups() const {
+vector<string> IniParser::get_groups() const
+{
     vector<string> result;
     gsize count;
     gchar **groups = g_key_file_get_groups(p->k, &count);
@@ -172,7 +186,8 @@ vector<string> IniParser::get_groups() const {
     return result;
 }
 
-vector<string> IniParser::get_keys(const std::string &group) const {
+vector<string> IniParser::get_keys(const std::string &group) const
+{
     vector<string> result;
     GError *e = nullptr;
     gchar **strlist;
