@@ -59,7 +59,7 @@ IniParser::IniParser(const char *filename)
     GKeyFile *kf = g_key_file_new();
     GError *e = nullptr;
     if(!kf) {
-        throw LogicException("Could not create keyfile parser.");
+        throw ResourceException("Could not create keyfile parser.");
     }
     if(!g_key_file_load_from_file(kf, filename, G_KEY_FILE_NONE, &e)) {
         string message = "Could not load ini file ";
