@@ -30,7 +30,10 @@ namespace unity
 namespace util
 {
 
+namespace internal
+{
 struct IniParserPrivate;
+}
 
 /**
 \brief Helper class to read configuration files.
@@ -79,7 +82,7 @@ public:
     std::vector<std::string> get_keys(const std::string &group) const;
 
 private:
-    IniParserPrivate *p;
+    internal::IniParserPrivate *p;
 };
 
 

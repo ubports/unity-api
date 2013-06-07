@@ -22,24 +22,29 @@
 
 using namespace std;
 
-
 namespace unity
 {
 
 namespace util
 {
 
+
+namespace internal
+{
 struct IniParserPrivate
 {
     GKeyFile *k;
 };
+}
+
+using internal::IniParserPrivate;
 
 /*
  * This is not a private member function, because it takes
  * a GError and we don't want to leak that.
  */
 
-static void inspectError(GError *e, const char *prefix)
+static void inspect_error(GError *e, const char *prefix)
 {
     if(e) {
         string message(prefix);
@@ -87,7 +92,7 @@ bool IniParser::has_key(const std::string &group, const std::string &key) const
     gboolean rval;
     GError *e = nullptr;
     rval = g_key_file_has_key(p->k, group.c_str(), key.c_str(), &e);
-    inspectError(e, "Error checking for key existence: ");
+    inspect_error(e, "Error checking for key existence: ");
     return rval;
 }
 
@@ -97,7 +102,7 @@ std::string IniParser::get_string(const std::string &group, const std::string &k
     GError *e = nullptr;
     string result;
     value = g_key_file_get_string(p->k, group.c_str(), key.c_str(), &e);
-    inspectError(e, "Could not get string value: ");
+    inspect_error(e, "Could not get string value: ");
     result = value;
     g_free(value);
     return result;
@@ -108,7 +113,7 @@ bool IniParser::get_boolean(const std::string &group, const std::string &key) co
     bool rval;
     GError *e = nullptr;
     rval = g_key_file_get_boolean(p->k, group.c_str(), key.c_str(), &e);
-    inspectError(e, "Could not get boolean value: ");
+    inspect_error(e, "Could not get boolean value: ");
     return rval;
 }
 
@@ -117,7 +122,7 @@ int IniParser::get_int(const std::string &group, const std::string &key) const
     int rval;
     GError *e = nullptr;
     rval = g_key_file_get_integer(p->k, group.c_str(), key.c_str(), &e);
-    inspectError(e, "Could not get integer value: ");
+    inspect_error(e, "Could not get integer value: ");
     return rval;
 }
 
@@ -128,7 +133,7 @@ std::vector<std::string> IniParser::get_string_array(const std::string &group, c
     gchar **strlist;
     gsize count;
     strlist = g_key_file_get_string_list(p->k, group.c_str(), key.c_str(), &count, &e);
-    inspectError(e, "Could not get string array: ");
+    inspect_error(e, "Could not get string array: ");
     for(gsize i= 0; i < count; i++) {
         result.push_back(strlist[i]);
     }
@@ -143,7 +148,7 @@ vector<int> IniParser::get_int_array(const std::string &group, const std::string
     gint *ints;
     gsize count;
     ints = g_key_file_get_integer_list(p->k, group.c_str(), key.c_str(), &count, &e);
-    inspectError(e, "Could not get integer array; ");
+    inspect_error(e, "Could not get integer array; ");
     for(gsize i=0; i<count; i++) {
         result.push_back(ints[i]);
     }
@@ -158,7 +163,7 @@ vector<bool> IniParser::get_boolean_array(const std::string &group, const std::s
     gboolean *bools;
     gsize count;
     bools = g_key_file_get_boolean_list(p->k, group.c_str(), key.c_str(), &count, &e);
-    inspectError(e, "Could not get boolean array; ");
+    inspect_error(e, "Could not get boolean array; ");
     for(gsize i=0; i<count; i++) {
         result.push_back(bools[i]);
     }
@@ -192,8 +197,9 @@ vector<string> IniParser::get_keys(const std::string &group) const
     GError *e = nullptr;
     gchar **strlist;
     gsize count;
+    IniParserPrivate f;
     strlist = g_key_file_get_keys(p->k, group.c_str(), &count, &e);
-    inspectError(e, "Could not get list of keys: ");
+    inspect_error(e, "Could not get list of keys: ");
     for(gsize i= 0; i < count; i++) {
         result.push_back(strlist[i]);
     }
