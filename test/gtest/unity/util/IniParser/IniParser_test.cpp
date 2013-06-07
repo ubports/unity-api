@@ -37,7 +37,7 @@ TEST(IniParser, missingFile)
     try {
         IniParser("nonexistant");
         FAIL();
-    } catch(const InvalidArgumentException &e) {
+    } catch(const FileException &e) {
     }
 }
 

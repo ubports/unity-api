@@ -66,9 +66,10 @@ IniParser::IniParser(const char *filename)
         message += filename;
         message += ": ";
         message += e->message;
+        int errnum = e->code;
         g_error_free(e);
         g_key_file_free(kf);
-        throw InvalidArgumentException(message);
+        throw FileException(message, errnum);
     }
     p = new IniParserPrivate();
     p->k = kf;
