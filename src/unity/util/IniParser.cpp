@@ -155,7 +155,10 @@ vector<bool> IniParser::get_boolean_array(const std::string &group, const std::s
 }
 
 string IniParser::get_start_group() const {
-    return g_key_file_get_start_group(p->k);
+    gchar *sg = g_key_file_get_start_group(p->k);
+    string result(sg);
+    g_free(sg);
+    return result;
 }
 
 vector<string> IniParser::get_groups() const {
