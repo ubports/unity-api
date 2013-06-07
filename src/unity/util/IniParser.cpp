@@ -74,13 +74,13 @@ IniParser::IniParser(const char *filename)
     p->k = kf;
 }
 
-IniParser::~IniParser()
+IniParser::~IniParser() noexcept
 {
     g_key_file_free(p->k);
     delete p;
 }
 
-bool IniParser::has_group(const std::string &group) const
+bool IniParser::has_group(const std::string &group) const noexcept
 {
     gboolean rval;
     rval = g_key_file_has_group(p->k, group.c_str());
