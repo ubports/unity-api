@@ -54,7 +54,9 @@ IniParser::IniParser(const char *filename) {
         throw LogicException("Could not create keyfile parser.");
     }
     if(!g_key_file_load_from_file(kf, filename, G_KEY_FILE_NONE, &e)) {
-        string message = "Could not load ini file: ";
+        string message = "Could not load ini file ";
+        message += filename;
+        message += ": ";
         message += e->message;
         g_error_free(e);
         g_key_file_free(kf);
