@@ -50,7 +50,7 @@ static void inspect_error(GError *e, const char *prefix)
         string message(prefix);
         message += e->message;
         g_error_free(e);
-        throw InvalidArgumentException(message);
+        throw LogicException(message);
     }
 }
 

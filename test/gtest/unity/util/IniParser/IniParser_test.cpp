@@ -95,28 +95,28 @@ TEST(IniParser, failingQueries) {
     try {
         conf.get_string("foo", "bar");
         FAIL();
-    } catch(const InvalidArgumentException &e) {
+    } catch(const LogicException &e) {
     }
     try {
         conf.get_int("foo", "bar");
         FAIL();
-    } catch(const InvalidArgumentException &e) {
+    } catch(const LogicException &e) {
     }
     try {
         conf.get_boolean("foo", "bar");
         FAIL();
-    } catch(const InvalidArgumentException &e) {
+    } catch(const LogicException &e) {
     }
 
     try {
         conf.get_int_array("first", "array");
         FAIL();
-    } catch(const InvalidArgumentException &e) {
+    } catch(const LogicException &e) {
     }
 
     try {
         conf.get_boolean_array("first", "array");
         FAIL();
-    } catch(const InvalidArgumentException &e) {
+    } catch(const LogicException &e) {
     }
 }
