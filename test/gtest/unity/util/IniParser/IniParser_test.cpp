@@ -27,11 +27,13 @@ using namespace unity::util;
 
 #define INI_FILE UNITY_API_TEST_DATADIR "/sample.ini"
 
-TEST(IniParser, basic) {
+TEST(IniParser, basic)
+{
     IniParser test(INI_FILE);
 }
 
-TEST(IniParser, missingFile) {
+TEST(IniParser, missingFile)
+{
     try {
         IniParser("nonexistant");
         FAIL();
@@ -39,7 +41,8 @@ TEST(IniParser, missingFile) {
     }
 }
 
-TEST(IniParser, has) {
+TEST(IniParser, has)
+{
     IniParser conf(INI_FILE);
 
     ASSERT_TRUE(conf.has_group("first"));
@@ -49,7 +52,8 @@ TEST(IniParser, has) {
     ASSERT_FALSE(conf.has_key("first", "missingvalue"));
 }
 
-TEST(IniParser, simpleQueries) {
+TEST(IniParser, simpleQueries)
+{
     IniParser conf(INI_FILE);
     vector<string> groups = conf.get_groups();
 
@@ -68,7 +72,8 @@ TEST(IniParser, simpleQueries) {
     ASSERT_FALSE(conf.get_boolean("second", "boolvalue"));
 }
 
-TEST(IniParser, arrayQueries) {
+TEST(IniParser, arrayQueries)
+{
     IniParser conf(INI_FILE);
     vector<string> strArr = conf.get_string_array("first", "array");
 
@@ -89,7 +94,8 @@ TEST(IniParser, arrayQueries) {
     ASSERT_FALSE(boolArr[2]);
 }
 
-TEST(IniParser, failingQueries) {
+TEST(IniParser, failingQueries)
+{
     IniParser conf(INI_FILE);
 
     try {
