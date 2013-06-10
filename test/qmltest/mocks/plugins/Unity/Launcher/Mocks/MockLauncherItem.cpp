@@ -17,7 +17,7 @@
  *      Michael Zanetti <michael.zanetti@canonical.com>
  */
 
-#include "MockLauncherItem.h"
+#include <Mocks/MockLauncherItem.h>
 
 using namespace unity::shell::launcher;
 

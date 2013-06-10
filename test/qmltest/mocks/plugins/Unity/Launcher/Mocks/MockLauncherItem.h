@@ -20,7 +20,7 @@
 #ifndef LAUNCHERMOCKITEM_H
 #define LAUNCHERMOCKITEM_H
 
-#include "include/unity/shell/launcher/LauncherItemInterface.h"
+#include <include/unity/shell/launcher/LauncherItemInterface.h>
 
 using namespace unity::shell::launcher;
 

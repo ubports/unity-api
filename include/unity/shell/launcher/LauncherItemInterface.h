@@ -17,12 +17,12 @@
  *      Michael Zanetti <michael.zanetti@canonical.com>
  */
 
-#ifndef LAUNCHERITEM_H
-#define LAUNCHERITEM_H
+#ifndef UNITY_LAUNCHER_LAUNCHERITEM_H
+#define UNITY_LAUNCHER_LAUNCHERITEM_H
 
 #include "unity/config.h"
 
-#include <QAbstractListModel>
+#include <QtCore/QObject>
 
 namespace unity
 {

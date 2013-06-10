@@ -20,7 +20,7 @@
 #ifndef LAUNCHERMOCKMODEL_H
 #define LAUNCHERMOCKMODEL_H
 
-#include "unity/shell/launcher/LauncherModelInterface.h"
+#include <unity/shell/launcher/LauncherModelInterface.h>
 
 using namespace unity::shell::launcher;
 
@@ -36,7 +36,7 @@ public:
 
     QVariant data(const QModelIndex &index, int role) const;
 
-    Q_INVOKABLE unity::shell::launcher::LauncherItemInterface* get(int index) const;
+    Q_INVOKABLE unity::shell::launcher::LauncherItemInterface *get(int index) const;
     Q_INVOKABLE void move(int oldIndex, int newIndex);
 private:
     QList<LauncherItemInterface*> m_list;

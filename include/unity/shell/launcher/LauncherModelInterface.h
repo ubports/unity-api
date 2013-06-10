@@ -17,12 +17,12 @@
  *      Michael Zanetti <michael.zanetti@canonical.com>
  */
 
-#ifndef LAUNCHERMODELINTERFACE_H
-#define LAUNCHERMODELINTERFACE_H
+#ifndef UNITY_LAUNCHER_LAUNCHERMODELINTERFACE_H
+#define UNITY_LAUNCHER_LAUNCHERMODELINTERFACE_H
 
 #include <unity/config.h>
 
-#include <QAbstractListModel>
+#include <QtCore/QAbstractListModel>
 
 namespace unity
 {
@@ -67,10 +67,13 @@ public:
 
     /**
      * @brief Get a launcher item.
+     *
+     * Note: QML requires the full namespace in the return value.
+     *
      * @param index the index of the item to get
      * @returns The item.
      */
-    Q_INVOKABLE virtual LauncherItemInterface* get(int index) const = 0;
+    Q_INVOKABLE virtual unity::shell::launcher::LauncherItemInterface *get(int index) const = 0;
 
     /// @cond
     QHash<int, QByteArray> roleNames() const
