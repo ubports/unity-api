@@ -66,13 +66,14 @@ coerced into the given type (i.e trying to convert the value
 
 class UNITY_API IniParser final {
 public:
-    /** Create new IniParser. From a file. */
+    /** Parse the given file. */
     IniParser(const char *filename);
     ~IniParser() noexcept;
 
-    /** Doxygen is too stupid to realize that this function does not exist. */
+    /// @cond
     IniParser(const IniParser &ip) = delete;
     IniParser() = delete;
+    /// @endcond
 
     /** Has group? */
     bool has_group(const std::string &group) const noexcept;

@@ -32,11 +32,10 @@ namespace util
 namespace internal
 {
 
-/** This is private. You don't need to know what it is or does. */
 struct IniParserPrivate
 {
-    GKeyFile *k;      ///< It's a GKeyFile.
-    string filename;  ///< It's a file name. In a string. In case you did not realize.
+    GKeyFile *k;
+    string filename;
 };
 }
 
