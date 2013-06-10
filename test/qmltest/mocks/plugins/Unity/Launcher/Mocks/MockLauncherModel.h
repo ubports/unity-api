@@ -32,7 +32,6 @@ public:
     MockLauncherModel(QObject *parent = 0);
     ~MockLauncherModel();
 
-    // cppcheck-suppress unusedFunction
     int rowCount(const QModelIndex &parent) const;
 
     QVariant data(const QModelIndex &index, int role) const;

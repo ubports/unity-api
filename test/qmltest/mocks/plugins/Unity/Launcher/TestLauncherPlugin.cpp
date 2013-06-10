@@ -33,6 +33,7 @@ static QObject* modelProvider(QQmlEngine* /* engine */, QJSEngine* /* scriptEngi
     return new MockLauncherModel();
 }
 
+// cppcheck-suppress unusedFunction
 void TestLauncherPlugin::registerTypes(const char *uri)
 {
     // @uri Unity.Launcher

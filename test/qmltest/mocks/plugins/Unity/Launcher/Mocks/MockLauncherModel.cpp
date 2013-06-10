@@ -55,6 +55,7 @@ MockLauncherModel::~MockLauncherModel()
     }
 }
 
+// cppcheck-suppress unusedFunction
 int MockLauncherModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
