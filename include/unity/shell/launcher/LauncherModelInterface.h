@@ -44,10 +44,12 @@ public:
         RoleIcon,
         RoleFavorite,
         RoleRunning,
-        RoleRecent
+        RoleRecent,
+        RoleProgress,
+        RoleCount
     };
 
-    LauncherModelInterface(QObject *parent = 0) {}
+    LauncherModelInterface(QObject *parent = 0): QAbstractListModel(parent) {}
     virtual ~LauncherModelInterface() {}
 
     Q_INVOKABLE virtual void move(int oldIndex, int newIndex) = 0;
@@ -62,6 +64,8 @@ public:
         roles.insert(RoleFavorite, "favorite");
         roles.insert(RoleRunning, "running");
         roles.insert(RoleRecent, "recent");
+        roles.insert(RoleProgress, "progress");
+        roles.insert(RoleCount, "count");
         return roles;
     }
 

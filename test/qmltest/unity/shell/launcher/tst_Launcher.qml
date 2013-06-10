@@ -46,6 +46,8 @@ Item {
                         { tag: "Model.roles[favorite]", role: "favorite", type: "boolean" },
                         { tag: "Model.roles[running]", role: "running", type: "boolean" },
                         { tag: "Model.roles[recent]", role: "recent", type: "boolean" },
+                        { tag: "Model.roles[progress]", role: "progress", type: "int" },
+                        { tag: "Model.roles[count]", role: "count", type: "int" },
                     ];
         }
 

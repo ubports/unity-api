@@ -44,9 +44,11 @@ public:
     bool recent() const;
     void setRecent(bool recent);
 
-Q_SIGNALS:
-    void favoriteChanged(bool favorite);
-    void runningChanged(bool running);
+    bool progress() const;
+    void setProgress(int progress);
+
+    bool count() const;
+    void setCount(int count);
 
 private:
     QString m_desktopFile;
@@ -55,6 +57,8 @@ private:
     bool m_favorite;
     bool m_running;
     bool m_recent;
+    int m_progress;
+    int m_count;
 };
 
 #endif

@@ -77,6 +77,10 @@ QVariant MockLauncherModel::data(const QModelIndex &index, int role) const
         return item->running();
     case RoleRecent:
         return item->recent();
+    case RoleProgress:
+        return item->progress();
+    case RoleCount:
+        return item->count();
     }
 
     return QVariant();

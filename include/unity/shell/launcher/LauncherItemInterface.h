@@ -40,6 +40,8 @@ class UNITY_API LauncherItemInterface: public QObject
     Q_PROPERTY(bool favorite READ favorite WRITE setFavorite NOTIFY favoriteChanged)
     Q_PROPERTY(bool running READ running WRITE setRunning NOTIFY runningChanged)
     Q_PROPERTY(bool recent READ recent WRITE setRecent NOTIFY recentChanged)
+    Q_PROPERTY(int progress READ progress WRITE setProgress NOTIFY progressChanged)
+    Q_PROPERTY(int count READ count WRITE setCount NOTIFY countChanged)
 
 public:
     LauncherItemInterface(QObject *parent = 0): QObject(parent) {}
@@ -59,10 +61,18 @@ public:
     virtual bool recent() const = 0;
     virtual void setRecent(bool recent) = 0;
 
+    virtual bool progress() const = 0;
+    virtual void setProgress(int progress) = 0;
+
+    virtual bool count() const = 0;
+    virtual void setCount(int count) = 0;
+
 Q_SIGNALS:
     void favoriteChanged(bool favorite);
     void runningChanged(bool running);
     void recentChanged(bool running);
+    void progressChanged(int progress);
+    void countChanged(int count);
 };
 
 }

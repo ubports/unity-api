@@ -28,7 +28,9 @@ MockLauncherItem::MockLauncherItem(const QString &desktopFile, const QString &na
     m_icon(icon),
     m_favorite(false),
     m_running(false),
-    m_recent(false)
+    m_recent(false),
+    m_progress(0),
+    m_count(0)
 {
 
 }
@@ -84,5 +86,31 @@ void MockLauncherItem::setRecent(bool recent)
     if (m_recent != recent) {
         m_recent = recent;
         Q_EMIT recentChanged(recent);
+    }
+}
+
+bool MockLauncherItem::progress() const
+{
+    return m_progress;
+}
+
+void MockLauncherItem::setProgress(int progress)
+{
+    if (m_progress != progress) {
+        m_progress = progress;
+        Q_EMIT progressChanged(progress);
+    }
+}
+
+bool MockLauncherItem::count() const
+{
+    return m_count;
+}
+
+void MockLauncherItem::setCount(int count)
+{
+    if (m_count != count) {
+        m_count = count;
+        Q_EMIT countChanged(count);
     }
 }
