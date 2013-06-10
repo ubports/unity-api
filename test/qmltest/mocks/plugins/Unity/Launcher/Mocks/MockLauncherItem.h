@@ -44,10 +44,10 @@ public:
     bool recent() const;
     void setRecent(bool recent);
 
-    bool progress() const;
+    int progress() const;
     void setProgress(int progress);
 
-    bool count() const;
+    int count() const;
     void setCount(int count);
 
 private:

@@ -109,10 +109,10 @@ public:
     virtual bool recent() const = 0;
     virtual void setRecent(bool recent) = 0;
 
-    virtual bool progress() const = 0;
+    virtual int progress() const = 0;
     virtual void setProgress(int progress) = 0;
 
-    virtual bool count() const = 0;
+    virtual int count() const = 0;
     virtual void setCount(int count) = 0;
 
 Q_SIGNALS:

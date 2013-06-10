@@ -49,8 +49,8 @@ Item {
                         { tag: "Model.roles[favorite]", role: "favorite", type: "boolean" },
                         { tag: "Model.roles[running]", role: "running", type: "boolean" },
                         { tag: "Model.roles[recent]", role: "recent", type: "boolean" },
-                        { tag: "Model.roles[progress]", role: "progress", type: "int" },
-                        { tag: "Model.roles[count]", role: "count", type: "int" },
+                        { tag: "Model.roles[progress]", role: "progress", type: "number" },
+                        { tag: "Model.roles[count]", role: "count", type: "number" },
                     ];
         }
 
@@ -61,6 +61,7 @@ Item {
             } catch(err) {
                 object = undefined;
             }
+
             verifyData(data);
         }
 
@@ -85,8 +86,8 @@ Item {
                         { tag: "Item.properties[favorite]", property: "favorite", type: "boolean" },
                         { tag: "Item.properties[recent]", property: "recent", type: "boolean" },
                         { tag: "Item.properties[running]", property: "running", type: "boolean" },
-                        { tag: "Item.properties[progress]", property: "progress", type: "int" },
-                        { tag: "Item.properties[count]", property: "count", type: "int" },
+                        { tag: "Item.properties[progress]", property: "progress", type: "number" },
+                        { tag: "Item.properties[count]", property: "count", type: "number" },
                     ];
         }
 
