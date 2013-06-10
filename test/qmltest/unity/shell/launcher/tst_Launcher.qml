@@ -85,6 +85,8 @@ Item {
                         { tag: "Item.properties[favorite]", property: "favorite", type: "boolean" },
                         { tag: "Item.properties[recent]", property: "recent", type: "boolean" },
                         { tag: "Item.properties[running]", property: "running", type: "boolean" },
+                        { tag: "Item.properties[progress]", property: "progress", type: "int" },
+                        { tag: "Item.properties[count]", property: "count", type: "int" },
                     ];
         }
 
