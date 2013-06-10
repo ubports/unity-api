@@ -33,6 +33,12 @@ namespace launcher
 
 class LauncherItemInterface;
 
+/**
+ * @brief A list of launcher items to be displayed
+ * 
+ * This model exposes all the launcher items that should be shown in the launcher.
+ */
+
 class UNITY_API LauncherModelInterface: public QAbstractListModel
 {
    Q_OBJECT
@@ -52,9 +58,19 @@ public:
     LauncherModelInterface(QObject *parent = 0): QAbstractListModel(parent) {}
     virtual ~LauncherModelInterface() {}
 
+    /**
+     * @brief Move an item in the model.
+     */
     Q_INVOKABLE virtual void move(int oldIndex, int newIndex) = 0;
+    
+    /**
+     * @brief Get a launcher item.
+     * @param index the index of the item to get
+     * @returns The item.
+     */
     Q_INVOKABLE virtual LauncherItemInterface* get(int index) const = 0;
 
+    /// @cond
     QHash<int, QByteArray> roleNames() const
     {
         QHash<int, QByteArray> roles;
@@ -68,6 +84,7 @@ public:
         roles.insert(RoleCount, "count");
         return roles;
     }
+    /// @endcond
 
 };
 
