@@ -33,7 +33,7 @@ namespace launcher
 
 /**
  * @brief An item presented in the launcher
- * 
+ *
  * The items hold all the information required for the visual representation
  * in the launcher.
  */
@@ -46,50 +46,52 @@ class UNITY_API LauncherItemInterface: public QObject
      * @brief The full path to the .desktop file.
      */
     Q_PROPERTY(QString desktopFile READ desktopFile CONSTANT)
-    
+
     /**
      * @brief The user visible name of the item.
      */
     Q_PROPERTY(QString name READ name CONSTANT)
-    
+
     /**
      * @brief The full path to the icon to be shown for the item.
      */
     Q_PROPERTY(QString icon READ icon CONSTANT)
-    
+
     /**
      * @brief A flag whether the item is marked as favorite (aka. pinned) or not
      */
     Q_PROPERTY(bool favorite READ favorite WRITE setFavorite NOTIFY favoriteChanged)
-    
+
     /**
      * @brief A flag whether the application belonging to the icon is currently running or not
      */
     Q_PROPERTY(bool running READ running WRITE setRunning NOTIFY runningChanged)
-    
+
     /**
      * @brief A flag wheter the application is in the recently used applications list
      */
     Q_PROPERTY(bool recent READ recent WRITE setRecent NOTIFY recentChanged)
-    
+
     /**
      * @brief The percentage of the progress bar shown on the item.
-     * 
+     *
      * For values from 0 and 100 this will present a progress bar on the item.
      * For values outside this range, no progress bar will be drawn.
      */
     Q_PROPERTY(int progress READ progress WRITE setProgress NOTIFY progressChanged)
-    
+
     /**
      * @brief The number for the count emblem on the item
-     * 
+     *
      * For values >0 this will paint an emblem containing the number.
      * For 0 and negative values, no count emblem will be drawn.
      */
     Q_PROPERTY(int count READ count WRITE setCount NOTIFY countChanged)
 
-public:
+protected:
     LauncherItemInterface(QObject *parent = 0): QObject(parent) {}
+
+public:
     virtual ~LauncherItemInterface() {}
 
     /// @cond

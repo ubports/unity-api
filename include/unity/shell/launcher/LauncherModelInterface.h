@@ -35,13 +35,16 @@ class LauncherItemInterface;
 
 /**
  * @brief A list of launcher items to be displayed
- * 
+ *
  * This model exposes all the launcher items that should be shown in the launcher.
  */
 
 class UNITY_API LauncherModelInterface: public QAbstractListModel
 {
    Q_OBJECT
+
+protected:
+    LauncherModelInterface(QObject *parent = 0): QAbstractListModel(parent) {}
 
 public:
     enum Roles {
@@ -55,14 +58,13 @@ public:
         RoleCount
     };
 
-    LauncherModelInterface(QObject *parent = 0): QAbstractListModel(parent) {}
     virtual ~LauncherModelInterface() {}
 
     /**
      * @brief Move an item in the model.
      */
     Q_INVOKABLE virtual void move(int oldIndex, int newIndex) = 0;
-    
+
     /**
      * @brief Get a launcher item.
      * @param index the index of the item to get
