@@ -38,15 +38,21 @@ class LauncherItemInterface;
  *
  * This model exposes all the launcher items that should be shown in the launcher.
  */
-
 class UNITY_API LauncherModelInterface: public QAbstractListModel
 {
    Q_OBJECT
 
 protected:
+    /// @cond
     LauncherModelInterface(QObject *parent = 0): QAbstractListModel(parent) {}
+    /// @endcond
 
 public:
+    /**
+     * @brief The Roles supported by the model
+     *
+     * See LauncherItemInterface properties for details.
+     */
     enum Roles {
         RoleDesktopFile = Qt::UserRole,
         RoleName,

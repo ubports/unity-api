@@ -89,12 +89,12 @@ class UNITY_API LauncherItemInterface: public QObject
     Q_PROPERTY(int count READ count WRITE setCount NOTIFY countChanged)
 
 protected:
+    /// @cond
     LauncherItemInterface(QObject *parent = 0): QObject(parent) {}
 
 public:
     virtual ~LauncherItemInterface() {}
 
-    /// @cond
     virtual QString desktopFile() const = 0;
 
     virtual QString name() const = 0;
