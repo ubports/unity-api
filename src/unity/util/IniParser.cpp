@@ -50,7 +50,7 @@ static void inspect_error(GError *e, const char *prefix, const string &filename)
 {
     if(e) {
         string message(prefix);
-        message += "(";
+        message += " (";
         message += filename;
         message += "): ";
         message += e->message;
