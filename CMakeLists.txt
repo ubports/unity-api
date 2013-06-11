@@ -46,7 +46,7 @@ set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,-z,defs")
 
 # Static C++ checks
 
-set(cppcheck_flags --inline-suppr --enable=all -q --error-exitcode=2)
+set(cppcheck_flags --check-config --inline-suppr --enable=all -q --error-exitcode=2)
 set(cppcheck_flags ${cppcheck_flags} --template '{file}({line}): {severity} ({id}): {message}')
 
 add_custom_target(cppcheck COMMAND cppcheck ${cppcheck_flags}
