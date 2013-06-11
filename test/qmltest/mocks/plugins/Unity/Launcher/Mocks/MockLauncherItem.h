@@ -28,7 +28,7 @@ class UNITY_API MockLauncherItem: public LauncherItemInterface
 {
     Q_OBJECT
 public:
-    MockLauncherItem(const QString &desktopFile, const QString &name, const QString &icon, QObject *parent = 0);
+    MockLauncherItem(const QString& desktopFile, const QString& name, const QString& icon, QObject* parent = 0);
 
     QString desktopFile() const;
 

@@ -34,7 +34,7 @@ static QObject* modelProvider(QQmlEngine* /* engine */, QJSEngine* /* scriptEngi
 }
 
 // cppcheck-suppress unusedFunction
-void TestLauncherPlugin::registerTypes(const char *uri)
+void TestLauncherPlugin::registerTypes(const char* uri)
 {
     // @uri Unity.Launcher
     qmlRegisterUncreatableType<LauncherModelInterface>(uri, 0, 1, "LauncherModelInterface", "Interface for the LauncherModel");

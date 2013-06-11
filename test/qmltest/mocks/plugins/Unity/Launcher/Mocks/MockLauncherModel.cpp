@@ -22,7 +22,7 @@
 
 using namespace unity::shell::launcher;
 
-MockLauncherModel::MockLauncherModel(QObject *parent): LauncherModelInterface(parent)
+MockLauncherModel::MockLauncherModel(QObject* parent): LauncherModelInterface(parent)
 {
     LauncherItemInterface *item = new MockLauncherItem("/usr/share/applications/phone-app.desktop", "Phone", "phone-app");
     m_list.append(item);
@@ -48,22 +48,24 @@ MockLauncherModel::MockLauncherModel(QObject *parent): LauncherModelInterface(pa
 
 MockLauncherModel::~MockLauncherModel()
 {
-    while (!m_list.empty()) {
+    while (!m_list.empty())
+    {
         m_list.takeFirst()->deleteLater();
     }
 }
 
 // cppcheck-suppress unusedFunction
-int MockLauncherModel::rowCount(const QModelIndex &parent) const
+int MockLauncherModel::rowCount(const QModelIndex& parent) const
 {
     Q_UNUSED(parent)
     return m_list.count();
 }
 
-QVariant MockLauncherModel::data(const QModelIndex &index, int role) const
+QVariant MockLauncherModel::data(const QModelIndex& index, int role) const
 {
     LauncherItemInterface *item = m_list.at(index.row());
-    switch(role) {
+    switch(role)
+    {
     case RoleDesktopFile:
         return item->desktopFile();
     case RoleName:
@@ -87,7 +89,8 @@ QVariant MockLauncherModel::data(const QModelIndex &index, int role) const
 
 LauncherItemInterface *MockLauncherModel::get(int index) const
 {
-    if (index < 0 || index >= m_list.count()) {
+    if (index < 0 || index >= m_list.count())
+    {
         return 0;
     }
     return m_list.at(index);

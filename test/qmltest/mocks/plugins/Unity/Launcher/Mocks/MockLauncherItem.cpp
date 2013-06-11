@@ -21,7 +21,7 @@
 
 using namespace unity::shell::launcher;
 
-MockLauncherItem::MockLauncherItem(const QString &desktopFile, const QString &name, const QString &icon, QObject *parent):
+MockLauncherItem::MockLauncherItem(const QString& desktopFile, const QString& name, const QString& icon, QObject* parent):
     LauncherItemInterface(parent),
     m_desktopFile(desktopFile),
     m_name(name),
@@ -57,7 +57,8 @@ bool MockLauncherItem::favorite() const
 
 void MockLauncherItem::setFavorite(bool favorite)
 {
-    if (m_favorite != favorite) {
+    if (m_favorite != favorite)
+    {
         m_favorite = favorite;
         Q_EMIT favoriteChanged(m_favorite);
     }
@@ -70,7 +71,8 @@ bool MockLauncherItem::running() const
 
 void MockLauncherItem::setRunning(bool running)
 {
-    if (m_running != running) {
+    if (m_running != running)
+    {
         m_running = running;
         Q_EMIT runningChanged(running);
     }
@@ -83,7 +85,8 @@ bool MockLauncherItem::recent() const
 
 void MockLauncherItem::setRecent(bool recent)
 {
-    if (m_recent != recent) {
+    if (m_recent != recent)
+    {
         m_recent = recent;
         Q_EMIT recentChanged(recent);
     }
@@ -96,7 +99,8 @@ int MockLauncherItem::progress() const
 
 void MockLauncherItem::setProgress(int progress)
 {
-    if (m_progress != progress) {
+    if (m_progress != progress)
+    {
         m_progress = progress;
         Q_EMIT progressChanged(progress);
     }
@@ -109,7 +113,8 @@ int MockLauncherItem::count() const
 
 void MockLauncherItem::setCount(int count)
 {
-    if (m_count != count) {
+    if (m_count != count)
+    {
         m_count = count;
         Q_EMIT countChanged(count);
     }

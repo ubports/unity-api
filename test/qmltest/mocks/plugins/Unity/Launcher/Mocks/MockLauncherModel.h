@@ -29,12 +29,12 @@ class UNITY_API MockLauncherModel: public LauncherModelInterface
    Q_OBJECT
 
 public:
-    MockLauncherModel(QObject *parent = 0);
+    MockLauncherModel(QObject* parent = 0);
     ~MockLauncherModel();
 
-    int rowCount(const QModelIndex &parent) const;
+    int rowCount(const QModelIndex& parent) const;
 
-    QVariant data(const QModelIndex &index, int role) const;
+    QVariant data(const QModelIndex& index, int role) const;
 
     Q_INVOKABLE unity::shell::launcher::LauncherItemInterface *get(int index) const;
     Q_INVOKABLE void move(int oldIndex, int newIndex);
