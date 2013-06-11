@@ -205,7 +205,7 @@ vector<string> IniParser::get_keys(const std::string &group) const
     vector<string> result;
     GError *e = nullptr;
     gchar **strlist;
-    gsize count;
+    gsize count=0;
     IniParserPrivate f;
     strlist = g_key_file_get_keys(p->k, group.c_str(), &count, &e);
     inspect_error(e, "Could not get list of keys", p->filename, group);
