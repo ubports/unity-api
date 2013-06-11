@@ -20,7 +20,7 @@
 #ifndef UNITY_LAUNCHER_LAUNCHERITEM_H
 #define UNITY_LAUNCHER_LAUNCHERITEM_H
 
-#include "unity/config.h"
+#include <unity/config.h>
 
 #include <QtCore/QObject>
 
