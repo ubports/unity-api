@@ -20,7 +20,7 @@
  * Authored by: Michi Henning <michi.henning@canonical.com>
  */
 
-#include <unity/config.h>
+#include <unity/SymbolExport.h>
 
 #ifndef UNITY_API_VERSION_H
 #define UNITY_API_VERSION_H

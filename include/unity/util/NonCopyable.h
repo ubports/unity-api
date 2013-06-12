@@ -31,7 +31,7 @@
 #ifndef UNITY_UTIL_NONCOPYABLE_H
 #define UNITY_UTIL_NONCOPYABLE_H
 
-#include <unity/config.h>
+#include <unity/SymbolExport.h>
 
 namespace unity
 {
