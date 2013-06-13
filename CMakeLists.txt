@@ -119,7 +119,6 @@ set(LIBS ${UNITY_API_LIB} ${OTHER_API_LIBS})
 set(LIB_INSTALL_PREFIX lib/${CMAKE_LIBRARY_ARCHITECTURE})
 
 set(LIBDIR ${CMAKE_INSTALL_PREFIX}/${LIB_INSTALL_PREFIX} CACHE PATH "Destination install dir for the library")
-set(libdir ${LIBDIR})
 
 # Tests
 include(CTest)

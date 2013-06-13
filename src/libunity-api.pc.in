@@ -16,9 +16,12 @@
 # Authored by: Michi Henning <michi.henning@canonical.com>
 #
 
+prefix=@CMAKE_INSTALL_PREFIX@
+includedir=${prefix}/include
+libdir=@LIBDIR@
+
 Name: lib@UNITY_API_LIB@
 Description: Unity API library
 Version: @UNITY_API_MAJOR@.@UNITY_API_MINOR@
-libdir=@libdir@
 Libs: -L${libdir} -l@UNITY_API_LIB@
-Cflags: -I@CMAKE_INSTALL_PREFIX@/include
+Cflags: -I${includedir}
