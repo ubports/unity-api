@@ -75,30 +75,26 @@ public:
     IniParser() = delete;
     /// @endcond
 
-    /** Has group? */
+    /** @name Accessors
+     * These member functions provide access to configuration entries by group and key.
+     * Attempts to retrieve a value as the wrong type, such as retrieving a string value
+     * "abc" as an integer, throw LogicException.
+      **/
+    //{@
     bool has_group(const std::string &group) const noexcept;
-    /** Has key? */
     bool has_key(const std::string &group, const std::string &key) const;
-    /** Get string value. */
     std::string get_string(const std::string &group, const std::string &key) const;
-    /** Get boolean value. */
     bool get_boolean(const std::string &group, const std::string &key) const;
-    /** Get integer value. */
     int get_int(const std::string &group, const std::string &key) const;
 
-    /** Get an array of strings. */
     std::vector<std::string> get_string_array(const std::string &group, const std::string &key) const;
-    /** Get an array of integers. */
     std::vector<int> get_int_array(const std::string &group, const std::string &key) const;
-    /** Get an array of booleans. */
     std::vector<bool> get_boolean_array(const std::string &group, const std::string &key) const;
 
-    /** Get start group. */
     std::string get_start_group() const;
-    /** Get list of groups. */
     std::vector<std::string> get_groups() const;
-    /** Get list of keys in a group. */
     std::vector<std::string> get_keys(const std::string &group) const;
+    //@}
 
 private:
     internal::IniParserPrivate *p;
