@@ -17,7 +17,7 @@
  */
 
 #include <unity/UnityExceptions.h>
-#include <unity/internal/UnityExceptionsImpl.h>
+#include <unity/ExceptionImplBase.h>
 
 using namespace std;
 
@@ -26,7 +26,7 @@ namespace unity
 
 InvalidArgumentException::
 InvalidArgumentException(string const& reason)
-    : Exception(make_shared<internal::InvalidArgumentExceptionImpl>(reason))
+    : Exception(make_shared<ExceptionImplBase>(this, reason))
 {
 }
 
@@ -49,7 +49,7 @@ char const*
 InvalidArgumentException::
 what() const noexcept
 {
-    return dynamic_cast<internal::InvalidArgumentExceptionImpl*>(pimpl())->what();
+    return "unity::InvalidArgumentException";
 }
 
 exception_ptr
@@ -61,7 +61,7 @@ self() const
 
 LogicException::
 LogicException(string const& reason)
-    : Exception(make_shared<internal::LogicExceptionImpl>(reason))
+    : Exception(make_shared<ExceptionImplBase>(this, reason))
 {
 }
 
@@ -83,7 +83,7 @@ char const*
 LogicException::
 what() const noexcept
 {
-    return dynamic_cast<internal::LogicExceptionImpl*>(pimpl())->what();
+    return "unity::LogicException";
 }
 
 exception_ptr
@@ -95,7 +95,7 @@ self() const
 
 ShutdownException::
 ShutdownException(string const& reason)
-    : Exception(make_shared<internal::ShutdownExceptionImpl>(reason))
+    : Exception(make_shared<ExceptionImplBase>(this, reason))
 {
 }
 
@@ -117,7 +117,7 @@ char const*
 ShutdownException::
 what() const noexcept
 {
-    return dynamic_cast<internal::ShutdownExceptionImpl*>(pimpl())->what();
+    return "unity::ShutdownException";
 }
 
 exception_ptr
@@ -127,9 +127,25 @@ self() const
     return make_exception_ptr(*this);
 }
 
+namespace internal
+{
+
+class FileExceptionImpl : public unity::ExceptionImplBase
+{
+public:
+    FileExceptionImpl(FileException const* owner, string const& reason, int err)
+        : ExceptionImplBase(owner, reason + (err == 0 ? "" : " (errno = " + std::to_string(err) + ")"))
+        , err_(err)
+    {
+    }
+    int err_;
+};
+
+}
+
 FileException::
 FileException(string const& reason, int err)
-    : Exception(make_shared<internal::FileExceptionImpl>(reason, err))
+    : Exception(make_shared<internal::FileExceptionImpl>(this, reason, err))
 {
 }
 
@@ -151,14 +167,14 @@ char const*
 FileException::
 what() const noexcept
 {
-    return dynamic_cast<internal::FileExceptionImpl*>(pimpl())->what();
+    return "unity::FileException";
 }
 
 int
 FileException::
 error() const noexcept
 {
-    return dynamic_cast<internal::FileExceptionImpl*>(pimpl())->error();
+    return dynamic_cast<const internal::FileExceptionImpl*>(pimpl())->err_;
 }
 
 exception_ptr
@@ -168,9 +184,25 @@ self() const
     return make_exception_ptr(*this);
 }
 
+namespace internal
+{
+
+class SyscallExceptionImpl : public unity::ExceptionImplBase
+{
+public:
+    SyscallExceptionImpl(SyscallException const* owner, string const& reason, int err)
+        : ExceptionImplBase(owner, reason + (reason.empty() ? "" : " ") + "(errno = " + std::to_string(err) + ")")
+        , err_(err)
+    {
+    }
+    int err_;
+};
+
+}
+
 SyscallException::
 SyscallException(string const& reason, int err)
-    : Exception(make_shared<internal::SyscallExceptionImpl>(reason, err))
+    : Exception(make_shared<internal::SyscallExceptionImpl>(this, reason, err))
 {
 }
 
@@ -192,14 +224,14 @@ char const*
 SyscallException::
 what() const noexcept
 {
-    return dynamic_cast<internal::SyscallExceptionImpl*>(pimpl())->what();
+    return "unity::SyscallException";
 }
 
 int
 SyscallException::
 error() const noexcept
 {
-    return dynamic_cast<internal::SyscallExceptionImpl*>(pimpl())->error();
+    return dynamic_cast<const internal::SyscallExceptionImpl*>(pimpl())->err_;
 }
 
 exception_ptr
@@ -211,7 +243,7 @@ self() const
 
 ResourceException::
 ResourceException(string const& reason)
-    : Exception(make_shared<internal::ResourceExceptionImpl>(reason))
+    : Exception(make_shared<ExceptionImplBase>(this, reason))
 {
 }
 
@@ -233,7 +265,7 @@ char const*
 ResourceException::
 what() const noexcept
 {
-    return dynamic_cast<internal::ResourceExceptionImpl*>(pimpl())->what();
+    return "unity::ResourceException";
 }
 
 exception_ptr

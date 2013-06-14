@@ -24,11 +24,6 @@
 namespace unity
 {
 
-namespace internal
-{
-class InvalidArgumentExceptionImpl;
-}
-
 /**
 \brief Exception to indicate that an invalid argument was passed to a function, such as passing <code>nullptr</code>
        when the function expects the argument to be non-null.
@@ -59,11 +54,6 @@ public:
     virtual std::exception_ptr self() const override;
 };
 
-namespace internal
-{
-class LogicExceptionImpl;
-}
-
 /**
 \brief Exception to indicate a logic error, such as driving the API incorrectly, such as calling methods
        in the wrong worder.
@@ -93,11 +83,6 @@ public:
     */
     virtual std::exception_ptr self() const override;
 };
-
-namespace internal
-{
-class ShutdownExceptionImpl;
-}
 
 /**
 \brief Exception to indicate errors during shutdown.
@@ -174,6 +159,9 @@ public:
     \return Returns the error number that was passed to the constructor.
     */
     int error() const noexcept;
+
+private:
+    std::shared_ptr<internal::FileExceptionImpl> p_;
 };
 
 namespace internal
@@ -217,12 +205,10 @@ public:
     \return Returns the error number that was passed to the constructor.
     */
     int error() const noexcept;
-};
 
-namespace internal
-{
-class ResourceExceptionImpl;
-}
+private:
+    //std::shared_ptr<internal::SyscallExceptionImpl> p_;
+};
 
 /**
 \brief Exception for miscellaneous errors, such as failure of a third-party library or hitting resource limitations.
@@ -235,7 +221,7 @@ public:
     \brief Constructs the exception.
     \param reason Further details about the cause of the exception.
     */
-    ResourceException(std::string const& reason);
+    explicit ResourceException(std::string const& reason);
     //! @cond
     ResourceException(ResourceException const&);
     ResourceException& operator=(ResourceException const&);

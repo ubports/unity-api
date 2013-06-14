@@ -17,7 +17,7 @@
  */
 
 #include <unity/Exception.h>
-#include <unity/internal/ExceptionImpl.h>
+#include <unity/ExceptionImplBase.h>
 
 using namespace std;
 
@@ -27,7 +27,7 @@ namespace unity
 //! @cond
 
 Exception::
-Exception(shared_ptr<internal::ExceptionImpl> const& derived)
+Exception(shared_ptr<ExceptionImplBase> const& derived)
     : p_(derived)
 {
 }
@@ -59,7 +59,7 @@ reason() const
 }
 
 /**
-Returns a string describing the exception, including any exceptions that were nested or chained.
+\brief Returns a string describing the exception, including any exceptions that were nested or chained.
 
 Nested exceptions are indented according to their nesting level. If the exception contains chained
 exceptions, these are shown in oldest-to-newest order.
@@ -74,11 +74,11 @@ string
 Exception::
 to_string(std::string const& indent) const
 {
-    return p_->to_string(*this, 0, indent);
+    return p_->to_string(this, 0, indent);
 }
 
 /**
-Returns a string describing the exception, including any exceptions that were nested or chained.
+\brief Returns a string describing the exception, including any exceptions that were nested or chained.
 
 Nested exceptions are indented according to their nesting level. If the exception contains chained
 exceptions, these are shown in oldest-to-newest order.
@@ -97,11 +97,11 @@ string
 Exception::
 to_string(int indent_level, std::string const& indent) const
 {
-    return p_->to_string(*this, indent_level, indent);
+    return p_->to_string(this, indent_level, indent);
 }
 
 /**
-Adds an exception to the exception history chain.
+\brief Adds an exception to the exception history chain.
 
 \param earlier_exception The parameter must be a <code>nullptr</code> or a <code>std::exception_ptr</code>
 to an exception that was remembered earlier. This allows a sequence of exceptions to be remembered without
@@ -116,11 +116,11 @@ exception_ptr
 Exception::
 remember(exception_ptr earlier_exception)
 {
-    return p_->remember(this, earlier_exception);
+    return p_->set_earlier(earlier_exception);
 }
 
 /**
-Returns the previous exception.
+\brief Returns the previous exception.
 \return Returns the next-older remembered exception, or <code>nullptr</code>, if none.
 */
 
@@ -131,15 +131,15 @@ get_earlier() const noexcept
     return p_->get_earlier();
 }
 
-//! @cond
+/**
+\brief Returns a pointer to to the implementation instance.
+*/
 
-internal::ExceptionImpl*
+ExceptionImplBase*
 Exception::
 pimpl() const noexcept
 {
     return p_.get();
 }
-
-//! @endcond
 
 } // namespace unity
