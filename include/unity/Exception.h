@@ -19,7 +19,7 @@
 #ifndef UNITY_EXCEPTION_H
 #define UNITY_EXCEPTION_H
 
-#include <unity/config.h>
+#include <unity/SymbolExport.h>
 #include <unity/util/NonCopyable.h>
 
 #include <exception>
