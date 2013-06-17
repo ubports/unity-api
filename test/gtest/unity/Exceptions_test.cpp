@@ -17,7 +17,7 @@
  */
 
 #include <unity/UnityExceptions.h>
-#include <unity/internal/UnityExceptionsImpl.h>
+#include <unity/ExceptionImplBase.h>
 
 #include <gtest/gtest.h>
 
@@ -47,6 +47,15 @@ TEST(Exception, basic)
     EXPECT_EQ("unity::SyscallException: blah (errno = 0)", e3.to_string(0, "    "));
     EXPECT_EQ("        unity::SyscallException: blah (errno = 0)", e3.to_string(1, "        "));
     EXPECT_EQ("                unity::SyscallException: blah (errno = 0)", e3.to_string(2, "        "));
+
+    try
+    {
+        throw e;
+    }
+    catch (Exception& e)
+    {
+        EXPECT_STREQ("unity::SyscallException", e.what());
+    }
 }
 
 TEST(Exception, empty_reason)
@@ -250,19 +259,9 @@ TEST(Exception, history)
         exception_ptr ep = make_exception_ptr(e);
 
         InvalidArgumentException e2("");
-        exception_ptr ep2 = e2.remember(ep);
+        e2.remember(ep);
         EXPECT_EQ(e2.get_earlier(), ep);
     }
-
-    {
-        InvalidArgumentException e("");
-        exception_ptr ep = make_exception_ptr(e);
-
-        InvalidArgumentException e2("");
-        exception_ptr ep2 = e2.remember(ep);
-        EXPECT_EQ(e2.get_earlier(), ep);
-    }
-
 
     // Check that we are following the history chain.
 
@@ -296,7 +295,6 @@ TEST(Exception, history)
                       "            unity::InvalidArgumentException: Step 2", e.to_string());
         }
     }
-
 
     // Same test, but this time with nested exceptions in the history.
 
@@ -534,3 +532,105 @@ TEST(Exceptions, dynamic)
         delete ep;
     }
 }
+
+class StatelessException : public unity::Exception
+{
+public:
+    explicit StatelessException(std::string const& reason)
+        : Exception(make_shared<ExceptionImplBase>(this, reason))
+    {
+    }
+    explicit StatelessException(std::shared_ptr<ExceptionImplBase> const& derived)
+        : Exception(derived)
+    {
+    }
+    StatelessException(StatelessException const&) = default;
+    StatelessException& operator=(StatelessException const&) = default;
+    virtual ~StatelessException() noexcept {}
+
+    virtual char const* what() const noexcept override
+    {
+        return "StatelessException";
+    }
+
+    virtual std::exception_ptr self() const override
+    {
+        return make_exception_ptr(*this);
+    }
+
+};
+
+TEST(Derivation, stateless_derivation)
+{
+    StatelessException e("test");
+    EXPECT_EQ("test", e.reason());
+    EXPECT_STREQ("StatelessException", e.what());
+}
+
+namespace Impl
+{
+class StatefulExceptionImpl;
+}
+
+class StatefulException : public unity::Exception
+{
+public:
+    StatefulException(std::string const& reason, int state);
+    StatefulException(std::shared_ptr<ExceptionImplBase> const& derived)
+        : Exception(derived)
+    {
+    }
+    StatefulException(StatefulException const&) = default;
+    StatefulException& operator=(StatefulException const&) = default;
+    virtual ~StatefulException() noexcept {}
+
+    virtual char const* what() const noexcept override
+    {
+        return "StatefulException";
+    }
+
+    virtual std::exception_ptr self() const override
+    {
+        return make_exception_ptr(*this);
+    }
+
+};
+
+namespace Impl
+{
+
+class StatefulExceptionImpl : public unity::ExceptionImplBase
+{
+public:
+    StatefulExceptionImpl(StatefulException const* owner, string const& reason, int state)
+        : ExceptionImplBase(owner, reason + " state = " + std::to_string(state))
+        , state_(state)
+    {
+    }
+    int state_;
+};
+
+}
+
+StatefulException::
+StatefulException(std::string const& reason, int state)
+    : Exception(make_shared<Impl::StatefulExceptionImpl>(this, reason, state))
+{
+}
+
+TEST(Derivation, stateful_derivation)
+{
+    StatefulException e("test", 99);
+    EXPECT_EQ("test state = 99", e.reason());
+    EXPECT_STREQ("StatefulException", e.what());
+}
+
+#if 0
+
+TEST(Derivation, two_level_derivation)
+{
+    StatefulException e("test", 99);
+    EXPECT_EQ("test state = 99", e.reason());
+    EXPECT_STREQ("StatefulException", e.what());
+}
+#endif

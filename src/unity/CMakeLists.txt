@@ -4,6 +4,7 @@ add_subdirectory(util)
 
 set(UNITY_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/Exception.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/ExceptionImplBase.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/UnityExceptions.cpp
 )
 

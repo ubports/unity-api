@@ -20,6 +20,7 @@
 #define UNITY_EXCEPTION_H
 
 #include <unity/SymbolExport.h>
+#include <unity/util/NonCopyable.h>
 
 #include <exception>
 #include <string>
@@ -28,15 +29,7 @@
 namespace unity
 {
 
-namespace internal
-{
-class ExceptionImpl;
-}
-
-// TODO: It probably would be best to split this into a base and ImplBase, with the derived part in the internal
-//       namespace and declaring self(), the constructor, and pimpl(). That's because the Impl for the exception
-//       is in the internal namespace, so public API clients can use Exception instances, but they cannot
-//       create new derived exceptions because the Impl classes are internal to Unity.
+class ExceptionImplBase;
 
 /**
 \brief Abstract base class for all Unity exceptions.
@@ -126,14 +119,6 @@ public:
     */
     virtual char const* what() const noexcept = 0;
 
-    virtual std::string reason() const;
-
-    virtual std::string to_string(std::string const& indent = "    ") const;
-    virtual std::string to_string(int indent_level, std::string const& indent) const;
-
-    std::exception_ptr remember(std::exception_ptr earlier_exception);
-    std::exception_ptr get_earlier() const noexcept;
-
     /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.
 
@@ -142,15 +127,22 @@ public:
     */
     virtual std::exception_ptr self() const = 0;
 
+    std::string reason() const;
+
+    std::string to_string(std::string const& indent = "    ") const;
+    std::string to_string(int indent_level, std::string const& indent) const;
+
+    std::exception_ptr remember(std::exception_ptr earlier_exception);
+    std::exception_ptr get_earlier() const noexcept;
+
 protected:
     //! @cond
-    Exception(std::shared_ptr<internal::ExceptionImpl> const& derived);
-    internal::ExceptionImpl* pimpl() const noexcept;     // No need to reimplement in derived
+    Exception(std::shared_ptr<ExceptionImplBase> const& derived);
     //! @endcond
+    ExceptionImplBase* pimpl() const noexcept;
 
 private:
-    std::shared_ptr<internal::ExceptionImpl> p_;         // shared_ptr instead of unique_ptr because
-                                                         // exceptions must be copyable
+    std::shared_ptr<ExceptionImplBase> p_;    // shared_ptr instead of unique_ptr because exceptions must be copyable
 };
 
 } // namespace unity

@@ -34,12 +34,19 @@ create()
     return UPtr(new Daemon());
 }
 
+// This is covered by tests, but only when we are not building for coverage.
+// (Closing all file descriptors interferes with the coverage reporting.)
+
+// LCOV_EXCL_START
+
 void
 Daemon::
 close_fds() noexcept
 {
     p_->close_fds();
 }
+
+// LCOV_EXCL_STOP
 
 void
 Daemon::
