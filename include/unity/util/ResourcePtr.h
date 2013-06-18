@@ -179,8 +179,7 @@ after constructing a ResourcePtr this way returns <code>false</code>.
 */
 
 template<typename R, typename D>
-ResourcePtr<R, D>::
-ResourcePtr(D d)
+ResourcePtr<R, D>::ResourcePtr(D d)
     : delete_(d), initialized_(false)
 {
 }
@@ -223,8 +222,7 @@ ResourcePtr<int, decltype(&::close)> fd(::open("/somefile", O_RDONLY), ::close);
 */
 
 template<typename R, typename D>
-ResourcePtr<R, D>::
-ResourcePtr(R r, D d)
+ResourcePtr<R, D>::ResourcePtr(R r, D d)
     : resource_(r), delete_(d), initialized_(true)
 {
 }
@@ -238,8 +236,7 @@ The strong exception guarantee is preserved if it is provided by the resource.
 // TODO: Mark as nothrow if the resource has a nothrow move constructor or nothrow copy constructor
 
 template<typename R, typename D>
-ResourcePtr<R, D>::
-ResourcePtr(ResourcePtr<R, D>&& r)
+ResourcePtr<R, D>::ResourcePtr(ResourcePtr<R, D>&& r)
     : resource_(std::move(r.resource_)), delete_(r.delete_), initialized_(r.initialized_)
 {
     r.initialized_ = false; // Stop r from deleting its resource, if it held any. No need to lock: r is a temporary.
@@ -253,9 +250,7 @@ the value of <code>r.has_resource()</code> prior to the assignment.
 // TODO: document exception safety behavior
 
 template<typename R, typename D>
-ResourcePtr<R, D>&
-ResourcePtr<R, D>::
-operator=(ResourcePtr&& r)
+ResourcePtr<R, D>& ResourcePtr<R, D>::operator=(ResourcePtr&& r)
 {
     AutoLock lock(m_);
 
@@ -280,8 +275,7 @@ Destroys the ResourcePtr. If a resource is held, it calls the deleter for the cu
 */
 
 template<typename R, typename D>
-ResourcePtr<R, D>::
-~ResourcePtr() noexcept
+ResourcePtr<R, D>::~ResourcePtr() noexcept
 {
     try
     {
@@ -302,9 +296,7 @@ held by the ResourcePtr is unchanged.
 // TODO Split this into throw and no-throw versions depending on the underlying swap?
 
 template<typename R, typename D>
-void
-ResourcePtr<R, D>::
-swap(ResourcePtr& other)
+void ResourcePtr<R, D>::swap(ResourcePtr& other)
 {
     if (this == &other)   // This is necessary to avoid deadlock for self-swap
     {
@@ -335,8 +327,7 @@ held by the ResourcePtr is unchanged.
 // TODO Split this into throw and no-throw versions depending on the underlying swap?
 
 template<typename R, typename D>
-void
-swap(unity::util::ResourcePtr<R, D>& lhs, unity::util::ResourcePtr<R, D>& rhs)
+void swap(unity::util::ResourcePtr<R, D>& lhs, unity::util::ResourcePtr<R, D>& rhs)
 {
     lhs.swap(rhs);
 }
@@ -351,9 +342,7 @@ no attempt is made to call the deleter again for the same resource.)
 */
 
 template<typename R, typename D>
-void
-ResourcePtr<R, D>::
-reset(R r)
+void ResourcePtr<R, D>::reset(R r)
 {
     AutoLock lock(m_);
 
@@ -380,9 +369,7 @@ Releases ownership of the current resource without calling the deleter.
 
 template<typename R, typename D>
 inline
-R
-ResourcePtr<R, D>::
-release()
+R ResourcePtr<R, D>::release()
 {
     AutoLock lock(m_);
 
@@ -402,9 +389,7 @@ that is, no attempt is made to call the deleter again for this resource.
 */
 
 template<typename R, typename D>
-void
-ResourcePtr<R, D>::
-dealloc()
+void ResourcePtr<R, D>::dealloc()
 {
     AutoLock lock(m_);
 
@@ -427,9 +412,7 @@ If the resource's copy constructor throws an exception, that exception is propag
 
 template<typename R, typename D>
 inline
-R
-ResourcePtr<R, D>::
-get() const
+R ResourcePtr<R, D>::get() const
 {
     AutoLock lock(m_);
 
@@ -446,9 +429,7 @@ get() const
 
 template<typename R, typename D>
 inline
-bool
-ResourcePtr<R, D>::
-has_resource() const noexcept
+bool ResourcePtr<R, D>::has_resource() const noexcept
 {
     AutoLock lock(m_);
     return initialized_;
@@ -460,8 +441,7 @@ Synonym for has_resource().
 
 template<typename R, typename D>
 inline
-ResourcePtr<R, D>::
-operator bool() const noexcept
+ResourcePtr<R, D>::operator bool() const noexcept
 {
     return has_resource();
 }
@@ -472,9 +452,7 @@ operator bool() const noexcept
 
 template<typename R, typename D>
 inline
-D&
-ResourcePtr<R, D>::
-get_deleter() noexcept
+D& ResourcePtr<R, D>::get_deleter() noexcept
 {
     AutoLock lock(m_);
     return delete_;
@@ -486,9 +464,7 @@ get_deleter() noexcept
 
 template<typename R, typename D>
 inline
-D const&
-ResourcePtr<R, D>::
-get_deleter() const noexcept
+D const& ResourcePtr<R, D>::get_deleter() const noexcept
 {
     AutoLock lock(m_);
     return delete_;
@@ -506,9 +482,7 @@ If the underlying operator throws an exception, that exception is propagated to 
 */
 
 template<typename R, typename D>
-bool
-ResourcePtr<R, D>::
-operator==(ResourcePtr<R, D> const& rhs) const
+bool ResourcePtr<R, D>::operator==(ResourcePtr<R, D> const& rhs) const
 {
     if (this == &rhs)   // This is necessary to avoid deadlock for self-comparison
     {
@@ -543,9 +517,7 @@ If the underlying operator throws an exception, that exception is propagated to 
 
 template<typename R, typename D>
 inline
-bool
-ResourcePtr<R, D>::
-operator!=(ResourcePtr<R, D> const& rhs) const
+bool ResourcePtr<R, D>::operator!=(ResourcePtr<R, D> const& rhs) const
 {
     return !(*this == rhs);
 }
@@ -562,9 +534,7 @@ If the underlying operator throws an exception, that exception is propagated to 
 */
 
 template<typename R, typename D>
-bool
-ResourcePtr<R, D>::
-operator<(ResourcePtr<R, D> const& rhs) const
+bool ResourcePtr<R, D>::operator<(ResourcePtr<R, D> const& rhs) const
 {
     if (this == &rhs)   // This is necessary to avoid deadlock for self-comparison
     {
@@ -602,9 +572,7 @@ If the underlying operator throws an exception, that exception is propagated to 
 */
 
 template<typename R, typename D>
-bool
-ResourcePtr<R, D>::
-operator<=(ResourcePtr<R, D> const& rhs) const
+bool ResourcePtr<R, D>::operator<=(ResourcePtr<R, D> const& rhs) const
 {
     if (this == &rhs)   // This is necessary to avoid deadlock for self-comparison
     {
@@ -638,9 +606,7 @@ If the underlying operator throws an exception, that exception is propagated to 
 
 template<typename R, typename D>
 inline
-bool
-ResourcePtr<R, D>::
-operator>(ResourcePtr<R, D> const& rhs) const
+bool ResourcePtr<R, D>::operator>(ResourcePtr<R, D> const& rhs) const
 {
     return !(*this <= rhs);
 }
@@ -659,9 +625,7 @@ If the underlying operator throws an exception, that exception is propagated to 
 
 template<typename R, typename D>
 inline
-bool
-ResourcePtr<R, D>::
-operator>=(ResourcePtr<R, D> const& rhs) const
+bool ResourcePtr<R, D>::operator>=(ResourcePtr<R, D> const& rhs) const
 {
     return !(*this < rhs);
 }

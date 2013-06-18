@@ -27,9 +27,7 @@ namespace unity
 namespace util
 {
 
-Daemon::UPtr
-Daemon::
-create()
+Daemon::UPtr Daemon::create()
 {
     return UPtr(new Daemon());
 }
@@ -39,32 +37,24 @@ create()
 
 // LCOV_EXCL_START
 
-void
-Daemon::
-close_fds() noexcept
+void Daemon::close_fds() noexcept
 {
     p_->close_fds();
 }
 
 // LCOV_EXCL_STOP
 
-void
-Daemon::
-reset_signals() noexcept
+void Daemon::reset_signals() noexcept
 {
     p_->reset_signals();
 }
 
-void
-Daemon::
-set_umask(mode_t mask) noexcept
+void Daemon::set_umask(mode_t mask) noexcept
 {
     p_->set_umask(mask);
 }
 
-void
-Daemon::
-set_working_directory(string const& working_directory)
+void Daemon::set_working_directory(string const& working_directory)
 {
     p_->set_working_directory(working_directory);
 }
@@ -73,21 +63,17 @@ set_working_directory(string const& working_directory)
 // Whether to close open file descriptors, reset signals to their defaults, change the umask,
 // or change the working directory is determined by the setters above.
 
-void
-Daemon::
-daemonize_me()
+void Daemon::daemonize_me()
 {
     p_->daemonize_me();
 }
 
-Daemon::
-Daemon()
+Daemon::Daemon()
     : p_(new internal::DaemonImpl())
 {
 }
 
-Daemon::
-~Daemon() noexcept
+Daemon::~Daemon() noexcept
 {
 }
 

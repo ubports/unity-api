@@ -44,8 +44,7 @@ namespace
 //
 
 template<typename T>
-vector<T>
-read_file(string const& filename)
+vector<T> read_file(string const& filename)
 {
     util::ResourcePtr<int, std::function<void(int)>> fd(::open(filename.c_str(), O_RDONLY),
                                                         [](int fd) { if (fd != -1) ::close(fd); });

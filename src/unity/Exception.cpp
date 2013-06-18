@@ -26,21 +26,16 @@ namespace unity
 
 //! @cond
 
-Exception::
-Exception(shared_ptr<ExceptionImplBase> const& derived)
+Exception::Exception(shared_ptr<ExceptionImplBase> const& derived)
     : p_(derived)
 {
 }
 
-Exception::
-Exception(Exception const&) = default;
+Exception::Exception(Exception const&) = default;
 
-Exception&
-Exception::
-operator=(Exception const&) = default;
+Exception& Exception::operator=(Exception const&) = default;
 
-Exception::
-~Exception() noexcept = default;
+Exception::~Exception() noexcept = default;
 
 //! @endcond
 
@@ -51,9 +46,7 @@ Derived classes should include any other state information, such as the value of
 other relevant detail in the <code>reason</code> string they pass to the protected constructor.
 */
 
-string
-Exception::
-reason() const
+string Exception::reason() const
 {
     return p_->reason();
 }
@@ -70,9 +63,7 @@ exceptions, these are shown in oldest-to-newest order.
 \note The default implementation of this member function calls <code>to_string(0, indent)</code>.
 */
 
-string
-Exception::
-to_string(std::string const& indent) const
+string Exception::to_string(std::string const& indent) const
 {
     return p_->to_string(this, 0, indent);
 }
@@ -93,9 +84,7 @@ exceptions, these are shown in oldest-to-newest order.
       unless they want to change the formatting of the returned string.
 */
 
-string
-Exception::
-to_string(int indent_level, std::string const& indent) const
+string Exception::to_string(int indent_level, std::string const& indent) const
 {
     return p_->to_string(this, indent_level, indent);
 }
@@ -112,9 +101,7 @@ throw something like <code>ShutdownException</code>.
 \return A <code>std::exception_ptr</code> to <code>this</code>.
 */
 
-exception_ptr
-Exception::
-remember(exception_ptr earlier_exception)
+exception_ptr Exception::remember(exception_ptr earlier_exception)
 {
     return p_->set_earlier(earlier_exception);
 }
@@ -124,9 +111,7 @@ remember(exception_ptr earlier_exception)
 \return Returns the next-older remembered exception, or <code>nullptr</code>, if none.
 */
 
-exception_ptr
-Exception::
-get_earlier() const noexcept
+exception_ptr Exception::get_earlier() const noexcept
 {
     return p_->get_earlier();
 }
@@ -135,9 +120,7 @@ get_earlier() const noexcept
 \brief Returns a pointer to to the implementation instance.
 */
 
-ExceptionImplBase*
-Exception::
-pimpl() const noexcept
+ExceptionImplBase* Exception::pimpl() const noexcept
 {
     return p_.get();
 }

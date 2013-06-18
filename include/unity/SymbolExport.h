@@ -22,9 +22,9 @@
 #define UNITY_HELPER_DLL_EXPORT __attribute__ ((visibility ("default")))
 
 #ifdef UNITY_DLL_EXPORTS                          // Defined if we are building the Unity API library
-    #define UNITY_API UNITY_HELPER_DLL_EXPORT
+#    define UNITY_API UNITY_HELPER_DLL_EXPORT
 #else
-    #define UNITY_API /**/
+#    define UNITY_API /**/
 #endif
 
 #endif
