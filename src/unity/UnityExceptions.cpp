@@ -24,105 +24,78 @@ using namespace std;
 namespace unity
 {
 
-InvalidArgumentException::
-InvalidArgumentException(string const& reason)
+InvalidArgumentException::InvalidArgumentException(string const& reason)
     : Exception(make_shared<ExceptionImplBase>(this, reason))
 {
 }
 
-InvalidArgumentException::
-InvalidArgumentException(InvalidArgumentException const&) = default;
+InvalidArgumentException::InvalidArgumentException(InvalidArgumentException const&) = default;
 
 //! @cond
 
-InvalidArgumentException&
-InvalidArgumentException::
-operator=(InvalidArgumentException const&) = default;
+InvalidArgumentException& InvalidArgumentException::operator=(InvalidArgumentException const&) = default;
 
 
-InvalidArgumentException::
-~InvalidArgumentException() noexcept = default;
+InvalidArgumentException::~InvalidArgumentException() noexcept = default;
 
 //! @endcond
 
-char const*
-InvalidArgumentException::
-what() const noexcept
+char const* InvalidArgumentException::what() const noexcept
 {
     return "unity::InvalidArgumentException";
 }
 
-exception_ptr
-InvalidArgumentException::
-self() const
+exception_ptr InvalidArgumentException::self() const
 {
     return make_exception_ptr(*this);
 }
 
-LogicException::
-LogicException(string const& reason)
+LogicException::LogicException(string const& reason)
     : Exception(make_shared<ExceptionImplBase>(this, reason))
 {
 }
 
-LogicException::
-LogicException(LogicException const&) = default;
+LogicException::LogicException(LogicException const&) = default;
 
 //! @cond
 
-LogicException&
-LogicException::
-operator=(LogicException const&) = default;
+LogicException& LogicException::operator=(LogicException const&) = default;
 
-LogicException::
-~LogicException() noexcept = default;
+LogicException::~LogicException() noexcept = default;
 
 //! @endcond
 
-char const*
-LogicException::
-what() const noexcept
+char const* LogicException::what() const noexcept
 {
     return "unity::LogicException";
 }
 
-exception_ptr
-LogicException::
-self() const
+exception_ptr LogicException::self() const
 {
     return make_exception_ptr(*this);
 }
 
-ShutdownException::
-ShutdownException(string const& reason)
+ShutdownException::ShutdownException(string const& reason)
     : Exception(make_shared<ExceptionImplBase>(this, reason))
 {
 }
 
-ShutdownException::
-ShutdownException(ShutdownException const&) = default;
+ShutdownException::ShutdownException(ShutdownException const&) = default;
 
 //! @cond
 
-ShutdownException&
-ShutdownException::
-operator=(ShutdownException const&) = default;
+ShutdownException& ShutdownException::operator=(ShutdownException const&) = default;
 
-ShutdownException::
-~ShutdownException() noexcept = default;
+ShutdownException::~ShutdownException() noexcept = default;
 
 //! @endcond
 
-char const*
-ShutdownException::
-what() const noexcept
+char const* ShutdownException::what() const noexcept
 {
     return "unity::ShutdownException";
 }
 
-exception_ptr
-ShutdownException::
-self() const
+exception_ptr ShutdownException::self() const
 {
     return make_exception_ptr(*this);
 }
@@ -143,43 +116,33 @@ public:
 
 }
 
-FileException::
-FileException(string const& reason, int err)
+FileException::FileException(string const& reason, int err)
     : Exception(make_shared<internal::FileExceptionImpl>(this, reason, err))
 {
 }
 
-FileException::
-FileException(FileException const&) = default;
+FileException::FileException(FileException const&) = default;
 
 //! @cond
 
-FileException&
-FileException::
-operator=(FileException const&) = default;
+FileException& FileException::operator=(FileException const&) = default;
 
-FileException::
-~FileException() noexcept = default;
+FileException::~FileException() noexcept = default;
 
 //! @endcond
 
-char const*
-FileException::
-what() const noexcept
+char const* FileException::what() const noexcept
 {
     return "unity::FileException";
 }
 
 int
-FileException::
-error() const noexcept
+FileException::error() const noexcept
 {
     return dynamic_cast<const internal::FileExceptionImpl*>(pimpl())->err_;
 }
 
-exception_ptr
-FileException::
-self() const
+exception_ptr FileException::self() const
 {
     return make_exception_ptr(*this);
 }
@@ -200,77 +163,57 @@ public:
 
 }
 
-SyscallException::
-SyscallException(string const& reason, int err)
+SyscallException::SyscallException(string const& reason, int err)
     : Exception(make_shared<internal::SyscallExceptionImpl>(this, reason, err))
 {
 }
 
-SyscallException::
-SyscallException(SyscallException const&) = default;
+SyscallException::SyscallException(SyscallException const&) = default;
 
 //! @cond
 
-SyscallException&
-SyscallException::
-operator=(SyscallException const&) = default;
+SyscallException& SyscallException::operator=(SyscallException const&) = default;
 
-SyscallException::
-~SyscallException() noexcept = default;
+SyscallException::~SyscallException() noexcept = default;
 
 //! @endcond
 
-char const*
-SyscallException::
-what() const noexcept
+char const* SyscallException::what() const noexcept
 {
     return "unity::SyscallException";
 }
 
-int
-SyscallException::
-error() const noexcept
+int SyscallException::error() const noexcept
 {
     return dynamic_cast<const internal::SyscallExceptionImpl*>(pimpl())->err_;
 }
 
-exception_ptr
-SyscallException::
-self() const
+exception_ptr SyscallException::self() const
 {
     return make_exception_ptr(*this);
 }
 
-ResourceException::
-ResourceException(string const& reason)
+ResourceException::ResourceException(string const& reason)
     : Exception(make_shared<ExceptionImplBase>(this, reason))
 {
 }
 
-ResourceException::
-ResourceException(ResourceException const&) = default;
+ResourceException::ResourceException(ResourceException const&) = default;
 
 //! @cond
 
-ResourceException&
-ResourceException::
-operator=(ResourceException const&) = default;
+ResourceException& ResourceException::operator=(ResourceException const&) = default;
 
-ResourceException::
-~ResourceException() noexcept = default;
+ResourceException::~ResourceException() noexcept = default;
 
 //! @endcond
 
-char const*
-ResourceException::
-what() const noexcept
+char const* ResourceException::what() const noexcept
 {
     return "unity::ResourceException";
 }
 
-exception_ptr
-ResourceException::
-self() const
+exception_ptr ResourceException::self() const
 {
     return make_exception_ptr(*this);
 }

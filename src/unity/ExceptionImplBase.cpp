@@ -53,16 +53,14 @@ public:
 \param reason Further details about the cause of the exception.
 */
 
-ExceptionImplBase::
-ExceptionImplBase(Exception const* owner, string const& reason)
+ExceptionImplBase::ExceptionImplBase(Exception const* owner, string const& reason)
     : p_(make_shared<internal::ExceptionData>(owner, reason))
 {
 }
 
 //! @cond
 
-ExceptionImplBase::
-~ExceptionImplBase() noexcept = default;
+ExceptionImplBase::~ExceptionImplBase() noexcept = default;
 
 namespace
 {
@@ -71,8 +69,7 @@ namespace
 // Return the margin string for the indent level and indent.
 //
 
-string
-get_margin(int indent_level, string const& indent)
+string get_margin(int indent_level, string const& indent)
 {
     string margin;
     for (int i = 0; i < indent_level; ++i)
@@ -86,8 +83,7 @@ get_margin(int indent_level, string const& indent)
 // Follow the nested exceptions that were rethrown along the call stack, printing them into s.
 //
 
-void
-print_name_and_reason(string& s, nested_exception const* nested)
+void print_name_and_reason(string& s, nested_exception const* nested)
 {
     // Add the what() string if this is a std::exception.
 
@@ -124,8 +120,7 @@ print_name_and_reason(string& s, nested_exception const* nested)
     }
 }
 
-void
-follow_nested(string& s, nested_exception const* nested, int indent_level, std::string const& indent)
+void follow_nested(string& s, nested_exception const* nested, int indent_level, std::string const& indent)
 {
     if (nested->nested_ptr())
     {
@@ -167,8 +162,7 @@ follow_nested(string& s, nested_exception const* nested, int indent_level, std::
 // Follow the history chain and print each exception in the chain.
 //
 
-void
-follow_history(string& s, int& count, unity::Exception const* e, int indent_level, std::string const& indent)
+void follow_history(string& s, int& count, unity::Exception const* e, int indent_level, std::string const& indent)
 {
     if (!e->get_earlier())
     {
@@ -211,9 +205,7 @@ Derived classes should include any other state information, such as the value of
 other relevant detail in the <code>reason</code> string they pass to the protected constructor.
 */
 
-string
-ExceptionImplBase::
-reason() const
+string ExceptionImplBase::reason() const
 {
     return p_->reason_;
 }
@@ -232,9 +224,7 @@ exceptions, these are shown in oldest-to-newest order.
 \return The string describing the exception.
 */
 
-string
-ExceptionImplBase::
-to_string(nested_exception const* nested, int indent_level, string const& indent) const
+string ExceptionImplBase::to_string(nested_exception const* nested, int indent_level, string const& indent) const
 {
     string margin = get_margin(indent_level, indent);
     string s = margin;
@@ -282,9 +272,7 @@ throw something like <code>ShutdownException</code>.
 \return A <code>std::exception_ptr</code> to <code>this</code>.
 */
 
-exception_ptr
-ExceptionImplBase::
-set_earlier(exception_ptr earlier_exception)
+exception_ptr ExceptionImplBase::set_earlier(exception_ptr earlier_exception)
 {
     // Doesn't prevent loops, but protects against accidental self-assignment.
 
@@ -300,9 +288,7 @@ set_earlier(exception_ptr earlier_exception)
 \return Returns the next-older remembered exception, or <code>nullptr</code>, if none.
 */
 
-exception_ptr
-ExceptionImplBase::
-get_earlier() const noexcept
+exception_ptr ExceptionImplBase::get_earlier() const noexcept
 {
     return p_->earlier_;
 }

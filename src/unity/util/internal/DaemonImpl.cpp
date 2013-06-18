@@ -42,8 +42,7 @@ namespace util
 namespace internal
 {
 
-DaemonImpl::
-DaemonImpl()
+DaemonImpl::DaemonImpl()
     : close_fds_(false), reset_signals_(false), set_umask_(false)
 {
 }
@@ -53,33 +52,25 @@ DaemonImpl()
 // This is tested, but only when coverage is disabled, because closing
 // file descriptors interferes with writing the coverage results.
 
-void
-DaemonImpl::
-close_fds() noexcept
+void DaemonImpl::close_fds() noexcept
 {
     close_fds_ = true;
 }
 
 // LCOV_EXCL_STOP
 
-void
-DaemonImpl::
-reset_signals() noexcept
+void DaemonImpl::reset_signals() noexcept
 {
     reset_signals_ = true;
 }
 
-void
-DaemonImpl::
-set_umask(mode_t mask) noexcept
+void DaemonImpl::set_umask(mode_t mask) noexcept
 {
     set_umask_ = true;
     umask_ = mask;
 }
 
-void
-DaemonImpl::
-set_working_directory(string const& working_directory)
+void DaemonImpl::set_working_directory(string const& working_directory)
 {
     working_directory_ = working_directory;
 }
@@ -88,9 +79,7 @@ set_working_directory(string const& working_directory)
 // Whether to close open file descriptors, reset signals to their defaults, change the umask,
 // or change the working directory is determined by the setters above.
 
-void
-DaemonImpl::
-daemonize_me()
+void DaemonImpl::daemonize_me()
 {
     // Let's start by changing the working directory because that is the most likely thing to fail. If it does
     // fail, we have not modified any other properties of the calling process.
@@ -237,9 +226,7 @@ daemonize_me()
 
 // Close all open file descriptors
 
-void
-DaemonImpl::
-close_open_files() noexcept
+void DaemonImpl::close_open_files() noexcept
 {
     // We close the standard file descriptors first. This allows opendir() to work if we need to close
     // other files and are at the descriptor limit already.

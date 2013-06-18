@@ -624,13 +624,3 @@ TEST(Derivation, stateful_derivation)
     EXPECT_EQ("test state = 99", e.reason());
     EXPECT_STREQ("StatefulException", e.what());
 }
-
-#if 0
-
-TEST(Derivation, two_level_derivation)
-{
-    StatefulException e("test", 99);
-    EXPECT_EQ("test state = 99", e.reason());
-    EXPECT_STREQ("StatefulException", e.what());
-}
-#endif
