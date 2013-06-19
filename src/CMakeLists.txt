@@ -9,6 +9,8 @@ add_subdirectory(unity)
 
 set(UNITY_API_LIB_OBJ ${UNITY_API_LIB}-obj)
 add_library(${UNITY_API_LIB_OBJ} OBJECT ${UNITY_API_LIB_SRC})
+set_target_properties(${UNITY_API_LIB_OBJ} PROPERTIES COMPILE_FLAGS "-fPIC")
+add_pch(pch/unityapi_pch.hh ${UNITY_API_LIB_OBJ})
 
 # Use the object files to make the shared library.
 set(UNITY_API_SOVERSION 0)
@@ -19,7 +21,6 @@ set_target_properties(${UNITY_API_LIB} PROPERTIES
 )
 
 # Use the object files to make the static library. We add -fPIC to avoid compiling a second time.
-set_source_files_properties(${UNITY_API_LIB_SRC} PROPERTIES COMPILE_FLAGS "-fPIC")
 add_library(${UNITY_API_STATIC_LIB} STATIC $<TARGET_OBJECTS:${UNITY_API_LIB_OBJ}>)
 set_target_properties(${UNITY_API_STATIC_LIB} PROPERTIES OUTPUT_NAME ${UNITY_API_LIB})
 
