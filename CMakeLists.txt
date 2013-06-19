@@ -30,6 +30,10 @@ if(cmake_build_type_lower MATCHES coverage)
   set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} --coverage" )
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} --coverage" )
 
+  # We add -g when building with coverage so valgrind reports line numbers.
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g" )
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g" )
+
   # This allows us to skip the file descriptor closing test in Daemon_test
   # when coverage is enabled. (Closing file descriptors
   # in the test messes with coverage reporting.)
@@ -42,14 +46,18 @@ set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,-z,defs")
 
 # Static C++ checks
 
-set(cppcheck_flags --inline-suppr --enable=all -q --error-exitcode=2)
-set(cppcheck_flags ${cppcheck_flags} --template '{file}({line}): {severity} ({id}): {message}')
-
-add_custom_target(cppcheck COMMAND cppcheck ${cppcheck_flags}
-    ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/test
-    ${CMAKE_BINARY_DIR}/test
-)
+find_program(CPPCHECK_COMMAND NAMES cppcheck)
+if (CPPCHECK_COMMAND)
+    set(CPPCHECK_COMMAND_OPTIONS --check-config --inline-suppr --enable=all -q --error-exitcode=2)
+    set(CPPCHECK_COMMAND_OPTIONS ${CPPCHECK_COMMAND_OPTIONS} --template '{file}({line}): {severity} ({id}): {message}')
+    add_custom_target(cppcheck COMMAND ${CPPCHECK_COMMAND} ${CPPCHECK_COMMAND_OPTIONS}
+        ${CMAKE_SOURCE_DIR}/src
+        ${CMAKE_SOURCE_DIR}/test
+        ${CMAKE_BINARY_DIR}/test
+    )
+else()
+    message(WARNING "Cannot find cppcheck: cppcheck target will not be available")
+endif()
 
 #
 # Definitions for testing with valgrind.
@@ -118,6 +126,8 @@ set(LIBS ${UNITY_API_LIB} ${OTHER_API_LIBS})
 
 # Library install prefix
 set(LIB_INSTALL_PREFIX lib/${CMAKE_LIBRARY_ARCHITECTURE})
+
+set(LIBDIR ${CMAKE_INSTALL_PREFIX}/${LIB_INSTALL_PREFIX} CACHE PATH "Destination install dir for the library")
 
 # Tests
 include(CTest)

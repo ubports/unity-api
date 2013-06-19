@@ -19,7 +19,7 @@
 #ifndef UNITY_UTIL_INIPARSER_H
 #define UNITY_UTIL_INIPARSER_H
 
-#include <unity/config.h>
+#include <unity/SymbolExport.h>
 
 #include<string>
 #include<vector>

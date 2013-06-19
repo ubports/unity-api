@@ -2,15 +2,15 @@
  * Copyright (C) 2013 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as
+ * it under the terms of the Lesser GNU General Public License version 3 as
  * published by the Free Software Foundation.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Lesser GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
+ * You should have received a copy of the Lesser GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authored by: Michi Henning <michi.henning@canonical.com>
@@ -39,8 +39,7 @@ using namespace unity::util;
 
 char const* error_file = "Daemon_test.out";
 
-int
-clear_error_file()
+int clear_error_file()
 {
     mode_t old_umask = umask(0);   // Make sure we have mode rw-rw-rw for the file, otherwise different
                                    // people running the test can have problems.
@@ -55,8 +54,7 @@ clear_error_file()
 // so we cannot keep the error file open while the various tests are running. We use a raw write() system
 // call to write the messages, so there are no buffering issues, even if we crash unexpectedly.
 
-void
-error(string const& file, int line, string const& msg)
+void error(string const& file, int line, string const& msg)
 {
     int fd = open(error_file, O_APPEND | O_WRONLY);
     if (fd == -1)
@@ -79,8 +77,7 @@ error(string const& file, int line, string const& msg)
 
 // Check that the standard three file descriptors are connected to /dev/null.
 
-void
-check_std_descriptors()
+void check_std_descriptors()
 {
     struct stat null_st;
     if (stat("/dev/null", &null_st) == -1)
@@ -120,15 +117,13 @@ check_std_descriptors()
 
 // Check if fd is a descriptor for an open file.
 
-bool
-is_open(int fd)
+bool is_open(int fd)
 {
     struct stat st;
     return fstat(fd, &st) != -1;
 }
 
-string
-get_cwd()
+string get_cwd()
 {
     char* wd = get_current_dir_name();
     if (wd == nullptr)
