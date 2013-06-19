@@ -20,7 +20,7 @@
 #ifndef UNITY_SHELL_LAUNCHER_LAUNCHERITEM_H
 #define UNITY_SHELL_LAUNCHER_LAUNCHERITEM_H
 
-#include <unity/config.h>
+#include <unity/SymbolExport.h>
 
 #include <QtCore/QObject>
 

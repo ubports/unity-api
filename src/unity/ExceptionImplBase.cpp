@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Canonical Ltd
+ * Copyright (C) 2012 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -16,7 +16,7 @@
  * Authored by: Michi Henning <michi.henning@canonical.com>
  */
 
-#include <unity/internal/ExceptionImpl.h>
+#include <unity/ExceptionImplBase.h>
 #include <unity/Exception.h>
 
 using namespace std;
@@ -27,21 +27,40 @@ namespace unity
 namespace internal
 {
 
-ExceptionImpl::
-ExceptionImpl(string const& reason)
-    : reason_(reason)
+class ExceptionData
+{
+public:
+    ExceptionData(Exception const* owner, string const& reason)
+        : owner_(owner)
+        , reason_(reason)
+        , earlier_(nullptr)
+    {
+    }
+
+    ExceptionData(ExceptionData const&) = delete;
+    ExceptionData& operator=(ExceptionData const&) = delete;
+
+    Exception const* owner_;
+    string reason_;
+    std::exception_ptr earlier_;
+};
+
+}
+
+/**
+\brief Instantiates an implementation instance for a unity::Exception.
+\param owner This must be set to the `this` pointer of the exception that owns this implementation.
+\param reason Further details about the cause of the exception.
+*/
+
+ExceptionImplBase::ExceptionImplBase(Exception const* owner, string const& reason)
+    : p_(make_shared<internal::ExceptionData>(owner, reason))
 {
 }
 
-ExceptionImpl::
-~ExceptionImpl() noexcept = default;
+//! @cond
 
-string
-ExceptionImpl::
-reason() const
-{
-    return reason_;
-}
+ExceptionImplBase::~ExceptionImplBase() noexcept = default;
 
 namespace
 {
@@ -50,8 +69,7 @@ namespace
 // Return the margin string for the indent level and indent.
 //
 
-string
-get_margin(int indent_level, string const& indent)
+string get_margin(int indent_level, string const& indent)
 {
     string margin;
     for (int i = 0; i < indent_level; ++i)
@@ -65,12 +83,11 @@ get_margin(int indent_level, string const& indent)
 // Follow the nested exceptions that were rethrown along the call stack, printing them into s.
 //
 
-void
-print_name_and_reason(string& s, nested_exception const& nested)
+void print_name_and_reason(string& s, nested_exception const* nested)
 {
     // Add the what() string if this is a std::exception.
 
-    std::exception const* std_exception = dynamic_cast<std::exception const*>(&nested);
+    std::exception const* std_exception = dynamic_cast<std::exception const*>(nested);
     if (std_exception)
     {
         s += std_exception->what();
@@ -78,7 +95,7 @@ print_name_and_reason(string& s, nested_exception const& nested)
 
     // Add the reason if this is a unity::Exception.
 
-    unity::Exception const* unity_exception = dynamic_cast<unity::Exception const*>(&nested);
+    unity::Exception const* unity_exception = dynamic_cast<unity::Exception const*>(nested);
     if (unity_exception)
     {
         string reason = unity_exception->reason();
@@ -103,17 +120,16 @@ print_name_and_reason(string& s, nested_exception const& nested)
     }
 }
 
-void
-follow_nested(string& s, nested_exception const& nested, int indent_level, std::string const& indent)
+void follow_nested(string& s, nested_exception const* nested, int indent_level, std::string const& indent)
 {
-    if (nested.nested_ptr())
+    if (nested->nested_ptr())
     {
         string margin = get_margin(indent_level, indent);
 
         s += ":\n";
         try
         {
-            nested.rethrow_nested();
+            nested->rethrow_nested();
         }
         catch (std::nested_exception const& e)
         {
@@ -125,8 +141,8 @@ follow_nested(string& s, nested_exception const& nested, int indent_level, std::
             else
             {
                 s += margin + indent;
-                print_name_and_reason(s, e);
-                follow_nested(s, e, indent_level + 1, indent);
+                print_name_and_reason(s, &e);
+                follow_nested(s, &e, indent_level + 1, indent);
             }
         }
         catch (std::exception const& e)
@@ -146,10 +162,9 @@ follow_nested(string& s, nested_exception const& nested, int indent_level, std::
 // Follow the history chain and print each exception in the chain.
 //
 
-void
-follow_history(string& s, int& count, unity::Exception const& e, int indent_level, std::string const& indent)
+void follow_history(string& s, int& count, unity::Exception const* e, int indent_level, std::string const& indent)
 {
-    if (!e.get_earlier())
+    if (!e->get_earlier())
     {
         count = 1;  // We have reached the oldest exception; set exception generation count and terminate recursion.
     }
@@ -157,7 +172,7 @@ follow_history(string& s, int& count, unity::Exception const& e, int indent_leve
     {
         try
         {
-            rethrow_exception(e.get_earlier());
+            rethrow_exception(e->get_earlier());
         }
         catch (unity::Exception const& e)
         {
@@ -165,7 +180,7 @@ follow_history(string& s, int& count, unity::Exception const& e, int indent_leve
             // count and print it as a generation number for the exception information.
             // A bit like the "kicks" in "Inception", except that the deepest level is level 1...
 
-            follow_history(s, count, e, indent_level, indent);
+            follow_history(s, count, &e, indent_level, indent);
         }
         ++count;
     }
@@ -181,13 +196,39 @@ follow_history(string& s, int& count, unity::Exception const& e, int indent_leve
 
 } // namespace
 
-string
-ExceptionImpl::
-to_string(nested_exception const& nested, int indent_level, string const& indent) const
+//! @endcond
+
+/**
+\brief Returns the reason set by the derived class's constructor (empty string if none).
+
+Derived classes should include any other state information, such as the value of data members or
+other relevant detail in the <code>reason</code> string they pass to the protected constructor.
+*/
+
+string ExceptionImplBase::reason() const
+{
+    return p_->reason_;
+}
+
+/**
+\brief Returns a string describing the exception, including any exceptions that were nested or chained.
+
+Nested exceptions are indented according to their nesting level. If the exception contains chained
+exceptions, these are shown in oldest-to-newest order.
+
+\param nested This must be set to the `this` pointer of the exception that owns this implementation.
+
+\param indent_level This controls the indent level. The value <code>0</code> indicates
+       the outermost level (no indent).
+\param indent This controls the amount of indenting per level. The default indent is four spaces.
+\return The string describing the exception.
+*/
+
+string ExceptionImplBase::to_string(nested_exception const* nested, int indent_level, string const& indent) const
 {
     string margin = get_margin(indent_level, indent);
     string s = margin;
-    s += what();
+    s += dynamic_cast<const std::exception*>(nested)->what();
 
     string r = reason();
     if (!r.empty())
@@ -197,7 +238,7 @@ to_string(nested_exception const& nested, int indent_level, string const& indent
 
     // Check whether there is an exception history and print each exception in the history.
 
-    unity::Exception const* unity_exception(dynamic_cast<unity::Exception const*>(&nested));
+    unity::Exception const* unity_exception(dynamic_cast<unity::Exception const*>(nested));
     if (unity_exception && unity_exception->get_earlier())
     {
         s += "\n" + margin + indent + "Exception history:";
@@ -208,7 +249,7 @@ to_string(nested_exception const& nested, int indent_level, string const& indent
         catch (unity::Exception const& e)
         {
             int count;
-            follow_history(s, count, e, indent_level + 2, indent);
+            follow_history(s, count, &e, indent_level + 2, indent);
         }
     }
 
@@ -219,26 +260,37 @@ to_string(nested_exception const& nested, int indent_level, string const& indent
     return s;
 }
 
-exception_ptr
-ExceptionImpl::
-remember(Exception const* env, exception_ptr earlier_exception)
+/**
+\brief Adds an exception to the exception history chain.
+
+\param earlier_exception The parameter must be a <code>nullptr</code> or a <code>std::exception_ptr</code>
+to an exception that was remembered earlier. This allows a sequence of exceptions to be remembered without
+having to throw them and is useful for example, in shutdown scenarios where any one of a sequence of steps
+can fail, but we want to continue and try all the following steps and only throw after all of them have been
+tried. In this case, each step that fails can add itself to the sequence of remembered exceptions, and finally
+throw something like <code>ShutdownException</code>.
+\return A <code>std::exception_ptr</code> to <code>this</code>.
+*/
+
+exception_ptr ExceptionImplBase::set_earlier(exception_ptr earlier_exception)
 {
     // Doesn't prevent loops, but protects against accidental self-assignment.
 
-    if (previous_ != earlier_exception)
+    if (p_->earlier_ != earlier_exception)
     {
-        previous_ = earlier_exception;
+        p_->earlier_ = earlier_exception;
     }
-    return env->self();
+    return p_->owner_->self();
 }
 
-exception_ptr
-ExceptionImpl::
-get_earlier() const noexcept
+/**
+\brief Returns the previous exception.
+\return Returns the next-older remembered exception, or <code>nullptr</code>, if none.
+*/
+
+exception_ptr ExceptionImplBase::get_earlier() const noexcept
 {
-    return previous_;
+    return p_->earlier_;
 }
-
-} // namespace internal
 
 } // namespace unity

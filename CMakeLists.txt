@@ -46,14 +46,18 @@ set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,-z,defs")
 
 # Static C++ checks
 
-set(cppcheck_flags --check-config --inline-suppr --enable=all -q --error-exitcode=2)
-set(cppcheck_flags ${cppcheck_flags} --template '{file}({line}): {severity} ({id}): {message}')
-
-add_custom_target(cppcheck COMMAND cppcheck ${cppcheck_flags}
-    ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/test
-    ${CMAKE_BINARY_DIR}/test
-)
+find_program(CPPCHECK_COMMAND NAMES cppcheck)
+if (CPPCHECK_COMMAND)
+    set(CPPCHECK_COMMAND_OPTIONS --check-config --inline-suppr --enable=all -q --error-exitcode=2)
+    set(CPPCHECK_COMMAND_OPTIONS ${CPPCHECK_COMMAND_OPTIONS} --template '{file}({line}): {severity} ({id}): {message}')
+    add_custom_target(cppcheck COMMAND ${CPPCHECK_COMMAND} ${CPPCHECK_COMMAND_OPTIONS}
+        ${CMAKE_SOURCE_DIR}/src
+        ${CMAKE_SOURCE_DIR}/test
+        ${CMAKE_BINARY_DIR}/test
+    )
+else()
+    message(WARNING "Cannot find cppcheck: cppcheck target will not be available")
+endif()
 
 #
 # Definitions for testing with valgrind.
@@ -113,14 +117,23 @@ set(UNITY_API_VERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}.${UNITY_API_MICRO}"
 # API library
 set(UNITY_API_LIB unity-api)
 
+# Static version for testing
+set(UNITY_API_STATIC_LIB unity-api-static)
+
 # Other libraries we depend on
 set(OTHER_API_LIBS )
 
 # All the libraries we need to link a normal executable that uses the Unity API
 set(LIBS ${UNITY_API_LIB} ${OTHER_API_LIBS})
 
+# All the libraries we need to link a gtest executable. (We link the tests against a static version
+# so we can do whitebox testing on internal classes.
+set(TESTLIBS ${UNITY_API_STATIC_LIB} ${OTHER_API_LIBS})
+
 # Library install prefix
 set(LIB_INSTALL_PREFIX lib/${CMAKE_LIBRARY_ARCHITECTURE})
+
+set(LIBDIR ${CMAKE_INSTALL_PREFIX}/${LIB_INSTALL_PREFIX} CACHE PATH "Destination install dir for the library")
 
 # Tests
 include(CTest)

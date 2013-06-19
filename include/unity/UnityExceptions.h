@@ -2,15 +2,15 @@
  * Copyright (C) 2013 Canonical Ltd
  *
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as
+ * it under the terms of the Lesser GNU General Public License version 3 as
  * published by the Free Software Foundation.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Lesser GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
+ * You should have received a copy of the Lesser GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authored by: Michi Henning <michi.henning@canonical.com>
@@ -23,11 +23,6 @@
 
 namespace unity
 {
-
-namespace internal
-{
-class InvalidArgumentExceptionImpl;
-}
 
 /**
 \brief Exception to indicate that an invalid argument was passed to a function, such as passing <code>nullptr</code>
@@ -59,11 +54,6 @@ public:
     virtual std::exception_ptr self() const override;
 };
 
-namespace internal
-{
-class LogicExceptionImpl;
-}
-
 /**
 \brief Exception to indicate a logic error, such as driving the API incorrectly, such as calling methods
        in the wrong worder.
@@ -93,11 +83,6 @@ public:
     */
     virtual std::exception_ptr self() const override;
 };
-
-namespace internal
-{
-class ShutdownExceptionImpl;
-}
 
 /**
 \brief Exception to indicate errors during shutdown.
@@ -174,6 +159,9 @@ public:
     \return Returns the error number that was passed to the constructor.
     */
     int error() const noexcept;
+
+private:
+    std::shared_ptr<internal::FileExceptionImpl> p_;
 };
 
 namespace internal
@@ -217,12 +205,10 @@ public:
     \return Returns the error number that was passed to the constructor.
     */
     int error() const noexcept;
-};
 
-namespace internal
-{
-class ResourceExceptionImpl;
-}
+private:
+    //std::shared_ptr<internal::SyscallExceptionImpl> p_;
+};
 
 /**
 \brief Exception for miscellaneous errors, such as failure of a third-party library or hitting resource limitations.
@@ -235,7 +221,7 @@ public:
     \brief Constructs the exception.
     \param reason Further details about the cause of the exception.
     */
-    ResourceException(std::string const& reason);
+    explicit ResourceException(std::string const& reason);
     //! @cond
     ResourceException(ResourceException const&);
     ResourceException& operator=(ResourceException const&);
