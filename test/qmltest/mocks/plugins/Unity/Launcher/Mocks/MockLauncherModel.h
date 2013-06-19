@@ -17,10 +17,10 @@
  *      Michael Zanetti <michael.zanetti@canonical.com>
  */
 
-#ifndef LAUNCHERMOCKMODEL_H
-#define LAUNCHERMOCKMODEL_H
+#ifndef MOCKLAUNCHERMODEL_H
+#define MOCKLAUNCHERMODEL_H
 
-#include <unity/shell/launcher/LauncherModelInterface.h>
+#include <LauncherModelInterface.h>
 
 using namespace unity::shell::launcher;
 
@@ -42,4 +42,4 @@ private:
     QList<LauncherItemInterface*> m_list;
 };
 
-#endif
+#endif // MOCKLAUNCHERMODEL_H

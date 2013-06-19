@@ -21,8 +21,8 @@
 #include <Mocks/MockLauncherModel.h>
 #include <Mocks/MockLauncherItem.h>
 
-#include <unity/shell/launcher/LauncherModelInterface.h>
-#include <unity/shell/launcher/LauncherItemInterface.h>
+#include <LauncherModelInterface.h>
+#include <LauncherItemInterface.h>
 
 #include <QtQml/qqml.h>
 

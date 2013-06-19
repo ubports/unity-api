@@ -17,10 +17,10 @@
  *      Michael Zanetti <michael.zanetti@canonical.com>
  */
 
-#ifndef UNITY_LAUNCHER_LAUNCHERMODELINTERFACE_H
-#define UNITY_LAUNCHER_LAUNCHERMODELINTERFACE_H
+#ifndef UNITY_SHELL_LAUNCHER_LAUNCHERMODELINTERFACE_H
+#define UNITY_SHELL_LAUNCHER_LAUNCHERMODELINTERFACE_H
 
-#include <unity/config.h>
+#include <unity/SymbolExport.h>
 
 #include <QtCore/QAbstractListModel>
 
@@ -99,8 +99,8 @@ public:
 
 };
 
-}
-}
-}
+} // namespace launcher
+} // namespace shell
+} // namespace unity
 
-#endif
+#endif // UNITY_SHELL_LAUNCHER_LAUNCHERMODELINTERFACE_H

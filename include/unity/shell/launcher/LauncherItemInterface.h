@@ -17,8 +17,8 @@
  *      Michael Zanetti <michael.zanetti@canonical.com>
  */
 
-#ifndef UNITY_LAUNCHER_LAUNCHERITEM_H
-#define UNITY_LAUNCHER_LAUNCHERITEM_H
+#ifndef UNITY_SHELL_LAUNCHER_LAUNCHERITEM_H
+#define UNITY_SHELL_LAUNCHER_LAUNCHERITEM_H
 
 #include <unity/config.h>
 
@@ -124,8 +124,8 @@ Q_SIGNALS:
     /// @endcond
 };
 
-}
-}
-}
+} // namespace launcher
+} // namespace shell
+} // namespace unity
 
-#endif
+#endif // UNITY_SHELL_LAUNCHER_LAUNCHERITEMINTERFACE_H

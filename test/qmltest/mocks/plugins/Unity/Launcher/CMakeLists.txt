@@ -1,4 +1,5 @@
 include_directories(
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/launcher
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 

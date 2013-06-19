@@ -17,10 +17,10 @@
  *      Michael Zanetti <michael.zanetti@canonical.com>
  */
 
-#ifndef LAUNCHERMOCKITEM_H
-#define LAUNCHERMOCKITEM_H
+#ifndef MOCKLAUNCHERITEM_H
+#define MOCKLAUNCHERITEM_H
 
-#include <include/unity/shell/launcher/LauncherItemInterface.h>
+#include <LauncherItemInterface.h>
 
 using namespace unity::shell::launcher;
 
@@ -61,4 +61,4 @@ private:
     int m_count;
 };
 
-#endif
+#endif // MOCKLAUNCHERITEM_H
