@@ -1,3 +1,24 @@
+# This module enables precompiled headers. To use:
+#
+#     include(pch)
+#     add_pch(<path_to_system_header_list> <build_target>) # Optional
+#
+# For example:
+#
+#    include(pch)
+#    add_pch(pch/pch_sys_headers.hh mylibrary)
+#
+# pch_sys_headers.hh must contain a list of #includes for system headers
+# that should be precompiled, such as
+#
+# #include<vector>
+# #include<iostream>
+# ...
+#
+# Due to various limitations this implementation only works
+# with C++. It is also strongly recommended that the suffix
+# of your pch file should be .hh rather than .h.
+
 function(get_gcc_flags target_name)
   # CMake does not provide an easy way to get all compiler switches,
   # so this function is a fishing expedition to get them.
@@ -68,7 +89,7 @@ function(add_pch_linux header_filename target_name pch_suffix)
     DEPENDS ${header_filename})
   add_custom_target(${gch_target_name} DEPENDS ${gch_filename})
   add_dependencies(${target_name} ${gch_target_name})
-  
+
   # Add the PCH to every source file's include list.
   # This is the only way that is supported by both GCC and Clang.
   set_property(TARGET ${target_name} APPEND_STRING PROPERTY COMPILE_FLAGS " -include ${header_basename}")
