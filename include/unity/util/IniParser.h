@@ -67,11 +67,11 @@ coerced into the given type (i.e trying to convert the value
 class UNITY_API IniParser final {
 public:
     /** Parse the given file. */
-    IniParser(const char *filename);
+    IniParser(const char* filename);
     ~IniParser() noexcept;
 
     /// @cond
-    IniParser(const IniParser &ip) = delete;
+    IniParser(const IniParser& ip) = delete;
     IniParser() = delete;
     /// @endcond
 
@@ -81,23 +81,23 @@ public:
      * "abc" as an integer, throw LogicException.
       **/
     //{@
-    bool has_group(const std::string &group) const noexcept;
-    bool has_key(const std::string &group, const std::string &key) const;
-    std::string get_string(const std::string &group, const std::string &key) const;
-    bool get_boolean(const std::string &group, const std::string &key) const;
-    int get_int(const std::string &group, const std::string &key) const;
+    bool has_group(const std::string& group) const noexcept;
+    bool has_key(const std::string& group, const std::string& key) const;
+    std::string get_string(const std::string& group, const std::string& key) const;
+    bool get_boolean(const std::string& group, const std::string& key) const;
+    int get_int(const std::string& group, const std::string& key) const;
 
-    std::vector<std::string> get_string_array(const std::string &group, const std::string &key) const;
-    std::vector<int> get_int_array(const std::string &group, const std::string &key) const;
-    std::vector<bool> get_boolean_array(const std::string &group, const std::string &key) const;
+    std::vector<std::string> get_string_array(const std::string& group, const std::string& key) const;
+    std::vector<int> get_int_array(const std::string& group, const std::string& key) const;
+    std::vector<bool> get_boolean_array(const std::string& group, const std::string& key) const;
 
     std::string get_start_group() const;
     std::vector<std::string> get_groups() const;
-    std::vector<std::string> get_keys(const std::string &group) const;
+    std::vector<std::string> get_keys(const std::string& group) const;
     //@}
 
 private:
-    internal::IniParserPrivate *p;
+    internal::IniParserPrivate* p;
 };
 
 
