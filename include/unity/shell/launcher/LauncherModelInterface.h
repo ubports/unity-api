@@ -82,7 +82,7 @@ public:
     Q_INVOKABLE virtual unity::shell::launcher::LauncherItemInterface *get(int index) const = 0;
 
     /// @cond
-    QHash<int, QByteArray> roleNames() const
+    virtual QHash<int, QByteArray> roleNames() const
     {
         QHash<int, QByteArray> roles;
         roles.insert(RoleDesktopFile, "desktopFile");

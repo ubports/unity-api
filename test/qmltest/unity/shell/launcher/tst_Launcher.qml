@@ -23,7 +23,29 @@ import TestUtil 0.1
 import Unity.Launcher 0.1
 
 Item {
+
     Verifier {
+        id: checkModelVerifier
+
+        property var model: LauncherModel
+
+        function test_model_data() {
+            return [
+                { tag: "LauncherModel[object]", type: "object" },
+                { tag: "LauncherModel[LauncherModelInterface]", type: "unity::shell::launcher::LauncherModelInterface" },
+            ];
+        }
+
+        function test_model(data) {
+            object = model;
+            name = "LauncherModel"
+
+            verifyData(data);
+        }
+    }
+
+    Verifier {
+        when: checkModelVerifier.completed
 
         Repeater {
             id: repeater
