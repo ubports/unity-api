@@ -98,7 +98,9 @@ function(add_pch_linux header_filename target_name pch_suffix)
 
 endfunction()
 
-try_run(IS_CLANG did_build ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_SOURCE_DIR}/cmake/modules/isclang.cc)
+include(CheckCXXSourceCompiles)
+CHECK_CXX_SOURCE_COMPILES("#ifdef __clang__\n#else\n#error \"Not clang.\"\n#endif\nint main(int argc, char **argv) { return 0; }" IS_CLANG)
+
 
 if(UNIX)
   if(NOT APPLE)
