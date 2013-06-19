@@ -117,11 +117,18 @@ set(UNITY_API_VERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}.${UNITY_API_MICRO}"
 # API library
 set(UNITY_API_LIB unity-api)
 
+# Static version for testing
+set(UNITY_API_STATIC_LIB unity-api-static)
+
 # Other libraries we depend on
 set(OTHER_API_LIBS )
 
 # All the libraries we need to link a normal executable that uses the Unity API
 set(LIBS ${UNITY_API_LIB} ${OTHER_API_LIBS})
+
+# All the libraries we need to link a gtest executable. (We link the tests against a static version
+# so we can do whitebox testing on internal classes.
+set(TESTLIBS ${UNITY_API_STATIC_LIB} ${OTHER_API_LIBS})
 
 # Library install prefix
 set(LIB_INSTALL_PREFIX lib/${CMAKE_LIBRARY_ARCHITECTURE})
