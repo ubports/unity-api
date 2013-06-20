@@ -11,3 +11,19 @@
     fun:g_main_context_push_thread_default
     ...
 }
+
+{
+    g_keyfile_new_leak
+    Memcheck:Leak
+    ...
+    fun:g_key_file_new
+    ...
+}
+
+{
+    g_keyfile_load_leak
+    Memcheck:Leak
+    ...
+    fun:g_key_file_load_from_file
+    ...
+}

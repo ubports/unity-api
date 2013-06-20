@@ -1,5 +1,7 @@
 add_subdirectory(unity)
 
+include_directories(${GLIB_INCLUDE_DIRS})
+
 # Pseudo-library of object files. We need a dynamic version of the library for normal clients,
 # and a static version for the whitebox tests, so we can write unit tests for classes in the internal namespaces
 # (because, for the .so, non-public APIs are compiled with -fvisibility=hidden).
@@ -19,10 +21,12 @@ set_target_properties(${UNITY_API_LIB} PROPERTIES
     VERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}"
     SOVERSION ${UNITY_API_SOVERSION}
 )
+target_link_libraries(${UNITY_API_LIB} ${GLIB_LDFLAGS})
 
 # Use the object files to make the static library. We add -fPIC to avoid compiling a second time.
 add_library(${UNITY_API_STATIC_LIB} STATIC $<TARGET_OBJECTS:${UNITY_API_LIB_OBJ}>)
 set_target_properties(${UNITY_API_STATIC_LIB} PROPERTIES OUTPUT_NAME ${UNITY_API_LIB})
+target_link_libraries(${UNITY_API_STATIC_LIB} ${GLIB_LDFLAGS})
 
 # Only the dynamic library gets installed.
 install(TARGETS ${UNITY_API_LIB} LIBRARY DESTINATION ${LIB_INSTALL_PREFIX})

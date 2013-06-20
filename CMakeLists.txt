@@ -79,6 +79,7 @@ endif()
 
 include(FindPkgConfig)
 find_package(Boost 1.49.0 COMPONENTS regex REQUIRED)
+pkg_check_modules(GLIB glib-2.0 REQUIRED)
 
 # Standard install paths
 include(GNUInstallDirs)
