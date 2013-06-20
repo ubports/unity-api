@@ -48,7 +48,8 @@ using internal::IniParserPrivate;
 
 static void inspect_error(GError* e, const char* prefix, const string& filename, const string& group)
 {
-    if(e) {
+    if (e)
+    {
         string message(prefix);
         message += " (";
         message += filename;
@@ -65,10 +66,12 @@ IniParser::IniParser(const char* filename)
 {
     GKeyFile* kf = g_key_file_new();
     GError* e = nullptr;
-    if(!kf) {
+    if (!kf)
+    {
         throw ResourceException("Could not create keyfile parser.");
     }
-    if(!g_key_file_load_from_file(kf, filename, G_KEY_FILE_NONE, &e)) {
+    if (!g_key_file_load_from_file(kf, filename, G_KEY_FILE_NONE, &e))
+    {
         string message = "Could not load ini file ";
         message += filename;
         message += ": ";
@@ -143,7 +146,8 @@ std::vector<std::string> IniParser::get_string_array(const std::string& group, c
     gsize count;
     strlist = g_key_file_get_string_list(p->k, group.c_str(), key.c_str(), &count, &e);
     inspect_error(e, "Could not get string array", p->filename, group);
-    for(gsize i= 0; i < count; i++) {
+    for (gsize i = 0; i < count; i++)
+    {
         result.push_back(strlist[i]);
     }
     g_strfreev(strlist);
@@ -158,7 +162,8 @@ vector<int> IniParser::get_int_array(const std::string& group, const std::string
     gsize count;
     ints = g_key_file_get_integer_list(p->k, group.c_str(), key.c_str(), &count, &e);
     inspect_error(e, "Could not get integer array", p->filename, group);
-    for(gsize i=0; i<count; i++) {
+    for (gsize i = 0; i < count; i++)
+    {
         result.push_back(ints[i]);
     }
     g_free(ints);
@@ -173,7 +178,8 @@ vector<bool> IniParser::get_boolean_array(const std::string& group, const std::s
     gsize count;
     bools = g_key_file_get_boolean_list(p->k, group.c_str(), key.c_str(), &count, &e);
     inspect_error(e, "Could not get boolean array", p->filename, group);
-    for(gsize i=0; i<count; i++) {
+    for (gsize i = 0; i < count; i++)
+    {
         result.push_back(bools[i]);
     }
     g_free(bools);
@@ -193,7 +199,8 @@ vector<string> IniParser::get_groups() const
     vector<string> result;
     gsize count;
     gchar** groups = g_key_file_get_groups(p->k, &count);
-    for(gsize i=0; i<count; i++) {
+    for (gsize i = 0; i < count; i++)
+    {
         result.push_back(groups[i]);
     }
     g_strfreev(groups);
@@ -205,11 +212,12 @@ vector<string> IniParser::get_keys(const std::string& group) const
     vector<string> result;
     GError* e = nullptr;
     gchar** strlist;
-    gsize count=0;
+    gsize count = 0;
     IniParserPrivate f;
     strlist = g_key_file_get_keys(p->k, group.c_str(), &count, &e);
     inspect_error(e, "Could not get list of keys", p->filename, group);
-    for(gsize i= 0; i < count; i++) {
+    for (gsize i = 0; i < count; i++)
+    {
         result.push_back(strlist[i]);
     }
     g_strfreev(strlist);
