@@ -18,5 +18,5 @@ configure_file(${CMAKE_SOURCE_DIR}/data/unity-shell-api.pc.in
 )
 
 install(FILES ${CMAKE_BINARY_DIR}/data/${PKGCONFIG_FILE}
-  DESTINATION ${LIBDIR}/pkgconfig
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
 )
