@@ -1,9 +1,20 @@
-unity-api (7.80.2-0ubuntu1) UNRELEASED; urgency=low
+unity-api (7.80.2+13.10.20130627ubuntu.unity.next-0ubuntu1) saucy; urgency=low
 
+  [ Didier Roche ]
   * Fix packaging to follow daily release guidelines
   * Automatic snapshot from revision 67 (bootstrap)
 
- -- Didier Roche <didrocks@ubuntu.com>  Wed, 26 Jun 2013 14:48:11 +0200
+  [ Michi Henning ]
+  * Changed "Lesser GNU General Public License" to "GNU Lesser General
+    Public License" throughout. Fixed five files that used GPL instead
+    of LGPL. licensecheck comes up clean now, reporting LGPL v3 for
+    everything. (LP: #1194867)
+  * Renamed COPYING.LIB -> COPYING. (LP: #1194867)
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 70 (ubuntu-unity/next)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 27 Jun 2013 09:48:56 +0000
 
 unity-api (7.80.1) saucy; urgency=low
 
