@@ -1,3 +1,10 @@
+unity-api (7.80.2-0ubuntu1) UNRELEASED; urgency=low
+
+  * Fix packaging to follow daily release guidelines
+  * Automatic snapshot from revision 67 (bootstrap)
+
+ -- Didier Roche <didrocks@ubuntu.com>  Wed, 26 Jun 2013 14:48:11 +0200
+
 unity-api (7.80.1) saucy; urgency=low
 
   * This project forked from lp:unity/phablet. Updating the versioning to 
