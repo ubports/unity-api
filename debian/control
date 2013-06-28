@@ -32,7 +32,7 @@ Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends},
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-Description: API for shell integration
+Description: API for Unity shell integration
  Library to integrate with the Unity shell
 
 Package: libunity-api-dev
