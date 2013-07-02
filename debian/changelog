@@ -1,3 +1,13 @@
+unity-api (7.80.2+13.10.20130702ubuntu.unity.next-0ubuntu1) saucy; urgency=low
+
+  [ Didier Roche ]
+  * Add a better package description.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 72 (ubuntu-unity/next)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 02 Jul 2013 02:31:07 +0000
+
 unity-api (7.80.2+13.10.20130627ubuntu.unity.next-0ubuntu1) saucy; urgency=low
 
   [ Didier Roche ]
