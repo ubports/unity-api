@@ -1,3 +1,13 @@
+unity-api (7.80.2+13.10.20130703ubuntu.unity.next-0ubuntu1) saucy; urgency=low
+
+  [ Michał Sawicz ]
+  * Do not require any particular version of boost.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 74 (ubuntu-unity/next)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 03 Jul 2013 02:35:04 +0000
+
 unity-api (7.80.2+13.10.20130702ubuntu.unity.next-0ubuntu1) saucy; urgency=low
 
   [ Didier Roche ]
