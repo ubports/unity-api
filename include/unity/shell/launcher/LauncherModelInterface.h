@@ -57,7 +57,7 @@ public:
         RoleDesktopFile = Qt::UserRole,
         RoleName,
         RoleIcon,
-        RoleFavorite,
+        RolePinned,
         RoleRunning,
         RoleRecent,
         RoleProgress,
@@ -68,6 +68,9 @@ public:
 
     /**
      * @brief Move an item in the model.
+     *
+     * @param oldIndex The current (old) index of the item to be moved.
+     * @param newIndex The new index where the item should be moved to.
      */
     Q_INVOKABLE virtual void move(int oldIndex, int newIndex) = 0;
 
@@ -81,6 +84,28 @@ public:
      */
     Q_INVOKABLE virtual unity::shell::launcher::LauncherItemInterface *get(int index) const = 0;
 
+    /**
+     * @brief Pin an item to the launcher.
+     *
+     * Recent and running applications will eventually disappear from the model
+     * as the application is closed or new recent items appear. Pinning an item
+     * to the launcher makes it persist until remove is called on it.
+     *
+     * @param index The index of the item to be pinned.
+     */
+    Q_INVOKABLE virtual void pin(int index) = 0;
+
+    /**
+     * @brief Remove an item from the model.
+     *
+     * Note: In case the according application is running, it will only
+     * disappear once the application is closed. In this case, this
+     * operation just unpins the item.
+     *
+     * @param index The index of the item to be removed.
+     */
+    Q_INVOKABLE virtual void remove(int index) = 0;
+
     /// @cond
     virtual QHash<int, QByteArray> roleNames() const
     {
@@ -88,7 +113,7 @@ public:
         roles.insert(RoleDesktopFile, "desktopFile");
         roles.insert(RoleName, "name");
         roles.insert(RoleIcon, "icon");
-        roles.insert(RoleFavorite, "favorite");
+        roles.insert(RolePinned, "pinned");
         roles.insert(RoleRunning, "running");
         roles.insert(RoleRecent, "recent");
         roles.insert(RoleProgress, "progress");

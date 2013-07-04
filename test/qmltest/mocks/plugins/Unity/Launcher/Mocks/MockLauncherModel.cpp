@@ -24,7 +24,7 @@ using namespace unity::shell::launcher;
 
 MockLauncherModel::MockLauncherModel(QObject* parent): LauncherModelInterface(parent)
 {
-    LauncherItemInterface *item = new MockLauncherItem("/usr/share/applications/phone-app.desktop", "Phone", "phone-app");
+    MockLauncherItem *item = new MockLauncherItem("/usr/share/applications/phone-app.desktop", "Phone", "phone-app");
     m_list.append(item);
     item = new MockLauncherItem("/usr/share/applications/camera-app.desktop", "Camera", "camera");
     m_list.append(item);
@@ -72,8 +72,8 @@ QVariant MockLauncherModel::data(const QModelIndex& index, int role) const
         return item->name();
     case RoleIcon:
         return item->icon();
-    case RoleFavorite:
-        return item->favorite();
+    case RolePinned:
+        return item->pinned();
     case RoleRunning:
         return item->running();
     case RoleRecent:
@@ -101,4 +101,18 @@ void MockLauncherModel::move(int oldIndex, int newIndex)
     beginMoveRows(QModelIndex(), oldIndex, oldIndex, QModelIndex(), newIndex);
     m_list.move(oldIndex, newIndex);
     endMoveRows();
+}
+
+void MockLauncherModel::pin(int index)
+{
+    m_list.at(index)->setPinned(true);
+    QModelIndex modelIndex = this->index(index);
+    Q_EMIT dataChanged(modelIndex, modelIndex);
+}
+
+void MockLauncherModel::remove(int index)
+{
+    beginRemoveRows(QModelIndex(), index, index);
+    m_list.takeAt(index)->deleteLater();
+    endRemoveRows();
 }

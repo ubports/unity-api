@@ -17,33 +17,22 @@
  *      Michael Zanetti <michael.zanetti@canonical.com>
  */
 
-#ifndef MOCKLAUNCHERMODEL_H
-#define MOCKLAUNCHERMODEL_H
+#ifndef MOCKQUICKLISTMODEL_H
+#define MOCKQUICKLISTMODEL_H
 
-#include <LauncherModelInterface.h>
-
-class MockLauncherItem;
+#include <QuickListModelInterface.h>
 
 using namespace unity::shell::launcher;
 
-class UNITY_API MockLauncherModel: public LauncherModelInterface
+class UNITY_API MockQuickListModel: public QuickListModelInterface
 {
-   Q_OBJECT
-
+    Q_OBJECT
 public:
-    MockLauncherModel(QObject* parent = 0);
-    ~MockLauncherModel();
+    MockQuickListModel(QObject *parent = 0);
 
-    int rowCount(const QModelIndex& parent) const;
+    QVariant data(const QModelIndex &index, int role) const;
 
-    QVariant data(const QModelIndex& index, int role) const;
-
-    Q_INVOKABLE unity::shell::launcher::LauncherItemInterface *get(int index) const;
-    Q_INVOKABLE void move(int oldIndex, int newIndex);
-    Q_INVOKABLE void pin(int index);
-    Q_INVOKABLE void remove(int index);
-private:
-    QList<MockLauncherItem*> m_list;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
 };
 
-#endif // MOCKLAUNCHERMODEL_H
+#endif // MOCKQUICKLISTMODEL_H

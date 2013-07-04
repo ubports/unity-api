@@ -20,6 +20,7 @@
 #include <TestLauncherPlugin.h>
 #include <Mocks/MockLauncherModel.h>
 #include <Mocks/MockLauncherItem.h>
+#include <Mocks/MockQuickListModel.h>
 
 #include <LauncherModelInterface.h>
 #include <LauncherItemInterface.h>
@@ -39,7 +40,9 @@ void TestLauncherPlugin::registerTypes(const char* uri)
     // @uri Unity.Launcher
     qmlRegisterUncreatableType<LauncherModelInterface>(uri, 0, 1, "LauncherModelInterface", "Interface for the LauncherModel");
     qmlRegisterUncreatableType<LauncherItemInterface>(uri, 0, 1, "LauncherItemInterface", "Interface for the LauncherItem");
+    qmlRegisterUncreatableType<QuickListModelInterface>(uri, 0, 1, "QuickListModelInterface", "Interface for the QuickListModel");
 
     qmlRegisterSingletonType<MockLauncherModel>(uri, 0, 1, "LauncherModel", modelProvider);
     qmlRegisterUncreatableType<MockLauncherItem>(uri, 0, 1, "LauncherItem", "Can't create LauncherItems in QML. Get them from the LauncherModel");
+    qmlRegisterUncreatableType<MockQuickListModel>(uri, 0, 1, "QuickListModel", "Can't create QuickListModels in QML. Get them from the LauncherItems");
 }

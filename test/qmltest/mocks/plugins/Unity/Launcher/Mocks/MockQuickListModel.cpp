@@ -17,33 +17,30 @@
  *      Michael Zanetti <michael.zanetti@canonical.com>
  */
 
-#ifndef MOCKLAUNCHERMODEL_H
-#define MOCKLAUNCHERMODEL_H
-
-#include <LauncherModelInterface.h>
-
-class MockLauncherItem;
+#include <Mocks/MockQuickListModel.h>
 
 using namespace unity::shell::launcher;
 
-class UNITY_API MockLauncherModel: public LauncherModelInterface
+MockQuickListModel::MockQuickListModel(QObject *parent) :
+    QuickListModelInterface(parent)
 {
-   Q_OBJECT
 
-public:
-    MockLauncherModel(QObject* parent = 0);
-    ~MockLauncherModel();
+}
 
-    int rowCount(const QModelIndex& parent) const;
+QVariant MockQuickListModel::data(const QModelIndex &index, int role) const
+{
+    switch (role)
+    {
+    case RoleLabel:
+        return QLatin1String("test menu entry ") + QString::number(index.row());
+    case RoleIcon:
+        return QLatin1String("copy.png");
+    }
+    return QVariant();
+}
 
-    QVariant data(const QModelIndex& index, int role) const;
-
-    Q_INVOKABLE unity::shell::launcher::LauncherItemInterface *get(int index) const;
-    Q_INVOKABLE void move(int oldIndex, int newIndex);
-    Q_INVOKABLE void pin(int index);
-    Q_INVOKABLE void remove(int index);
-private:
-    QList<MockLauncherItem*> m_list;
-};
-
-#endif // MOCKLAUNCHERMODEL_H
+int MockQuickListModel::rowCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent)
+    return 4;
+}

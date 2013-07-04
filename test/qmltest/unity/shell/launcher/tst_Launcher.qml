@@ -56,8 +56,8 @@ Item {
         }
 
         function initTestCase() {
-            if (repeater.count < 4) {
-                print("This Test Suite requires at least 4 items in the model.")
+            if (repeater.count < 5) {
+                print("This Test Suite requires at least 5 items in the model.")
                 fail()
             }
         }
@@ -68,7 +68,7 @@ Item {
                         { tag: "Model.roles[desktopFile]", role: "desktopFile", type: "string" },
                         { tag: "Model.roles[name]", role: "name", type: "string" },
                         { tag: "Model.roles[icon]", role: "icon", type: "string" },
-                        { tag: "Model.roles[favorite]", role: "favorite", type: "boolean" },
+                        { tag: "Model.roles[pinned]", role: "pinned", type: "boolean" },
                         { tag: "Model.roles[running]", role: "running", type: "boolean" },
                         { tag: "Model.roles[recent]", role: "recent", type: "boolean" },
                         { tag: "Model.roles[progress]", role: "progress", type: "number" },
@@ -105,11 +105,12 @@ Item {
                         { tag: "Item.properties[desktopFile]", constant: "desktopFile", type: "string" },
                         { tag: "Item.properties[name]", constant: "name", type: "string" },
                         { tag: "Item.properties[icon]", constant: "icon", type: "string" },
-                        { tag: "Item.properties[favorite]", property: "favorite", type: "boolean" },
+                        { tag: "Item.properties[pinned]", property: "pinned", type: "boolean" },
                         { tag: "Item.properties[recent]", property: "recent", type: "boolean" },
                         { tag: "Item.properties[running]", property: "running", type: "boolean" },
                         { tag: "Item.properties[progress]", property: "progress", type: "number" },
                         { tag: "Item.properties[count]", property: "count", type: "number" },
+                        { tag: "Item.properties[quickList]", constant: "quickList", type: "object" },
                     ];
         }
 
@@ -137,6 +138,27 @@ Item {
             compare(item0, LauncherModel.get(1), "Error moving Items im model")
             compare(item1, LauncherModel.get(2), "Error moving Items im model")
             compare(item3, LauncherModel.get(3), "Error moving Items im model")
+        }
+
+        function test_pinning() {
+            var item0 = LauncherModel.get(0)
+            signalSpy.clear()
+            signalSpy.target = item0
+            signalSpy.signalName = "pinnedChanged"
+            compare(item0.pinned, false, "Item is already pinned. Cannot test pinning.")
+            LauncherModel.pin(0)
+            compare(signalSpy.count, 1, "Item did not emit pinnedChanged.")
+            compare(item0.pinned, true, "Items pinned state did not change to true.")
+        }
+
+        function test_remove() {
+            var currentCount = repeater.count
+            LauncherModel.remove(4)
+            compare(repeater.count, currentCount - 1, "Remove did not succeed.")
+        }
+
+        SignalSpy {
+            id: signalSpy
         }
     }
 }

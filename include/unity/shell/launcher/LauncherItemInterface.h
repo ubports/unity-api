@@ -31,6 +31,8 @@ namespace shell
 namespace launcher
 {
 
+class QuickListModelInterface;
+
 /**
  * @brief An item presented in the launcher
  *
@@ -58,19 +60,19 @@ class UNITY_API LauncherItemInterface: public QObject
     Q_PROPERTY(QString icon READ icon CONSTANT)
 
     /**
-     * @brief A flag whether the item is marked as favorite (aka. pinned) or not
+     * @brief A flag whether the item is pinned or not
      */
-    Q_PROPERTY(bool favorite READ favorite WRITE setFavorite NOTIFY favoriteChanged)
+    Q_PROPERTY(bool pinned READ pinned NOTIFY pinnedChanged)
 
     /**
      * @brief A flag whether the application belonging to the icon is currently running or not
      */
-    Q_PROPERTY(bool running READ running WRITE setRunning NOTIFY runningChanged)
+    Q_PROPERTY(bool running READ running NOTIFY runningChanged)
 
     /**
      * @brief A flag wheter the application is in the recently used applications list
      */
-    Q_PROPERTY(bool recent READ recent WRITE setRecent NOTIFY recentChanged)
+    Q_PROPERTY(bool recent READ recent NOTIFY recentChanged)
 
     /**
      * @brief The percentage of the progress bar shown on the item.
@@ -78,7 +80,7 @@ class UNITY_API LauncherItemInterface: public QObject
      * For values from 0 and 100 this will present a progress bar on the item.
      * For values outside this range, no progress bar will be drawn.
      */
-    Q_PROPERTY(int progress READ progress WRITE setProgress NOTIFY progressChanged)
+    Q_PROPERTY(int progress READ progress NOTIFY progressChanged)
 
     /**
      * @brief The number for the count emblem on the item
@@ -86,7 +88,16 @@ class UNITY_API LauncherItemInterface: public QObject
      * For values >0 this will paint an emblem containing the number.
      * For 0 and negative values, no count emblem will be drawn.
      */
-    Q_PROPERTY(int count READ count WRITE setCount NOTIFY countChanged)
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
+
+    /**
+     * @brief The quick list menu contents for the item
+     *
+     * Items can have a quick list menu. This property holds a model for
+     * the contents of that menu. The pointer to the model will be
+     * constant, but of course the contents of the model can change.
+     */
+    Q_PROPERTY(unity::shell::launcher::QuickListModelInterface* quickList READ quickList CONSTANT)
 
 protected:
     /// @cond
@@ -96,27 +107,17 @@ public:
     virtual ~LauncherItemInterface() {}
 
     virtual QString desktopFile() const = 0;
-
     virtual QString name() const = 0;
     virtual QString icon() const = 0;
-
-    virtual bool favorite() const = 0;
-    virtual void setFavorite(bool favorite) = 0;
-
+    virtual bool pinned() const = 0;
     virtual bool running() const = 0;
-    virtual void setRunning(bool running) = 0;
-
     virtual bool recent() const = 0;
-    virtual void setRecent(bool recent) = 0;
-
     virtual int progress() const = 0;
-    virtual void setProgress(int progress) = 0;
-
     virtual int count() const = 0;
-    virtual void setCount(int count) = 0;
+    virtual unity::shell::launcher::QuickListModelInterface *quickList() const = 0;
 
 Q_SIGNALS:
-    void favoriteChanged(bool favorite);
+    void pinnedChanged(bool pinned);
     void runningChanged(bool running);
     void recentChanged(bool running);
     void progressChanged(int progress);
