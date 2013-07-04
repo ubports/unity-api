@@ -116,3 +116,9 @@ void MockLauncherModel::remove(int index)
     m_list.takeAt(index)->deleteLater();
     endRemoveRows();
 }
+
+void MockLauncherModel::triggerQuickListAction(int itemIndex, int quickListIndex)
+{
+    Q_UNUSED(itemIndex)
+    Q_UNUSED(quickListIndex)
+}

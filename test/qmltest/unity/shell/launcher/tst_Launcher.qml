@@ -55,6 +55,14 @@ Item {
             }
         }
 
+        Repeater {
+            id: quickListRepeater
+            model: LauncherModel.get(0).quickList
+            delegate: Item {
+                property var roles: model
+            }
+        }
+
         function initTestCase() {
             if (repeater.count < 5) {
                 print("This Test Suite requires at least 5 items in the model.")
@@ -90,7 +98,10 @@ Item {
         function test_model_methods_data() {
             return [
                         { tag: "Model.methods[get]", method: "get" },
-                        { tag: "Model.methods[move]", method: "move" }
+                        { tag: "Model.methods[move]", method: "move" },
+                        { tag: "Model.methods[move]", method: "pin" },
+                        { tag: "Model.methods[move]", method: "remove" },
+                        { tag: "Model.methods[move]", method: "triggerQuickListAction" }
             ];
         }
 
@@ -124,6 +135,24 @@ Item {
             }
 
             verifyData(data)
+        }
+
+        function test_quicklist_model_roles_data() {
+            return [
+                        { tag: "Model.roles[label]", role: "label", type: "string" },
+                        { tag: "Model.roles[icon]", role: "icon", type: "string" },
+                    ];
+        }
+
+        function test_quicklist_model_roles(data) {
+            name = "QuickListModel"
+            try {
+                object = quickListRepeater.itemAt(0).roles;
+            } catch(err) {
+                object = undefined;
+            }
+
+            verifyData(data);
         }
 
         function test_move() {

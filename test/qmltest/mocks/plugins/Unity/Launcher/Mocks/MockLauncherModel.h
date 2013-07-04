@@ -42,6 +42,7 @@ public:
     Q_INVOKABLE void move(int oldIndex, int newIndex);
     Q_INVOKABLE void pin(int index);
     Q_INVOKABLE void remove(int index);
+    Q_INVOKABLE void triggerQuickListAction(int itemIndex, int quickListIndex);
 private:
     QList<MockLauncherItem*> m_list;
 };

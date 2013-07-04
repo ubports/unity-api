@@ -106,6 +106,15 @@ public:
      */
     Q_INVOKABLE virtual void remove(int index) = 0;
 
+
+    /**
+      * @brief Trigger an action from the QuickList
+      *
+      * @param itemIndex The index of the LauncherItem.
+      * @param quickListIndex the index of the triggered entry in the QuickListModel.
+      */
+    Q_INVOKABLE virtual void triggerQuickListAction(int itemIndex, int quickListIndex) = 0;
+
     /// @cond
     virtual QHash<int, QByteArray> roleNames() const
     {
