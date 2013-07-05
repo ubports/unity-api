@@ -36,8 +36,6 @@ namespace launcher
   * @description The model has the following roles:
   * - RoleLabel: The text entry in the QuickList menu (QString).
   * - RoleIcon: The icon to be shown for this entry (QString).
-  * - RoleCheckable: Wether the item is checkable or not (bool).
-  * - RoleGroup: A group this item is in. Items in the same group are exclusive (int). -1 for no group.
   */
 class UNITY_API QuickListModelInterface: public QAbstractListModel
 {
