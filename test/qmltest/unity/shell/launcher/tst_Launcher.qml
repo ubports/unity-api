@@ -24,6 +24,10 @@ import Unity.Launcher 0.1
 
 Item {
 
+    SignalSpy {
+        id: signalSpy
+    }
+
     Verifier {
         id: checkModelVerifier
 
@@ -184,10 +188,6 @@ Item {
             var currentCount = repeater.count
             LauncherModel.remove(4)
             compare(repeater.count, currentCount - 1, "Remove did not succeed.")
-        }
-
-        SignalSpy {
-            id: signalSpy
         }
     }
 }
