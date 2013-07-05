@@ -6,6 +6,6 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory(gtest)
 add_subdirectory(headers)
-#add_subdirectory(copyright)
-#add_subdirectory(whitespace)
+add_subdirectory(copyright)
+add_subdirectory(whitespace)
 add_subdirectory(qmltest)
