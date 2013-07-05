@@ -1,4 +1,4 @@
-unity-api (7.80.2+13.10.20130703ubuntu.unity.next-0ubuntu2) UNRELEASED; urgency=low
+unity-api (7.80.2-ubuntu1) UNRELEASED; urgency=low
 
   * added quicklist support to launcher api
 
