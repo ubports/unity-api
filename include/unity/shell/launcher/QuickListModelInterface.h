@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef QUICKLISTMODEL_H
-#define QUICKLISTMODEL_H
+#ifndef UNITY_SHELL_LAUNCHER_QUICKLISTMODELINTERFACE_H
+#define UNITY_SHELL_LAUNCHER_QUICKLISTMODELINTERFACE_H
 
 #include <unity/SymbolExport.h>
 
@@ -72,4 +72,4 @@ public:
 } // shell
 } // launcher
 
-#endif // QUICKLISTMODEL_H
+#endif // UNITY_SHELL_LAUNCHER_QUICKLISTMODELINTERFACE_H
