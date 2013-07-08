@@ -102,11 +102,11 @@ Item {
 
         function test_model_methods_data() {
             return [
-                        { tag: "Model.methods[get]", method: "get" },
-                        { tag: "Model.methods[move]", method: "move" },
-                        { tag: "Model.methods[pin]", method: "pin" },
-                        { tag: "Model.methods[requestRemove]", method: "requestRemove" },
-                        { tag: "Model.methods[quickListActionInvoked]", method: "quickListActionInvoked" }
+                { tag: "Model.methods[get]", method: "get" },
+                { tag: "Model.methods[move]", method: "move" },
+                { tag: "Model.methods[pin]", method: "pin" },
+                { tag: "Model.methods[requestRemove]", method: "requestRemove" },
+                { tag: "Model.methods[quickListActionInvoked]", method: "quickListActionInvoked" }
             ];
         }
 
@@ -118,17 +118,17 @@ Item {
 
         function test_item_properties_data() {
             return [
-                        { tag: "Item.properties[appId]", constant: "appId", type: "string" },
-                        { tag: "Item.properties[desktopFile]", constant: "desktopFile", type: "string" },
-                        { tag: "Item.properties[name]", constant: "name", type: "string" },
-                        { tag: "Item.properties[icon]", constant: "icon", type: "string" },
-                        { tag: "Item.properties[pinned]", property: "pinned", type: "boolean" },
-                        { tag: "Item.properties[recent]", property: "recent", type: "boolean" },
-                        { tag: "Item.properties[running]", property: "running", type: "boolean" },
-                        { tag: "Item.properties[progress]", property: "progress", type: "number" },
-                        { tag: "Item.properties[count]", property: "count", type: "number" },
-                        { tag: "Item.properties[quickList]", constant: "quickList", type: "object" },
-                    ];
+                { tag: "Item.properties[appId]", constant: "appId", type: "string" },
+                { tag: "Item.properties[desktopFile]", constant: "desktopFile", type: "string" },
+                { tag: "Item.properties[name]", constant: "name", type: "string" },
+                { tag: "Item.properties[icon]", constant: "icon", type: "string" },
+                { tag: "Item.properties[pinned]", property: "pinned", type: "boolean" },
+                { tag: "Item.properties[recent]", property: "recent", type: "boolean" },
+                { tag: "Item.properties[running]", property: "running", type: "boolean" },
+                { tag: "Item.properties[progress]", property: "progress", type: "number" },
+                { tag: "Item.properties[count]", property: "count", type: "number" },
+                { tag: "Item.properties[quickList]", constant: "quickList", type: "object" },
+            ];
         }
 
         function test_item_properties(data) {
@@ -145,9 +145,9 @@ Item {
 
         function test_quicklist_model_roles_data() {
             return [
-                        { tag: "Model.roles[label]", role: "label", type: "string" },
-                        { tag: "Model.roles[icon]", role: "icon", type: "string" },
-                    ];
+                { tag: "Model.roles[label]", role: "label", type: "string" },
+                { tag: "Model.roles[icon]", role: "icon", type: "string" },
+            ];
         }
 
         function test_quicklist_model_roles(data) {
