@@ -45,6 +45,11 @@ class UNITY_API LauncherItemInterface: public QObject
     Q_OBJECT
 
     /**
+     * @brief The appId of the application associated with the item.
+     */
+    Q_PROPERTY(QString appId READ appId CONSTANT)
+
+    /**
      * @brief The full path to the .desktop file.
      */
     Q_PROPERTY(QString desktopFile READ desktopFile CONSTANT)
@@ -106,6 +111,7 @@ protected:
 public:
     virtual ~LauncherItemInterface() {}
 
+    virtual QString appId() const = 0;
     virtual QString desktopFile() const = 0;
     virtual QString name() const = 0;
     virtual QString icon() const = 0;

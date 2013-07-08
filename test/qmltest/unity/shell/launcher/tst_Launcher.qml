@@ -77,6 +77,7 @@ Item {
         /* make sure all the required roles are exposed on Model */
         function test_model_roles_data() {
             return [
+                        { tag: "Model.roles[appId]", role: "appId", type: "string" },
                         { tag: "Model.roles[desktopFile]", role: "desktopFile", type: "string" },
                         { tag: "Model.roles[name]", role: "name", type: "string" },
                         { tag: "Model.roles[icon]", role: "icon", type: "string" },
@@ -103,9 +104,9 @@ Item {
             return [
                         { tag: "Model.methods[get]", method: "get" },
                         { tag: "Model.methods[move]", method: "move" },
-                        { tag: "Model.methods[move]", method: "pin" },
-                        { tag: "Model.methods[move]", method: "remove" },
-                        { tag: "Model.methods[move]", method: "triggerQuickListAction" }
+                        { tag: "Model.methods[pin]", method: "pin" },
+                        { tag: "Model.methods[requestRemove]", method: "requestRemove" },
+                        { tag: "Model.methods[triggerQuickListAction]", method: "triggerQuickListAction" }
             ];
         }
 
@@ -117,6 +118,7 @@ Item {
 
         function test_item_properties_data() {
             return [
+                        { tag: "Item.properties[appId]", constant: "appId", type: "string" },
                         { tag: "Item.properties[desktopFile]", constant: "desktopFile", type: "string" },
                         { tag: "Item.properties[name]", constant: "name", type: "string" },
                         { tag: "Item.properties[icon]", constant: "icon", type: "string" },
@@ -179,14 +181,14 @@ Item {
             signalSpy.target = item0
             signalSpy.signalName = "pinnedChanged"
             compare(item0.pinned, false, "Item is already pinned. Cannot test pinning.")
-            LauncherModel.pin(0)
+            LauncherModel.pin(LauncherModel.get(0).appId)
             compare(signalSpy.count, 1, "Item did not emit pinnedChanged.")
             compare(item0.pinned, true, "Items pinned state did not change to true.")
         }
 
         function test_remove() {
             var currentCount = repeater.count
-            LauncherModel.remove(4)
+            LauncherModel.requestRemove(LauncherModel.get(4).appId)
             compare(repeater.count, currentCount - 1, "Remove did not succeed.")
         }
     }

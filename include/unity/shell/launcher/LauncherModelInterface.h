@@ -54,7 +54,8 @@ public:
      * See LauncherItemInterface properties for details.
      */
     enum Roles {
-        RoleDesktopFile = Qt::UserRole,
+        RoleAppId = Qt::UserRole,
+        RoleDesktopFile,
         RoleName,
         RoleIcon,
         RolePinned,
@@ -91,34 +92,35 @@ public:
      * as the application is closed or new recent items appear. Pinning an item
      * to the launcher makes it persist until remove is called on it.
      *
-     * @param index The index of the item to be pinned.
+     * @param appId The appId of the item to be pinned.
      */
-    Q_INVOKABLE virtual void pin(int index) = 0;
+    Q_INVOKABLE virtual void pin(const QString &appId) = 0;
 
     /**
-     * @brief Remove an item from the model.
+     * @brief Request removal an item from the model.
      *
      * Note: In case the according application is running, it will only
      * disappear once the application is closed. In this case, this
      * operation just unpins the item.
      *
-     * @param index The index of the item to be removed.
+     * @param appId The appId of the item to be removed.
      */
-    Q_INVOKABLE virtual void remove(int index) = 0;
+    Q_INVOKABLE virtual void requestRemove(const QString &appId) = 0;
 
 
     /**
       * @brief Trigger an action from the QuickList
       *
-      * @param itemIndex The index of the LauncherItem.
+      * @param appId The appId of the LauncherItem.
       * @param quickListIndex the index of the triggered entry in the QuickListModel.
       */
-    Q_INVOKABLE virtual void triggerQuickListAction(int itemIndex, int quickListIndex) = 0;
+    Q_INVOKABLE virtual void triggerQuickListAction(const QString &appId, int quickListIndex) = 0;
 
     /// @cond
     virtual QHash<int, QByteArray> roleNames() const
     {
         QHash<int, QByteArray> roles;
+        roles.insert(RoleAppId, "appId");
         roles.insert(RoleDesktopFile, "desktopFile");
         roles.insert(RoleName, "name");
         roles.insert(RoleIcon, "icon");
