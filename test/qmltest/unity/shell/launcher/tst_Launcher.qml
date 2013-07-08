@@ -160,36 +160,5 @@ Item {
 
             verifyData(data);
         }
-
-        function test_move() {
-            var item0 = LauncherModel.get(0)
-            var item1 = LauncherModel.get(1)
-            var item2 = LauncherModel.get(2)
-            var item3 = LauncherModel.get(3)
-
-            LauncherModel.move(2, 0);
-
-            compare(item2, LauncherModel.get(0), "Error moving Items im model")
-            compare(item0, LauncherModel.get(1), "Error moving Items im model")
-            compare(item1, LauncherModel.get(2), "Error moving Items im model")
-            compare(item3, LauncherModel.get(3), "Error moving Items im model")
-        }
-
-        function test_pinning() {
-            var item0 = LauncherModel.get(0)
-            signalSpy.clear()
-            signalSpy.target = item0
-            signalSpy.signalName = "pinnedChanged"
-            compare(item0.pinned, false, "Item is already pinned. Cannot test pinning.")
-            LauncherModel.pin(LauncherModel.get(0).appId)
-            compare(signalSpy.count, 1, "Item did not emit pinnedChanged.")
-            compare(item0.pinned, true, "Items pinned state did not change to true.")
-        }
-
-        function test_remove() {
-            var currentCount = repeater.count
-            LauncherModel.requestRemove(LauncherModel.get(4).appId)
-            compare(repeater.count, currentCount - 1, "Remove did not succeed.")
-        }
     }
 }
