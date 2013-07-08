@@ -103,8 +103,7 @@ public:
     /**
      * @brief Request removal of an item from the model.
      *
-     * Note: In case the according application is running, the actual removal of the
-     * item will be delayed.
+     * Note: The actual removal of the item might be delayed in certain circumstances.
      *
      * @param appId The appId of the item to be removed.
      */
