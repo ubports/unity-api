@@ -101,7 +101,7 @@ public:
     Q_INVOKABLE virtual void pin(const QString &appId, int index = -1) = 0;
 
     /**
-     * @brief Request removal an item from the model.
+     * @brief Request removal of an item from the model.
      *
      * Note: In case the according application is running, it will only
      * disappear once the application is closed. In this case, this
