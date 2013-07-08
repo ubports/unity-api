@@ -136,7 +136,9 @@ public:
     /// @endcond
 
 protected:
+    /// @cond
     QHash<int, QByteArray> m_roleNames;
+    /// @endcond
 
 };
 

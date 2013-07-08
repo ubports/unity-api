@@ -34,9 +34,9 @@ namespace launcher
 /**
   * @brief A model containing QuickList actions for an application in the launcher.
   *
-  * @description The model has the following roles:
-  * - RoleLabel: The text entry in the QuickList menu (QString).
-  * - RoleIcon: The icon to be shown for this entry (QString).
+  * The model has the following roles:
+  * - RoleLabel (label): The text entry in the QuickList menu (QString).
+  * - RoleIcon (icon): The icon to be shown for this entry (QString).
   */
 class UNITY_API QuickListModelInterface: public QAbstractListModel
 {
@@ -50,6 +50,11 @@ protected:
     }
     /// @endcond
 public:
+    /**
+     * @brief The Roles supported by the model
+     *
+     * See class description for details.
+     */
     enum Roles {
         RoleLabel,
         RoleIcon
@@ -66,7 +71,9 @@ public:
     /// @endcond
 
 protected:
+    /// @cond
     QHash<int, QByteArray> m_roleNames;
+    /// @endcond
 
 };
 
