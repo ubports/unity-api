@@ -116,9 +116,9 @@ public:
       * @brief Trigger an action from the QuickList
       *
       * @param appId The appId of the LauncherItem.
-      * @param quickListIndex the index of the triggered entry in the QuickListModel.
+      * @param actionIndex The index of the triggered entry in the QuickListModel.
       */
-    Q_INVOKABLE virtual void quickListActionInvoked(const QString &appId, int quickListIndex) = 0;
+    Q_INVOKABLE virtual void quickListActionInvoked(const QString &appId, int actionIndex) = 0;
 
     /// @cond
     virtual QHash<int, QByteArray> roleNames() const
