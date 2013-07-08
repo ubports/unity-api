@@ -93,8 +93,12 @@ public:
      * to the launcher makes it persist until remove is called on it.
      *
      * @param appId The appId of the item to be pinned.
+     * @param index The index where the item should be pinned to. This parameter is optional
+     * and if not supplied, the item will be pinned to the current position.
+     * Note: If an item is not contained in the launcher yet, calling this without an index
+     * will fail to pin the item.
      */
-    Q_INVOKABLE virtual void pin(const QString &appId) = 0;
+    Q_INVOKABLE virtual void pin(const QString &appId, int index = -1) = 0;
 
     /**
      * @brief Request removal an item from the model.
@@ -114,7 +118,7 @@ public:
       * @param appId The appId of the LauncherItem.
       * @param quickListIndex the index of the triggered entry in the QuickListModel.
       */
-    Q_INVOKABLE virtual void triggerQuickListAction(const QString &appId, int quickListIndex) = 0;
+    Q_INVOKABLE virtual void quickListActionInvoked(const QString &appId, int quickListIndex) = 0;
 
     /// @cond
     virtual QHash<int, QByteArray> roleNames() const
