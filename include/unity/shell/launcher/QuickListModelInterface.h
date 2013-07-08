@@ -70,8 +70,8 @@ protected:
 
 };
 
-} // unity
-} // shell
 } // launcher
+} // shell
+} // unity
 
 #endif // UNITY_SHELL_LAUNCHER_QUICKLISTMODELINTERFACE_H
