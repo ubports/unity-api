@@ -44,7 +44,17 @@ class UNITY_API LauncherModelInterface: public QAbstractListModel
 
 protected:
     /// @cond
-    LauncherModelInterface(QObject *parent = 0): QAbstractListModel(parent) {}
+    LauncherModelInterface(QObject *parent = 0): QAbstractListModel(parent) {
+        m_roleNames.insert(RoleAppId, "appId");
+        m_roleNames.insert(RoleDesktopFile, "desktopFile");
+        m_roleNames.insert(RoleName, "name");
+        m_roleNames.insert(RoleIcon, "icon");
+        m_roleNames.insert(RolePinned, "pinned");
+        m_roleNames.insert(RoleRunning, "running");
+        m_roleNames.insert(RoleRecent, "recent");
+        m_roleNames.insert(RoleProgress, "progress");
+        m_roleNames.insert(RoleCount, "count");
+    }
     /// @endcond
 
 public:
@@ -121,19 +131,12 @@ public:
     /// @cond
     virtual QHash<int, QByteArray> roleNames() const
     {
-        QHash<int, QByteArray> roles;
-        roles.insert(RoleAppId, "appId");
-        roles.insert(RoleDesktopFile, "desktopFile");
-        roles.insert(RoleName, "name");
-        roles.insert(RoleIcon, "icon");
-        roles.insert(RolePinned, "pinned");
-        roles.insert(RoleRunning, "running");
-        roles.insert(RoleRecent, "recent");
-        roles.insert(RoleProgress, "progress");
-        roles.insert(RoleCount, "count");
-        return roles;
+        return m_roleNames;
     }
     /// @endcond
+
+protected:
+    QHash<int, QByteArray> m_roleNames;
 
 };
 

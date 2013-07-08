@@ -44,7 +44,10 @@ class UNITY_API QuickListModelInterface: public QAbstractListModel
 
 protected:
     /// @cond
-    explicit QuickListModelInterface(QObject *parent = 0) : QAbstractListModel(parent) {}
+    explicit QuickListModelInterface(QObject *parent = 0) : QAbstractListModel(parent) {
+        m_roleNames.insert(RoleLabel, "label");
+        m_roleNames.insert(RoleIcon, "icon");
+    }
     /// @endcond
 public:
     enum Roles {
@@ -58,12 +61,12 @@ public:
 
     /// @cond
     QHash<int, QByteArray> roleNames() const {
-        QHash<int, QByteArray> roles;
-        roles.insert(RoleLabel, "label");
-        roles.insert(RoleIcon, "icon");
-        return roles;
+        return m_roleNames;
     }
     /// @endcond
+
+protected:
+    QHash<int, QByteArray> m_roleNames;
 
 };
 
