@@ -96,16 +96,15 @@ public:
      * @param index The index where the item should be pinned to. This parameter is optional
      * and if not supplied, the item will be pinned to the current position.
      * Note: If an item is not contained in the launcher yet, calling this without an index
-     * will fail to pin the item.
+     * will pin the item to the end of the list.
      */
     Q_INVOKABLE virtual void pin(const QString &appId, int index = -1) = 0;
 
     /**
      * @brief Request removal of an item from the model.
      *
-     * Note: In case the according application is running, it will only
-     * disappear once the application is closed. In this case, this
-     * operation just unpins the item.
+     * Note: In case the according application is running, the actual removal of the
+     * item will be delayed.
      *
      * @param appId The appId of the item to be removed.
      */

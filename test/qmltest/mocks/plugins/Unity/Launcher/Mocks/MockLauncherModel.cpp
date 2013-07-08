@@ -118,6 +118,9 @@ void MockLauncherModel::pin(const QString &appId, int index)
             move(currentIndex, index);
         }
     } else {
+        if (index == -1) {
+            index = m_list.count();
+        }
         beginInsertRows(QModelIndex(), index, index);
         m_list.insert(index, new MockLauncherItem(appId,
                                                   appId + ".desktop",
