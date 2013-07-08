@@ -18,21 +18,29 @@
  */
 
 #include <Mocks/MockLauncherItem.h>
+#include <Mocks/MockQuickListModel.h>
 
 using namespace unity::shell::launcher;
 
-MockLauncherItem::MockLauncherItem(const QString& desktopFile, const QString& name, const QString& icon, QObject* parent):
+MockLauncherItem::MockLauncherItem(const QString &appId, const QString& desktopFile, const QString& name, const QString& icon, QObject* parent):
     LauncherItemInterface(parent),
+    m_appId(appId),
     m_desktopFile(desktopFile),
     m_name(name),
     m_icon(icon),
-    m_favorite(false),
+    m_pinned(false),
     m_running(false),
     m_recent(false),
     m_progress(8),
-    m_count(8)
+    m_count(8),
+    m_quickListModel(new MockQuickListModel(this))
 {
 
+}
+
+QString MockLauncherItem::appId() const
+{
+    return m_appId;
 }
 
 QString MockLauncherItem::desktopFile() const
@@ -50,17 +58,17 @@ QString MockLauncherItem::icon() const
     return m_icon;
 }
 
-bool MockLauncherItem::favorite() const
+bool MockLauncherItem::pinned() const
 {
-    return m_favorite;
+    return m_pinned;
 }
 
-void MockLauncherItem::setFavorite(bool favorite)
+void MockLauncherItem::setPinned(bool pinned)
 {
-    if (m_favorite != favorite)
+    if (m_pinned != pinned)
     {
-        m_favorite = favorite;
-        Q_EMIT favoriteChanged(m_favorite);
+        m_pinned = pinned;
+        Q_EMIT pinnedChanged(m_pinned);
     }
 }
 
@@ -118,4 +126,9 @@ void MockLauncherItem::setCount(int count)
         m_count = count;
         Q_EMIT countChanged(count);
     }
+}
+
+QuickListModelInterface *MockLauncherItem::quickList() const
+{
+    return m_quickListModel;
 }

@@ -22,6 +22,8 @@
 
 #include <LauncherModelInterface.h>
 
+class MockLauncherItem;
+
 using namespace unity::shell::launcher;
 
 class UNITY_API MockLauncherModel: public LauncherModelInterface
@@ -38,8 +40,15 @@ public:
 
     Q_INVOKABLE unity::shell::launcher::LauncherItemInterface *get(int index) const;
     Q_INVOKABLE void move(int oldIndex, int newIndex);
+    Q_INVOKABLE void pin(const QString &appId, int index = -1);
+    Q_INVOKABLE void requestRemove(const QString &appId);
+    Q_INVOKABLE void quickListActionInvoked(const QString &appId, int actionIndex);
+
 private:
-    QList<LauncherItemInterface*> m_list;
+    int findApp(const QString &appId);
+
+private:
+    QList<MockLauncherItem*> m_list;
 };
 
 #endif // MOCKLAUNCHERMODEL_H

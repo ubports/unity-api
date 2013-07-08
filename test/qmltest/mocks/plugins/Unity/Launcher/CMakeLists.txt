@@ -13,8 +13,10 @@ find_package(Qt5Qml REQUIRED)
 set(LauncherMocks_SOURCES
     ${CMAKE_SOURCE_DIR}/include/unity/shell/launcher/LauncherModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/launcher/LauncherItemInterface.h
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/launcher/QuickListModelInterface.h
     Mocks/MockLauncherModel.cpp
     Mocks/MockLauncherItem.cpp
+    Mocks/MockQuickListModel.cpp
 )
 
 add_library(LauncherMocks SHARED ${LauncherMocks_SOURCES})

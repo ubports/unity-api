@@ -44,7 +44,17 @@ class UNITY_API LauncherModelInterface: public QAbstractListModel
 
 protected:
     /// @cond
-    LauncherModelInterface(QObject *parent = 0): QAbstractListModel(parent) {}
+    LauncherModelInterface(QObject *parent = 0): QAbstractListModel(parent) {
+        m_roleNames.insert(RoleAppId, "appId");
+        m_roleNames.insert(RoleDesktopFile, "desktopFile");
+        m_roleNames.insert(RoleName, "name");
+        m_roleNames.insert(RoleIcon, "icon");
+        m_roleNames.insert(RolePinned, "pinned");
+        m_roleNames.insert(RoleRunning, "running");
+        m_roleNames.insert(RoleRecent, "recent");
+        m_roleNames.insert(RoleProgress, "progress");
+        m_roleNames.insert(RoleCount, "count");
+    }
     /// @endcond
 
 public:
@@ -54,10 +64,11 @@ public:
      * See LauncherItemInterface properties for details.
      */
     enum Roles {
-        RoleDesktopFile = Qt::UserRole,
+        RoleAppId = Qt::UserRole,
+        RoleDesktopFile,
         RoleName,
         RoleIcon,
-        RoleFavorite,
+        RolePinned,
         RoleRunning,
         RoleRecent,
         RoleProgress,
@@ -68,6 +79,9 @@ public:
 
     /**
      * @brief Move an item in the model.
+     *
+     * @param oldIndex The current (old) index of the item to be moved.
+     * @param newIndex The new index where the item should be moved to.
      */
     Q_INVOKABLE virtual void move(int oldIndex, int newIndex) = 0;
 
@@ -81,20 +95,49 @@ public:
      */
     Q_INVOKABLE virtual unity::shell::launcher::LauncherItemInterface *get(int index) const = 0;
 
+    /**
+     * @brief Pin an item to the launcher.
+     *
+     * Recent and running applications will eventually disappear from the model
+     * as the application is closed or new recent items appear. Pinning an item
+     * to the launcher makes it persist until remove is called on it.
+     *
+     * @param appId The appId of the item to be pinned.
+     * @param index The index where the item should be pinned to. This parameter is optional
+     * and if not supplied, the item will be pinned to the current position.
+     * Note: If an item is not contained in the launcher yet, calling this without an index
+     * will pin the item to the end of the list.
+     */
+    Q_INVOKABLE virtual void pin(const QString &appId, int index = -1) = 0;
+
+    /**
+     * @brief Request removal of an item from the model.
+     *
+     * Note: The actual removal of the item might be delayed in certain circumstances.
+     *
+     * @param appId The appId of the item to be removed.
+     */
+    Q_INVOKABLE virtual void requestRemove(const QString &appId) = 0;
+
+
+    /**
+      * @brief Trigger an action from the QuickList
+      *
+      * @param appId The appId of the LauncherItem.
+      * @param actionIndex The index of the triggered entry in the QuickListModel.
+      */
+    Q_INVOKABLE virtual void quickListActionInvoked(const QString &appId, int actionIndex) = 0;
+
     /// @cond
     virtual QHash<int, QByteArray> roleNames() const
     {
-        QHash<int, QByteArray> roles;
-        roles.insert(RoleDesktopFile, "desktopFile");
-        roles.insert(RoleName, "name");
-        roles.insert(RoleIcon, "icon");
-        roles.insert(RoleFavorite, "favorite");
-        roles.insert(RoleRunning, "running");
-        roles.insert(RoleRecent, "recent");
-        roles.insert(RoleProgress, "progress");
-        roles.insert(RoleCount, "count");
-        return roles;
+        return m_roleNames;
     }
+    /// @endcond
+
+protected:
+    /// @cond
+    QHash<int, QByteArray> m_roleNames;
     /// @endcond
 
 };

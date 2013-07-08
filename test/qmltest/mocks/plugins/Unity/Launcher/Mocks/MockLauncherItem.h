@@ -28,15 +28,15 @@ class UNITY_API MockLauncherItem: public LauncherItemInterface
 {
     Q_OBJECT
 public:
-    MockLauncherItem(const QString& desktopFile, const QString& name, const QString& icon, QObject* parent = 0);
+    MockLauncherItem(const QString &appId, const QString& desktopFile, const QString& name, const QString& icon, QObject* parent = 0);
 
+    QString appId() const;
     QString desktopFile() const;
-
     QString name() const;
     QString icon() const;
 
-    bool favorite() const;
-    void setFavorite(bool favorite);
+    bool pinned() const;
+    void setPinned(bool pinned);
 
     bool running() const;
     void setRunning(bool running);
@@ -50,15 +50,19 @@ public:
     int count() const;
     void setCount(int count);
 
+    unity::shell::launcher::QuickListModelInterface *quickList() const;
+
 private:
+    QString m_appId;
     QString m_desktopFile;
     QString m_name;
     QString m_icon;
-    bool m_favorite;
+    bool m_pinned;
     bool m_running;
     bool m_recent;
     int m_progress;
     int m_count;
+    QuickListModelInterface *m_quickListModel;
 };
 
 #endif // MOCKLAUNCHERITEM_H

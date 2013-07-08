@@ -24,6 +24,10 @@ import Unity.Launcher 0.1
 
 Item {
 
+    SignalSpy {
+        id: signalSpy
+    }
+
     Verifier {
         id: checkModelVerifier
 
@@ -55,9 +59,17 @@ Item {
             }
         }
 
+        Repeater {
+            id: quickListRepeater
+            model: LauncherModel.get(0).quickList
+            delegate: Item {
+                property var roles: model
+            }
+        }
+
         function initTestCase() {
-            if (repeater.count < 4) {
-                print("This Test Suite requires at least 4 items in the model.")
+            if (repeater.count < 5) {
+                print("This Test Suite requires at least 5 items in the model.")
                 fail()
             }
         }
@@ -65,10 +77,11 @@ Item {
         /* make sure all the required roles are exposed on Model */
         function test_model_roles_data() {
             return [
+                        { tag: "Model.roles[appId]", role: "appId", type: "string" },
                         { tag: "Model.roles[desktopFile]", role: "desktopFile", type: "string" },
                         { tag: "Model.roles[name]", role: "name", type: "string" },
                         { tag: "Model.roles[icon]", role: "icon", type: "string" },
-                        { tag: "Model.roles[favorite]", role: "favorite", type: "boolean" },
+                        { tag: "Model.roles[pinned]", role: "pinned", type: "boolean" },
                         { tag: "Model.roles[running]", role: "running", type: "boolean" },
                         { tag: "Model.roles[recent]", role: "recent", type: "boolean" },
                         { tag: "Model.roles[progress]", role: "progress", type: "number" },
@@ -89,8 +102,11 @@ Item {
 
         function test_model_methods_data() {
             return [
-                        { tag: "Model.methods[get]", method: "get" },
-                        { tag: "Model.methods[move]", method: "move" }
+                { tag: "Model.methods[get]", method: "get" },
+                { tag: "Model.methods[move]", method: "move" },
+                { tag: "Model.methods[pin]", method: "pin" },
+                { tag: "Model.methods[requestRemove]", method: "requestRemove" },
+                { tag: "Model.methods[quickListActionInvoked]", method: "quickListActionInvoked" }
             ];
         }
 
@@ -102,15 +118,17 @@ Item {
 
         function test_item_properties_data() {
             return [
-                        { tag: "Item.properties[desktopFile]", constant: "desktopFile", type: "string" },
-                        { tag: "Item.properties[name]", constant: "name", type: "string" },
-                        { tag: "Item.properties[icon]", constant: "icon", type: "string" },
-                        { tag: "Item.properties[favorite]", property: "favorite", type: "boolean" },
-                        { tag: "Item.properties[recent]", property: "recent", type: "boolean" },
-                        { tag: "Item.properties[running]", property: "running", type: "boolean" },
-                        { tag: "Item.properties[progress]", property: "progress", type: "number" },
-                        { tag: "Item.properties[count]", property: "count", type: "number" },
-                    ];
+                { tag: "Item.properties[appId]", constant: "appId", type: "string" },
+                { tag: "Item.properties[desktopFile]", constant: "desktopFile", type: "string" },
+                { tag: "Item.properties[name]", constant: "name", type: "string" },
+                { tag: "Item.properties[icon]", constant: "icon", type: "string" },
+                { tag: "Item.properties[pinned]", property: "pinned", type: "boolean" },
+                { tag: "Item.properties[recent]", property: "recent", type: "boolean" },
+                { tag: "Item.properties[running]", property: "running", type: "boolean" },
+                { tag: "Item.properties[progress]", property: "progress", type: "number" },
+                { tag: "Item.properties[count]", property: "count", type: "number" },
+                { tag: "Item.properties[quickList]", constant: "quickList", type: "object" },
+            ];
         }
 
         function test_item_properties(data) {
@@ -125,18 +143,22 @@ Item {
             verifyData(data)
         }
 
-        function test_move() {
-            var item0 = LauncherModel.get(0)
-            var item1 = LauncherModel.get(1)
-            var item2 = LauncherModel.get(2)
-            var item3 = LauncherModel.get(3)
+        function test_quicklist_model_roles_data() {
+            return [
+                { tag: "Model.roles[label]", role: "label", type: "string" },
+                { tag: "Model.roles[icon]", role: "icon", type: "string" },
+            ];
+        }
 
-            LauncherModel.move(2, 0);
+        function test_quicklist_model_roles(data) {
+            name = "QuickListModel"
+            try {
+                object = quickListRepeater.itemAt(0).roles;
+            } catch(err) {
+                object = undefined;
+            }
 
-            compare(item2, LauncherModel.get(0), "Error moving Items im model")
-            compare(item0, LauncherModel.get(1), "Error moving Items im model")
-            compare(item1, LauncherModel.get(2), "Error moving Items im model")
-            compare(item3, LauncherModel.get(3), "Error moving Items im model")
+            verifyData(data);
         }
     }
 }

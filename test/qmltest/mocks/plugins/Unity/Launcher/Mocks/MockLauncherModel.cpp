@@ -24,25 +24,25 @@ using namespace unity::shell::launcher;
 
 MockLauncherModel::MockLauncherModel(QObject* parent): LauncherModelInterface(parent)
 {
-    LauncherItemInterface *item = new MockLauncherItem("/usr/share/applications/phone-app.desktop", "Phone", "phone-app");
+    MockLauncherItem *item = new MockLauncherItem("phone-app", "/usr/share/applications/phone-app.desktop", "Phone", "phone-app");
     m_list.append(item);
-    item = new MockLauncherItem("/usr/share/applications/camera-app.desktop", "Camera", "camera");
+    item = new MockLauncherItem("camera-app", "/usr/share/applications/camera-app.desktop", "Camera", "camera");
     m_list.append(item);
-    item = new MockLauncherItem("/usr/share/applications/gallery-app.desktop", "Gallery", "gallery");
+    item = new MockLauncherItem("gallery-app", "/usr/share/applications/gallery-app.desktop", "Gallery", "gallery");
     m_list.append(item);
-    item = new MockLauncherItem("/usr/share/applications/facebook-webapp.desktop", "Facebook", "facebook");
+    item = new MockLauncherItem("facebook-webapp", "/usr/share/applications/facebook-webapp.desktop", "Facebook", "facebook");
     m_list.append(item);
-    item = new MockLauncherItem("/usr/share/applications/webbrowser-app.desktop", "Browser", "browser");
+    item = new MockLauncherItem("webbrowser-app", "/usr/share/applications/webbrowser-app.desktop", "Browser", "browser");
     m_list.append(item);
-    item = new MockLauncherItem("/usr/share/applications/twitter-webapp.desktop", "Twitter", "twitter");
+    item = new MockLauncherItem("twitter-webapp", "/usr/share/applications/twitter-webapp.desktop", "Twitter", "twitter");
     m_list.append(item);
-    item = new MockLauncherItem("/usr/share/applications/gmail-webapp.desktop", "GMail", "gmail");
+    item = new MockLauncherItem("gmail-webapp", "/usr/share/applications/gmail-webapp.desktop", "GMail", "gmail");
     m_list.append(item);
-    item = new MockLauncherItem("/usr/share/applications/ubuntu-weather-app.desktop", "Weather", "weather");
+    item = new MockLauncherItem("ubuntu-weather-app", "/usr/share/applications/ubuntu-weather-app.desktop", "Weather", "weather");
     m_list.append(item);
-    item = new MockLauncherItem("/usr/share/applications/notes-app.desktop", "Notepad", "notepad");
+    item = new MockLauncherItem("notes-app", "/usr/share/applications/notes-app.desktop", "Notepad", "notepad");
     m_list.append(item);
-    item = new MockLauncherItem("/usr/share/applications/ubuntu-calendar-app.desktop","Calendar", "calendar");
+    item = new MockLauncherItem("ubuntu-calendar-app", "/usr/share/applications/ubuntu-calendar-app.desktop","Calendar", "calendar");
     m_list.append(item);
 }
 
@@ -66,14 +66,16 @@ QVariant MockLauncherModel::data(const QModelIndex& index, int role) const
     LauncherItemInterface *item = m_list.at(index.row());
     switch(role)
     {
+    case RoleAppId:
+        return item->appId();
     case RoleDesktopFile:
         return item->desktopFile();
     case RoleName:
         return item->name();
     case RoleIcon:
         return item->icon();
-    case RoleFavorite:
-        return item->favorite();
+    case RolePinned:
+        return item->pinned();
     case RoleRunning:
         return item->running();
     case RoleRecent:
@@ -98,7 +100,23 @@ LauncherItemInterface *MockLauncherModel::get(int index) const
 
 void MockLauncherModel::move(int oldIndex, int newIndex)
 {
-    beginMoveRows(QModelIndex(), oldIndex, oldIndex, QModelIndex(), newIndex);
-    m_list.move(oldIndex, newIndex);
-    endMoveRows();
+    Q_UNUSED(oldIndex)
+    Q_UNUSED(newIndex)
+}
+
+void MockLauncherModel::pin(const QString &appId, int index)
+{
+    Q_UNUSED(appId)
+    Q_UNUSED(index)
+}
+
+void MockLauncherModel::requestRemove(const QString &appId)
+{
+    Q_UNUSED(appId)
+}
+
+void MockLauncherModel::quickListActionInvoked(const QString &appId, int actionIndex)
+{
+    Q_UNUSED(appId)
+    Q_UNUSED(actionIndex)
 }
