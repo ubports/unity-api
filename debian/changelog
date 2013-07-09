@@ -1,8 +1,12 @@
-unity-api (7.80.3-0ubuntu1) UNRELEASED; urgency=low
+unity-api (7.80.3+13.10.20130709ubuntu.unity.next-0ubuntu1) saucy; urgency=low
 
+  [ Michael Zanetti ]
   * added quicklist support to launcher api
 
- -- Michael Zanetti <michael.zanetti@canonical.com>  Fri, 05 Jul 2013 17:29:44 +0200
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 76 (ubuntu-unity/next)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 09 Jul 2013 02:58:47 +0000
 
 unity-api (7.80.2+13.10.20130703ubuntu.unity.next-0ubuntu1) saucy; urgency=low
 
