@@ -20,6 +20,7 @@
 #define UNITY_UTIL_INIPARSER_H
 
 #include <unity/SymbolExport.h>
+#include <unity/util/DefinesPtrs.h>
 
 #include<string>
 #include<vector>
@@ -71,6 +72,8 @@ public:
     ~IniParser() noexcept;
 
     /// @cond
+    UNITY_DEFINES_PTRS(IniParser);
+
     IniParser(const IniParser& ip) = delete;
     IniParser() = delete;
     /// @endcond
