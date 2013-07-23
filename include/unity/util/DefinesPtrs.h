@@ -21,25 +21,21 @@
 
 #include <memory>
 
-namespace unity
-{
-
-namespace util
-{
-
 /**
-\brief Helper template to inject smart pointer definitions into a class.
+\file DefinesPtrs.h
+\def UNITY_DEFINES_PTRS(classname)
+\brief Macro to add smart pointer definitions to a class.
 
-This template injects type definitions for smart pointer types into a class. It is useful to
+This macro injects type definitions for smart pointer types into a class. It is useful to
 establish a common naming convention for smart pointers across a project.
 
-You can use the template as follows. Note that the template parameter is the name of the class
-being defined ("curiously recurring template pattern").
+You can use the macro as follows. Note that the macro argument is the name of the class being defined.
 
 ~~~
-* class MyClass : public util::DefinesPtrs<MyClass>
+* class MyClass
 * {
 * public:
+*     UNITY_DEFINES_PTRS(MyClass);
 *     // MyClass now provides public typedefs for SPtr, SCPtr, UPtr, and UCPtr.
 *     // ...
 * };
@@ -53,37 +49,10 @@ Callers of <code>MyClass</code> can now, for example, write
 
 */
 
-template <typename T>
-class DefinesPtrs
-{
-public:
-    /**
-    A <code>std::shared_ptr</code> to a non-constant instance.
-    */
-    typedef std::shared_ptr<T> SPtr;
-
-    /**
-    A <code>std::shared_ptr</code> to a constant instance.
-    */
-    typedef std::shared_ptr<T const> SCPtr;
-
-    /**
-    A <code>std::unique_ptr</code> to a non-constant instance.
-    */
-    typedef std::unique_ptr<T> UPtr;
-
-    /**
-    A <code>std::unique_ptr</code> to a constant instance.
-    */
-    typedef std::unique_ptr<T const> UCPtr;
-
-protected:                                  // Not meant to be instantiated stand-alone
-    DefinesPtrs() = default;
-    virtual ~DefinesPtrs() = default;
-};
-
-} // namespace util
-
-} // namespace unity
+#define UNITY_DEFINES_PTRS(classname)               \
+    typedef std::shared_ptr<classname>       SPtr;  \
+    typedef std::shared_ptr<classname const> SCPtr; \
+    typedef std::unique_ptr<classname>       UPtr;  \
+    typedef std::unique_ptr<classname const> UCPtr
 
 #endif

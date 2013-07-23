@@ -23,23 +23,42 @@
 
 using namespace unity::util;
 
-class MyClass : public DefinesPtrs<MyClass>, private NonCopyable
+class MyClass : private NonCopyable
 {
 public:
+    UNITY_DEFINES_PTRS(MyClass);
+
     static SPtr create()
     {
         return SPtr(new MyClass);
     }
 
-private:
+protected:
     MyClass()
+    {
+    }
+};
+
+class MyDerivedClass : public MyClass
+{
+public:
+    UNITY_DEFINES_PTRS(MyDerivedClass);
+
+    static UPtr create()
+    {
+        return UPtr(new MyDerivedClass);
+    }
+
+protected:
+    MyDerivedClass()
     {
     }
 };
 
 TEST(DefinesPtrs, basic)
 {
-    // No real test here. This is just so we get function coverage for the coverage tests.
+    // No real test here. This is just so we check that things compile.
 
     MyClass::SPtr p = MyClass::create();
+    MyDerivedClass::UPtr q = MyDerivedClass::create();
 }
