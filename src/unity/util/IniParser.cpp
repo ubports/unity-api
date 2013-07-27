@@ -68,7 +68,7 @@ IniParser::IniParser(const char* filename)
     GError* e = nullptr;
     if (!kf)
     {
-        throw ResourceException("Could not create keyfile parser.");
+        throw ResourceException("Could not create keyfile parser."); // LCOV_EXCL_LINE
     }
     if (!g_key_file_load_from_file(kf, filename, G_KEY_FILE_NONE, &e))
     {
