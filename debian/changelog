@@ -1,3 +1,18 @@
+unity-api (7.80.3+13.10.20130729ubuntu.unity.next-0ubuntu1) saucy; urgency=low
+
+  [ Michi Henning ]
+  * Changed DefinesPtrs to a macro. That way, we don't need a virtual
+    destructor, and the generated typedefs can be used with POD types.
+    The macro also prevents ambiguous names that were caused by the
+    template for classes in a derivation hierarchy.
+  * Added UNITY_DEFINES_PTRS (needed by scopes). Added coverage
+    suppresssion for unreachable line of code.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 79 (ubuntu-unity/next)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 29 Jul 2013 03:40:54 +0000
+
 unity-api (7.80.3+13.10.20130709ubuntu.unity.next-0ubuntu1) saucy; urgency=low
 
   [ Michael Zanetti ]
