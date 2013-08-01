@@ -1,3 +1,9 @@
+unity-api (7.80.3+13.10.20130801-0ubuntu1) saucy; urgency=low
+
+  * Automatic snapshot from revision 80
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 01 Aug 2013 14:30:16 +0000
+
 unity-api (7.80.3+13.10.20130729ubuntu.unity.next-0ubuntu1) saucy; urgency=low
 
   [ Michi Henning ]
