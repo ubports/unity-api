@@ -35,7 +35,7 @@ QVariant MockQuickListModel::data(const QModelIndex &index, int role) const
         return QLatin1String("test menu entry ") + QString::number(index.row());
     case RoleIcon:
         return QLatin1String("copy.png");
-    case RoleHasAction:
+    case RoleClickable:
         return true;
     }
     return QVariant();
