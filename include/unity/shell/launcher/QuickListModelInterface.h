@@ -37,6 +37,7 @@ namespace launcher
   * The model has the following roles:
   * - RoleLabel (label): The text entry in the QuickList menu (QString).
   * - RoleIcon (icon): The icon to be shown for this entry (QString).
+  * - RoleClickable (clickable): Determines if the entry can be triggered or is just a static text (boolean)
   */
 class UNITY_API QuickListModelInterface: public QAbstractListModel
 {
@@ -47,6 +48,7 @@ protected:
     explicit QuickListModelInterface(QObject *parent = 0) : QAbstractListModel(parent) {
         m_roleNames.insert(RoleLabel, "label");
         m_roleNames.insert(RoleIcon, "icon");
+        m_roleNames.insert(RoleClickable, "clickable");
     }
     /// @endcond
 public:
@@ -57,7 +59,8 @@ public:
      */
     enum Roles {
         RoleLabel,
-        RoleIcon
+        RoleIcon,
+        RoleClickable
     };
 
     /// @cond
