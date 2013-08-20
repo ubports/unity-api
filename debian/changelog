@@ -1,3 +1,14 @@
+unity-api (7.80.3+13.10.20130820-0ubuntu1) saucy; urgency=low
+
+  [ Michael Zanetti ]
+  * Add a role, clickable to quicklistModel which determines if the
+    entry can be clicked or not.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 82
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 20 Aug 2013 02:08:23 +0000
+
 unity-api (7.80.3+13.10.20130801-0ubuntu1) saucy; urgency=low
 
   * Automatic snapshot from revision 80
