@@ -128,6 +128,14 @@ public:
       */
     Q_INVOKABLE virtual void quickListActionInvoked(const QString &appId, int actionIndex) = 0;
 
+
+    /**
+      * @brief Set the user for which the launcher should display items.
+      *
+      * @param username The user for which the launcher should display items.
+      */
+    Q_INVOKABLE virtual void setUser(const QString &username) = 0;
+
     /// @cond
     virtual QHash<int, QByteArray> roleNames() const
     {
