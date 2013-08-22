@@ -106,7 +106,8 @@ Item {
                 { tag: "Model.methods[move]", method: "move" },
                 { tag: "Model.methods[pin]", method: "pin" },
                 { tag: "Model.methods[requestRemove]", method: "requestRemove" },
-                { tag: "Model.methods[quickListActionInvoked]", method: "quickListActionInvoked" }
+                { tag: "Model.methods[quickListActionInvoked]", method: "quickListActionInvoked" },
+                { tag: "Model.methods[setUser]", method: "setUser" }
             ];
         }
 
