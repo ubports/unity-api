@@ -1,3 +1,13 @@
+unity-api (7.80.3+13.10.20130826-0ubuntu1) saucy; urgency=low
+
+  [ Michael Zanetti ]
+  * Add setUser method to LauncherModel.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 86
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 26 Aug 2013 02:31:24 +0000
+
 unity-api (7.80.3+13.10.20130820.2-0ubuntu1) saucy; urgency=low
 
   * Automatic snapshot from revision 84
