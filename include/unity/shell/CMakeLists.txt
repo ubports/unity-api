@@ -1,5 +1,6 @@
 add_subdirectory(notifications)
 add_subdirectory(launcher)
+add_subdirectory(application)
 
 file(GLOB headers "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
 file(GLOB internal_headers "${CMAKE_CURRENT_SOURCE_DIR}/internal/*.h")
