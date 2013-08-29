@@ -99,13 +99,34 @@ class UNITY_API ApplicationInfoInterface: public QObject
 protected:
     /// @cond
     ApplicationInfo(const QString &appId, QObject* parent = 0): QObject(parent) {}
+    /// @endcond
 
 public:
+    /**
+     * @brief A enum that defines a stage.
+     *
+     * MainStage: The main stage, which is the normal place for applications in
+     * traditional desktop environments.
+     * SideStage: The side stage, a panel on the right to place phone form factor
+     * applications.
+     */
     enum Stage {
         MainStage,
         SideStage
     };
 
+    /**
+     * @brief An application's state.
+     *
+     * Starting: The application was launched and is currently starting up.
+     * Running: The application is running and ready to be used.
+     * Suspended: The application is in the background and has been suspended by
+     * the system in order to save resources.
+     * Stopped: The application is in the background and has been stopped by
+     * the system in order to save resources. From a programmers point of view,
+     * the application is closed, but it's state has been stored to disk and
+     * can be restored upon next launch.
+     */
     enum State {
         Starting,
         Running,
@@ -113,6 +134,7 @@ public:
         Stopped
     };
 
+    /// @cond
     virtual ~ApplicationInfo() {}
 
     virtual QString appId() const = 0;
@@ -122,8 +144,10 @@ public:
     virtual Stage stage() const = 0;
     virtual State state() const = 0;
     virtual bool focused() const = 0;
+    /// @endcond
 
 Q_SIGNALS:
+    /// @cond
     void nameChanged(const QString &name);
     void commentChanged(const QString &comment);
     void iconChanged(const QUrl &icon);
