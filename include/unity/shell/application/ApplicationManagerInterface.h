@@ -56,21 +56,12 @@ class UNITY_API ApplicationManagerInterface: public QAbstractListModel
      *
      * Use focusApplication() and unfocusCurrentApplication() to modify this.
      */
-    Q_PROPERTY(ApplicationInfoInterface* focusedApplication READ focusedApplication NOTIFY focusedApplicationChanged)
+    Q_PROPERTY(unity::shell::application::ApplicationInfoInterface* focusedApplication READ focusedApplication NOTIFY focusedApplicationChanged)
 
 protected:
     /// @cond
-    ApplicationManagerInterface(QObject* parent = 0): QObject(parent)
+    ApplicationManagerInterface(QObject* parent = 0): QAbstractListModel(parent)
     {
-        connect(this, SIGNAL(rowsInserted(QModelIndex, int, int)), SIGNAL(countChanged()));
-        connect(this, SIGNAL(rowsRemoved(QModelIndex, int, int)), SIGNAL(countChanged()));
-        connect(this, SIGNAL(modelReset()), SIGNAL(countChanged()));
-        connect(this, SIGNAL(layoutChanged()), SIGNAL(countChanged()));
-    }
-    /// @endcond
-
-    /// @cond
-    ApplicationListModelInterface(QObject *parent = 0): QAbstractListModel(parent) {
         m_roleNames.insert(RoleAppId, "appId");
         m_roleNames.insert(RoleName, "name");
         m_roleNames.insert(RoleComment, "comment");
@@ -78,9 +69,13 @@ protected:
         m_roleNames.insert(RoleStage, "stage");
         m_roleNames.insert(RoleState, "state");
         m_roleNames.insert(RoleFocused, "focused");
+
+        connect(this, SIGNAL(rowsInserted(QModelIndex, int, int)), SIGNAL(countChanged()));
+        connect(this, SIGNAL(rowsRemoved(QModelIndex, int, int)), SIGNAL(countChanged()));
+        connect(this, SIGNAL(modelReset()), SIGNAL(countChanged()));
+        connect(this, SIGNAL(layoutChanged()), SIGNAL(countChanged()));
     }
     /// @endcond
-
 
 public:
     /**
@@ -134,12 +129,12 @@ public:
      *
      * @param application The application to be focused.
      */
-    Q_INVOKABLE void focusApplication(ApplicationInfoInterface *application) = 0;
+    Q_INVOKABLE virtual void focusApplication(ApplicationInfoInterface *application) = 0;
 
     /**
      * @brief Unfocus the currently focused application.
      */
-    Q_INVOKABLE void unfocusCurrentApplication() = 0;
+    Q_INVOKABLE virtual void unfocusCurrentApplication() = 0;
 
     /**
      * @brief Start a process.
@@ -147,12 +142,12 @@ public:
      * @param appId The appId for the application to be spawned.
      * @param arguments Any arguments to be passed to the process.
      */
-    Q_INVOKABLE unity::shell::application::ApplicationInfoInterface* startProcess(const QString &appId, const QStringList &arguments) = 0;
+    Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface* startProcess(const QString &appId, const QStringList &arguments) = 0;
 
     /**
       * @brief Stops a process.
       */
-    Q_INVOKABLE void stopProcess(ApplicationInfoInterface* application) = 0;
+    Q_INVOKABLE virtual void stopProcess(ApplicationInfoInterface* application) = 0;
 
 Q_SIGNALS:
     /// @cond
@@ -175,4 +170,3 @@ protected:
 } // namespace unity
 
 #endif // UNITY_SHELL_APPLICATIONMANAGER_APPLICATIONINFO_H
-

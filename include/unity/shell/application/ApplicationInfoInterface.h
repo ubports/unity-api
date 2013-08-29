@@ -23,6 +23,7 @@
 #include <unity/SymbolExport.h>
 
 #include <QtCore/QObject>
+#include <QtCore/QUrl>
 
 namespace unity
 {
@@ -98,7 +99,7 @@ class UNITY_API ApplicationInfoInterface: public QObject
 
 protected:
     /// @cond
-    ApplicationInfo(const QString &appId, QObject* parent = 0): QObject(parent) {}
+    ApplicationInfoInterface(const QString &appId, QObject* parent = 0): QObject(parent) { Q_UNUSED(appId) }
     /// @endcond
 
 public:
@@ -135,7 +136,7 @@ public:
     };
 
     /// @cond
-    virtual ~ApplicationInfo() {}
+    virtual ~ApplicationInfoInterface() {}
 
     virtual QString appId() const = 0;
     virtual QString name() const = 0;
