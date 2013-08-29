@@ -20,7 +20,7 @@
 import QtQuick 2.0
 import QtTest 1.0
 import TestUtil 0.1
-import Ubuntu.Application 0.1
+import Unity.Application 0.1
 
 Item {
 
@@ -88,8 +88,8 @@ Item {
                 { tag: "ApplicationManager.methods[get]", method: "get" },
                 { tag: "ApplicationManager.methods[focusApplication]", method: "focusApplication" },
                 { tag: "ApplicationManager.methods[unfocusCurrentApplication]", method: "unfocusCurrentApplication" },
-                { tag: "ApplicationManager.methods[startProcess]", method: "startProcess" },
-                { tag: "ApplicationManager.methods[stopProcess]", method: "stopProcess" },
+                { tag: "ApplicationManager.methods[startApplication]", method: "startApplication" },
+                { tag: "ApplicationManager.methods[stopApplication]", method: "stopApplication" },
             ];
         }
 
