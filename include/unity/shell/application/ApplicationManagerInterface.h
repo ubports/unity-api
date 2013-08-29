@@ -52,7 +52,7 @@ class UNITY_API ApplicationManagerInterface: public QAbstractListModel
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
     /**
-     * @bried The currently focused application.
+     * @brief The currently focused application.
      *
      * Use focusApplication() and unfocusCurrentApplication() to modify this.
      */
@@ -95,19 +95,17 @@ public:
 
     /// @cond
     virtual ~ApplicationManagerInterface() {}
-    /// @endcond
 
-    /// @cond
     virtual QHash<int, QByteArray> roleNames() const
     {
         return m_roleNames;
     }
-    /// @endcond
 
-    /// @cond
     int count() const {
         return rowCount();
     }
+
+    virtual unity::shell::application::ApplicationInfoInterface *focusedApplication() const = 0;
     /// @endcond
 
     /**
@@ -119,10 +117,6 @@ public:
      * @returns The item.
      */
     Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *get(int index) const = 0;
-
-    /// @cond
-    virtual unity::shell::application::ApplicationInfoInterface *focusedApplication() const = 0;
-    /// @endcond
 
     /**
      * @brief Focus the given application.
@@ -137,17 +131,19 @@ public:
     Q_INVOKABLE virtual void unfocusCurrentApplication() = 0;
 
     /**
-     * @brief Start a process.
+     * @brief Start an application.
      *
      * @param appId The appId for the application to be spawned.
      * @param arguments Any arguments to be passed to the process.
      */
-    Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface* startProcess(const QString &appId, const QStringList &arguments) = 0;
+    Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface* startApplication(const QString &appId, const QStringList &arguments) = 0;
 
     /**
-      * @brief Stops a process.
+      * @brief Stops an application.
+      *
+      * @param application The application to be stopped.
       */
-    Q_INVOKABLE virtual void stopProcess(ApplicationInfoInterface* application) = 0;
+    Q_INVOKABLE virtual void stopApplication(ApplicationInfoInterface* application) = 0;
 
 Q_SIGNALS:
     /// @cond

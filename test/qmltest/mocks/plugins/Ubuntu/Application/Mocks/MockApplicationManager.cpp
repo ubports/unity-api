@@ -24,29 +24,12 @@ using namespace unity::shell::application;
 
 MockApplicationManager::MockApplicationManager(QObject* parent): ApplicationManagerInterface(parent)
 {
-    MockApplicationInfo *item = new MockApplicationInfo("phone-app", "Phone App", "This is a comment", QUrl("/usr/share/pixmaps/some/icon.png"));
+    MockApplicationInfo *item = new MockApplicationInfo("phone-app", "Phone App", "Telephony application", QUrl("/usr/share/pixmaps/some/icon.png"));
     m_list.append(item);
-/*    MockLauncherItem *item = new MockLauncherItem("phone-app", "/usr/share/applications/phone-app.desktop", "Phone", "phone-app");
+    item = new MockApplicationInfo("camera-app", "Camera App", "Lets you take pictures with the camera.", QUrl("/usr/share/pixmaps/some/icon.png"));
     m_list.append(item);
-    item = new MockLauncherItem("camera-app", "/usr/share/applications/camera-app.desktop", "Camera", "camera");
+    item = new MockApplicationInfo("calendar-app", "Calendar App", "5 missed reminders", QUrl("/usr/share/pixmaps/some/icon.png"));
     m_list.append(item);
-    item = new MockLauncherItem("gallery-app", "/usr/share/applications/gallery-app.desktop", "Gallery", "gallery");
-    m_list.append(item);
-    item = new MockLauncherItem("facebook-webapp", "/usr/share/applications/facebook-webapp.desktop", "Facebook", "facebook");
-    m_list.append(item);
-    item = new MockLauncherItem("webbrowser-app", "/usr/share/applications/webbrowser-app.desktop", "Browser", "browser");
-    m_list.append(item);
-    item = new MockLauncherItem("twitter-webapp", "/usr/share/applications/twitter-webapp.desktop", "Twitter", "twitter");
-    m_list.append(item);
-    item = new MockLauncherItem("gmail-webapp", "/usr/share/applications/gmail-webapp.desktop", "GMail", "gmail");
-    m_list.append(item);
-    item = new MockLauncherItem("ubuntu-weather-app", "/usr/share/applications/ubuntu-weather-app.desktop", "Weather", "weather");
-    m_list.append(item);
-    item = new MockLauncherItem("notes-app", "/usr/share/applications/notes-app.desktop", "Notepad", "notepad");
-    m_list.append(item);
-    item = new MockLauncherItem("ubuntu-calendar-app", "/usr/share/applications/ubuntu-calendar-app.desktop","Calendar", "calendar");
-    m_list.append(item);
-*/
 }
 
 MockApplicationManager::~MockApplicationManager()
@@ -111,14 +94,14 @@ void MockApplicationManager::unfocusCurrentApplication()
 {
 }
 
-unity::shell::application::ApplicationInfoInterface *MockApplicationManager::startProcess(const QString &appId, const QStringList &arguments)
+unity::shell::application::ApplicationInfoInterface *MockApplicationManager::startApplication(const QString &appId, const QStringList &arguments)
 {
     Q_UNUSED(appId)
     Q_UNUSED(arguments)
     return 0;
 }
 
-void MockApplicationManager::stopProcess(unity::shell::application::ApplicationInfoInterface *application)
+void MockApplicationManager::stopApplication(unity::shell::application::ApplicationInfoInterface *application)
 {
     Q_UNUSED(application)
 }
