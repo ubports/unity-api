@@ -81,7 +81,7 @@ public:
     /**
      * @brief The Roles supported by the model
      *
-     * See LauncherItemInterface properties for details.
+     * See ApplicationInfoInterface properties for details.
      */
     enum Roles {
         RoleAppId = Qt::UserRole,
