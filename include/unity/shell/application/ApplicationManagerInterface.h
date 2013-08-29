@@ -51,6 +51,13 @@ class UNITY_API ApplicationManagerInterface: public QAbstractListModel
      */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
+    /**
+     * @bried The currently focused application.
+     *
+     * Use focusApplication() and unfocusCurrentApplication() to modify this.
+     */
+    Q_PROPERTY(ApplicationInfoInterface* focusedApplication READ focusedApplication NOTIFY focusedApplicationChanged)
+
 protected:
     /// @cond
     ApplicationManagerInterface(QObject* parent = 0): QObject(parent)
@@ -118,14 +125,19 @@ public:
      */
     Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *get(int index) const = 0;
 
+    /// @cond
+    virtual unity::shell::application::ApplicationInfoInterface *focusedApplication() const = 0;
+    /// @endcond
 
     /**
-     * @brief Focus an application.
+     * @brief Focus the given application.
+     *
+     * @param application The application to be focused.
      */
     Q_INVOKABLE void focusApplication(ApplicationInfoInterface *application) = 0;
 
     /**
-     * @brief Unfocus an application.
+     * @brief Unfocus the currently focused application.
      */
     Q_INVOKABLE void unfocusCurrentApplication() = 0;
 
