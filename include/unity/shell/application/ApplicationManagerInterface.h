@@ -23,6 +23,7 @@
 #include <unity/SymbolExport.h>
 
 #include <QtCore/QObject>
+#include <QtCore/QAbstractListModel>
 
 namespace unity
 {
@@ -31,65 +32,130 @@ namespace shell
 namespace application
 {
 
+class ApplicationInfoInterface;
+
 /**
  * @brief The Application manager
  *
  * This is the main class to interact with Applications
  */
 
-class UNITY_API ApplicationManagerInterface: public QObject
+class UNITY_API ApplicationManagerInterface: public QAbstractListModel
 {
     Q_OBJECT
 
     /**
-     * Holds all the applications known to the ApplicationManager.
+     * @brief The count of the applications known to the manager.
+     *
+     * This is the same as rowCount, added in order to keep compatibility with QML ListModels.
      */
-    Q_PROPERTY(ApplicationListModel* applications READ applications CONSTANT)
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 protected:
     /// @cond
-    ApplicationManagerInterface(QObject* parent = 0): QObject(parent) {}
+    ApplicationManagerInterface(QObject* parent = 0): QObject(parent)
+    {
+        connect(this, SIGNAL(rowsInserted(QModelIndex, int, int)), SIGNAL(countChanged()));
+        connect(this, SIGNAL(rowsRemoved(QModelIndex, int, int)), SIGNAL(countChanged()));
+        connect(this, SIGNAL(modelReset()), SIGNAL(countChanged()));
+        connect(this, SIGNAL(layoutChanged()), SIGNAL(countChanged()));
+    }
     /// @endcond
-
-public:
-    enum Flag {
-        NoFlag = 0x0,
-        ForceMainStage = 0x1,
-    };
-    Q_DECLARE_FLAGS(ExecFlags, Flag)
 
     /// @cond
-    virtual ~ApplicationInfo() {}
+    ApplicationListModelInterface(QObject *parent = 0): QAbstractListModel(parent) {
+        m_roleNames.insert(RoleAppId, "appId");
+        m_roleNames.insert(RoleName, "name");
+        m_roleNames.insert(RoleComment, "comment");
+        m_roleNames.insert(RoleIcon, "icon");
+        m_roleNames.insert(RoleStage, "stage");
+        m_roleNames.insert(RoleState, "state");
+        m_roleNames.insert(RoleFocused, "focused");
+    }
     /// @endcond
+
+
+public:
+    /**
+     * @brief The Roles supported by the model
+     *
+     * See LauncherItemInterface properties for details.
+     */
+    enum Roles {
+        RoleAppId = Qt::UserRole,
+        RoleName,
+        RoleComment,
+        RoleIcon,
+        RoleStage,
+        RoleState,
+        RoleFocused,
+    };
+
+    /// @cond
+    virtual ~ApplicationManagerInterface() {}
+    /// @endcond
+
+    /// @cond
+    virtual QHash<int, QByteArray> roleNames() const
+    {
+        return m_roleNames;
+    }
+    /// @endcond
+
+    /// @cond
+    int count() const {
+        return rowCount();
+    }
+    /// @endcond
+
+    /**
+     * @brief Get an ApplicationInfo item.
+     *
+     * Note: QML requires the full namespace in the return value.
+     *
+     * @param index the index of the item to get
+     * @returns The item.
+     */
+    Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *get(int index) const = 0;
+
 
     /**
      * @brief Focus an application.
      */
-    void focusApplication(ApplicationInfoInterface *application);
+    Q_INVOKABLE void focusApplication(ApplicationInfoInterface *application) = 0;
 
     /**
      * @brief Unfocus an application.
      */
-    void unfocusCurrentApplication(StageHint stageHint);
+    Q_INVOKABLE void unfocusCurrentApplication() = 0;
 
     /**
      * @brief Start a process.
      *
-     * @param desktopFile // TODO: really desktopFile? Shouldn't this be appId?
-     * @param flags Special Flags for the execution of this process.
+     * @param appId The appId for the application to be spawned.
+     * @param arguments Any arguments to be passed to the process.
      */
-    Application* startProcess(QString desktopFile, ExecFlags flags, QStringList arguments)
+    Q_INVOKABLE unity::shell::application::ApplicationInfoInterface* startProcess(const QString &appId, const QStringList &arguments) = 0;
 
     /**
       * @brief Stops a process.
       */
-    void stopProcess(ApplicationInfoInterface* application)
+    Q_INVOKABLE void stopProcess(ApplicationInfoInterface* application) = 0;
 
 Q_SIGNALS:
-    // TODO: needed?
-    void mainStageFocusedApplicationChanged();
-    void sideStageFocusedApplicationChanged();
-    void focusRequested(FavoriteApplication favoriteApplication);
+    /// @cond
+    void countChanged();
+    /// @endcond
+
+    /**
+     * @brief Will be emitted whenever the focused application changes.
+     */
+    void focusedApplicationChanged();
+
+protected:
+    /// @cond
+    QHash<int, QByteArray> m_roleNames;
+    /// @endcond
 };
 
 } // namespace application
@@ -97,3 +163,4 @@ Q_SIGNALS:
 } // namespace unity
 
 #endif // UNITY_SHELL_APPLICATIONMANAGER_APPLICATIONINFO_H
+
