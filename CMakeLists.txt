@@ -111,6 +111,8 @@ if (Werror)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 endif()
 
+set(MCHECK_LIBS "-lmcheck")
+
 # API version
 set(UNITY_API_MAJOR 0)
 set(UNITY_API_MINOR 1)
@@ -124,14 +126,17 @@ set(UNITY_API_LIB unity-api)
 set(UNITY_API_STATIC_LIB unity-api-static)
 
 # Other libraries we depend on
-set(OTHER_API_LIBS )
+set(OTHER_API_LIBS)
 
 # All the libraries we need to link a normal executable that uses the Unity API
 set(LIBS ${UNITY_API_LIB} ${OTHER_API_LIBS})
 
 # All the libraries we need to link a gtest executable. (We link the tests against a static version
 # so we can do whitebox testing on internal classes.
-set(TESTLIBS ${UNITY_API_STATIC_LIB} ${OTHER_API_LIBS})
+# mcheck is applied to test executables and not the actual library because using it
+# on both causes a linker error. We can also use it on release builds because
+# test executables are never installed.
+set(TESTLIBS ${UNITY_API_STATIC_LIB} ${OTHER_API_LIBS} ${MCHECK_LIBS})
 
 # Library install prefix
 set(LIB_INSTALL_PREFIX lib/${CMAKE_LIBRARY_ARCHITECTURE})
