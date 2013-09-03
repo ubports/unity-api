@@ -75,33 +75,48 @@ unity::shell::application::ApplicationInfoInterface *MockApplicationManager::get
 {
     if (index < 0 || index >= m_list.count())
     {
-        return 0;
+        return nullptr;
     }
     return m_list.at(index);
 }
 
-unity::shell::application::ApplicationInfoInterface *MockApplicationManager::focusedApplication() const
+unity::shell::application::ApplicationInfoInterface *MockApplicationManager::findApplication(const QString &appId) const
 {
-    return m_list.first();
+    for (auto app : m_list)
+    {
+        if (app->appId() == appId)
+        {
+            return app;
+        }
+    }
+    return nullptr;
 }
 
-void MockApplicationManager::focusApplication(ApplicationInfoInterface *application)
+QString MockApplicationManager::focusedApplication() const
 {
-    Q_UNUSED(application)
+    auto first = m_list.first();
+    return (first) ? first->appId() : QString();
+}
+
+bool MockApplicationManager::focusApplication(const QString &appId)
+{
+    Q_UNUSED(appId)
+    return true;
 }
 
 void MockApplicationManager::unfocusCurrentApplication()
 {
 }
 
-unity::shell::application::ApplicationInfoInterface *MockApplicationManager::startApplication(const QString &appId, const QStringList &arguments)
+bool MockApplicationManager::startApplication(const QString &appId, const QStringList &arguments)
 {
     Q_UNUSED(appId)
     Q_UNUSED(arguments)
-    return 0;
+    return true;
 }
 
-void MockApplicationManager::stopApplication(unity::shell::application::ApplicationInfoInterface *application)
+bool MockApplicationManager::stopApplication(const QString &appId)
 {
-    Q_UNUSED(application)
+    Q_UNUSED(appId)
+    return true;
 }

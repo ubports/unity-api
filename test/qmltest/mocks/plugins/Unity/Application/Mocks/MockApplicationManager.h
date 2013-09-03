@@ -38,17 +38,19 @@ public:
 
     QVariant data(const QModelIndex& index, int role) const;
 
-    unity::shell::application::ApplicationInfoInterface *focusedApplication() const;
+    QString focusedApplication() const;
 
-    Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *get(int index) const;
+    Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *get(const int index) const;
 
-    Q_INVOKABLE void focusApplication(unity::shell::application::ApplicationInfoInterface *application);
+    Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *findApplication(const QString &appId) const;
+
+    Q_INVOKABLE bool focusApplication(const QString &appId);
 
     Q_INVOKABLE void unfocusCurrentApplication();
 
-    Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *startApplication(const QString &appId, const QStringList &arguments);
+    Q_INVOKABLE bool startApplication(const QString &appId, const QStringList &arguments);
 
-    Q_INVOKABLE void stopApplication(unity::shell::application::ApplicationInfoInterface *application);
+    Q_INVOKABLE bool stopApplication(const QString &appId);
 
 private:
     QList<MockApplicationInfo*> m_list;

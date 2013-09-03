@@ -56,7 +56,7 @@ class UNITY_API ApplicationManagerInterface: public QAbstractListModel
      *
      * Use focusApplication() and unfocusCurrentApplication() to modify this.
      */
-    Q_PROPERTY(unity::shell::application::ApplicationInfoInterface* focusedApplication READ focusedApplication NOTIFY focusedApplicationChanged)
+    Q_PROPERTY(QString focusedApplication READ focusedApplication NOTIFY focusedApplicationChanged)
 
 protected:
     /// @cond
@@ -105,25 +105,36 @@ public:
         return rowCount();
     }
 
-    virtual unity::shell::application::ApplicationInfoInterface *focusedApplication() const = 0;
+    virtual QString focusedApplication() const = 0;
     /// @endcond
 
     /**
-     * @brief Get an ApplicationInfo item.
+     * @brief Get an ApplicationInfo item (using stack index).
      *
      * Note: QML requires the full namespace in the return value.
      *
      * @param index the index of the item to get
-     * @returns The item.
+     * @returns The item, or null if not found.
      */
-    Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *get(int index) const = 0;
+    Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *get(const int index) const = 0;
+
+    /**
+     * @brief Get an ApplicationInfo item (using the appId).
+     *
+     * Note: QML requires the full namespace in the return value.
+     *
+     * @param appId the appId of the item to get
+     * @returns The item, or null if not found.
+     */
+    Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *findApplication(const QString &appId) const = 0;
 
     /**
      * @brief Focus the given application.
      *
      * @param application The application to be focused.
+     * @returns True if appId found and application focused, else false.
      */
-    Q_INVOKABLE virtual void focusApplication(ApplicationInfoInterface *application) = 0;
+    Q_INVOKABLE virtual bool focusApplication(const QString &appId) = 0;
 
     /**
      * @brief Unfocus the currently focused application.
@@ -135,15 +146,17 @@ public:
      *
      * @param appId The appId for the application to be spawned.
      * @param arguments Any arguments to be passed to the process.
+     * @returns True if application start successful, else false.
      */
-    Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface* startApplication(const QString &appId, const QStringList &arguments) = 0;
+    Q_INVOKABLE virtual bool startApplication(const QString &appId, const QStringList &arguments) = 0;
 
     /**
       * @brief Stops an application.
       *
       * @param application The application to be stopped.
+      * @returns True if application stop successful, else false (i.e. false if application was not running)
       */
-    Q_INVOKABLE virtual void stopApplication(ApplicationInfoInterface* application) = 0;
+    Q_INVOKABLE virtual bool stopApplication(const QString &appId) = 0;
 
 Q_SIGNALS:
     /// @cond
