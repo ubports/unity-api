@@ -1,3 +1,13 @@
+unity-api (7.80.3+13.10.20130903.1-0ubuntu1) saucy; urgency=low
+
+  [ Jussi Pakkanen ]
+  * Use glibc's memory validator.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 93
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 03 Sep 2013 06:09:20 +0000
+
 unity-api (7.80.3+13.10.20130902-0ubuntu1) saucy; urgency=low
 
   [ Michael Zanetti ]
