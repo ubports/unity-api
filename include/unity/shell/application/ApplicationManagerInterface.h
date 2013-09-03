@@ -131,7 +131,7 @@ public:
     /**
      * @brief Focus the given application.
      *
-     * @param application The application to be focused.
+     * @param appId The application to be focused.
      * @returns True if appId found and application focused, else false.
      */
     Q_INVOKABLE virtual bool focusApplication(const QString &appId) = 0;
@@ -153,7 +153,7 @@ public:
     /**
       * @brief Stops an application.
       *
-      * @param application The application to be stopped.
+      * @param appId The application to be stopped.
       * @returns True if application stop successful, else false (i.e. false if application was not running).
       */
     Q_INVOKABLE virtual bool stopApplication(const QString &appId) = 0;
