@@ -86,6 +86,7 @@ Item {
         function test_model_methods_data() {
             return [
                 { tag: "ApplicationManager.methods[get]", method: "get" },
+                { tag: "ApplicationManager.methods[findApplication]", method: "findApplication" },
                 { tag: "ApplicationManager.methods[focusApplication]", method: "focusApplication" },
                 { tag: "ApplicationManager.methods[unfocusCurrentApplication]", method: "unfocusCurrentApplication" },
                 { tag: "ApplicationManager.methods[startApplication]", method: "startApplication" },
@@ -102,7 +103,7 @@ Item {
         function test_model_properties_data() {
             return [
                 { tag: "ApplicationManager.count", property: "count", type: "number" },
-                { tag: "ApplicationManager.focusedApplication", property: "focusedApplication", type: "unity::shell::application::ApplicationInfoInterface" },
+                { tag: "ApplicationManager.focusedApplicationId", property: "focusedApplicationId", type: "string" },
             ];
         }
 
