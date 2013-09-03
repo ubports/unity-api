@@ -116,7 +116,7 @@ public:
      * @param index the index of the item to get
      * @returns The item, or null if not found.
      */
-    Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *get(const int index) const = 0;
+    Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *get(int index) const = 0;
 
     /**
      * @brief Get an ApplicationInfo item (using the appId).
