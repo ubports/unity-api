@@ -154,7 +154,7 @@ public:
       * @brief Stops an application.
       *
       * @param application The application to be stopped.
-      * @returns True if application stop successful, else false (i.e. false if application was not running)
+      * @returns True if application stop successful, else false (i.e. false if application was not running).
       */
     Q_INVOKABLE virtual bool stopApplication(const QString &appId) = 0;
 
