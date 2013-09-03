@@ -92,7 +92,7 @@ unity::shell::application::ApplicationInfoInterface *MockApplicationManager::fin
     return nullptr;
 }
 
-QString MockApplicationManager::focusedApplication() const
+QString MockApplicationManager::focusedApplicationId() const
 {
     auto first = m_list.first();
     return (first) ? first->appId() : QString();

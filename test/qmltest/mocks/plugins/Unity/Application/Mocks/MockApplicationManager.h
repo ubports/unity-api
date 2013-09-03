@@ -38,7 +38,7 @@ public:
 
     QVariant data(const QModelIndex& index, int role) const;
 
-    QString focusedApplication() const;
+    QString focusedApplicationId() const;
 
     Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *get(const int index) const;
 

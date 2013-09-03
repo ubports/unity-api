@@ -103,7 +103,7 @@ Item {
         function test_model_properties_data() {
             return [
                 { tag: "ApplicationManager.count", property: "count", type: "number" },
-                { tag: "ApplicationManager.focusedApplication", property: "focusedApplication", type: "string" },
+                { tag: "ApplicationManager.focusedApplicationId", property: "focusedApplicationId", type: "string" },
             ];
         }
 

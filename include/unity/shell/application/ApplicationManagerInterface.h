@@ -56,7 +56,7 @@ class UNITY_API ApplicationManagerInterface: public QAbstractListModel
      *
      * Use focusApplication() and unfocusCurrentApplication() to modify this.
      */
-    Q_PROPERTY(QString focusedApplication READ focusedApplication NOTIFY focusedApplicationChanged)
+    Q_PROPERTY(QString focusedApplicationId READ focusedApplicationId NOTIFY focusedApplicationIdChanged)
 
 protected:
     /// @cond
@@ -105,7 +105,7 @@ public:
         return rowCount();
     }
 
-    virtual QString focusedApplication() const = 0;
+    virtual QString focusedApplicationId() const = 0;
     /// @endcond
 
     /**
@@ -166,7 +166,7 @@ Q_SIGNALS:
     /**
      * @brief Will be emitted whenever the focused application changes.
      */
-    void focusedApplicationChanged();
+    void focusedApplicationIdChanged();
 
 protected:
     /// @cond
