@@ -136,6 +136,15 @@ public:
       */
     Q_INVOKABLE virtual void setUser(const QString &username) = 0;
 
+    /**
+      * @brief Notify the launcher when an application has been focused
+      *
+      * This will cause the appropriate icon to be added to the list of
+      * recent/running apps, and to paint the highlight for the currently
+      * focused app.
+      */
+    Q_INVOKABLE virtual void applicationFocused(const QString &appId) = 0;
+
     /// @cond
     virtual QHash<int, QByteArray> roleNames() const
     {

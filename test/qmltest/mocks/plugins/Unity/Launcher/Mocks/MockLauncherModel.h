@@ -44,6 +44,7 @@ public:
     Q_INVOKABLE void requestRemove(const QString &appId);
     Q_INVOKABLE void quickListActionInvoked(const QString &appId, int actionIndex);
     Q_INVOKABLE void setUser(const QString &user);
+    Q_INVOKABLE void applicationFocused(const QString &appId);
 
 private:
     int findApp(const QString &appId);
