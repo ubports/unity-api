@@ -108,11 +108,11 @@ void MockApplicationManager::unfocusCurrentApplication()
 {
 }
 
-bool MockApplicationManager::startApplication(const QString &appId, const QStringList &arguments)
+unity::shell::application::ApplicationInfoInterface *MockApplicationManager::startApplication(const QString &appId, const QStringList &arguments)
 {
-    Q_UNUSED(appId)
     Q_UNUSED(arguments)
-    return true;
+    MockApplicationInfo *item = new MockApplicationInfo(appId, "name", "comment", QUrl());
+    return item;
 }
 
 bool MockApplicationManager::stopApplication(const QString &appId)

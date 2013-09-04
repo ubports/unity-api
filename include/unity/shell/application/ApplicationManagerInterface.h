@@ -146,9 +146,9 @@ public:
      *
      * @param appId The appId for the application to be spawned.
      * @param arguments Any arguments to be passed to the process.
-     * @returns True if application start successful, else false.
+     * @returns The created application item if start successful, else null.
      */
-    Q_INVOKABLE virtual bool startApplication(const QString &appId, const QStringList &arguments) = 0;
+    Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *startApplication(const QString &appId, const QStringList &arguments) = 0;
 
     /**
       * @brief Stops an application.
