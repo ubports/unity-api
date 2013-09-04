@@ -125,3 +125,8 @@ void MockLauncherModel::setUser(const QString &user)
 {
     Q_UNUSED(user)
 }
+
+void MockLauncherModel::applicationFocused(const QString &appId)
+{
+    Q_UNUSED(appId)
+}
