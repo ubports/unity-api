@@ -48,7 +48,7 @@ public:
 
     Q_INVOKABLE void unfocusCurrentApplication();
 
-    Q_INVOKABLE bool startApplication(const QString &appId, const QStringList &arguments);
+    Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *startApplication(const QString &appId, const QStringList &arguments);
 
     Q_INVOKABLE bool stopApplication(const QString &appId);
 
