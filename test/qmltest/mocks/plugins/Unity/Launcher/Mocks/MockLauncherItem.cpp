@@ -128,6 +128,20 @@ void MockLauncherItem::setCount(int count)
     }
 }
 
+bool MockLauncherItem::focused() const
+{
+    return m_focused;
+}
+
+void MockLauncherItem::setFocused(bool focused)
+{
+    if (m_focused != focused)
+    {
+        m_focused = focused;
+        Q_EMIT focusedChanged(focused);
+    }
+}
+
 QuickListModelInterface *MockLauncherItem::quickList() const
 {
     return m_quickListModel;
