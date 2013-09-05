@@ -54,6 +54,7 @@ protected:
         m_roleNames.insert(RoleRecent, "recent");
         m_roleNames.insert(RoleProgress, "progress");
         m_roleNames.insert(RoleCount, "count");
+        m_roleNames.insert(RoleFocused, "focused");
     }
     /// @endcond
 
@@ -72,7 +73,8 @@ public:
         RoleRunning,
         RoleRecent,
         RoleProgress,
-        RoleCount
+        RoleCount,
+        RoleFocused
     };
 
     virtual ~LauncherModelInterface() {}

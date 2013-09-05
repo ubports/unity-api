@@ -50,6 +50,9 @@ public:
     int count() const;
     void setCount(int count);
 
+    bool focused() const;
+    void setFocused(bool focused);
+
     unity::shell::launcher::QuickListModelInterface *quickList() const;
 
 private:
@@ -62,6 +65,7 @@ private:
     bool m_recent;
     int m_progress;
     int m_count;
+    bool m_focused;
     QuickListModelInterface *m_quickListModel;
 };
 
