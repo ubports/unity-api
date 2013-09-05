@@ -1,3 +1,18 @@
+unity-api (7.80.3+13.10.20130905.2-0ubuntu1) saucy; urgency=low
+
+  [ Gerry Boland ]
+  * AppManager: change startApplication to return ApplicationInfo, is
+    useful for shell.
+
+  [ Michael Zanetti ]
+  * add applicationFocused method to LauncherModelInterface.
+  * add focused role to model.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 99
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 05 Sep 2013 10:47:48 +0000
+
 unity-api (7.80.3+13.10.20130904-0ubuntu1) saucy; urgency=low
 
   [ Gerry Boland ]
