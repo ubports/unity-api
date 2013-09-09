@@ -60,6 +60,25 @@ Item {
         }
 
         /* make sure all the required roles are exposed on ApplicationManager */
+        function test_model_roles_enum_data() {
+            return [
+                        { enum: "RoleAppId" },
+                        { enum: "RoleName" },
+                        { enum: "RoleComment" },
+                        { enum: "RoleIcon" },
+                        { enum: "RoleStage" },
+                        { enum: "RoleState" },
+                        { enum: "RoleFocused" },
+                    ];
+        }
+
+        function test_model_roles_enum(data) {
+            name = "ApplicationManager"
+            object = ApplicationManager
+
+            verifyData(data);
+        }
+
         function test_model_roles_data() {
             return [
                         { tag: "ApplicationManager.roles[appId]", role: "appId", type: "string" },
