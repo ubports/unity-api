@@ -43,6 +43,7 @@ class ApplicationInfoInterface;
 class UNITY_API ApplicationManagerInterface: public QAbstractListModel
 {
     Q_OBJECT
+    Q_ENUMS(Roles)
 
     /**
      * @brief The count of the applications known to the manager.
