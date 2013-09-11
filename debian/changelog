@@ -1,3 +1,14 @@
+unity-api (7.80.3+13.10.20130911-0ubuntu1) saucy; urgency=low
+
+  [ Gerry Boland ]
+  * Shell::Application: Apply Q_ENUMS to the Roles enum so
+    implementations can use it.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 101
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 11 Sep 2013 00:29:43 +0000
+
 unity-api (7.80.3+13.10.20130905.2-0ubuntu1) saucy; urgency=low
 
   [ Gerry Boland ]
