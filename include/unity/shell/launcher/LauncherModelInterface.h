@@ -161,7 +161,7 @@ public:
 Q_SIGNALS:
     /// @cond
     void applicationManagerChanged();
-    /// @cond
+    /// @endcond
 
 protected:
     /// @cond
