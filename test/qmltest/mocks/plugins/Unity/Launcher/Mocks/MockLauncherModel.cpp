@@ -20,6 +20,8 @@
 #include <Mocks/MockLauncherModel.h>
 #include <Mocks/MockLauncherItem.h>
 
+#include "../../Application/Mocks/MockApplicationManager.h"
+
 using namespace unity::shell::launcher;
 
 MockLauncherModel::MockLauncherModel(QObject* parent): LauncherModelInterface(parent)
@@ -68,8 +70,6 @@ QVariant MockLauncherModel::data(const QModelIndex& index, int role) const
     {
     case RoleAppId:
         return item->appId();
-    case RoleDesktopFile:
-        return item->desktopFile();
     case RoleName:
         return item->name();
     case RoleIcon:
@@ -128,7 +128,14 @@ void MockLauncherModel::setUser(const QString &user)
     Q_UNUSED(user)
 }
 
-void MockLauncherModel::applicationFocused(const QString &appId)
+unity::shell::application::ApplicationManagerInterface *MockLauncherModel::applicationManager() const
 {
-    Q_UNUSED(appId)
+    unity::shell::application::ApplicationManagerInterface* appManager = new MockApplicationManager();
+    appManager->deleteLater();
+    return appManager;
+}
+
+void MockLauncherModel::setApplicationManager(unity::shell::application::ApplicationManagerInterface *applicationManager)
+{
+    Q_UNUSED(applicationManager)
 }

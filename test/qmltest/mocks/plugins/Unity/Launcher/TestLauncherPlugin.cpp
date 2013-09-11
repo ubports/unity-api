@@ -28,6 +28,7 @@
 #include <QtQml/qqml.h>
 
 using namespace unity::shell::launcher;
+using namespace unity::shell::application;
 
 static QObject* modelProvider(QQmlEngine* /* engine */, QJSEngine* /* scriptEngine */)
 {
@@ -45,4 +46,7 @@ void TestLauncherPlugin::registerTypes(const char* uri)
     qmlRegisterSingletonType<MockLauncherModel>(uri, 0, 1, "LauncherModel", modelProvider);
     qmlRegisterUncreatableType<MockLauncherItem>(uri, 0, 1, "LauncherItem", "Can't create LauncherItems in QML. Get them from the LauncherModel");
     qmlRegisterUncreatableType<MockQuickListModel>(uri, 0, 1, "QuickListModel", "Can't create QuickListModels in QML. Get them from the LauncherItems");
+
+    // Need to register the appmanager here ourselves as there won't be a real AppManager plugin in this test
+    qmlRegisterUncreatableType<unity::shell::application::ApplicationManagerInterface>(uri, 0, 1, "ApplicationManagerInterface", "Interface for the ApplicationManager");
 }

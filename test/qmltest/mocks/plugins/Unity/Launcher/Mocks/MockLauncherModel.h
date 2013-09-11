@@ -21,6 +21,7 @@
 #define MOCKLAUNCHERMODEL_H
 
 #include <LauncherModelInterface.h>
+#include <unity/shell/application/ApplicationManagerInterface.h>
 
 class MockLauncherItem;
 
@@ -44,7 +45,9 @@ public:
     Q_INVOKABLE void requestRemove(const QString &appId);
     Q_INVOKABLE void quickListActionInvoked(const QString &appId, int actionIndex);
     Q_INVOKABLE void setUser(const QString &user);
-    Q_INVOKABLE void applicationFocused(const QString &appId);
+
+    unity::shell::application::ApplicationManagerInterface *applicationManager() const;
+    void setApplicationManager(unity::shell::application::ApplicationManagerInterface *applicationManager);
 
 private:
     int findApp(const QString &appId);

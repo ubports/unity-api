@@ -22,6 +22,8 @@
 
 #include <unity/SymbolExport.h>
 
+#include <unity/shell/application/ApplicationManagerInterface.h>
+
 #include <QtCore/QAbstractListModel>
 
 namespace unity
@@ -40,13 +42,22 @@ class LauncherItemInterface;
  */
 class UNITY_API LauncherModelInterface: public QAbstractListModel
 {
-   Q_OBJECT
+    Q_OBJECT
+
+    /**
+     * @brief The ApplicationManager instance the launcher should be connected to
+     *
+     * The Launcher will display applications contained in the ApplicationManager as
+     * running/recent apps and adjust the currently focused app highlight according
+     * to this.
+     */
+    Q_PROPERTY(unity::shell::application::ApplicationManagerInterface* applicationManager
+               READ applicationManager WRITE setApplicationManager NOTIFY applicationManagerChanged)
 
 protected:
     /// @cond
     LauncherModelInterface(QObject *parent = 0): QAbstractListModel(parent) {
         m_roleNames.insert(RoleAppId, "appId");
-        m_roleNames.insert(RoleDesktopFile, "desktopFile");
         m_roleNames.insert(RoleName, "name");
         m_roleNames.insert(RoleIcon, "icon");
         m_roleNames.insert(RolePinned, "pinned");
@@ -66,7 +77,6 @@ public:
      */
     enum Roles {
         RoleAppId = Qt::UserRole,
-        RoleDesktopFile,
         RoleName,
         RoleIcon,
         RolePinned,
@@ -138,21 +148,20 @@ public:
       */
     Q_INVOKABLE virtual void setUser(const QString &username) = 0;
 
-    /**
-      * @brief Notify the launcher when an application has been focused
-      *
-      * This will cause the appropriate icon to be added to the list of
-      * recent/running apps, and to paint the highlight for the currently
-      * focused app.
-      */
-    Q_INVOKABLE virtual void applicationFocused(const QString &appId) = 0;
-
     /// @cond
+    virtual unity::shell::application::ApplicationManagerInterface *applicationManager() const = 0;
+    virtual void setApplicationManager(unity::shell::application::ApplicationManagerInterface *applicationManager) = 0;
+
     virtual QHash<int, QByteArray> roleNames() const
     {
         return m_roleNames;
     }
     /// @endcond
+
+Q_SIGNALS:
+    /// @cond
+    void applicationManagerChanged();
+    /// @cond
 
 protected:
     /// @cond
