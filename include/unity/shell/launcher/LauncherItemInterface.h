@@ -50,11 +50,6 @@ class UNITY_API LauncherItemInterface: public QObject
     Q_PROPERTY(QString appId READ appId CONSTANT)
 
     /**
-     * @brief The full path to the .desktop file.
-     */
-    Q_PROPERTY(QString desktopFile READ desktopFile CONSTANT)
-
-    /**
      * @brief The user visible name of the item.
      */
     Q_PROPERTY(QString name READ name CONSTANT)
@@ -119,7 +114,6 @@ public:
     virtual ~LauncherItemInterface() {}
 
     virtual QString appId() const = 0;
-    virtual QString desktopFile() const = 0;
     virtual QString name() const = 0;
     virtual QString icon() const = 0;
     virtual bool pinned() const = 0;

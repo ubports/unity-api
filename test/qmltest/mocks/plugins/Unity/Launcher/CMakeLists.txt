@@ -1,6 +1,8 @@
 include_directories(
     ${CMAKE_SOURCE_DIR}/include/unity/shell/launcher
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/application
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Application/
 )
 
 add_definitions(-DQT_NO_KEYWORDS)
@@ -14,9 +16,13 @@ set(LauncherMocks_SOURCES
     ${CMAKE_SOURCE_DIR}/include/unity/shell/launcher/LauncherModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/launcher/LauncherItemInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/launcher/QuickListModelInterface.h
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/application/ApplicationManagerInterface.h
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/application/ApplicationInfoInterface.h
     Mocks/MockLauncherModel.cpp
     Mocks/MockLauncherItem.cpp
     Mocks/MockQuickListModel.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Application/Mocks/MockApplicationManager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Application/Mocks/MockApplicationInfo.cpp
 )
 
 add_library(LauncherMocks SHARED ${LauncherMocks_SOURCES})

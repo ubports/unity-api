@@ -78,7 +78,6 @@ Item {
         function test_model_roles_data() {
             return [
                         { tag: "Model.roles[appId]", role: "appId", type: "string" },
-                        { tag: "Model.roles[desktopFile]", role: "desktopFile", type: "string" },
                         { tag: "Model.roles[name]", role: "name", type: "string" },
                         { tag: "Model.roles[icon]", role: "icon", type: "string" },
                         { tag: "Model.roles[pinned]", role: "pinned", type: "boolean" },
@@ -109,7 +108,6 @@ Item {
                 { tag: "Model.methods[requestRemove]", method: "requestRemove" },
                 { tag: "Model.methods[quickListActionInvoked]", method: "quickListActionInvoked" },
                 { tag: "Model.methods[setUser]", method: "setUser" },
-                { tag: "Model.methods[applicationFocused]", method: "applicationFocused" }
             ];
         }
 
@@ -119,10 +117,21 @@ Item {
             verifyData(data);
         }
 
+        function test_model_properties_data() {
+            return [
+                { tag: "Model.properties[applicationManager]", property: "applicationManager", type: "unity::shell::application::ApplicationManagerInterface" },
+            ];
+        }
+
+        function test_model_properties(data) {
+            name = "LauncherModel";
+            object = LauncherModel;
+            verifyData(data);
+        }
+
         function test_item_properties_data() {
             return [
                 { tag: "Item.properties[appId]", constant: "appId", type: "string" },
-                { tag: "Item.properties[desktopFile]", constant: "desktopFile", type: "string" },
                 { tag: "Item.properties[name]", constant: "name", type: "string" },
                 { tag: "Item.properties[icon]", constant: "icon", type: "string" },
                 { tag: "Item.properties[pinned]", property: "pinned", type: "boolean" },
