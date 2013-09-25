@@ -18,7 +18,7 @@
 
 prefix=@CMAKE_INSTALL_PREFIX@
 includedir=${prefix}/include
-libdir=@CMAKE_INSTALL_LIBDIR@
+libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
 
 Name: lib@UNITY_API_LIB@
 Description: Unity API library
