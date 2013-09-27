@@ -1,3 +1,20 @@
+unity-api (7.80.3+13.10.20130927.1-0ubuntu1) saucy; urgency=low
+
+  [ Michi Henning ]
+  * Changed pkgconfig to use absolute path for Libs, so things will work
+    if the package is installed in a non-standard location.
+  * Reverting commit 89, which added -D_GLIBCXX_DEBUG. This has truly
+    hideous consequences when calling cross-library and passing STL
+    types. If not all libraries involved are compiled with the same
+    flag, the code links and runs and, in many cases, will work, except
+    in some cases, where suddenly the stack gets trashed, the code
+    segfaults on a memory allocation, or similar.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 106
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 27 Sep 2013 10:32:57 +0000
+
 unity-api (7.80.3+13.10.20130912-0ubuntu1) saucy; urgency=low
 
   [ Michael Zanetti ]
