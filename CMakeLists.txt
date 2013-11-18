@@ -50,11 +50,12 @@ set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} -Wl,-z,defs")
 find_program(CPPCHECK_COMMAND NAMES cppcheck)
 if (CPPCHECK_COMMAND)
     set(CPPCHECK_COMMAND_OPTIONS --check-config --inline-suppr --enable=all -q --error-exitcode=2)
-    set(CPPCHECK_COMMAND_OPTIONS ${CPPCHECK_COMMAND_OPTIONS} --template '{file}({line}): {severity} ({id}): {message}')
+    set(CPPCHECK_COMMAND_OPTIONS ${CPPCHECK_COMMAND_OPTIONS} --template "{file}({line}): {severity} ({id}): {message}")
     add_custom_target(cppcheck COMMAND ${CPPCHECK_COMMAND} ${CPPCHECK_COMMAND_OPTIONS}
         ${CMAKE_SOURCE_DIR}/src
         ${CMAKE_SOURCE_DIR}/test
         ${CMAKE_BINARY_DIR}/test
+        VERBATIM
     )
 else()
     message(WARNING "Cannot find cppcheck: cppcheck target will not be available")
