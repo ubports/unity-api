@@ -1,5 +1,6 @@
 prefix=@CMAKE_INSTALL_PREFIX@
 includedir=${prefix}/include
+plugindir=@PKGCONFIG_PLUGINDIR@
 
 Name: @PKGCONFIG_NAME@
 Description: @PKGCONFIG_NAME@

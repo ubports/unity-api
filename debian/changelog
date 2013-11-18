@@ -1,3 +1,9 @@
+unity-api (7.80.4-0ubuntu1) UNRELEASED; urgency=low
+
+  * Added pkg-config module unity-shell-api.
+
+ -- Michal Hruby <michal.hruby@canonical.com>  Mon, 18 Nov 2013 11:35:28 +0000
+
 unity-api (7.80.3+13.10.20130927.1-0ubuntu1) saucy; urgency=low
 
   [ Michi Henning ]
