@@ -1,7 +1,7 @@
 # Set up package config.
 set(PKGCONFIG_NAME "unity-shell-api")
 set(PKGCONFIG_DESCRIPTION "Unity shell APIs")
-set(PKGCONFIG_PLUGINDIR "\${prefix}/${SHELL_PLUGINDIR}")
+set(PKGCONFIG_PLUGINDIR "${SHELL_PLUGINDIR}")
 set(VERSION "1.0")
 
 configure_file(unity-shell-api.pc.in unity-shell-api.pc @ONLY)
