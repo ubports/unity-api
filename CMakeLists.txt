@@ -85,6 +85,9 @@ pkg_check_modules(GLIB glib-2.0 REQUIRED)
 # Standard install paths
 include(GNUInstallDirs)
 
+# Shell install paths
+set(SHELL_PLUGINDIR ${CMAKE_INSTALL_LIBDIR}/unity8/qml)
+
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}/include
@@ -154,6 +157,7 @@ enable_testing()
 add_subdirectory(include)
 add_subdirectory(src)
 add_subdirectory(test)
+add_subdirectory(data)
 
 if (cmake_build_type_lower MATCHES coverage)
   ENABLE_COVERAGE_REPORT(TARGETS ${UNITY_API_LIB} FILTER /usr/include ${CMAKE_SOURCE_DIR}/test/* ${CMAKE_BINARY_DIR}/*)
