@@ -1,8 +1,31 @@
-unity-api (7.80.4-0ubuntu1) UNRELEASED; urgency=low
+unity-api (7.80.4+14.04.20131126.2-0ubuntu1) trusty; urgency=low
 
+  [ Michal Hruby ]
   * Added pkg-config module unity-shell-api.
 
- -- Michal Hruby <michal.hruby@canonical.com>  Mon, 18 Nov 2013 11:35:28 +0000
+  [ Albert Astals ]
+  * Avoid cmake warnings CMake Warning (dev) in CMakeLists.txt: Syntax
+    Warning in cmake code at /home/tsdgeos_work/phablet/unity-api/unity-
+    api/CMakeLists.txt:53:88 Argument not separated from preceding token
+    by whitespace. This warning is for project developers. Use -Wno-dev
+    to suppress it. CMake Warning (dev) in CMakeLists.txt: Syntax
+    Warning in cmake code at /home/tsdgeos_work/phablet/unity-api/unity-
+    api/CMakeLists.txt:53:107 Argument not separated from preceding
+    token by whitespace. This warning is for project developers. Use -
+    Wno-dev to suppress it. .
+
+  [ Michi Henning ]
+  * Don't set -fno-permissive when compiling with clang because clang
+    produces an "ignored" warning for this flag. Set -
+    DGTEST_USE_OWN_TR1_TUPLE=1 to make tests compile with clang.
+  * Fix warning from clang when building libgtest about unused field.
+  * Removed obsolete doxygen config variable that caused a warning
+    during the build.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 112
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 26 Nov 2013 19:42:23 +0000
 
 unity-api (7.80.3+13.10.20130927.1-0ubuntu1) saucy; urgency=low
 
