@@ -66,6 +66,8 @@ QVariant MockApplicationManager::data(const QModelIndex& index, int role) const
         return item->state();
     case RoleFocused:
         return item->focused();
+    case RoleScreenshot:
+        return item->screenshot();
     }
 
     return QVariant();
@@ -119,4 +121,9 @@ bool MockApplicationManager::stopApplication(const QString &appId)
 {
     Q_UNUSED(appId)
     return true;
+}
+
+void MockApplicationManager::updateScreenshot(const QString &appId)
+{
+    Q_UNUSED(appId)
 }

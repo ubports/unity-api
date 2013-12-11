@@ -36,6 +36,7 @@ public:
     QString name() const;
     QString comment() const;
     QUrl icon() const;
+    QUrl screenshot() const;
 
     ApplicationInfoInterface::Stage stage() const;
     void setStage(ApplicationInfoInterface::Stage stage);
@@ -51,6 +52,7 @@ private:
     QString m_name;
     QString m_comment;
     QUrl m_icon;
+    QUrl m_screenshot;
     ApplicationInfoInterface::Stage m_stage;
     ApplicationInfoInterface::State m_state;
     bool m_focused;
