@@ -154,11 +154,11 @@ public:
     Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *startApplication(const QString &appId, const QStringList &arguments) = 0;
 
     /**
-     * @brief Stops an application.
-     *
-     * @param appId The application to be stopped.
-     * @returns True if application stop successful, else false (i.e. false if application was not running).
-     */
+      * @brief Stops an application.
+      *
+      * @param appId The application to be stopped.
+      * @returns True if application stop successful, else false (i.e. false if application was not running).
+      */
     Q_INVOKABLE virtual bool stopApplication(const QString &appId) = 0;
 
     /**
