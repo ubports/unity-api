@@ -70,6 +70,7 @@ protected:
         m_roleNames.insert(RoleStage, "stage");
         m_roleNames.insert(RoleState, "state");
         m_roleNames.insert(RoleFocused, "focused");
+        m_roleNames.insert(RoleScreenshot, "screenshot");
 
         connect(this, SIGNAL(rowsInserted(QModelIndex, int, int)), SIGNAL(countChanged()));
         connect(this, SIGNAL(rowsRemoved(QModelIndex, int, int)), SIGNAL(countChanged()));
@@ -92,6 +93,7 @@ public:
         RoleStage,
         RoleState,
         RoleFocused,
+        RoleScreenshot,
     };
 
     /// @cond
@@ -152,12 +154,23 @@ public:
     Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *startApplication(const QString &appId, const QStringList &arguments) = 0;
 
     /**
-      * @brief Stops an application.
-      *
-      * @param appId The application to be stopped.
-      * @returns True if application stop successful, else false (i.e. false if application was not running).
-      */
+     * @brief Stops an application.
+     *
+     * @param appId The application to be stopped.
+     * @returns True if application stop successful, else false (i.e. false if application was not running).
+     */
     Q_INVOKABLE virtual bool stopApplication(const QString &appId) = 0;
+
+    /**
+     * @brief Update the screenshot for an application.
+     *
+     * NOTE: Normally the ApplicationManager will update screenshots unfocusing or focusing apps,
+     * However, in cases where you need to show the screenshot while the application is still focused,
+     * you can request the ApplicationManager to update it now.
+     *
+     * @param appId The application for which the screenshot should be updated.
+     */
+    Q_INVOKABLE virtual void updateScreenshot(const QString &appId) = 0;
 
 Q_SIGNALS:
     /// @cond
