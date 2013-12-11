@@ -163,6 +163,7 @@ Q_SIGNALS:
     void stageChanged(Stage stage);
     void stateChanged(State state);
     void focusedChanged(bool focused);
+    void screenshotChanged(const QUrl &screenshot);
     /// @endcond
 };
 
