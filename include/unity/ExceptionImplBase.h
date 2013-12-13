@@ -41,9 +41,11 @@ class Exception;
 \sa unity::Exception
 */
 
-class UNITY_API ExceptionImplBase : public util::NonCopyable
+class UNITY_API ExceptionImplBase
 {
 public:
+    NONCOPYABLE(ExceptionImplBase)
+
     explicit ExceptionImplBase(Exception const* owner, std::string const& reason);
     //! @cond
     virtual ~ExceptionImplBase() noexcept;
