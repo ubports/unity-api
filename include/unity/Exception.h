@@ -45,7 +45,7 @@ is automatically preserved; you can access nested exceptions by calling the <cod
 <code>rethrow_nested()</code> member functions of <code>std::nested_exception</code>.
 
 In addition, you can remember one or more exceptions by calling remember(). This is useful in situations
-where you need perform a number of actions that may fail with an error code, and you do not want to
+where you need to perform a number of actions that may fail with an error code, and you do not want to
 throw an exception until all of the actions have been attempted. This is particularly useful in shutdown
 scenarios, where it is often impossible to recover from an error, but it is still desirable to try to
 shut down as much as possible before reporting or logging the errors:
@@ -96,7 +96,7 @@ shutdown()
 }
 ~~~
 
-Calling to_string() on a caught exception returns a string with the entire exception history (both nested and
+Calling what() on a caught exception returns a string with the entire exception history (both nested and
 chained).
 
 */
@@ -110,14 +110,7 @@ public:
     virtual ~Exception() noexcept;
     //! @endcond
 
-    /**
-    \brief Returns the name of the exception.
-
-    Derived classes must override what() to return <i>only</i> the (fully-qualified) name of the derived
-    exception. If the derived class sets a reason string (or contains other details), it should <i>not</i>
-    include the reason or details as part of the string return returned by what().
-    */
-    virtual char const* what() const noexcept = 0;
+    virtual char const* what() const noexcept;
 
     /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.
@@ -127,6 +120,7 @@ public:
     */
     virtual std::exception_ptr self() const = 0;
 
+    std::string name() const;
     std::string reason() const;
 
     std::string to_string(std::string const& indent = "    ") const;
@@ -136,13 +130,13 @@ public:
     std::exception_ptr get_earlier() const noexcept;
 
 protected:
-    //! @cond
-    Exception(std::shared_ptr<ExceptionImplBase> const& derived);
-    //! @endcond
-    ExceptionImplBase* pimpl() const noexcept;
+    Exception(std::string const& name, std::string const& reason);
 
 private:
-    std::shared_ptr<ExceptionImplBase> p_;    // shared_ptr instead of unique_ptr because exceptions must be copyable
+    std::string name_;
+    std::string reason_;
+    mutable std::string what_;
+    std::exception_ptr earlier_;
 };
 
 } // namespace unity

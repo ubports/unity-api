@@ -17,7 +17,6 @@
  */
 
 #include <unity/UnityExceptions.h>
-#include <unity/ExceptionImplBase.h>
 
 #include <gtest/gtest.h>
 
@@ -31,22 +30,25 @@ using namespace unity;
 TEST(Exception, basic)
 {
     SyscallException e("Hello", 0);
+    EXPECT_EQ("unity::SyscallException", e.name());
     EXPECT_EQ("Hello (errno = 0)", e.reason());
-    EXPECT_STREQ("unity::SyscallException", e.what());
+    EXPECT_STREQ("unity::SyscallException: Hello (errno = 0)", e.what());
 
     SyscallException e2(e);
-    EXPECT_EQ(e2.reason(), e.reason());
-    EXPECT_STREQ(e2.what(), e.what());
+    EXPECT_EQ(e.name(), e2.name());
+    EXPECT_EQ(e.reason(), e2.reason());
+    EXPECT_STREQ(e.what(), e2.what());
 
-    SyscallException e3("blah", 0);
+    SyscallException e3("blah", 1);
     e2 = e3;
-    EXPECT_EQ(e2.reason(), e3.reason());
-    EXPECT_STREQ(e2.what(), e.what());
+    EXPECT_EQ(e3.name(), e2.name());
+    EXPECT_EQ(e3.reason(), e2.reason());
+    EXPECT_STREQ(e3.what(), e2.what());
 
-    EXPECT_EQ("unity::SyscallException: blah (errno = 0)", e3.to_string());
-    EXPECT_EQ("unity::SyscallException: blah (errno = 0)", e3.to_string(0, "    "));
-    EXPECT_EQ("        unity::SyscallException: blah (errno = 0)", e3.to_string(1, "        "));
-    EXPECT_EQ("                unity::SyscallException: blah (errno = 0)", e3.to_string(2, "        "));
+    EXPECT_EQ("unity::SyscallException: blah (errno = 1)", e3.to_string());
+    EXPECT_EQ("unity::SyscallException: blah (errno = 1)", e3.to_string(0, "    "));
+    EXPECT_EQ("        unity::SyscallException: blah (errno = 1)", e3.to_string(1, "        "));
+    EXPECT_EQ("                unity::SyscallException: blah (errno = 1)", e3.to_string(2, "        "));
 
     try
     {
@@ -54,7 +56,7 @@ TEST(Exception, basic)
     }
     catch (Exception& e)
     {
-        EXPECT_STREQ("unity::SyscallException", e.what());
+        EXPECT_STREQ("unity::SyscallException: Hello (errno = 0)", e.what());
     }
 }
 
@@ -69,7 +71,7 @@ TEST(Exception, empty_reason)
     {
         SyscallException e("", 0);
         EXPECT_EQ("(errno = 0)", e.reason());
-        EXPECT_STREQ("unity::SyscallException", e.what());
+        EXPECT_STREQ("unity::SyscallException: (errno = 0)", e.what());
     }
 }
 
@@ -427,7 +429,7 @@ TEST(InvalidArgumentException, state)
 {
     {
         InvalidArgumentException e("bad arg");
-        EXPECT_STREQ("unity::InvalidArgumentException", e.what());
+        EXPECT_STREQ("unity::InvalidArgumentException: bad arg", e.what());
         EXPECT_THROW(rethrow_exception(e.self()), InvalidArgumentException);
         InvalidArgumentException e2("blah");
         e2 = e;
@@ -439,7 +441,7 @@ TEST(LogicException, state)
 {
     {
         LogicException e("You shouldn't have done that!");
-        EXPECT_STREQ("unity::LogicException", e.what());
+        EXPECT_STREQ("unity::LogicException: You shouldn't have done that!", e.what());
         EXPECT_THROW(rethrow_exception(e.self()), LogicException);
         LogicException e2("blah");
         e2 = e;
@@ -451,7 +453,7 @@ TEST(ShutdownException, state)
 {
     {
         ShutdownException e("Need some kicks");
-        EXPECT_STREQ("unity::ShutdownException", e.what());
+        EXPECT_STREQ("unity::ShutdownException: Need some kicks", e.what());
         EXPECT_THROW(rethrow_exception(e.self()), ShutdownException);
         ShutdownException e2("blah");
         e2 = e;
@@ -463,8 +465,8 @@ TEST(FileException, state)
 {
     {
         FileException e("File error", 0);
-        EXPECT_EQ("File error", e.reason());
-        EXPECT_STREQ("unity::FileException", e.what());
+        EXPECT_EQ("File error (errno = 0)", e.reason());
+        EXPECT_STREQ("unity::FileException: File error (errno = 0)", e.what());
         EXPECT_EQ(0, e.error());
         EXPECT_THROW(rethrow_exception(e.self()), FileException);
         FileException e2("blah", 0);
@@ -476,7 +478,7 @@ TEST(FileException, state)
     {
         FileException e("File error", 42);
         EXPECT_EQ("File error (errno = 42)", e.reason());
-        EXPECT_STREQ("unity::FileException", e.what());
+        EXPECT_STREQ("unity::FileException: File error (errno = 42)", e.what());
         EXPECT_EQ(42, e.error());
         EXPECT_THROW(rethrow_exception(e.self()), FileException);
         FileException e2("blah", 0);
@@ -490,7 +492,7 @@ TEST(ResourceException, state)
 {
     {
         ResourceException e("Need some kicks");
-        EXPECT_STREQ("unity::ResourceException", e.what());
+        EXPECT_STREQ("unity::ResourceException: Need some kicks", e.what());
         EXPECT_THROW(rethrow_exception(e.self()), ResourceException);
         ResourceException e2("blah");
         e2 = e;
@@ -531,96 +533,4 @@ TEST(Exceptions, dynamic)
         ResourceException* ep = new ResourceException("Hello");
         delete ep;
     }
-}
-
-class StatelessException : public unity::Exception
-{
-public:
-    explicit StatelessException(std::string const& reason)
-        : Exception(make_shared<ExceptionImplBase>(this, reason))
-    {
-    }
-    explicit StatelessException(std::shared_ptr<ExceptionImplBase> const& derived)
-        : Exception(derived)
-    {
-    }
-    StatelessException(StatelessException const&) = default;
-    StatelessException& operator=(StatelessException const&) = default;
-    virtual ~StatelessException() noexcept {}
-
-    virtual char const* what() const noexcept override
-    {
-        return "StatelessException";
-    }
-
-    virtual std::exception_ptr self() const override
-    {
-        return make_exception_ptr(*this);
-    }
-
-};
-
-TEST(Derivation, stateless_derivation)
-{
-    StatelessException e("test");
-    EXPECT_EQ("test", e.reason());
-    EXPECT_STREQ("StatelessException", e.what());
-}
-
-namespace Impl
-{
-class StatefulExceptionImpl;
-}
-
-class StatefulException : public unity::Exception
-{
-public:
-    StatefulException(std::string const& reason, int state);
-    StatefulException(std::shared_ptr<ExceptionImplBase> const& derived)
-        : Exception(derived)
-    {
-    }
-    StatefulException(StatefulException const&) = default;
-    StatefulException& operator=(StatefulException const&) = default;
-    virtual ~StatefulException() noexcept {}
-
-    virtual char const* what() const noexcept override
-    {
-        return "StatefulException";
-    }
-
-    virtual std::exception_ptr self() const override
-    {
-        return make_exception_ptr(*this);
-    }
-
-};
-
-namespace Impl
-{
-
-class StatefulExceptionImpl : public unity::ExceptionImplBase
-{
-public:
-    StatefulExceptionImpl(StatefulException const* owner, string const& reason, int state)
-        : ExceptionImplBase(owner, reason + " state = " + std::to_string(state))
-        , state_(state)
-    {
-    }
-    int state_;
-};
-
-}
-
-StatefulException::
-StatefulException(std::string const& reason, int state)
-    : Exception(make_shared<Impl::StatefulExceptionImpl>(this, reason, state))
-{
-}
-
-TEST(Derivation, stateful_derivation)
-{
-    StatefulException e("test", 99);
-    EXPECT_EQ("test state = 99", e.reason());
-    EXPECT_STREQ("StatefulException", e.what());
 }
