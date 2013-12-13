@@ -43,29 +43,28 @@ namespace NonCopyable_ // Prevent unintended ADL
 {
 
 /**
-\brief Helper class to prevent a class from being copied.
+\brief Helper macro to prevent a class from being copied.
 
-This class disables the copy constructor and assignment operator of a class to prevent it from being copied.
-This makes the fact that a class is not copyable immediately visible on reading the class definition,
-rather than having to read through the entire class to look for a copy constructor and assignment operator
-in the private section, or having to look for <code> = delete;</code> on the corresponding definitions.
+This helper macro disables the copy constructor and assignment operator of a class to prevent it
+from being copied. This is a macro rather than a base class to reduce clutter on the class
+hierarchy.
 
-To use the class, use private inheritance:
-~~~
-* class MyClass : private unity::util::NonCopyable
-* {
-* public:
-*     // MyClass cannot be copied now
-*     // ...
-* };
-~~~
+Use it like this:
 
-\note Do not use public or protected inheritance for this class. Private inheritance prevents accidental polymorphism, such as
-~~~
-* void some_method(NonCopyable& param); // Bad, permits unrelated classes to be passed
-~~~
-
+class MyClass
+{
+public: // not necessary, but the error message is more explicit with this
+  NONCOPYABLE(MyClass)
+  ...
+};
 */
+
+#define NONCOPYABLE(ClassName) ClassName(ClassName const&) = delete; ClassName& operator=(ClassName const&) = delete;
+
+/**
+ * This class is deprecated and will go away before 14/04 freeze. Use the NONCOPYABLE macro instead or
+ * write your own =delete declarations.
+ */
 
 class UNITY_API NonCopyable
 {
@@ -76,11 +75,11 @@ protected:
 private:
     NonCopyable(NonCopyable const&) = delete;
     NonCopyable& operator=(NonCopyable const&) = delete;
-};
+} __attribute__((deprecated));
 
 } // namespace NonCopyable_
 
-typedef NonCopyable_::NonCopyable NonCopyable;
+typedef NonCopyable_::NonCopyable NonCopyable __attribute__((deprecated));
 
 } // namespace util
 
