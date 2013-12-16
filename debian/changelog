@@ -1,17 +1,5 @@
-unity-api (7.80.5-0ubuntu1) UNRELEASED; urgency=low
-
   [ Michi Henning ]
-  * Changed unity::Exception to return the same string as to_string(). This means that it is no longer necessary
-    to treat unity::Exception differently from std::exception for structured exception handling: catching std::exception
-    will catch unity::Exception as well, and call what() produces the correct result. The pointer returned from what()
-    remains valid until the next call to what(), or until the exception is destroyed.
-          
-    Added deep-copy semantics for exceptions.
-              
-    Removed pimpling of unity::Exception, so there is no longer a class called ExceptionImplBase. Pimpling with
-    inheritance and deep-copy just gets too messy and confusing.
-
- -- Michi Henning <michi@ubuntu>  Mon, 16 Dec 2013 06:45:29 +1000
+  * Changed unity::Exception::what() to return the same text as unity::Exception::to_string()/
 
 unity-api (7.80.4+14.04.20131126.2-0ubuntu1) trusty; urgency=low
 
