@@ -23,9 +23,11 @@
 
 using namespace unity::util;
 
-class MyClass : private NonCopyable
+class MyClass
 {
 public:
+    NONCOPYABLE(MyClass)
+
     UNITY_DEFINES_PTRS(MyClass);
 
     static SPtr create()
