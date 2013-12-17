@@ -76,6 +76,6 @@ TEST(FileIO, exceptions)
     }
     catch (FileException const& e)
     {
-        EXPECT_EQ("unity::FileException: \"testdir\" is not a regular file", e.to_string());
+        EXPECT_EQ("unity::FileException: \"testdir\" is not a regular file (errno = 0)", e.to_string());
     }
 }
