@@ -2,7 +2,7 @@ unity-api (7.80.5-0ubuntu1) UNRELEASED; urgency=low
 
   * Changed unity::Exception::what() to return the same text as unity::Exception::to_string().
 
- -- Michi Henning <michi@ubuntu>  Tue, 17 Dec 2013 08:42:03 +1000
+ -- Michi Henning <michi.henning@canonical.com>  Tue, 17 Dec 2013 08:42:03 +1000
 
 unity-api (7.80.4+14.04.20131126.2-0ubuntu1) trusty; urgency=low
 
