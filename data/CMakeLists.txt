@@ -9,4 +9,3 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/unity-shell-api.pc DESTINATION ${CMAKE
 
 configure_file(lib${UNITY_API_LIB}.pc.in lib${UNITY_API_LIB}.pc @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/lib${UNITY_API_LIB}.pc DESTINATION ${LIB_INSTALL_PREFIX}/pkgconfig)
-
