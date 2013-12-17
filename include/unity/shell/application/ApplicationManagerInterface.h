@@ -132,6 +132,15 @@ public:
     Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *findApplication(const QString &appId) const = 0;
 
     /**
+     * @brief Activate a given application
+     *
+     * This will request the shell to focus the given application.
+     *
+     * @param appId The appId of the app to be activated.
+     */
+    Q_INVOKABLE virtual void activateApplication(const QString &appId) = 0;
+
+    /**
      * @brief Focus the given application.
      *
      * @param appId The application to be focused.
@@ -178,9 +187,31 @@ Q_SIGNALS:
     /// @endcond
 
     /**
+     * @brief Will be emitted right before the focused application changes.
+     *
+     * This can be used to prepare for an upcoming focus change. For example starting
+     * an animation.
+     */
+    void focusRequested(const QString &appId);
+
+    /**
      * @brief Will be emitted whenever the focused application changes.
      */
     void focusedApplicationIdChanged();
+
+    /**
+     * @brief Will be emitted when an application was added to the model.
+     *
+     * @param appId The appId of the application that was added.
+     */
+    void applicationAdded(const QString &appId);
+
+    /**
+     * @brief Will be emitted when an application was removed from the model.
+     *
+     * @param appId The appId of the application that was removed.
+     */
+    void applicationRemoved(const QString &appId);
 
 protected:
     /// @cond
