@@ -33,15 +33,6 @@
 
 #include <unity/SymbolExport.h>
 
-namespace unity
-{
-
-namespace util
-{
-
-namespace NonCopyable_ // Prevent unintended ADL
-{
-
 /**
 \brief Helper macro to prevent a class from being copied.
 
@@ -60,29 +51,5 @@ public: // not necessary, but the error message is more explicit with this
 */
 
 #define NONCOPYABLE(ClassName) /** Deleted */ ClassName(ClassName const&) = delete; /** Deleted */ ClassName& operator=(ClassName const&) = delete;
-
-/**
- * This class is deprecated and will go away before 14/04 freeze. Use the NONCOPYABLE macro instead or
- * write your own =delete declarations.
- */
-
-class UNITY_API NonCopyable
-{
-protected:
-    NonCopyable() = default;
-    ~NonCopyable() = default;
-
-private:
-    NonCopyable(NonCopyable const&) = delete;
-    NonCopyable& operator=(NonCopyable const&) = delete;
-} __attribute__((deprecated));
-
-} // namespace NonCopyable_
-
-typedef NonCopyable_::NonCopyable NonCopyable __attribute__((deprecated));
-
-} // namespace util
-
-} // namespace unity
 
 #endif
