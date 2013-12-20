@@ -100,6 +100,11 @@ QString MockApplicationManager::focusedApplicationId() const
     return (first) ? first->appId() : QString();
 }
 
+void MockApplicationManager::activateApplication(const QString &appId)
+{
+    Q_UNUSED(appId)
+}
+
 bool MockApplicationManager::focusApplication(const QString &appId)
 {
     Q_UNUSED(appId)
