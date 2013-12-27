@@ -59,7 +59,7 @@ public: // not necessary, but the error message is more explicit with this
 };
 */
 
-#define NONCOPYABLE(ClassName) /** Deleted */ ClassName(ClassName const&) = delete; /** Deleted */ ClassName& operator=(ClassName const&) = delete;
+#define NONCOPYABLE(ClassName) /** Deleted */ ClassName(ClassName const&) = delete; /** Deleted */ ClassName& operator=(ClassName const&) = delete
 
 /**
  * This class is deprecated and will go away before 14/04 freeze. Use the NONCOPYABLE macro instead or

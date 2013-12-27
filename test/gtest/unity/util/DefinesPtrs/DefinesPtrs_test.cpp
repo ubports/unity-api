@@ -26,7 +26,7 @@ using namespace unity::util;
 class MyClass
 {
 public:
-    NONCOPYABLE(MyClass)
+    NONCOPYABLE(MyClass);
 
     UNITY_DEFINES_PTRS(MyClass);
 

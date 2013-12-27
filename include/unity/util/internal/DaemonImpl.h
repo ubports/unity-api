@@ -38,7 +38,7 @@ namespace internal
 class DaemonImpl final
 {
 public:
-    NONCOPYABLE(DaemonImpl)
+    NONCOPYABLE(DaemonImpl);
 
     DaemonImpl();
     ~DaemonImpl() = default;
