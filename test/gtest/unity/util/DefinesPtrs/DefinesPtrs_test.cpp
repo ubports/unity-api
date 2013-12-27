@@ -21,8 +21,6 @@
 
 #include <gtest/gtest.h>
 
-using namespace unity::util;
-
 class MyClass
 {
 public:
