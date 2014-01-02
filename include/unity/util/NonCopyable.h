@@ -50,6 +50,6 @@ public: // not necessary, but the error message is more explicit with this
 };
 */
 
-#define NONCOPYABLE(ClassName) /** Deleted */ ClassName(ClassName const&) = delete; /** Deleted */ ClassName& operator=(ClassName const&) = delete;
+#define NONCOPYABLE(ClassName) /** Deleted */ ClassName(ClassName const&) = delete; /** Deleted */ ClassName& operator=(ClassName const&) = delete
 
 #endif

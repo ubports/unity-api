@@ -66,9 +66,8 @@ Note: This class is not async signal-safe. Do not call daemonize_me() from a a s
 class UNITY_API Daemon final
 {
 public:
-    NONCOPYABLE(Daemon)
-
     /// @cond
+    NONCOPYABLE(Daemon);
     UNITY_DEFINES_PTRS(Daemon);
     /// @endcond
 
