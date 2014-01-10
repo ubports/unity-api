@@ -63,10 +63,11 @@ is in any other file system, that file system cannot be unmounted while the daem
 Note: This class is not async signal-safe. Do not call daemonize_me() from a a signal handler.
 */
 
-class UNITY_API Daemon final : private NonCopyable
+class UNITY_API Daemon final
 {
 public:
     /// @cond
+    NONCOPYABLE(Daemon);
     UNITY_DEFINES_PTRS(Daemon);
     /// @endcond
 

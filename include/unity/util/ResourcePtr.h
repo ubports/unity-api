@@ -19,8 +19,6 @@
 #ifndef UNITY_UTIL_RESOURCEPTR_H
 #define UNITY_UTIL_RESOURCEPTR_H
 
-#include <unity/util/NonCopyable.h>
-
 #include <mutex>
 
 namespace unity
@@ -117,9 +115,13 @@ Use <code>std::unique_ptr</code> instead, which is better suited to the task.
 // TODO: Discuss throwing deleters and requirements (copy constructible, etc.) on deleter.
 
 template<typename R, typename D>
-class ResourcePtr final : private NonCopyable
+class ResourcePtr final
 {
 public:
+    /** Deleted */
+    ResourcePtr(ResourcePtr const &) = delete;
+    /** Deleted */
+    ResourcePtr& operator=(ResourcePtr const&) = delete;
     /**
     \typedef element_type
     The type of resource managed by this ResourcePtr.

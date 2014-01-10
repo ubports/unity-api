@@ -1,3 +1,19 @@
+unity-api (7.80.5+14.04.20131219.1-0ubuntu1) trusty; urgency=low
+
+  [ Michi Henning ]
+  * Changed unity::Exception::what() to return the same text as unity::Exception::to_string().
+
+  [ Michal Hruby ]
+  * Expose full version including micro version number in pc file.
+
+  [ Jussi Pakkanen ]
+  * Made noncopyable a macro.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 116
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 19 Dec 2013 21:07:55 +0000
+
 unity-api (7.80.4+14.04.20131126.2-0ubuntu1) trusty; urgency=low
 
   [ Michal Hruby ]

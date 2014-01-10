@@ -35,9 +35,11 @@ namespace util
 namespace internal
 {
 
-class DaemonImpl final : private NonCopyable
+class DaemonImpl final
 {
 public:
+    NONCOPYABLE(DaemonImpl);
+
     DaemonImpl();
     ~DaemonImpl() = default;
 

@@ -44,11 +44,6 @@ public:
     //! @endcond
 
     /**
-    \brief Returns the fully-qualified name of the exception.
-    */
-    virtual char const* what() const noexcept override;
-
-    /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.
     */
     virtual std::exception_ptr self() const override;
@@ -72,11 +67,6 @@ public:
     LogicException& operator=(LogicException const&);
     virtual ~LogicException() noexcept;
     //! @endcond
-
-    /**
-    \brief Returns the fully-qualified name of the exception.
-    */
-    virtual char const* what() const noexcept override;
 
     /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.
@@ -108,20 +98,11 @@ public:
     //! @endcond
 
     /**
-    \brief Returns the fully-qualified name of the exception.
-    */
-    virtual char const* what() const noexcept override;
-
-    /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.
     */
     virtual std::exception_ptr self() const override;
 };
 
-namespace internal
-{
-class FileExceptionImpl;
-}
 
 /**
 \brief Exception to indicate file I/O errors, such as failure to open or write to a file.
@@ -146,11 +127,6 @@ public:
     //! @endcond
 
     /**
-    \brief Returns the fully-qualified name of the exception.
-    */
-    virtual char const* what() const noexcept override;
-
-    /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.
     */
     virtual std::exception_ptr self() const override;
@@ -161,13 +137,8 @@ public:
     int error() const noexcept;
 
 private:
-    std::shared_ptr<internal::FileExceptionImpl> p_;
+    int err_;
 };
-
-namespace internal
-{
-class SyscallExceptionImpl;
-}
 
 /**
 \brief Exception to indicate system or library call errors that set <code>errno</code>.
@@ -192,11 +163,6 @@ public:
     //! @endcond
 
     /**
-    \brief Returns the fully-qualified name of the exception.
-    */
-    virtual char const* what() const noexcept override;
-
-    /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.
     */
     virtual std::exception_ptr self() const override;
@@ -207,7 +173,7 @@ public:
     int error() const noexcept;
 
 private:
-    //std::shared_ptr<internal::SyscallExceptionImpl> p_;
+    int err_;
 };
 
 /**
@@ -227,11 +193,6 @@ public:
     ResourceException& operator=(ResourceException const&);
     virtual ~ResourceException() noexcept;
     //! @endcond
-
-    /**
-    \brief Returns the fully-qualified name of the exception.
-    */
-    virtual char const* what() const noexcept override;
 
     /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.

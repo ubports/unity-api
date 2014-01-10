@@ -31,9 +31,5 @@ target_link_libraries(${UNITY_API_STATIC_LIB} ${GLIB_LDFLAGS})
 # Only the dynamic library gets installed.
 install(TARGETS ${UNITY_API_LIB} LIBRARY DESTINATION ${LIB_INSTALL_PREFIX})
 
-# Set up package config.
-configure_file(lib${UNITY_API_LIB}.pc.in lib${UNITY_API_LIB}.pc @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/lib${UNITY_API_LIB}.pc DESTINATION ${LIB_INSTALL_PREFIX}/pkgconfig)
-
 # Parent needs to know what all the source files are, for generating doc and the like.
 set(UNITY_API_LIB_SRC ${UNITY_API_LIB_SRC} ${UNITY_SRC} PARENT_SCOPE)

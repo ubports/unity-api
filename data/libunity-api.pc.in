@@ -22,6 +22,6 @@ libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
 
 Name: lib@UNITY_API_LIB@
 Description: Unity API library
-Version: @UNITY_API_MAJOR@.@UNITY_API_MINOR@
+Version: @UNITY_API_VERSION@
 Libs: -L${libdir} -l@UNITY_API_LIB@
 Cflags: -I${includedir}
