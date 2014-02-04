@@ -1,3 +1,18 @@
+unity-api (7.80.5+14.04.20140120-0ubuntu1) trusty; urgency=low
+
+  [ Jussi Pakkanen ]
+  * Remove deprecated NonCopyable base class.
+
+  [ Michi Henning ]
+  * Removed final semicolon from NONCOPYABLE macro. This makes the usage
+    consistent with the UNITY_DEFINES_PTRS macro, which also does not
+    include the semicolon.
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 119
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 20 Jan 2014 16:05:43 +0000
+
 unity-api (7.80.5+14.04.20131219.1-0ubuntu1) trusty; urgency=low
 
   [ Michi Henning ]
