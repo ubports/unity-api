@@ -127,6 +127,7 @@ Item {
             return [
                 { tag: "ApplicationManager.count", property: "count", type: "number" },
                 { tag: "ApplicationManager.focusedApplicationId", property: "focusedApplicationId", type: "string" },
+                { tag: "ApplicationManager.suspended", property: "suspended", type: "boolean" },
             ];
         }
 

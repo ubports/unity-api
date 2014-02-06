@@ -40,6 +40,9 @@ public:
 
     QString focusedApplicationId() const;
 
+    bool suspended() const;
+    void setSuspended(bool suspended);
+
     Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *get(const int index) const;
 
     Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *findApplication(const QString &appId) const;
