@@ -110,9 +110,10 @@ void MockApplicationManager::setSuspended(bool suspended)
     Q_UNUSED(suspended)
 }
 
-void MockApplicationManager::activateApplication(const QString &appId)
+bool MockApplicationManager::requestFocusApplication(const QString &appId)
 {
     Q_UNUSED(appId)
+    return true;
 }
 
 bool MockApplicationManager::focusApplication(const QString &appId)

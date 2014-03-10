@@ -47,7 +47,7 @@ public:
 
     Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *findApplication(const QString &appId) const;
 
-    Q_INVOKABLE virtual void activateApplication(const QString &appId);
+    Q_INVOKABLE bool requestFocusApplication(const QString &appId);
 
     Q_INVOKABLE bool focusApplication(const QString &appId);
 

@@ -108,7 +108,7 @@ Item {
             return [
                 { tag: "ApplicationManager.methods[get]", method: "get" },
                 { tag: "ApplicationManager.methods[findApplication]", method: "findApplication" },
-                { tag: "ApplicationManager.methods[activateApplication]", method: "activateApplication" },
+                { tag: "ApplicationManager.methods[requestFocusApplication]", method: "requestFocusApplication" },
                 { tag: "ApplicationManager.methods[focusApplication]", method: "focusApplication" },
                 { tag: "ApplicationManager.methods[unfocusCurrentApplication]", method: "unfocusCurrentApplication" },
                 { tag: "ApplicationManager.methods[startApplication]", method: "startApplication" },

@@ -142,16 +142,20 @@ public:
     Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *findApplication(const QString &appId) const = 0;
 
     /**
-     * @brief Activate a given application
+     * @brief Request to focus a given application
      *
      * This will request the shell to focus the given application.
      *
-     * @param appId The appId of the app to be activated.
+     * @param appId The appId of the app to be focused.
      */
-    Q_INVOKABLE virtual void activateApplication(const QString &appId) = 0;
+    Q_INVOKABLE virtual bool requestFocusApplication(const QString &appId) = 0;
 
     /**
      * @brief Focus the given application.
+     *
+     * This will immediately focus the given application. Usually you should not use this
+     * but instead call requestFocusApplication() in order to allow the shell to prepare
+     * for the upcoming animation or even block the focus request (e.g. focus stealing prevention)
      *
      * @param appId The application to be focused.
      * @returns True if appId found and application focused, else false.
