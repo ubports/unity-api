@@ -147,6 +147,7 @@ public:
      * This will request the shell to focus the given application.
      *
      * @param appId The appId of the app to be focused.
+     * @returns True if the request will processed, false if it was discarded (i.e. the given appid could not be found)
      */
     Q_INVOKABLE virtual bool requestFocusApplication(const QString &appId) = 0;
 
