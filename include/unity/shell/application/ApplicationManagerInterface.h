@@ -188,8 +188,9 @@ public:
      * you can request the ApplicationManager to update it now.
      *
      * @param appId The application for which the screenshot should be updated.
+     * @returns True if the screenshot update operation was scheduled successfully, false otherwise (i.e. the given appId could not be found)
      */
-    Q_INVOKABLE virtual void updateScreenshot(const QString &appId) = 0;
+    Q_INVOKABLE virtual bool updateScreenshot(const QString &appId) = 0;
 
 Q_SIGNALS:
     /// @cond

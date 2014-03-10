@@ -57,7 +57,7 @@ public:
 
     Q_INVOKABLE bool stopApplication(const QString &appId);
 
-    Q_INVOKABLE void updateScreenshot(const QString &appId);
+    Q_INVOKABLE bool updateScreenshot(const QString &appId);
 
 private:
     QList<MockApplicationInfo*> m_list;

@@ -138,7 +138,8 @@ bool MockApplicationManager::stopApplication(const QString &appId)
     return true;
 }
 
-void MockApplicationManager::updateScreenshot(const QString &appId)
+bool MockApplicationManager::updateScreenshot(const QString &appId)
 {
     Q_UNUSED(appId)
+    return true;
 }
