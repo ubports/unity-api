@@ -62,7 +62,7 @@ class UNITY_API ApplicationManagerInterface: public QAbstractListModel
     /**
      * @brief The suspended state of the ApplicationManager.
      *
-     * If this is set to true, all apps (regarless if focused or not) will be suspended.
+     * If this is set to true, all apps (regardless if focused or not) will be suspended.
      */
     Q_PROPERTY(bool suspended READ suspended WRITE setSuspended NOTIFY suspendedChanged)
 
