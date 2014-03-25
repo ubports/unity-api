@@ -1,3 +1,13 @@
+unity-api (7.80.5+14.04.20140304-0ubuntu1) trusty; urgency=low
+
+  [ CI bot ]
+  * No change rebuild against Qt 5.2.1.
+
+  [ Ubuntu daily release ]
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 04 Mar 2014 13:52:36 +0000
+
 unity-api (7.80.5+14.04.20140120-0ubuntu1) trusty; urgency=low
 
   [ Jussi Pakkanen ]
