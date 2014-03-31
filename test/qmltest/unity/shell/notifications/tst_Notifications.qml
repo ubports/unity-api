@@ -68,6 +68,30 @@ Item {
             verifyData(data);
         }
 
+        /* make sure all the required roles are exposed on the NotificationModel */
+        function test_model_roles_enum_data() {
+            return [
+                        { enum: "RoleType" },
+                        { enum: "RoleUrgency" },
+                        { enum: "RoleId" },
+                        { enum: "RoleSummary" },
+                        { enum: "RoleBody" },
+                        { enum: "RoleValue" },
+                        { enum: "RoleIcon" },
+                        { enum: "RoleSecondaryIcon" },
+                        { enum: "RoleActions" },
+                        { enum: "RoleHints" },
+                        { enum: "RoleNotification" },
+                    ];
+        }
+
+        function test_model_roles_enum(data) {
+            object = model
+            name = "Model"
+
+            verifyData(data);
+        }
+
         function test_model_data() {
             return [
                 { tag: "Model[object]", type: "object" },

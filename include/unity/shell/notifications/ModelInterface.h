@@ -47,7 +47,7 @@ actually displayed.
 class UNITY_API ModelInterface : public QAbstractListModel
 {
     Q_OBJECT
-    Q_ENUMS(RolesEnum)
+    Q_ENUMS(Roles)
 
     /**
     \brief Whether a placeholder for confirmation should be kept at the beginning
@@ -78,7 +78,7 @@ public:
 
     The different data-entries of a notification element in the model.
     */
-    enum RolesEnum {
+    enum Roles {
         RoleType          = Qt::UserRole + 1,  /** type of notification */
         RoleUrgency       = Qt::UserRole + 2,  /** urgency of notification */
         RoleId            = Qt::UserRole + 3,  /** internal id set by daemon */
