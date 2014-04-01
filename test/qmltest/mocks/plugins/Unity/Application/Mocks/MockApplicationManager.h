@@ -40,9 +40,14 @@ public:
 
     QString focusedApplicationId() const;
 
+    bool suspended() const;
+    void setSuspended(bool suspended);
+
     Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *get(const int index) const;
 
     Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *findApplication(const QString &appId) const;
+
+    Q_INVOKABLE bool requestFocusApplication(const QString &appId);
 
     Q_INVOKABLE bool focusApplication(const QString &appId);
 
@@ -51,6 +56,8 @@ public:
     Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *startApplication(const QString &appId, const QStringList &arguments);
 
     Q_INVOKABLE bool stopApplication(const QString &appId);
+
+    Q_INVOKABLE bool updateScreenshot(const QString &appId);
 
 private:
     QList<MockApplicationInfo*> m_list;

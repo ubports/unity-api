@@ -97,6 +97,13 @@ class UNITY_API ApplicationInfoInterface: public QObject
      */
     Q_PROPERTY(bool focused READ focused NOTIFY focusedChanged)
 
+    /**
+     * @brief The URL of the app's screenshot to be used with the image provider.
+     *
+     * Holds the URL for the app's screenshot. This URL will change whenever the screenshot updates.
+     */
+    Q_PROPERTY(QUrl screenshot READ screenshot NOTIFY screenshotChanged)
+
 protected:
     /// @cond
     ApplicationInfoInterface(const QString &appId, QObject* parent = 0): QObject(parent) { Q_UNUSED(appId) }
@@ -145,6 +152,7 @@ public:
     virtual Stage stage() const = 0;
     virtual State state() const = 0;
     virtual bool focused() const = 0;
+    virtual QUrl screenshot() const = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -155,6 +163,7 @@ Q_SIGNALS:
     void stageChanged(Stage stage);
     void stateChanged(State state);
     void focusedChanged(bool focused);
+    void screenshotChanged(const QUrl &screenshot);
     /// @endcond
 };
 

@@ -59,6 +59,13 @@ class UNITY_API ApplicationManagerInterface: public QAbstractListModel
      */
     Q_PROPERTY(QString focusedApplicationId READ focusedApplicationId NOTIFY focusedApplicationIdChanged)
 
+    /**
+     * @brief The suspended state of the ApplicationManager.
+     *
+     * If this is set to true, all apps (regardless if focused or not) will be suspended.
+     */
+    Q_PROPERTY(bool suspended READ suspended WRITE setSuspended NOTIFY suspendedChanged)
+
 protected:
     /// @cond
     ApplicationManagerInterface(QObject* parent = 0): QAbstractListModel(parent)
@@ -70,6 +77,7 @@ protected:
         m_roleNames.insert(RoleStage, "stage");
         m_roleNames.insert(RoleState, "state");
         m_roleNames.insert(RoleFocused, "focused");
+        m_roleNames.insert(RoleScreenshot, "screenshot");
 
         connect(this, SIGNAL(rowsInserted(QModelIndex, int, int)), SIGNAL(countChanged()));
         connect(this, SIGNAL(rowsRemoved(QModelIndex, int, int)), SIGNAL(countChanged()));
@@ -92,6 +100,7 @@ public:
         RoleStage,
         RoleState,
         RoleFocused,
+        RoleScreenshot,
     };
 
     /// @cond
@@ -107,6 +116,9 @@ public:
     }
 
     virtual QString focusedApplicationId() const = 0;
+
+    virtual bool suspended() const = 0;
+    virtual void setSuspended(bool suspended) = 0;
     /// @endcond
 
     /**
@@ -130,7 +142,21 @@ public:
     Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *findApplication(const QString &appId) const = 0;
 
     /**
+     * @brief Request to focus a given application
+     *
+     * This will request the shell to focus the given application.
+     *
+     * @param appId The appId of the app to be focused.
+     * @returns True if the request will processed, false if it was discarded (i.e. the given appid could not be found)
+     */
+    Q_INVOKABLE virtual bool requestFocusApplication(const QString &appId) = 0;
+
+    /**
      * @brief Focus the given application.
+     *
+     * This will immediately focus the given application. Usually you should not use this
+     * but instead call requestFocusApplication() in order to allow the shell to prepare
+     * for the upcoming animation or even block the focus request (e.g. focus stealing prevention)
      *
      * @param appId The application to be focused.
      * @returns True if appId found and application focused, else false.
@@ -159,15 +185,54 @@ public:
       */
     Q_INVOKABLE virtual bool stopApplication(const QString &appId) = 0;
 
+    /**
+     * @brief Update the screenshot for an application.
+     *
+     * NOTE: Normally the ApplicationManager will update screenshots unfocusing or focusing apps,
+     * However, in cases where you need to show the screenshot while the application is still focused,
+     * you can request the ApplicationManager to update it now.
+     *
+     * @param appId The application for which the screenshot should be updated.
+     * @returns True if the screenshot update operation was scheduled successfully, false otherwise (i.e. the given appId could not be found)
+     */
+    Q_INVOKABLE virtual bool updateScreenshot(const QString &appId) = 0;
+
 Q_SIGNALS:
     /// @cond
     void countChanged();
     /// @endcond
 
     /**
+     * @brief Will be emitted right before the focused application changes.
+     *
+     * This can be used to prepare for an upcoming focus change. For example starting
+     * an animation.
+     */
+    void focusRequested(const QString &appId);
+
+    /**
      * @brief Will be emitted whenever the focused application changes.
      */
     void focusedApplicationIdChanged();
+
+    /**
+     * @brief Will be emitted when the suspended state of the ApplicationManager changes.
+     */
+    void suspendedChanged();
+
+    /**
+     * @brief Will be emitted when an application was added to the model.
+     *
+     * @param appId The appId of the application that was added.
+     */
+    void applicationAdded(const QString &appId);
+
+    /**
+     * @brief Will be emitted when an application was removed from the model.
+     *
+     * @param appId The appId of the application that was removed.
+     */
+    void applicationRemoved(const QString &appId);
 
 protected:
     /// @cond
