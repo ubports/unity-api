@@ -47,6 +47,7 @@ actually displayed.
 class UNITY_API ModelInterface : public QAbstractListModel
 {
     Q_OBJECT
+    Q_ENUMS(Roles)
 
     /**
     \brief Whether a placeholder for confirmation should be kept at the beginning
@@ -71,6 +72,25 @@ public:
     virtual bool confirmationPlaceholder() const = 0;
     virtual void setConfirmationPlaceholder(bool confirmationPlaceholder) = 0;
     /// @endcond
+
+    /**
+    \brief NotificationModel's data-role enumeration.
+
+    The different data-entries of a notification element in the model.
+    */
+    enum Roles {
+        RoleType          = Qt::UserRole + 1,  /** type of notification */
+        RoleUrgency       = Qt::UserRole + 2,  /** urgency of notification */
+        RoleId            = Qt::UserRole + 3,  /** internal id set by daemon */
+        RoleSummary       = Qt::UserRole + 4,  /** summary-text */
+        RoleBody          = Qt::UserRole + 5,  /** body-text */
+        RoleValue         = Qt::UserRole + 6,  /** 0..100 value */
+        RoleIcon          = Qt::UserRole + 7,  /** main icon */
+        RoleSecondaryIcon = Qt::UserRole + 8,  /** optional 2nd icon */
+        RoleActions       = Qt::UserRole + 9,  /** attached optional actions */
+        RoleHints         = Qt::UserRole + 10, /** attached hints */
+        RoleNotification  = Qt::UserRole + 11  /** notification object */
+    };
 
 Q_SIGNALS:
     /**
