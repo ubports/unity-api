@@ -74,6 +74,7 @@ TEST(IniParser, simpleQueries)
     ASSERT_EQ(conf.get_string("first", "locstring"), "world");
     ASSERT_EQ(conf.get_locale_string("first", "locstring", "en"), "world");
     ASSERT_EQ(conf.get_locale_string("first", "locstring", "pt_BR"), "mundo");
+    ASSERT_EQ(conf.get_locale_string("first", "locstring", "no_DF"), "world");
 }
 
 TEST(IniParser, arrayQueries)
@@ -104,6 +105,11 @@ TEST(IniParser, failingQueries)
 
     try {
         conf.get_string("foo", "bar");
+        FAIL();
+    } catch(const LogicException &e) {
+    }
+    try {
+        conf.get_locale_string("foo", "bar");
         FAIL();
     } catch(const LogicException &e) {
     }
