@@ -64,12 +64,16 @@ TEST(IniParser, simpleQueries)
     ASSERT_EQ(groups[1], "second");
 
     vector<string> firstKeys = conf.get_keys("first");
-    ASSERT_EQ(firstKeys.size(), 5);
+    ASSERT_EQ(firstKeys.size(), 8);
     ASSERT_EQ(firstKeys[1], "boolvalue");
 
     ASSERT_EQ(conf.get_string("first", "stringvalue"), "hello");
     ASSERT_EQ(conf.get_int("first", "intvalue"), 1);
     ASSERT_FALSE(conf.get_boolean("second", "boolvalue"));
+
+    ASSERT_EQ(conf.get_string("first", "locstring"), "world");
+    ASSERT_EQ(conf.get_locale_string("first", "locstring", "en"), "world");
+    ASSERT_EQ(conf.get_locale_string("first", "locstring", "pt_BR"), "mundo");
 }
 
 TEST(IniParser, arrayQueries)
