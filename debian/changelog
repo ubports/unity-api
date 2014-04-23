@@ -1,4 +1,4 @@
-unity-api (7.80.6+14.04.20140402-0ubuntu2) UNRELEASED; urgency=medium
+unity-api (7.80.7-0ubuntu1) UNRELEASED; urgency=medium
 
   * Bumped the unity-api version from 0.1.2 to 0.1.3, because the added exposure of the NotificationModel's Roles-Enum in r126 needs to be trackable by the api-consumers outside.
 
