@@ -75,7 +75,7 @@ IniParser::IniParser(const char* filename)
     {
         throw ResourceException("Could not create keyfile parser."); // LCOV_EXCL_LINE
     }
-    if (!g_key_file_load_from_file(kf, filename, G_KEY_FILE_NONE, &e))
+    if (!g_key_file_load_from_file(kf, filename, G_KEY_FILE_KEEP_TRANSLATIONS, &e))
     {
         string message = "Could not load ini file ";
         message += filename;
@@ -122,6 +122,18 @@ std::string IniParser::get_string(const std::string& group, const std::string& k
     GError* e = nullptr;
     string result;
     value = g_key_file_get_string(p->k, group.c_str(), key.c_str(), &e);
+    inspect_error(e, "Could not get string value", p->filename, group);
+    result = value;
+    g_free(value);
+    return result;
+}
+
+std::string IniParser::get_locale_string(const std::string& group, const std::string& key, const std::string& locale) const
+{
+    gchar* value;
+    GError* e = nullptr;
+    string result;
+    value = g_key_file_get_locale_string(p->k, group.c_str(), key.c_str(), locale.empty() ? nullptr : locale.c_str(), &e);
     inspect_error(e, "Could not get string value", p->filename, group);
     result = value;
     g_free(value);
