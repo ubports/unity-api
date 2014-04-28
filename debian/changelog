@@ -1,6 +1,7 @@
 unity-api (7.80.7-0ubuntu1) UNRELEASED; urgency=medium
 
   * Added IniParser::get_locale_string()
+  * Bumped the unity-notification version, because the added exposure of the NotificationModel's Roles-Enum needs to be trackable by the api-consumers outside.
 
  -- Michal Hruby <michal.hruby@canonical.com>  Wed, 23 Apr 2014 11:15:38 +0100
 
