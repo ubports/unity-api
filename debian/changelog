@@ -1,8 +1,9 @@
-unity-api (7.80.7-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.80.7+14.10.20140428.1-0ubuntu1) utopic; urgency=medium
 
+  [ Michal Hruby ]
   * Added IniParser::get_locale_string()
 
- -- Michal Hruby <michal.hruby@canonical.com>  Wed, 23 Apr 2014 11:15:38 +0100
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 28 Apr 2014 17:28:16 +0000
 
 unity-api (7.80.6+14.04.20140402-0ubuntu1) trusty; urgency=low
 
