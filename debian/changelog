@@ -1,3 +1,9 @@
+unity-api (7.80.8-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Bump unity-notification version due to exposure of NotificationModel's Roles-Enum.
+
+ -- Mirco Müller (MacSlow) <mirco.mueller@ubuntu.com>  Mon, 05 May 2014 10:05:27 +0200
+
 unity-api (7.80.7+14.10.20140428.1-0ubuntu1) utopic; urgency=medium
 
   [ Michal Hruby ]
