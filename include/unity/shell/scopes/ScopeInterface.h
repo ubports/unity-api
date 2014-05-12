@@ -85,13 +85,13 @@ public:
 Q_SIGNALS:
     // @cond
     void idChanged();
-    void nameChanged(const std::string&);
-    void iconHintChanged(const std::string&);
-    void descriptionChanged(const std::string&);
-    void searchHintChanged(const std::string&);
+    void nameChanged(const QString&);
+    void iconHintChanged(const QString&);
+    void descriptionChanged(const QString&);
+    void searchHintChanged(const QString&);
     void searchInProgressChanged();
     void visibleChanged(bool);
-    void shortcutChanged(const std::string&);
+    void shortcutChanged(const QString&);
     void categoriesChanged();
     void searchQueryChanged();
     void noResultsHintChanged();
