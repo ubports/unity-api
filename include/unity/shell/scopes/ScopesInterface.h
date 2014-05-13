@@ -49,10 +49,14 @@ public:
     Q_INVOKABLE virtual QVariant get(int row) const = 0;
     Q_INVOKABLE virtual QVariant get(QString const& scopeId) const = 0;
 
+    // @cond
     virtual bool loaded() const = 0;
+    // @endcond
 
 Q_SIGNALS:
+    // @cond
     void loadedChanged(bool loaded);
+    // @endcond
 };
 
 }
