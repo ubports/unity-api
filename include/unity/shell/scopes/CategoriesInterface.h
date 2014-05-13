@@ -42,7 +42,6 @@ public:
         RoleRawRendererTemplate,
         RoleRenderer,
         RoleComponents,
-        RoleProgressSource, // maybe
         RoleResults,
         RoleCount
     };
@@ -60,7 +59,6 @@ public:
         roles[RoleRawRendererTemplate] = "rawRendererTemplate";
         roles[RoleRenderer] = "renderer";
         roles[RoleComponents] = "components";
-        roles[RoleProgressSource] = "progressSource";
         roles[RoleResults] = "results";
         roles[RoleCount] = "count";
         return roles;
