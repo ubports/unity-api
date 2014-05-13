@@ -51,6 +51,15 @@ public:
 
     // @cond
     virtual bool loaded() const = 0;
+    QHash<int, QByteArray> roleNames() const override
+    {
+        QHash<int, QByteArray> roles;
+        roles[RoleScope] = "scope";
+        roles[RoleId] = "id";
+        roles[RoleVisible] = "visible";
+        roles[RoleTitle] = "title";
+        return roles;
+    }
     // @endcond
 
 Q_SIGNALS:

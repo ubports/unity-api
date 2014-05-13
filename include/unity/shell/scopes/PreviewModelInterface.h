@@ -48,6 +48,12 @@ public:
     virtual int widgetColumnCount() const = 0;
     virtual bool loaded() const = 0;
     virtual bool processingAction() const = 0;
+    QHash<int, QByteArray> roleNames() const override
+    {
+        QHash<int, QByteArray> roles;
+        roles[RoleColumnModel] = "columnModel";
+        return roles;
+    }
     // @endcond
 
 Q_SIGNALS:

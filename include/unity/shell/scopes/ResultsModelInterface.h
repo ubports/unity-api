@@ -61,6 +61,24 @@ public:
     virtual int count() const = 0;
 
     virtual void setCategoryId(QString const& id) = 0;
+    QHash<int, QByteArray> roleNames() const override
+    {
+        QHash<int, QByteArray> roles;
+        roles[RoleUri] = "uri";
+        roles[RoleCategoryId] = "categoryId";
+        roles[RoleDndUri] = "dndUri";
+        roles[RoleResult] = "result";
+        roles[RoleTitle] = "title";
+        roles[RoleArt] = "art";
+        roles[RoleSubtitle] = "subtitle";
+        roles[RoleMascot] = "mascot";
+        roles[RoleEmblem] = "emblem";
+        roles[RoleSummary] = "summary";
+        roles[RoleAttributes] = "attributes";
+        roles[RoleBackground] = "background";
+        return roles;
+    }
+
     // @endcond
 
 Q_SIGNALS:

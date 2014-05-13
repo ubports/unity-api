@@ -49,6 +49,23 @@ public:
 
     Q_INVOKABLE virtual bool overrideCategoryJson(QString const& categoryId, QString const& json) = 0;
     Q_INVOKABLE virtual void addSpecialCategory(QString const& categoryId, QString const& name, QString const& icon, QString const& rawTemplate, QObject* countObject) = 0;
+
+    // @cond
+    QHash<int, QByteArray> roleNames() const override
+    {
+        QHash<int, QByteArray> roles;
+        roles[RoleCategoryId] = "categoryId";
+        roles[RoleName] = "name";
+        roles[RoleIcon] = "icon";
+        roles[RoleRawRendererTemplate] = "rawRendererTemplate";
+        roles[RoleRenderer] = "renderer";
+        roles[RoleComponents] = "components";
+        roles[RoleProgressSource] = "progressSource";
+        roles[RoleResults] = "results";
+        roles[RoleCount] = "count";
+        return roles;
+    }
+    // @endcond
 };
 
 }

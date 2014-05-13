@@ -40,6 +40,17 @@ public:
         RoleType,
         RoleProperties
     };
+
+    // @cond
+    QHash<int, QByteArray> roleNames() const override
+    {
+        QHash<int, QByteArray> roles;
+        roles[RoleWidgetId] = "widgetId";
+        roles[RoleType] = "type";
+        roles[RoleProperties] = "properties";
+        return roles;
+    }
+    // @endcond
 };
 
 }
