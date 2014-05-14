@@ -52,7 +52,8 @@ QVariant MockResultsModel::get(int row) const
 
     QVariantMap result;
     QModelIndex modelIndex(index(row));
-    QHashIterator<int, QByteArray> it(roleNames());
+    const QHash<int, QByteArray> roles = roleNames();
+    QHashIterator<int, QByteArray> it(roles);
     while (it.hasNext()) {
         it.next();
         QVariant val(data(modelIndex, it.key()));
