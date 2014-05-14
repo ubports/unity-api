@@ -36,9 +36,8 @@ struct MockPreviewData
 };
 
 MockPreviewWidgetModel::MockPreviewWidgetModel(QObject* parent)
+ : unity::shell::scopes::PreviewWidgetModelInterface(parent)
 {
-    setParent(parent);
-
     for (int i = 0; i <= 20; i++) {
         QVariantMap attributes;
         attributes["text"] = QVariant::fromValue(QString("Widget %1").arg(i));

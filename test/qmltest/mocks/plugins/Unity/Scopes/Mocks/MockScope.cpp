@@ -23,7 +23,8 @@ MockScope::MockScope(QObject* parent) : MockScope(QString(), QString(), false, p
 }
 
 MockScope::MockScope(QString const& id, QString const& name, bool visible, QObject* parent)
-    : m_id(id)
+    : unity::shell::scopes::ScopeInterface(parent)
+    , m_id(id)
     , m_name(name)
     , m_visible(visible)
     , m_searching(false)
@@ -31,7 +32,6 @@ MockScope::MockScope(QString const& id, QString const& name, bool visible, QObje
     , m_previewRendererName("preview-generic")
     , m_categories(new MockCategories(20, this))
 {
-    setParent(parent);
 }
 
 QString MockScope::id() const {

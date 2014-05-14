@@ -28,9 +28,8 @@
 #include <QDebug>
 
 MockPreviewModel::MockPreviewModel(QObject* parent)
+ : unity::shell::scopes::PreviewModelInterface(parent)
 {
-    setParent(parent);
-
     // we have one column by default
     MockPreviewWidgetModel* columnModel = new MockPreviewWidgetModel(this);
     m_previewWidgetModels.append(columnModel);

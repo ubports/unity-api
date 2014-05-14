@@ -36,6 +36,11 @@ class UNITY_API ScopesInterface : public QAbstractListModel
 
     Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
 
+protected:
+    /// @cond
+    explicit ScopesInterface(QObject* parent = 0) : QAbstractListModel(parent) { }
+    /// @endcond
+
 public:
     enum Roles {
         RoleScope,

@@ -18,10 +18,10 @@
 #include "MockResultsModel.h"
 
 MockResultsModel::MockResultsModel(int result_count, int categoryId, QObject* parent)
-    : m_result_count(result_count)
+    : unity::shell::scopes::ResultsModelInterface(parent)
+    , m_result_count(result_count)
     , m_categoryId(categoryId)
 {
-    setParent(parent);
 }
 
 QString MockResultsModel::categoryId() const

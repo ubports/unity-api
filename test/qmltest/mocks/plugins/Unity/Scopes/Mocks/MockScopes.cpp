@@ -21,9 +21,8 @@
 #include "MockScope.h"
 
 MockScopes::MockScopes(QObject *parent)
+ : unity::shell::scopes::ScopesInterface(parent)
 {
-    setParent(parent);
-
     m_scopes << new MockScope("MockScope1", "People", true, this);
     m_scopes << new MockScope("MockScope2", "Music", false, this);
     m_scopes << new MockScope("MockScope3", "Apps", true, this);

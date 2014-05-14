@@ -50,6 +50,11 @@ class UNITY_API ScopeInterface : public QObject
     Q_PROPERTY(QString formFactor READ formFactor WRITE setFormFactor NOTIFY formFactorChanged)
     Q_PROPERTY(bool isActive READ isActive WRITE setActive NOTIFY isActiveChanged)
 
+protected:
+    /// @cond
+    explicit ScopeInterface(QObject* parent = 0) : QObject(parent) { }
+    /// @endcond
+
 public:
 
     // @cond

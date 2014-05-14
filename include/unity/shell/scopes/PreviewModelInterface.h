@@ -38,6 +38,11 @@ class UNITY_API PreviewModelInterface : public QAbstractListModel
     Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
     Q_PROPERTY(bool processingAction READ processingAction NOTIFY processingActionChanged)
 
+protected:
+    /// @cond
+    explicit PreviewModelInterface(QObject* parent = 0) : QAbstractListModel(parent) { }
+    /// @endcond
+
 public:
     enum Roles {
         RoleColumnModel

@@ -34,6 +34,11 @@ class UNITY_API PreviewWidgetModelInterface : public QAbstractListModel
 
     Q_ENUMS(Roles)
 
+protected:
+    /// @cond
+    explicit PreviewWidgetModelInterface(QObject* parent = 0) : QAbstractListModel(parent) { }
+    /// @endcond
+
 public:
     enum Roles {
         RoleWidgetId,

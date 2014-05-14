@@ -21,9 +21,8 @@
 #include "MockPreviewModel.h"
 
 MockPreviewStack::MockPreviewStack(QObject* parent)
+ : unity::shell::scopes::PreviewStackInterface(parent)
 {
-    setParent(parent);
-
     m_previews << new MockPreviewModel(this);
 }
 

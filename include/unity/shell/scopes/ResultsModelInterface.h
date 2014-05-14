@@ -37,6 +37,11 @@ class UNITY_API ResultsModelInterface : public QAbstractListModel
     Q_PROPERTY(QString categoryId READ categoryId WRITE setCategoryId NOTIFY categoryIdChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
+protected:
+    /// @cond
+    explicit ResultsModelInterface(QObject* parent = 0) : QAbstractListModel(parent) { }
+    /// @endcond
+
 public:
     enum Roles {
         RoleUri,

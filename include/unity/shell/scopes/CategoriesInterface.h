@@ -34,6 +34,11 @@ class UNITY_API CategoriesInterface : public QAbstractListModel
 
     Q_ENUMS(Roles)
 
+protected:
+    /// @cond
+    explicit CategoriesInterface(QObject* parent = 0) : QAbstractListModel(parent) { }
+    /// @endcond
+
 public:
     enum Roles {
         RoleCategoryId,

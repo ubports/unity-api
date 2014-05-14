@@ -22,9 +22,9 @@
 #include "MockResultsModel.h"
 
 MockCategories::MockCategories(int category_count, QObject* parent)
-    : m_category_count(category_count)
+    : unity::shell::scopes::CategoriesInterface(parent)
+    , m_category_count(category_count)
 {
-    setParent(parent);
 }
 
 int MockCategories::rowCount(const QModelIndex& /*parent*/) const

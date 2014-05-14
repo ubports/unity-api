@@ -38,6 +38,11 @@ class UNITY_API PreviewStackInterface : public QAbstractListModel
 
     Q_PROPERTY(int widgetColumnCount READ widgetColumnCount WRITE setWidgetColumnCount NOTIFY widgetColumnCountChanged)
 
+protected:
+    /// @cond
+    explicit PreviewStackInterface(QObject* parent = 0) : QAbstractListModel(parent) { }
+    /// @endcond
+
 public:
     enum Roles {
         RolePreviewModel
