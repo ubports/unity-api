@@ -143,7 +143,6 @@ Item {
                 { tag: "Model.methods[showDash]", method: "showDash" },
                 { tag: "Model.methods[hideDash]", method: "hideDash" },
                 { tag: "Model.methods[gotoUri]", method: "gotoUri" },
-                { tag: "Model.methods[activated]", method: "activated" },
                 { tag: "Model.methods[previewRequested]", method: "previewRequested" },
                 { tag: "Model.methods[gotoScope]", method: "gotoScope" },
                 { tag: "Model.methods[openScope]", method: "openScope" },
