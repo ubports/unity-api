@@ -28,12 +28,20 @@ namespace shell
 namespace scopes
 {
 
+/**
+ * @brief A list of scopes to display in the UI.
+ *
+ * This model exposes information about scopes that should be shown by the dash.
+ */
 class UNITY_API ScopesInterface : public QAbstractListModel
 {
     Q_OBJECT
 
     Q_ENUMS(Roles)
 
+    /**
+     * @brief Boolean indicating whether asynchronous populating of the model finished.
+     */
     Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
 
 protected:
@@ -42,6 +50,9 @@ protected:
     /// @endcond
 
 public:
+    /**
+     * @brief Roles supported by the model.
+     */
     enum Roles {
         RoleScope,
         RoleId,
@@ -49,9 +60,24 @@ public:
         RoleTitle
     };
 
+    /**
+     * @brief Number of rows in the model.
+     */
     Q_INVOKABLE virtual int rowCount(const QModelIndex& parent = QModelIndex()) const = 0;
 
+    /**
+     * @brief Get ScopeInterface instance associated with a row.
+     *
+     * Returns ScopeInterface instance associated with a row or a null variant when
+     * supplied with incorrect index.
+     */
     Q_INVOKABLE virtual QVariant get(int row) const = 0;
+    /**
+     * @brief Get ScopeInterface instance by scope id.
+     *
+     * Returns ScopeInterface instance which with the supplied scope id or a null
+     * variant.
+     */
     Q_INVOKABLE virtual QVariant get(QString const& scopeId) const = 0;
 
     // @cond

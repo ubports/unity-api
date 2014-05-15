@@ -30,12 +30,26 @@ namespace scopes
 
 class PreviewModelInterface;
 
+/**
+ * @brief A master model for previews.
+ *
+ * Each item in this model represents an individual preview, where each is stacked
+ * on top of the previous one. Item on index 0 is always the one on the very bottom
+ * of the stack.
+ */
 class UNITY_API PreviewStackInterface : public QAbstractListModel
 {
     Q_OBJECT
 
     Q_ENUMS(Roles)
 
+    /**
+     * @brief Number of columns the individual previews should expose.
+     *
+     * Previews can be laid out in different number of columns - for example the number
+     * of desired columns can change when changing orientation of the display and
+     * therefore there's more horizontal space available.
+     */
     Q_PROPERTY(int widgetColumnCount READ widgetColumnCount WRITE setWidgetColumnCount NOTIFY widgetColumnCountChanged)
 
 protected:
@@ -44,10 +58,19 @@ protected:
     /// @endcond
 
 public:
+    /**
+     * @brief The roles supported by this model.
+     */
     enum Roles {
         RolePreviewModel
     };
 
+    /**
+     * @brief Get preview model at a particular index.
+     *
+     * Return PreviewModelInterface instance at a particular index or nullptr
+     * if the index is out of bounds.
+     */
     Q_INVOKABLE virtual unity::shell::scopes::PreviewModelInterface* get(int index) const = 0;
 
     // @cond

@@ -28,13 +28,22 @@ namespace shell
 namespace scopes
 {
 
+/**
+ * @brief A model of scope results for a particular category.
+ */
 class UNITY_API ResultsModelInterface : public QAbstractListModel
 {
     Q_OBJECT
 
     Q_ENUMS(Roles)
 
+    /**
+     * @brief Id of associated category.
+     */
     Q_PROPERTY(QString categoryId READ categoryId WRITE setCategoryId NOTIFY categoryIdChanged)
+    /**
+     * @brief Number of items in the model.
+     */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 protected:
@@ -43,6 +52,9 @@ protected:
     /// @endcond
 
 public:
+    /**
+     * @brief The Roles supported by this model.
+     */
     enum Roles {
         RoleUri,
         RoleCategoryId,
@@ -59,6 +71,11 @@ public:
         RoleBackground
     };
 
+    /**
+     * @brief Get values of all roles for a particular model row.
+     *
+     * Returns a dictionary of all model roles and their values for a particular row.
+     */
     Q_INVOKABLE virtual QVariant get(int row) const = 0;
 
     // @cond

@@ -28,6 +28,11 @@ namespace shell
 namespace scopes
 {
 
+/**
+ * @brief A list of widgets in a preview.
+ *
+ * This model exposes all the widgets that belong to a particular column in a preview.
+ */
 class UNITY_API PreviewWidgetModelInterface : public QAbstractListModel
 {
     Q_OBJECT
@@ -40,6 +45,9 @@ protected:
     /// @endcond
 
 public:
+    /**
+     * @brief The roles supported by this model.
+     */
     enum Roles {
         RoleWidgetId,
         RoleType,

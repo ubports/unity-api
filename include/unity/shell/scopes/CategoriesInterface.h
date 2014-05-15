@@ -28,6 +28,12 @@ namespace shell
 namespace scopes
 {
 
+/**
+ * @brief A list of categories for a particular search.
+ *
+ * This model exposes all categories and their properties (including the results model
+ * itself) associated with a particular search.
+ */
 class UNITY_API CategoriesInterface : public QAbstractListModel
 {
     Q_OBJECT
@@ -40,6 +46,9 @@ protected:
     /// @endcond
 
 public:
+    /**
+     * @brief The roles supported by this model.
+     */
     enum Roles {
         RoleCategoryId,
         RoleName,
@@ -51,7 +60,21 @@ public:
         RoleCount
     };
 
+    /**
+     * @brief Override definition of a category by passing a custom JSON string.
+     *
+     * A method that helps with scope development, where the renderer definition can
+     * be overridden from within the shell.
+     */
     Q_INVOKABLE virtual bool overrideCategoryJson(QString const& categoryId, QString const& json) = 0;
+    /**
+     * @brief Allows the shell to define a special category that isn't provided by
+     * the scope.
+     *
+     * Allows the shell to use specialized renderers for certain categories.
+     * The plugin implementation should prepend the category before any others
+     * provided by the scope.
+     */
     Q_INVOKABLE virtual void addSpecialCategory(QString const& categoryId, QString const& name, QString const& icon, QString const& rawTemplate, QObject* countObject) = 0;
 
     // @cond

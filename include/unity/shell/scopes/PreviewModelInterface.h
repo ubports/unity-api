@@ -28,14 +28,37 @@ namespace shell
 namespace scopes
 {
 
+/**
+ * @brief A list of PreviewWidgetModelInterface instances.
+ *
+ * This model exposes a number of PreviewWidgetModelInterface instances based on
+ * the value of widgetColumnCount property.
+ */
 class UNITY_API PreviewModelInterface : public QAbstractListModel
 {
     Q_OBJECT
 
     Q_ENUMS(Roles)
 
+    /**
+     * @brief Number of column models this preview should expose.
+     *
+     * Previews can be laid out in different number of columns - for example the number
+     * of desired columns can change when changing orientation of the display and
+     * therefore there's more horizontal space available.
+     */
     Q_PROPERTY(int widgetColumnCount READ widgetColumnCount WRITE setWidgetColumnCount NOTIFY widgetColumnCountChanged)
+    /**
+     * @brief Boolean specifying whether loading this preview finished.
+     */
     Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
+    /**
+     * @brief Boolean specifying whether an action is currently being performed.
+     *
+     * Performing an action in a preview often involves communicating to a scope and
+     * as such can take a while. It's safer to disable all actions while value of this
+     * property is true.
+     */
     Q_PROPERTY(bool processingAction READ processingAction NOTIFY processingActionChanged)
 
 protected:
@@ -44,6 +67,9 @@ protected:
     /// @endcond
 
 public:
+    /**
+     * @brief The roles supported by this model.
+     */
     enum Roles {
         RoleColumnModel
     };
@@ -68,6 +94,12 @@ Q_SIGNALS:
     void processingActionChanged();
     // @endcond
 
+    /**
+     * @brief Signal emitted when user triggers an action.
+     *
+     * This signal is emitted when user triggers an action - the parameters are widget
+     * id, action id and properties of the widget/action.
+     */
     void triggered(QString const&, QString const&, QVariantMap const&);
 };
 
