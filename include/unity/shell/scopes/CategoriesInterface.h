@@ -67,6 +67,7 @@ public:
      * be overridden from within the shell.
      */
     Q_INVOKABLE virtual bool overrideCategoryJson(QString const& categoryId, QString const& json) = 0;
+
     /**
      * @brief Allows the shell to define a special category that isn't provided by
      * the scope.

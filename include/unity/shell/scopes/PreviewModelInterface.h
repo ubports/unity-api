@@ -48,10 +48,12 @@ class UNITY_API PreviewModelInterface : public QAbstractListModel
      * therefore there's more horizontal space available.
      */
     Q_PROPERTY(int widgetColumnCount READ widgetColumnCount WRITE setWidgetColumnCount NOTIFY widgetColumnCountChanged)
+
     /**
      * @brief Boolean specifying whether loading this preview finished.
      */
     Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
+
     /**
      * @brief Boolean specifying whether an action is currently being performed.
      *

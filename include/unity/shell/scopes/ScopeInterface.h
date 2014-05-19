@@ -42,34 +42,42 @@ class UNITY_API ScopeInterface : public QObject
      * @brief Id of the scope.
      */
     Q_PROPERTY(QString id READ id NOTIFY idChanged)
+
     /**
      * @brief Display name of the scope.
      */
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
+
     /**
      * @brief URI to scope's icon.
      */
     Q_PROPERTY(QString iconHint READ iconHint NOTIFY iconHintChanged)
+
     /**
      * @brief Description of the scope.
      */
     Q_PROPERTY(QString description READ description NOTIFY descriptionChanged)
+
     /**
      * @brief Hint to display in the search field.
      */
     Q_PROPERTY(QString searchHint READ searchHint NOTIFY searchHintChanged)
+
     /**
      * @brief Boolean specifying whether a search is currently running.
      */
     Q_PROPERTY(bool searchInProgress READ searchInProgress NOTIFY searchInProgressChanged)
+
     /**
      * @brief Boolean specifying whether the scope should be visible.
      */
     Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged)
+
     /**
      * @brief Keyboard shortcut used to summon the scope.
      */
     Q_PROPERTY(QString shortcut READ shortcut NOTIFY shortcutChanged)
+
     /**
      * @brief Categories model for scope's results.
      */
@@ -81,16 +89,19 @@ class UNITY_API ScopeInterface : public QObject
      * Writing to this property issues new search to the scope.
      */
     Q_PROPERTY(QString searchQuery READ searchQuery WRITE setSearchQuery NOTIFY searchQueryChanged)
+
     /**
      * @brief Message to display when there are no results after a search.
      */
     Q_PROPERTY(QString noResultsHint READ noResultsHint WRITE setNoResultsHint NOTIFY noResultsHintChanged)
+
     /**
      * @brief Form factor which is sent with search queries.
      *
      * Form factor is one of scope inputs and be used by it to fine-tune the results.
      */
     Q_PROPERTY(QString formFactor READ formFactor WRITE setFormFactor NOTIFY formFactorChanged)
+
     /**
      * @brief Boolean specifying whether the scope is currently visible.
      */
@@ -129,6 +140,7 @@ public:
      * @brief Method used to activate a result.
      */
     Q_INVOKABLE virtual void activate(QVariant const& result) = 0;
+
     /**
      * @brief Method used to preview a result.
      *
@@ -136,10 +148,12 @@ public:
      * to free it.
      */
     Q_INVOKABLE virtual unity::shell::scopes::PreviewStackInterface* preview(QVariant const& result) = 0;
+
     /**
      * @brief Cancels the current activation.
      */
     Q_INVOKABLE virtual void cancelActivation() = 0;
+
     /**
      * @brief Closes temporary scope which got opened when openScope was emitted.
      */
@@ -169,28 +183,33 @@ Q_SIGNALS:
      * This signal is usually emitted after activating a result.
      */
     void showDash();
+
     /**
      * @brief Signal requesting to hide the dash.
      *
      * This signal is usually emitted after activating a result.
      */
     void hideDash();
+
     /**
      * @brief Signal requesting to open a uri.
      *
      * This signal is usually emitted after activating a result.
      */
     void gotoUri(QString const& uri);
+
     /**
      * @brief Signal requesting to preview a result.
      *
      * This signal is usually emitted after activating a result.
      */
     void previewRequested(QVariant const& result);
+
     /**
      * @brief Signal requesting to change the currently focused scope.
      */
     void gotoScope(QString const& scopeId);
+
     /**
      * @brief Signal requesting to show a temporary scope.
      */

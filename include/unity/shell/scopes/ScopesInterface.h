@@ -72,6 +72,7 @@ public:
      * supplied with incorrect index.
      */
     Q_INVOKABLE virtual QVariant get(int row) const = 0;
+
     /**
      * @brief Get ScopeInterface instance by scope id.
      *
