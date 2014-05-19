@@ -155,7 +155,7 @@ public:
     Q_INVOKABLE virtual void cancelActivation() = 0;
 
     /**
-     * @brief Closes temporary scope which got opened when openScope was emitted.
+     * @brief Closes the temporary scope which got opened when openScope was emitted.
      */
     Q_INVOKABLE virtual void closeScope(unity::shell::scopes::ScopeInterface* scope) = 0;
 
