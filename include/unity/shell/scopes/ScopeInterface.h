@@ -99,6 +99,8 @@ class UNITY_API ScopeInterface : public QObject
      * @brief Form factor which is sent with search queries.
      *
      * Form factor is one of scope inputs and be used by it to fine-tune the results.
+     *
+     * TODO Document the supported for factors
      */
     Q_PROPERTY(QString formFactor READ formFactor WRITE setFormFactor NOTIFY formFactorChanged)
 
