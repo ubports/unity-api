@@ -43,7 +43,7 @@ class UNITY_API PreviewModelInterface : public QAbstractListModel
     /**
      * @brief Number of column models this preview should expose.
      *
-     * Previews can be laid out in different number of columns - for example the number
+     * Previews can be laid out in a different number of columns - for example the number
      * of desired columns can change when changing orientation of the display and
      * therefore there's more horizontal space available.
      */

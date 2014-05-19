@@ -86,7 +86,7 @@ class UNITY_API ScopeInterface : public QObject
     /**
      * @brief Current search query.
      *
-     * Writing to this property issues new search to the scope.
+     * Writing to this property issues a new search to the scope.
      */
     Q_PROPERTY(QString searchQuery READ searchQuery WRITE setSearchQuery NOTIFY searchQueryChanged)
 
