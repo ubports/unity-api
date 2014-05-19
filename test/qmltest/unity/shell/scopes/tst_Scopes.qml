@@ -273,6 +273,18 @@ Item {
             name = "ResultsModel";
             verifyData(data);
         }
+
+        function test_resultsModel_methods_data() {
+            return [
+                { tag: "Model.methods[get]", method: "get" }
+            ];
+        }
+
+        function test_resultsModel_methods(data) {
+            object = resultsModelRepeater.model;
+            name = "ResultsModel"
+            verifyData(data);
+        }
     }
 
     Verifier {
