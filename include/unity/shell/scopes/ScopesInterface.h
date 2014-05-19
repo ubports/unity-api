@@ -61,11 +61,6 @@ public:
     };
 
     /**
-     * @brief Number of rows in the model.
-     */
-    Q_INVOKABLE virtual int rowCount(const QModelIndex& parent = QModelIndex()) const = 0;
-
-    /**
      * @brief Get ScopeInterface instance associated with a row.
      *
      * Returns ScopeInterface instance associated with a row or a null variant when

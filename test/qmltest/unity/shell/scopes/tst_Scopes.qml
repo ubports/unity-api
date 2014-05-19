@@ -82,8 +82,7 @@ Item {
 
         function test_scopes_methods_data() {
             return [
-                { tag: "Model.methods[get]", method: "get" },
-                { tag: "Model.methods[rowCount]", method: "rowCount" }
+                { tag: "Model.methods[get]", method: "get" }
             ];
         }
 
