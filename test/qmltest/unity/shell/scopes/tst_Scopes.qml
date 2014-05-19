@@ -18,7 +18,7 @@
 import QtQuick 2.0
 import QtTest 1.0
 import TestUtil 0.1
-import Unity.Scopes 0.1
+import Unity.Scopes 0.2
 
 Item {
     id: root
@@ -26,7 +26,7 @@ Item {
     Scopes {
         id: scopes
     }
-    property var scope: scopes.get(0)
+    property var scope: scopes.getScope(0)
     property var preview: root.scope.preview("")
 
     Verifier {
@@ -82,7 +82,7 @@ Item {
 
         function test_scopes_methods_data() {
             return [
-                { tag: "Model.methods[get]", method: "get" }
+                { tag: "Model.methods[get]", method: "getScope" }
             ];
         }
 
@@ -273,18 +273,6 @@ Item {
             name = "ResultsModel";
             verifyData(data);
         }
-
-        function test_resultsModel_methods_data() {
-            return [
-                { tag: "Model.methods[get]", method: "get" }
-            ];
-        }
-
-        function test_resultsModel_methods(data) {
-            object = resultsModelRepeater.model;
-            name = "ResultsModel"
-            verifyData(data);
-        }
     }
 
     Verifier {
@@ -337,7 +325,7 @@ Item {
 
         function test_previewStack_methods_data() {
             return [
-                { tag: "Model.methods[get]", method: "get" }
+                { tag: "Model.methods[get]", method: "getPreviewModel" }
             ];
         }
 
@@ -353,7 +341,7 @@ Item {
 
         Repeater {
              id: previewModelRepeater
-             model: preview.get(0)
+             model: preview.getPreviewModel(0)
              delegate: Item {
                  property var roles: model
                  property var columnModel: model.columnModel

@@ -43,7 +43,7 @@ int MockPreviewStack::rowCount(const QModelIndex&) const
     return m_previews.size();
 }
 
-unity::shell::scopes::PreviewModelInterface* MockPreviewStack::get(int index) const
+unity::shell::scopes::PreviewModelInterface* MockPreviewStack::getPreviewModel(int index) const
 {
     if (index >= m_previews.size()) {
         return nullptr;

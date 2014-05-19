@@ -28,6 +28,8 @@ namespace shell
 namespace scopes
 {
 
+class ScopeInterface;
+
 /**
  * @brief A list of scopes to display in the UI.
  *

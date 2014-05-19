@@ -41,7 +41,7 @@ class UNITY_API ResultsModelInterface : public QAbstractListModel
      * @brief Id of associated category.
      */
     Q_PROPERTY(QString categoryId READ categoryId WRITE setCategoryId NOTIFY categoryIdChanged)
-    
+
     /**
      * @brief Number of items in the model.
      */

@@ -29,8 +29,8 @@
 
 void TestScopesPlugin::registerTypes(const char* uri)
 {
-    qmlRegisterType<MockScope>(uri, 0, 2, "Scope");
-    qmlRegisterType<MockScopes>(uri, 0, 1, "Scopes");
+    qmlRegisterType<MockScopes>(uri, 0, 2, "Scopes");
+    qmlRegisterUncreatableType<unity::shell::scopes::ScopeInterface>(uri, 0, 2, "Scope", "Can't create Categories object in QML. Get them from Scopes instance.");
     qmlRegisterUncreatableType<unity::shell::scopes::CategoriesInterface>(uri, 0, 2, "Categories", "Can't create Categories object in QML. Get them from Scope instance.");
     qmlRegisterUncreatableType<unity::shell::scopes::ResultsModelInterface>(uri, 0, 2, "ResultsModel", "Can't create new ResultsModel in QML. Get them from Categories instance.");
     qmlRegisterUncreatableType<unity::shell::scopes::PreviewModelInterface>(uri, 0, 2, "PreviewModel", "Can't create new PreviewModel in QML. Get them from PreviewStack instance.");

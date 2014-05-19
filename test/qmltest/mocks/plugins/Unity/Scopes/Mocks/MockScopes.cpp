@@ -60,13 +60,17 @@ QVariant MockScopes::data(const QModelIndex& index, int role) const
     }
 }
 
-QVariant MockScopes::get(int row) const
+unity::shell::scopes::ScopeInterface* MockScopes::getScope(int row) const
 {
-    return data(QAbstractListModel::index(row), 0);
+    if (row < 0 ||  row >= m_scopes.size()) {
+        return nullptr;
+    }
+
+    return m_scopes[row];
 }
 
-QVariant MockScopes::get(QString const&) const
+unity::shell::scopes::ScopeInterface* MockScopes::getScope(QString const&) const
 {
     // Unimplemented
-    return QVariant();
+    return nullptr;
 }
