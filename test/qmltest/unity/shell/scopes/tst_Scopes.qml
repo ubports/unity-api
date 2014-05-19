@@ -55,11 +55,11 @@ Item {
 
         function test_scopes_roles_data() {
             return [
-                        { tag: "Model.roles[scope]", role: "scope", type: "object" },
-                        { tag: "Model.roles[id]", role: "id", type: "string" },
-                        { tag: "Model.roles[visible]", role: "visible", type: "boolean" },
-                        { tag: "Model.roles[title]", role: "title", type: "string" },
-                    ];
+                { tag: "Model.roles[scope]", role: "scope", type: "object" },
+                { tag: "Model.roles[id]", role: "id", type: "string" },
+                { tag: "Model.roles[visible]", role: "visible", type: "boolean" },
+                { tag: "Model.roles[title]", role: "title", type: "string" },
+            ];
         }
 
         function test_scopes_roles(data) {
@@ -184,15 +184,15 @@ Item {
 
         function test_categories_roles_data() {
             return [
-                        { tag: "Model.roles[categoryId]", role: "categoryId", type: "string" },
-                        { tag: "Model.roles[name]", role: "name", type: "string" },
-                        { tag: "Model.roles[icon]", role: "icon", type: "string" },
-                        { tag: "Model.roles[rawRendererTemplate]", role: "rawRendererTemplate", type: "string" },
-                        { tag: "Model.roles[renderer]", role: "renderer", type: "object" },
-                        { tag: "Model.roles[components]", role: "components", type: "object" },
-                        { tag: "Model.roles[results]", role: "results", type: "object" },
-                        { tag: "Model.roles[count]", role: "count", type: "number" },
-                    ];
+                { tag: "Model.roles[categoryId]", role: "categoryId", type: "string" },
+                { tag: "Model.roles[name]", role: "name", type: "string" },
+                { tag: "Model.roles[icon]", role: "icon", type: "string" },
+                { tag: "Model.roles[rawRendererTemplate]", role: "rawRendererTemplate", type: "string" },
+                { tag: "Model.roles[renderer]", role: "renderer", type: "object" },
+                { tag: "Model.roles[components]", role: "components", type: "object" },
+                { tag: "Model.roles[results]", role: "results", type: "object" },
+                { tag: "Model.roles[count]", role: "count", type: "number" },
+            ];
         }
 
         function test_categories_roles(data) {
@@ -241,19 +241,19 @@ Item {
 
         function test_resultsModel_roles_data() {
             return [
-                        { tag: "Model.roles[uri]", role: "uri", type: "string" },
-                        { tag: "Model.roles[categoryId]", role: "categoryId", type: "string" },
-                        { tag: "Model.roles[dndUri]", role: "dndUri", type: "string" },
-                        { tag: "Model.roles[result]", role: "result", type: "object" },
-                        { tag: "Model.roles[title]", role: "title", type: "string" },
-                        { tag: "Model.roles[art]", role: "art", type: "string" },
-                        { tag: "Model.roles[subtitle]", role: "subtitle", type: "string" },
-                        { tag: "Model.roles[mascot]", role: "mascot", type: "string" },
-                        { tag: "Model.roles[emblem]", role: "emblem", type: "string" },
-                        { tag: "Model.roles[summary]", role: "summary", type: "string" },
-                        { tag: "Model.roles[attributes]", role: "attributes", type: "string" },
-                        { tag: "Model.roles[background]", role: "background", type: "string" },
-                    ];
+                { tag: "Model.roles[uri]", role: "uri", type: "string" },
+                { tag: "Model.roles[categoryId]", role: "categoryId", type: "string" },
+                { tag: "Model.roles[dndUri]", role: "dndUri", type: "string" },
+                { tag: "Model.roles[result]", role: "result", type: "object" },
+                { tag: "Model.roles[title]", role: "title", type: "string" },
+                { tag: "Model.roles[art]", role: "art", type: "string" },
+                { tag: "Model.roles[subtitle]", role: "subtitle", type: "string" },
+                { tag: "Model.roles[mascot]", role: "mascot", type: "string" },
+                { tag: "Model.roles[emblem]", role: "emblem", type: "string" },
+                { tag: "Model.roles[summary]", role: "summary", type: "string" },
+                { tag: "Model.roles[attributes]", role: "attributes", type: "string" },
+                { tag: "Model.roles[background]", role: "background", type: "string" },
+            ];
         }
 
         function test_resultsModel_roles(data) {
@@ -302,8 +302,8 @@ Item {
 
         function test_previewStack_roles_data() {
             return [
-                        { tag: "Model.roles[previewModel]", role: "previewModel", type: "object" }
-                    ];
+                { tag: "Model.roles[previewModel]", role: "previewModel", type: "object" }
+            ];
         }
 
         function test_previewStack_roles(data) {
@@ -364,8 +364,8 @@ Item {
 
         function test_previewModel_roles_data() {
             return [
-                        { tag: "Model.roles[columnModel]", role: "columnModel", type: "object" }
-                    ];
+                { tag: "Model.roles[columnModel]", role: "columnModel", type: "object" }
+            ];
         }
 
         function test_previewModel_roles(data) {
@@ -427,10 +427,10 @@ Item {
 
         function test_previewWidgetModel_roles_data() {
             return [
-                        { tag: "Model.roles[widgetId]", role: "widgetId", type: "string" },
-                        { tag: "Model.roles[type]", role: "type", type: "string" },
-                        { tag: "Model.roles[properties]", role: "properties", type: "object" }
-                    ];
+                { tag: "Model.roles[widgetId]", role: "widgetId", type: "string" },
+                { tag: "Model.roles[type]", role: "type", type: "string" },
+                { tag: "Model.roles[properties]", role: "properties", type: "object" }
+            ];
         }
 
         function test_previewWidgetModel_roles(data) {
