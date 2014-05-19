@@ -71,7 +71,7 @@ public:
      * Return PreviewModelInterface instance at a particular index or nullptr
      * if the index is out of bounds.
      */
-    Q_INVOKABLE virtual unity::shell::scopes::PreviewModelInterface* get(int index) const = 0;
+    Q_INVOKABLE virtual unity::shell::scopes::PreviewModelInterface* getPreviewModel(int index) const = 0;
 
     // @cond
     virtual void setWidgetColumnCount(int columnCount) = 0;

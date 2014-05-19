@@ -72,13 +72,6 @@ public:
         RoleBackground
     };
 
-    /**
-     * @brief Get values of all roles for a particular model row.
-     *
-     * Returns a dictionary of all model roles and their values for a particular row.
-     */
-    Q_INVOKABLE virtual QVariant get(int row) const = 0;
-
     // @cond
     virtual QString categoryId() const = 0;
     virtual int count() const = 0;

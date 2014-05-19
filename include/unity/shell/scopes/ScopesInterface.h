@@ -66,7 +66,7 @@ public:
      * Returns ScopeInterface instance associated with a row or a null variant when
      * supplied with incorrect index.
      */
-    Q_INVOKABLE virtual QVariant get(int row) const = 0;
+    Q_INVOKABLE virtual unity::shell::scopes::ScopeInterface* getScope(int row) const = 0;
 
     /**
      * @brief Get ScopeInterface instance by scope id.
@@ -74,7 +74,7 @@ public:
      * Returns ScopeInterface instance which with the supplied scope id or a null
      * variant.
      */
-    Q_INVOKABLE virtual QVariant get(QString const& scopeId) const = 0;
+    Q_INVOKABLE virtual unity::shell::scopes::ScopeInterface* getScope(QString const& scopeId) const = 0;
 
     // @cond
     virtual bool loaded() const = 0;
