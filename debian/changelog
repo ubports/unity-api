@@ -1,8 +1,12 @@
-unity-api (7.81) UNRELEASED; urgency=medium
+unity-api (7.81+14.10.20140520-0ubuntu1) utopic; urgency=medium
 
+  [ Albert Astals Cid ]
   * Add interfaces for scopes.
 
- -- Albert Astals Cid <albert.astals@canonical.com>  Thu, 15 May 2014 17:20:44 +0200
+  [ Jussi Pakkanen ]
+  * Add missing include so compilation works with pch disabled.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 20 May 2014 12:05:11 +0000
 
 unity-api (7.80.8+14.10.20140505-0ubuntu1) utopic; urgency=medium
 
