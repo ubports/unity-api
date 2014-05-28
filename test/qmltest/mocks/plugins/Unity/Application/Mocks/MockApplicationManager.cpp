@@ -24,11 +24,11 @@ using namespace unity::shell::application;
 
 MockApplicationManager::MockApplicationManager(QObject* parent): ApplicationManagerInterface(parent)
 {
-    MockApplicationInfo *item = new MockApplicationInfo("phone-app", "Phone App", "Telephony application", QUrl("/usr/share/pixmaps/some/icon.png"));
+    MockApplicationInfo *item = new MockApplicationInfo("phone-app", "Phone App", "Telephony application", QUrl("/usr/share/pixmaps/some/icon.png"), this);
     m_list.append(item);
-    item = new MockApplicationInfo("camera-app", "Camera App", "Lets you take pictures with the camera.", QUrl("/usr/share/pixmaps/some/icon.png"));
+    item = new MockApplicationInfo("camera-app", "Camera App", "Lets you take pictures with the camera.", QUrl("/usr/share/pixmaps/some/icon.png"), this);
     m_list.append(item);
-    item = new MockApplicationInfo("calendar-app", "Calendar App", "5 missed reminders", QUrl("/usr/share/pixmaps/some/icon.png"));
+    item = new MockApplicationInfo("calendar-app", "Calendar App", "5 missed reminders", QUrl("/usr/share/pixmaps/some/icon.png"), this);
     m_list.append(item);
 }
 
