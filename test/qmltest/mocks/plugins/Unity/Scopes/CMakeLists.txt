@@ -24,8 +24,8 @@ set(ScopesMocks_SOURCES
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/PreviewModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/PreviewWidgetModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/PreviewStackInterface.h
-    ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/ScopesInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/ScopeInterface.h
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/ScopesInterface.h
 )
 
 add_library(ScopesMocks SHARED ${ScopesMocks_SOURCES})
