@@ -62,7 +62,7 @@ QString MockScope::shortcut() const {
     return QString("");
 }
 
-QString MockScope::currentDepartment const {
+QString MockScope::currentDepartment() const {
     return m_currentDepartment;
 }
 
@@ -97,7 +97,7 @@ bool MockScope::hasDepartments() const {
 void MockScope::setName(const QString &str) {
     if (str != m_name) {
         m_name = str;
-        Q_EMIT nameChanged(m_name);
+        Q_EMIT nameChanged();
     }
 }
 
@@ -118,7 +118,7 @@ void MockScope::setFormFactor(const QString &str) {
 void MockScope::setActive(const bool active) {
     if (active != m_isActive) {
         m_isActive = active;
-        Q_EMIT isActiveChanged(active);
+        Q_EMIT isActiveChanged();
     }
 }
 
@@ -145,11 +145,14 @@ unity::shell::scopes::PreviewStackInterface* MockScope::preview(QVariant const& 
 
 unity::shell::scopes::DepartmentInterface* MockScope::getDepartment(QString const& departmentId)
 {
+    Q_UNUSED(departmentId);
+
     return nullptr;
 }
 
 void MockScope::loadDepartment(QString const& departmentId)
 {
+    Q_UNUSED(departmentId);
 }
 
 void MockScope::cancelActivation()
