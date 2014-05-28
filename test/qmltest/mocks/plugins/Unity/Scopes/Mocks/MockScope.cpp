@@ -17,6 +17,7 @@
 #include "MockScope.h"
 #include "MockCategories.h"
 #include "MockPreviewStack.h"
+#include "MockDepartment.h"
 
 MockScope::MockScope(QObject* parent) : MockScope(QString(), QString(), false, parent)
 {
@@ -147,7 +148,7 @@ unity::shell::scopes::DepartmentInterface* MockScope::getDepartment(QString cons
 {
     Q_UNUSED(departmentId);
 
-    return nullptr;
+    return new MockDepartment();
 }
 
 void MockScope::loadDepartment(QString const& departmentId)

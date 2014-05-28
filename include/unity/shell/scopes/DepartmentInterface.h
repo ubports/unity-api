@@ -28,12 +28,6 @@ namespace shell
 namespace scopes
 {
 
-/**
- * @brief A list of PreviewWidgetModelInterface instances.
- *
- * This model exposes a number of PreviewWidgetModelInterface instances based on
- * the value of widgetColumnCount property.
- */
 class UNITY_API DepartmentInterface : public QAbstractListModel
 {
     Q_OBJECT
@@ -48,12 +42,6 @@ class UNITY_API DepartmentInterface : public QAbstractListModel
     Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
     Q_PROPERTY(bool isRoot READ isRoot NOTIFY isRootChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-
-
-    /**
-     * @brief Boolean specifying whether loading this preview finished.
-     */
-    Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
 
 protected:
     /// @cond

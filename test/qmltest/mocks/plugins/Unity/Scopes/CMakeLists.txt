@@ -12,6 +12,7 @@ find_package(Qt5Qml REQUIRED)
 
 set(ScopesMocks_SOURCES
     Mocks/MockCategories.cpp
+    Mocks/MockDepartment.cpp
     Mocks/MockResultsModel.cpp
     Mocks/MockPreviewModel.cpp
     Mocks/MockPreviewStack.cpp
