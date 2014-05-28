@@ -1,3 +1,13 @@
+unity-api (7.81+14.10.20140528-0ubuntu1) utopic; urgency=low
+
+  [ Michael Zanetti ]
+  * properly parent mock items otherwise QML deletes them as of 5.2 (LP:
+    #1318889)
+  * properly parent MockApplicationInfo objects in the mock plugin. QML
+    might delete them otherwise.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 28 May 2014 10:38:05 +0000
+
 unity-api (7.81+14.10.20140520-0ubuntu1) utopic; urgency=medium
 
   [ Albert Astals Cid ]
