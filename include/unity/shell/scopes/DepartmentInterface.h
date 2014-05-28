@@ -28,19 +28,53 @@ namespace shell
 namespace scopes
 {
 
+/**
+ * @brief Object representing department instance, which exposes model(s) with results.
+ */
 class UNITY_API DepartmentInterface : public QAbstractListModel
 {
     Q_OBJECT
 
     Q_ENUMS(Roles)
 
+    /**
+     * @brief Id of the department.
+     */
     Q_PROPERTY(QString departmentId READ departmentId NOTIFY departmentIdChanged)
+
+    /**
+     * @brief Label of the department.
+     */
     Q_PROPERTY(QString label READ label NOTIFY labelChanged)
+
+    /**
+     * @brief Label for "All Button" of the department.
+     */
     Q_PROPERTY(QString allLabel READ allLabel NOTIFY allLabelChanged)
+
+    /**
+     * @brief Parent Id of the department.
+     */
     Q_PROPERTY(QString parentId READ parentId NOTIFY parentIdChanged)
+
+    /**
+     * @brief Parent label of the department.
+     */
     Q_PROPERTY(QString parentLabel READ parentLabel NOTIFY parentLabelChanged)
+
+    /**
+     * @brief Is the model of the deparment completely loaded?
+     */
     Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
+
+    /**
+     * @brief Is this deparment the root deparment?
+     */
     Q_PROPERTY(bool isRoot READ isRoot NOTIFY isRootChanged)
+
+    /**
+     * @brief Number of items of the deparment.
+     */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 protected:
