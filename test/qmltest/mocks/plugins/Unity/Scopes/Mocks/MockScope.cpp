@@ -62,6 +62,10 @@ QString MockScope::shortcut() const {
     return QString("");
 }
 
+QString MockScope::currentDepartment const {
+    return m_currentDepartment;
+}
+
 bool MockScope::searchInProgress() const {
     return m_searching;
 }
@@ -84,6 +88,10 @@ bool MockScope::visible() const {
 
 bool MockScope::isActive() const {
     return m_isActive;
+}
+
+bool MockScope::hasDepartments() const {
+    return m_hasDepartments;
 }
 
 void MockScope::setName(const QString &str) {
@@ -133,6 +141,15 @@ unity::shell::scopes::PreviewStackInterface* MockScope::preview(QVariant const& 
     // This probably leaks, do we don't care
     // it's a  test after all
     return new MockPreviewStack;
+}
+
+unity::shell::scopes::DepartmentInterface* MockScope::getDepartment(QString const& departmentId)
+{
+    return nullptr;
+}
+
+void MockScope::loadDepartment(QString const& departmentId)
+{
 }
 
 void MockScope::cancelActivation()
