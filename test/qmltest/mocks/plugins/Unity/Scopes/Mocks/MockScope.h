@@ -42,7 +42,7 @@ public:
     QString formFactor() const override;
     bool isActive() const override;
     bool hasDepartments() const override;
-    QString currentDepartment() const override;
+    QString currentDepartmentId() const override;
 
     /* setters */
     void setName(const QString& name);
@@ -66,7 +66,7 @@ protected:
     QString m_searchQuery;
     QString m_noResultsHint;
     QString m_formFactor;
-    QString m_currentDepartment;
+    QString m_currentDepartmentId;
     bool m_visible;
     bool m_searching;
     bool m_isActive;

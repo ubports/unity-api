@@ -55,7 +55,7 @@ class UNITY_API DepartmentInterface : public QAbstractListModel
     /**
      * @brief Parent Id of the department.
      */
-    Q_PROPERTY(QString parentId READ parentId NOTIFY parentIdChanged)
+    Q_PROPERTY(QString parentDepartmentId READ parentDepartmentId NOTIFY parentDepartmentIdChanged)
 
     /**
      * @brief Parent label of the department.
@@ -97,7 +97,7 @@ public:
     virtual QString departmentId() const = 0;
     virtual QString label() const = 0;
     virtual QString allLabel() const = 0;
-    virtual QString parentId() const = 0;
+    virtual QString parentDepartmentId() const = 0;
     virtual QString parentLabel() const = 0;
     virtual bool loaded() const = 0;
     virtual bool isRoot() const = 0;
@@ -118,7 +118,7 @@ Q_SIGNALS:
     void departmentIdChanged();
     void labelChanged();
     void allLabelChanged();
-    void parentIdChanged();
+    void parentDepartmentIdChanged();
     void parentLabelChanged();
     void loadedChanged();
     void isRootChanged();

@@ -124,7 +124,9 @@ Item {
                 { tag: "Item.properties[searchQuery]", constant: "searchQuery", type: "string" },
                 { tag: "Item.properties[noResultsHint]", constant: "noResultsHint", type: "string" },
                 { tag: "Item.properties[formFactor]", constant: "formFactor", type: "string" },
-                { tag: "Item.properties[isActive]", constant: "isActive", type: "boolean" }
+                { tag: "Item.properties[isActive]", constant: "isActive", type: "boolean" },
+                { tag: "Item.properties[currentDepartmentId]", constant: "currentDepartmentId", type: "string" },
+                { tag: "Item.properties[hasDepartments]", constant: "hasDepartments", type: "boolean" }
             ];
         }
 
@@ -485,7 +487,7 @@ Item {
                 { tag: "Model.properties[departmentId]", constant: "departmentId", type: "string" },
                 { tag: "Model.properties[label]", constant: "label", type: "string" },
                 { tag: "Model.properties[allLabel]", constant: "allLabel", type: "string" },
-                { tag: "Model.properties[parentId]", constant: "parentId", type: "string" },
+                { tag: "Model.properties[parentDepartmentId]", constant: "parentDepartmentId", type: "string" },
                 { tag: "Model.properties[parentLabel]", constant: "parentLabel", type: "string" },
                 { tag: "Model.properties[loaded]", constant: "loaded", type: "boolean" },
                 { tag: "Model.properties[isRoot]", constant: "isRoot", type: "boolean" },

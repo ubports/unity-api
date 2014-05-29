@@ -113,7 +113,7 @@ class UNITY_API ScopeInterface : public QObject
     /**
      * @brief String specifying currently selected department
      */
-    Q_PROPERTY(QString currentDepartment READ currentDepartment NOTIFY currentDepartmentChanged)
+    Q_PROPERTY(QString currentDepartmentId READ currentDepartmentId NOTIFY currentDepartmentIdChanged)
 
     /**
      * @brief Boolean specifying whether current query has departments.
@@ -141,7 +141,7 @@ public:
     virtual QString noResultsHint() const = 0;
     virtual QString formFactor() const = 0;
     virtual bool isActive() const = 0;
-    virtual QString currentDepartment() const = 0;
+    virtual QString currentDepartmentId() const = 0;
     virtual bool hasDepartments() const = 0;
 
     /* setters */
@@ -202,7 +202,7 @@ Q_SIGNALS:
     void formFactorChanged();
     void isActiveChanged();
     void hasDepartmentsChanged();
-    void currentDepartmentChanged();
+    void currentDepartmentIdChanged();
     // @endcond
 
     // signals triggered by activate(..) or preview(..) requests.

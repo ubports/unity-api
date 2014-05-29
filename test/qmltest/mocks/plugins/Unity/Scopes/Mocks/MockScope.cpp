@@ -63,8 +63,8 @@ QString MockScope::shortcut() const {
     return QString("");
 }
 
-QString MockScope::currentDepartment() const {
-    return m_currentDepartment;
+QString MockScope::currentDepartmentId() const {
+    return m_currentDepartmentId;
 }
 
 bool MockScope::searchInProgress() const {

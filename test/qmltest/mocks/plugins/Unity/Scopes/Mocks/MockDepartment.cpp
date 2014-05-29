@@ -37,7 +37,7 @@ QString MockDepartment::allLabel() const
     return "All Departments";
 }
 
-QString MockDepartment::parentId() const
+QString MockDepartment::parentDepartmentId() const
 {
     return QString();
 }

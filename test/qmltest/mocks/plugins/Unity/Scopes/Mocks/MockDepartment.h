@@ -32,7 +32,7 @@ public:
     QString departmentId() const override;
     QString label() const override;
     QString allLabel() const override;
-    QString parentId() const override;
+    QString parentDepartmentId() const override;
     QString parentLabel() const override;
     bool loaded() const override;
     bool isRoot() const override;
