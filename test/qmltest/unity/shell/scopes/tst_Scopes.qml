@@ -455,7 +455,7 @@ Item {
         function test_department_data() {
             return [
                 { tag: "Department[object]", type: "object" },
-                { tag: "Department[ScopesInterface]", type: "unity::shell::scopes::DepartmentInterface" },
+                { tag: "Department[DepartmentInterface]", type: "unity::shell::scopes::DepartmentInterface" },
             ];
         }
 
