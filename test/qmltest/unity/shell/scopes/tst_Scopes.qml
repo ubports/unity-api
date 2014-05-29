@@ -148,7 +148,9 @@ Item {
                 { tag: "Model.methods[previewRequested]", method: "previewRequested" },
                 { tag: "Model.methods[gotoScope]", method: "gotoScope" },
                 { tag: "Model.methods[openScope]", method: "openScope" },
-                { tag: "Model.methods[activateApplication]", method: "activateApplication" }
+                { tag: "Model.methods[activateApplication]", method: "activateApplication" },
+                { tag: "Model.methods[getDepartment]", method: "getDepartment" },
+                { tag: "Model.methods[loadDepartment]", method: "loadDepartment" }
             ];
         }
 
