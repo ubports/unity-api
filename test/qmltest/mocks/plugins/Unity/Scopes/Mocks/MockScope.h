@@ -37,6 +37,7 @@ public:
     QString shortcut() const override;
     bool searchInProgress() const override;
     unity::shell::scopes::CategoriesInterface* categories() const override;
+    unity::shell::scopes::SettingsModelInterface* settings() const override;
     QString searchQuery() const override;
     QString noResultsHint() const override;
     QString formFactor() const override;
