@@ -50,7 +50,7 @@ public:
      */
     enum Roles
     {
-        RoleSettingId, RoleDisplayName, RoleType, RoleProperties
+        RoleSettingId, RoleDisplayName, RoleType, RoleProperties, RoleValue
     };
 
     // @cond
@@ -61,11 +61,10 @@ public:
         roles[RoleDisplayName] = "displayName";
         roles[RoleType] = "type";
         roles[RoleProperties] = "properties";
+        roles[RoleValue] = "value";
         return roles;
     }
     // @endcond
-
-    Q_INVOKABLE virtual void setValue(const QString& settingName, const QVariant& value) = 0;
 };
 
 }
