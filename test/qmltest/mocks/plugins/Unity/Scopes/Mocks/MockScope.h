@@ -41,6 +41,8 @@ public:
     QString noResultsHint() const override;
     QString formFactor() const override;
     bool isActive() const override;
+    bool hasDepartments() const override;
+    QString currentDepartmentId() const override;
 
     /* setters */
     void setName(const QString& name);
@@ -53,6 +55,8 @@ public:
     Q_INVOKABLE unity::shell::scopes::PreviewStackInterface* preview(QVariant const& result) override;
     Q_INVOKABLE void cancelActivation() override;
     Q_INVOKABLE void closeScope(unity::shell::scopes::ScopeInterface* scope) override;
+    Q_INVOKABLE unity::shell::scopes::DepartmentInterface* getDepartment(QString const& departmentId) override;
+    Q_INVOKABLE void loadDepartment(QString const& departmentId) override;
 
 protected:
     QString m_id;
@@ -62,9 +66,11 @@ protected:
     QString m_searchQuery;
     QString m_noResultsHint;
     QString m_formFactor;
+    QString m_currentDepartmentId;
     bool m_visible;
     bool m_searching;
     bool m_isActive;
+    bool m_hasDepartments;
 
     QString m_previewRendererName;
 

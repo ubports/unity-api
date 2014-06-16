@@ -17,6 +17,7 @@
 #include "MockScope.h"
 #include "MockCategories.h"
 #include "MockPreviewStack.h"
+#include "MockDepartment.h"
 
 MockScope::MockScope(QObject* parent) : MockScope(QString(), QString(), false, parent)
 {
@@ -62,6 +63,10 @@ QString MockScope::shortcut() const {
     return QString("");
 }
 
+QString MockScope::currentDepartmentId() const {
+    return m_currentDepartmentId;
+}
+
 bool MockScope::searchInProgress() const {
     return m_searching;
 }
@@ -86,10 +91,14 @@ bool MockScope::isActive() const {
     return m_isActive;
 }
 
+bool MockScope::hasDepartments() const {
+    return m_hasDepartments;
+}
+
 void MockScope::setName(const QString &str) {
     if (str != m_name) {
         m_name = str;
-        Q_EMIT nameChanged(m_name);
+        Q_EMIT nameChanged();
     }
 }
 
@@ -110,7 +119,7 @@ void MockScope::setFormFactor(const QString &str) {
 void MockScope::setActive(const bool active) {
     if (active != m_isActive) {
         m_isActive = active;
-        Q_EMIT isActiveChanged(active);
+        Q_EMIT isActiveChanged();
     }
 }
 
@@ -133,6 +142,18 @@ unity::shell::scopes::PreviewStackInterface* MockScope::preview(QVariant const& 
     // This probably leaks, do we don't care
     // it's a  test after all
     return new MockPreviewStack;
+}
+
+unity::shell::scopes::DepartmentInterface* MockScope::getDepartment(QString const& departmentId)
+{
+    Q_UNUSED(departmentId);
+
+    return new MockDepartment();
+}
+
+void MockScope::loadDepartment(QString const& departmentId)
+{
+    Q_UNUSED(departmentId);
 }
 
 void MockScope::cancelActivation()

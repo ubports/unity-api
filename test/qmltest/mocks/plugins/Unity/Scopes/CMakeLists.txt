@@ -12,6 +12,7 @@ find_package(Qt5Qml REQUIRED)
 
 set(ScopesMocks_SOURCES
     Mocks/MockCategories.cpp
+    Mocks/MockDepartment.cpp
     Mocks/MockResultsModel.cpp
     Mocks/MockPreviewModel.cpp
     Mocks/MockPreviewStack.cpp
@@ -19,6 +20,7 @@ set(ScopesMocks_SOURCES
     Mocks/MockScope.cpp
     Mocks/MockScopes.cpp
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/CategoriesInterface.h
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/DepartmentInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/ResultsModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/PreviewModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/PreviewWidgetModelInterface.h

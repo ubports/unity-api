@@ -30,6 +30,7 @@ namespace scopes
 
 class CategoriesInterface;
 class PreviewStackInterface;
+class DepartmentInterface;
 
 /**
  * @brief Object representing scope instance, which exposes model(s) with results.
@@ -109,6 +110,16 @@ class UNITY_API ScopeInterface : public QObject
      */
     Q_PROPERTY(bool isActive READ isActive WRITE setActive NOTIFY isActiveChanged)
 
+    /**
+     * @brief String specifying currently selected department
+     */
+    Q_PROPERTY(QString currentDepartmentId READ currentDepartmentId NOTIFY currentDepartmentIdChanged)
+
+    /**
+     * @brief Boolean specifying whether current query has departments.
+     */
+    Q_PROPERTY(bool hasDepartments READ hasDepartments NOTIFY hasDepartmentsChanged)
+
 protected:
     /// @cond
     explicit ScopeInterface(QObject* parent = 0) : QObject(parent) { }
@@ -130,6 +141,8 @@ public:
     virtual QString noResultsHint() const = 0;
     virtual QString formFactor() const = 0;
     virtual bool isActive() const = 0;
+    virtual QString currentDepartmentId() const = 0;
+    virtual bool hasDepartments() const = 0;
 
     /* setters */
     virtual void setSearchQuery(const QString& search_query) = 0;
@@ -161,21 +174,35 @@ public:
      */
     Q_INVOKABLE virtual void closeScope(unity::shell::scopes::ScopeInterface* scope) = 0;
 
+    /**
+     * @brief Get a DepartmentInterface instance for the passed departmentId.
+     */
+    Q_INVOKABLE virtual unity::shell::scopes::DepartmentInterface* getDepartment(QString const& departmentId) = 0;
+
+    /**
+     * @brief Activate department by its id.
+     *
+     * This effectively runs a new query.
+     */
+    Q_INVOKABLE virtual void loadDepartment(QString const& departmentId) = 0;
+
 Q_SIGNALS:
     // @cond
     void idChanged();
-    void nameChanged(const QString&);
-    void iconHintChanged(const QString&);
-    void descriptionChanged(const QString&);
-    void searchHintChanged(const QString&);
+    void nameChanged();
+    void iconHintChanged();
+    void descriptionChanged();
+    void searchHintChanged();
     void searchInProgressChanged();
-    void visibleChanged(bool);
-    void shortcutChanged(const QString&);
+    void visibleChanged();
+    void shortcutChanged();
     void categoriesChanged();
     void searchQueryChanged();
     void noResultsHintChanged();
     void formFactorChanged();
-    void isActiveChanged(bool);
+    void isActiveChanged();
+    void hasDepartmentsChanged();
+    void currentDepartmentIdChanged();
     // @endcond
 
     // signals triggered by activate(..) or preview(..) requests.

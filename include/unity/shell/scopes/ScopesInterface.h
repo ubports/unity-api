@@ -93,7 +93,7 @@ public:
 
 Q_SIGNALS:
     // @cond
-    void loadedChanged(bool loaded);
+    void loadedChanged();
     // @endcond
 };
 

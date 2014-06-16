@@ -20,6 +20,7 @@
 #include <QtQml/qqml.h>
 
 #include "CategoriesInterface.h"
+#include "DepartmentInterface.h"
 #include "ResultsModelInterface.h"
 #include "PreviewModelInterface.h"
 #include "PreviewWidgetModelInterface.h"
@@ -32,6 +33,7 @@ void TestScopesPlugin::registerTypes(const char* uri)
     qmlRegisterType<MockScopes>(uri, 0, 2, "Scopes");
     qmlRegisterUncreatableType<unity::shell::scopes::ScopeInterface>(uri, 0, 2, "Scope", "Can't create Categories object in QML. Get them from Scopes instance.");
     qmlRegisterUncreatableType<unity::shell::scopes::CategoriesInterface>(uri, 0, 2, "Categories", "Can't create Categories object in QML. Get them from Scope instance.");
+    qmlRegisterUncreatableType<unity::shell::scopes::DepartmentInterface>(uri, 0, 2, "Department", "Can't create Department object in QML. Get them from Scope instance.");
     qmlRegisterUncreatableType<unity::shell::scopes::ResultsModelInterface>(uri, 0, 2, "ResultsModel", "Can't create new ResultsModel in QML. Get them from Categories instance.");
     qmlRegisterUncreatableType<unity::shell::scopes::PreviewModelInterface>(uri, 0, 2, "PreviewModel", "Can't create new PreviewModel in QML. Get them from PreviewStack instance.");
     qmlRegisterUncreatableType<unity::shell::scopes::PreviewWidgetModelInterface>(uri, 0, 2, "PreviewWidgetModel", "Can't create new PreviewWidgetModel in QML. Get them from PreviewModel instance.");

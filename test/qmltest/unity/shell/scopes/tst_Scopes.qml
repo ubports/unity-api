@@ -28,6 +28,7 @@ Item {
     }
     property var scope: scopes.getScope(0)
     property var preview: root.scope.preview("")
+    property var department: root.scope.getDepartment("root")
 
     Verifier {
         id: scopesVerifier
@@ -123,7 +124,9 @@ Item {
                 { tag: "Item.properties[searchQuery]", constant: "searchQuery", type: "string" },
                 { tag: "Item.properties[noResultsHint]", constant: "noResultsHint", type: "string" },
                 { tag: "Item.properties[formFactor]", constant: "formFactor", type: "string" },
-                { tag: "Item.properties[isActive]", constant: "isActive", type: "boolean" }
+                { tag: "Item.properties[isActive]", constant: "isActive", type: "boolean" },
+                { tag: "Item.properties[currentDepartmentId]", constant: "currentDepartmentId", type: "string" },
+                { tag: "Item.properties[hasDepartments]", constant: "hasDepartments", type: "boolean" }
             ];
         }
 
@@ -145,7 +148,9 @@ Item {
                 { tag: "Model.methods[previewRequested]", method: "previewRequested" },
                 { tag: "Model.methods[gotoScope]", method: "gotoScope" },
                 { tag: "Model.methods[openScope]", method: "openScope" },
-                { tag: "Model.methods[activateApplication]", method: "activateApplication" }
+                { tag: "Model.methods[activateApplication]", method: "activateApplication" },
+                { tag: "Model.methods[getDepartment]", method: "getDepartment" },
+                { tag: "Model.methods[loadDepartment]", method: "loadDepartment" }
             ];
         }
 
@@ -435,6 +440,66 @@ Item {
         function test_previewWidgetModel_roles(data) {
             object = previewWidgetModelRepeater.itemAt(0).roles;
             name = "PreviewWidgetModel";
+            verifyData(data);
+        }
+    }
+
+
+    Verifier {
+        id: departmentVerifier
+
+        Repeater {
+             id: departmentRepeater
+             model: root.department
+             delegate: Item {
+                 property var roles: model
+             }
+        }
+
+        function test_department_data() {
+            return [
+                { tag: "Department[object]", type: "object" },
+                { tag: "Department[DepartmentInterface]", type: "unity::shell::scopes::DepartmentInterface" },
+            ];
+        }
+
+        function test_department(data) {
+            object = departmentRepeater.model;
+            name = "Department";
+            verifyData(data);
+        }
+
+        function test_department_roles_data() {
+            return [
+                { tag: "Model.roles[departmentId]", role: "departmentId", type: "string" },
+                { tag: "Model.roles[label]", role: "label", type: "string" },
+                { tag: "Model.roles[hasChildren]", role: "hasChildren", type: "boolean" },
+                { tag: "Model.roles[isActive]", role: "isActive", type: "boolean" }
+            ];
+        }
+
+        function test_department_roles(data) {
+            object = departmentRepeater.itemAt(0).roles;
+            name = "Department";
+            verifyData(data);
+        }
+
+        function test_department_properties_data() {
+            return [
+                { tag: "Model.properties[departmentId]", constant: "departmentId", type: "string" },
+                { tag: "Model.properties[label]", constant: "label", type: "string" },
+                { tag: "Model.properties[allLabel]", constant: "allLabel", type: "string" },
+                { tag: "Model.properties[parentDepartmentId]", constant: "parentDepartmentId", type: "string" },
+                { tag: "Model.properties[parentLabel]", constant: "parentLabel", type: "string" },
+                { tag: "Model.properties[loaded]", constant: "loaded", type: "boolean" },
+                { tag: "Model.properties[isRoot]", constant: "isRoot", type: "boolean" },
+                { tag: "Model.properties[count]", constant: "count", type: "number" }
+            ];
+        }
+
+        function test_department_properties(data) {
+            object = departmentRepeater.model;
+            name = "Department";
             verifyData(data);
         }
     }
