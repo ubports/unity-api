@@ -20,6 +20,7 @@
 #include <unity/SymbolExport.h>
 
 #include <QObject>
+#include <QVariantMap>
 
 namespace unity
 {
@@ -120,6 +121,11 @@ class UNITY_API ScopeInterface : public QObject
      */
     Q_PROPERTY(bool hasDepartments READ hasDepartments NOTIFY hasDepartmentsChanged)
 
+    /**
+     * @brief VariantMap with customization properties
+     */
+    Q_PROPERTY(QVariantMap customizations READ customizations NOTIFY customizationsChanged)
+
 protected:
     /// @cond
     explicit ScopeInterface(QObject* parent = 0) : QObject(parent) { }
@@ -143,6 +149,7 @@ public:
     virtual bool isActive() const = 0;
     virtual QString currentDepartmentId() const = 0;
     virtual bool hasDepartments() const = 0;
+    virtual QVariantMap customizations() const = 0;
 
     /* setters */
     virtual void setSearchQuery(const QString& search_query) = 0;
@@ -203,6 +210,7 @@ Q_SIGNALS:
     void isActiveChanged();
     void hasDepartmentsChanged();
     void currentDepartmentIdChanged();
+    void customizationsChanged();
     // @endcond
 
     // signals triggered by activate(..) or preview(..) requests.

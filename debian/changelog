@@ -1,3 +1,9 @@
+unity-api (7.83-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Added customizations property to ScopeInterface.
+
+ -- Michal Hruby <michal.hruby@canonical.com>  Thu, 19 Jun 2014 17:17:08 +0100
+
 unity-api (7.82+14.10.20140616-0ubuntu1) utopic; urgency=medium
 
   [ Albert Astals Cid ]
