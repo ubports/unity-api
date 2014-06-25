@@ -514,7 +514,7 @@ bool ResourcePtr<R, D>::operator==(ResourcePtr<R, D> const& rhs) const
 
 If the underlying operator throws an exception, that exception is propagated to the caller.
 
-\note This operator is available only if the underlying resource provides <code>operator!=</code>.
+\note This operator is available only if the underlying resource provides <code>operator==</code>.
 */
 
 template<typename R, typename D>
@@ -570,7 +570,8 @@ Two instances that do not hold a resource are equal.
 
 If the underlying operator throws an exception, that exception is propagated to the caller.
 
-\note This operator is available only if the underlying resource provides <code>operator\<=</code>.
+\note This operator is available only if the underlying resource provides <code>operator\<</code>
+and <code>operator==</code>.
 */
 
 template<typename R, typename D>
@@ -603,7 +604,8 @@ An instance that holds a resource is greater than any instance that does not hol
 
 If the underlying operator throws an exception, that exception is propagated to the caller.
 
-\note This operator is available only if the underlying resource provides <code>operator\></code>.
+\note This operator is available only if the underlying resource provides <code>operator\<</code>
+and <code>operator==</code>.
 */
 
 template<typename R, typename D>
@@ -622,7 +624,7 @@ Two instances that do not hold a resource are equal.
 
 If the underlying operator throws an exception, that exception is propagated to the caller.
 
-\note This operator is available only if the underlying resource provides <code>operator\>=</code>.
+\note This operator is available only if the underlying resource provides <code>operator\<</code>.
 */
 
 template<typename R, typename D>
