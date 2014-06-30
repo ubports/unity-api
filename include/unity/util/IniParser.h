@@ -92,6 +92,7 @@ public:
     int get_int(const std::string& group, const std::string& key) const;
 
     std::vector<std::string> get_string_array(const std::string& group, const std::string& key) const;
+    std::vector<std::string> get_locale_string_array(const std::string& group, const std::string& key, const std::string& locale = std::string()) const;
     std::vector<int> get_int_array(const std::string& group, const std::string& key) const;
     std::vector<bool> get_boolean_array(const std::string& group, const std::string& key) const;
 
