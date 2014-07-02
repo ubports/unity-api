@@ -16,5 +16,5 @@ ifeq ($(DEB_HOST_ARCH),arm64)
 # Precompiled headers are broken on arm64 with g++-4.8.  Recheck this once
 # g++-4.9 is the default.
 override_dh_auto_configure:
-	dh_auto_configure -- use_pch=FALSE
+	dh_auto_configure -- -Duse_pch=FALSE
 endif
