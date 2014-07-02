@@ -126,7 +126,8 @@ Item {
                 { tag: "Item.properties[formFactor]", constant: "formFactor", type: "string" },
                 { tag: "Item.properties[isActive]", constant: "isActive", type: "boolean" },
                 { tag: "Item.properties[currentDepartmentId]", constant: "currentDepartmentId", type: "string" },
-                { tag: "Item.properties[hasDepartments]", constant: "hasDepartments", type: "boolean" }
+                { tag: "Item.properties[hasDepartments]", constant: "hasDepartments", type: "boolean" },
+                { tag: "Item.properties[customizations]", constant: "customizations", type: "object" }
             ];
         }
 
