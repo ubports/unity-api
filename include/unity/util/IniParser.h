@@ -87,16 +87,11 @@ public:
     bool has_group(const std::string& group) const noexcept;
     bool has_key(const std::string& group, const std::string& key) const;
     std::string get_string(const std::string& group, const std::string& key) const;
-    std::string get_locale_string(const std::string& group,
-                                  const std::string& key,
-                                  const std::string& locale = std::string()) const;
+    std::string get_locale_string(const std::string& group, const std::string& key, const std::string& locale = std::string()) const;
     bool get_boolean(const std::string& group, const std::string& key) const;
     int get_int(const std::string& group, const std::string& key) const;
 
     std::vector<std::string> get_string_array(const std::string& group, const std::string& key) const;
-    std::vector<std::string> get_locale_string_array(const std::string& group,
-                                                     const std::string& key,
-                                                     const std::string& locale = std::string()) const;
     std::vector<int> get_int_array(const std::string& group, const std::string& key) const;
     std::vector<bool> get_boolean_array(const std::string& group, const std::string& key) const;
 
