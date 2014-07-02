@@ -75,10 +75,6 @@ unity::shell::scopes::CategoriesInterface* MockScope::categories() const {
     return m_categories;
 }
 
-unity::shell::scopes::SettingsModelInterface* MockScope::settings() const {
-    return nullptr;
-}
-
 QString MockScope::noResultsHint() const {
     return m_noResultsHint;
 }
