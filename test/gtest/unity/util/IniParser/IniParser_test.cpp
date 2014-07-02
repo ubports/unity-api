@@ -57,24 +57,24 @@ TEST(IniParser, simpleQueries)
     IniParser conf(INI_FILE);
     vector<string> groups = conf.get_groups();
 
-    ASSERT_EQ(conf.get_start_group(), "first");
+    ASSERT_EQ("first", conf.get_start_group());
 
-    ASSERT_EQ(groups.size(), 2);
-    ASSERT_EQ(groups[0], "first");
-    ASSERT_EQ(groups[1], "second");
+    ASSERT_EQ(2, groups.size());
+    ASSERT_EQ("first", groups[0]);
+    ASSERT_EQ("second", groups[1]);
 
     vector<string> firstKeys = conf.get_keys("first");
-    ASSERT_EQ(firstKeys.size(), 8);
-    ASSERT_EQ(firstKeys[1], "boolvalue");
+    ASSERT_EQ(10, firstKeys.size());
+    ASSERT_EQ("boolvalue", firstKeys[1]);
 
     ASSERT_EQ(conf.get_string("first", "stringvalue"), "hello");
-    ASSERT_EQ(conf.get_int("first", "intvalue"), 1);
+    ASSERT_EQ(1, conf.get_int("first", "intvalue"));
     ASSERT_FALSE(conf.get_boolean("second", "boolvalue"));
 
-    ASSERT_EQ(conf.get_string("first", "locstring"), "world");
-    ASSERT_EQ(conf.get_locale_string("first", "locstring", "en"), "world");
-    ASSERT_EQ(conf.get_locale_string("first", "locstring", "pt_BR"), "mundo");
-    ASSERT_EQ(conf.get_locale_string("first", "locstring", "no_DF"), "world");
+    ASSERT_EQ("world", conf.get_string("first", "locstring"));
+    ASSERT_EQ("world", conf.get_locale_string("first", "locstring", "en"));
+    ASSERT_EQ("mundo", conf.get_locale_string("first", "locstring", "pt_BR"));
+    ASSERT_EQ("world", conf.get_locale_string("first", "locstring", "no_DF"));
 }
 
 TEST(IniParser, arrayQueries)
@@ -82,21 +82,33 @@ TEST(IniParser, arrayQueries)
     IniParser conf(INI_FILE);
     vector<string> strArr = conf.get_string_array("first", "array");
 
-    ASSERT_EQ(strArr.size(), 3);
-    ASSERT_EQ(strArr[0], "foo");
-    ASSERT_EQ(strArr[1], "bar");
-    ASSERT_EQ(strArr[2], "baz");
+    ASSERT_EQ(3, strArr.size());
+    ASSERT_EQ("foo", strArr[0]);
+    ASSERT_EQ("bar", strArr[1]);
+    ASSERT_EQ("baz", strArr[2]);
 
     vector<int> intArr = conf.get_int_array("second", "intarray");
-    ASSERT_EQ(intArr.size(), 9);
-    ASSERT_EQ(intArr[0], 4);
-    ASSERT_EQ(intArr[8], 3);
+    ASSERT_EQ(9, intArr.size());
+    ASSERT_EQ(4, intArr[0]);
+    ASSERT_EQ(3, intArr[8]);
 
     vector<bool> boolArr = conf.get_boolean_array("first", "boolarray");
-    ASSERT_EQ(boolArr.size(), 3);
+    ASSERT_EQ(3, boolArr.size());
     ASSERT_TRUE(boolArr[0]);
     ASSERT_FALSE(boolArr[1]);
     ASSERT_FALSE(boolArr[2]);
+
+    strArr = conf.get_string_array("first", "stringarray");
+    ASSERT_EQ(3, strArr.size());
+    ASSERT_EQ("a", strArr[0]);
+    ASSERT_EQ("b", strArr[1]);
+    ASSERT_EQ("c", strArr[2]);
+
+    strArr = conf.get_locale_string_array("first", "locstringarray", "pt_BR");
+    ASSERT_EQ(3, strArr.size());
+    ASSERT_EQ("x", strArr[0]);
+    ASSERT_EQ("y", strArr[1]);
+    ASSERT_EQ("z", strArr[2]);
 }
 
 TEST(IniParser, failingQueries)
