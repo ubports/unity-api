@@ -135,7 +135,7 @@ std::string IniParser::get_locale_string(const std::string& group, const std::st
     GError* e = nullptr;
     string result;
     value = g_key_file_get_locale_string(p->k, group.c_str(), key.c_str(), locale.empty() ? nullptr : locale.c_str(), &e);
-    inspect_error(e, "Could not get string value", p->filename, group);
+    inspect_error(e, "Could not get localized string value", p->filename, group);
     result = value;
     g_free(value);
     return result;
@@ -167,6 +167,25 @@ std::vector<std::string> IniParser::get_string_array(const std::string& group, c
     gsize count;
     strlist = g_key_file_get_string_list(p->k, group.c_str(), key.c_str(), &count, &e);
     inspect_error(e, "Could not get string array", p->filename, group);
+    for (gsize i = 0; i < count; i++)
+    {
+        result.push_back(strlist[i]);
+    }
+    g_strfreev(strlist);
+    return result;
+}
+
+std::vector<std::string> IniParser::get_locale_string_array(const std::string& group,
+                                                            const std::string& key,
+                                                            const std::string& locale) const
+{
+    vector<string> result;
+    GError* e = nullptr;
+    gchar** strlist;
+    gsize count;
+    strlist = g_key_file_get_locale_string_list(p->k, group.c_str(), key.c_str(),
+                                                locale.empty() ? nullptr : locale.c_str(), &count, &e);
+    inspect_error(e, "Could not get localized string array", p->filename, group);
     for (gsize i = 0; i < count; i++)
     {
         result.push_back(strlist[i]);
