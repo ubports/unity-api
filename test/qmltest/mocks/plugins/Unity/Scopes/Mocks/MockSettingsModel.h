@@ -25,11 +25,6 @@
 #include <QList>
 #include <QSharedPointer>
 
-QT_BEGIN_NAMESPACE
-class QDir;
-class QTimer;
-QT_END_NAMESPACE
-
 class UNITY_API MockSettingsModel: public unity::shell::scopes::SettingsModelInterface {
 Q_OBJECT
 
