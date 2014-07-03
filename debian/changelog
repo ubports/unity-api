@@ -1,3 +1,9 @@
+unity-api (7.85-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Add settings support for shell
+
+ -- Marcus Tomlinson <marcus.tomlinson@canonical.com>  Thu, 03 Jul 2014 07:22:24 +0200
+
 unity-api (7.84+14.10.20140702.2-0ubuntu1) utopic; urgency=medium
 
   [ Michal Hruby ]
