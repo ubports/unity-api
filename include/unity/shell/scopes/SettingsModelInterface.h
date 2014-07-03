@@ -50,7 +50,11 @@ public:
      */
     enum Roles
     {
-        RoleSettingId, RoleDisplayName, RoleType, RoleProperties, RoleValue
+        RoleSettingId,
+        RoleDisplayName,
+        RoleType,
+        RoleProperties,
+        RoleValue
     };
 
     // @cond
