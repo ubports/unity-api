@@ -99,6 +99,10 @@ bool MockScope::hasDepartments() const {
     return m_hasDepartments;
 }
 
+QVariantMap MockScope::customizations() const {
+    return m_customizations;
+}
+
 void MockScope::setName(const QString &str) {
     if (str != m_name) {
         m_name = str;

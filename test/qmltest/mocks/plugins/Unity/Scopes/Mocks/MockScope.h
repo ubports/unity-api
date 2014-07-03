@@ -44,6 +44,7 @@ public:
     bool isActive() const override;
     bool hasDepartments() const override;
     QString currentDepartmentId() const override;
+    QVariantMap customizations() const override;
 
     /* setters */
     void setName(const QString& name);
@@ -72,6 +73,7 @@ protected:
     bool m_searching;
     bool m_isActive;
     bool m_hasDepartments;
+    QVariantMap m_customizations;
 
     QString m_previewRendererName;
 
