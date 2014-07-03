@@ -78,6 +78,7 @@ protected:
     QString m_previewRendererName;
 
     unity::shell::scopes::CategoriesInterface* m_categories;
+    unity::shell::scopes::SettingsModelInterface* m_settings;
 };
 
 #endif

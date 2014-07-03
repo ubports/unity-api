@@ -18,6 +18,7 @@
 #include "MockCategories.h"
 #include "MockPreviewStack.h"
 #include "MockDepartment.h"
+#include "MockSettingsModel.h"
 
 MockScope::MockScope(QObject* parent) : MockScope(QString(), QString(), false, parent)
 {
@@ -32,6 +33,7 @@ MockScope::MockScope(QString const& id, QString const& name, bool visible, QObje
     , m_isActive(false)
     , m_previewRendererName("preview-generic")
     , m_categories(new MockCategories(20, this))
+    , m_settings(new MockSettingsModel(this))
 {
 }
 
@@ -76,7 +78,7 @@ unity::shell::scopes::CategoriesInterface* MockScope::categories() const {
 }
 
 unity::shell::scopes::SettingsModelInterface* MockScope::settings() const {
-    return nullptr;
+    return m_settings;
 }
 
 QString MockScope::noResultsHint() const {
