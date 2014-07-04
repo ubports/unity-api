@@ -112,6 +112,8 @@ MockCategories::data(const QModelIndex& index, int role) const
                 map["title"] = "HOLA";
                 return map;
             }
+            case RoleExpansionQuery:
+                return QString();
             case RoleResults:
                 return QVariant();
             case RoleCount:
@@ -146,6 +148,8 @@ MockCategories::data(const QModelIndex& index, int role) const
                 map["title"] = "HOLA";
                 return map;
             }
+            case RoleExpansionQuery:
+                return QString();
             case RoleResults:
                 return QVariant::fromValue(resultsModel);
             case RoleCount:

@@ -168,3 +168,8 @@ void MockScope::closeScope(unity::shell::scopes::ScopeInterface* /*scope*/)
 {
     qFatal("MockScope::closeScope is not implemented");
 }
+
+void MockScope::performQuery(QString const& cannedQuery)
+{
+    Q_UNUSED(cannedQuery);
+}

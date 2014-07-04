@@ -149,6 +149,7 @@ Item {
                 { tag: "Model.methods[previewRequested]", method: "previewRequested" },
                 { tag: "Model.methods[gotoScope]", method: "gotoScope" },
                 { tag: "Model.methods[openScope]", method: "openScope" },
+                { tag: "Model.methods[performQuery]", method: "performQuery" },
                 { tag: "Model.methods[activateApplication]", method: "activateApplication" },
                 { tag: "Model.methods[getDepartment]", method: "getDepartment" },
                 { tag: "Model.methods[loadDepartment]", method: "loadDepartment" }
@@ -195,6 +196,7 @@ Item {
                 { tag: "Model.roles[rawRendererTemplate]", role: "rawRendererTemplate", type: "string" },
                 { tag: "Model.roles[renderer]", role: "renderer", type: "object" },
                 { tag: "Model.roles[components]", role: "components", type: "object" },
+                { tag: "Model.roles[expansionQuery]", role: "expansionQuery", type: "string" },
                 { tag: "Model.roles[results]", role: "results", type: "object" },
                 { tag: "Model.roles[count]", role: "count", type: "number" },
             ];

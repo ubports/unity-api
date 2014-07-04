@@ -58,6 +58,7 @@ public:
     Q_INVOKABLE void closeScope(unity::shell::scopes::ScopeInterface* scope) override;
     Q_INVOKABLE unity::shell::scopes::DepartmentInterface* getDepartment(QString const& departmentId) override;
     Q_INVOKABLE void loadDepartment(QString const& departmentId) override;
+    Q_INVOKABLE void performQuery(QString const& cannedQuery) override;
 
 protected:
     QString m_id;

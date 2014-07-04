@@ -1,3 +1,9 @@
+unity-api (7.85-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Added expansion queries to CategoriesInterface
+
+ -- Michal Hruby <michal.hruby@canonical.com>  Fri, 04 Jul 2014 10:50:03 +0100
+
 unity-api (7.84+14.10.20140702.2-0ubuntu1) utopic; urgency=medium
 
   [ Michal Hruby ]

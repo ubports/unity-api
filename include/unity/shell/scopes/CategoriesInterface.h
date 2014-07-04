@@ -56,6 +56,7 @@ public:
         RoleRawRendererTemplate,
         RoleRenderer,
         RoleComponents,
+        RoleExpansionQuery,
         RoleResults,
         RoleCount
     };
@@ -88,6 +89,7 @@ public:
         roles[RoleRawRendererTemplate] = "rawRendererTemplate";
         roles[RoleRenderer] = "renderer";
         roles[RoleComponents] = "components";
+        roles[RoleExpansionQuery] = "expansionQuery";
         roles[RoleResults] = "results";
         roles[RoleCount] = "count";
         return roles;
