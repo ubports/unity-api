@@ -260,6 +260,18 @@ Item {
             name = "Settings";
             verifyData(data);
         }
+
+        function test_settings_properties_data() {
+            return [
+                { tag: "Item.properties[count]", constant: "count", type: "number" }
+            ];
+        }
+
+        function test_settings_properties(data) {
+            object = settingsRepeater.model;
+            name = "Settings";
+            verifyData(data);
+        }
     }
 
     Verifier {

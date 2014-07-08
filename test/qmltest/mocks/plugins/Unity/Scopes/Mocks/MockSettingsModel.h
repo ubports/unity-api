@@ -56,6 +56,8 @@ public:
 
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
+    int count() const override;
+
 protected:
     QList<QSharedPointer<Data>> m_data;
 };

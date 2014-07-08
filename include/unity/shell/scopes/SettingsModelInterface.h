@@ -34,6 +34,11 @@ Q_OBJECT
 
 Q_ENUMS(Roles)
 
+/**
+ * @brief Integer representing the number of setting elements in the model.
+ */
+Q_PROPERTY(int count READ count NOTIFY countChanged)
+
 protected:
     /// @cond
     explicit SettingsModelInterface(QObject* parent = 0)
@@ -44,6 +49,8 @@ protected:
 
 public:
     virtual ~SettingsModelInterface() = default;
+
+    virtual int count() const = 0;
 
     /**
      * @brief The roles supported by this model.
@@ -68,6 +75,11 @@ public:
         roles[RoleValue] = "value";
         return roles;
     }
+    // @endcond
+
+Q_SIGNALS:
+    // @cond
+    void countChanged();
     // @endcond
 };
 

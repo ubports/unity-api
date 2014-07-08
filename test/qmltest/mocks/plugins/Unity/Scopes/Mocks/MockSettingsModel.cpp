@@ -93,5 +93,9 @@ bool MockSettingsModel::setData(const QModelIndex &index, const QVariant &value,
 }
 
 int MockSettingsModel::rowCount(const QModelIndex&) const {
+    return count();
+}
+
+int MockSettingsModel::count() const {
     return m_data.size();
 }
