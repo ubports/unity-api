@@ -1,4 +1,4 @@
-unity-api (7.85-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.85+14.10.20140708-0ubuntu1) utopic; urgency=medium
 
   [ Marcus Tomlinson ]
   * Add settings support for shell
@@ -7,7 +7,10 @@ unity-api (7.85-0ubuntu1) UNRELEASED; urgency=medium
   * Added header links CategoriesInterface and performQuery() to
     ScopeInterface 
 
- -- Marcus Tomlinson <marcus.tomlinson@canonical.com>  Thu, 03 Jul 2014 07:22:24 +0200
+  [ Michi Henning ]
+  * A few minor fixes to the doc comments for comparison operators.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 08 Jul 2014 15:06:24 +0000
 
 unity-api (7.84+14.10.20140702.2-0ubuntu1) utopic; urgency=medium
 
