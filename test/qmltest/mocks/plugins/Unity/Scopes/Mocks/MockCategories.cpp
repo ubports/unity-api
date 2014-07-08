@@ -112,7 +112,7 @@ MockCategories::data(const QModelIndex& index, int role) const
                 map["title"] = "HOLA";
                 return map;
             }
-            case RoleExpansionQuery:
+            case RoleHeaderLink:
                 return QString();
             case RoleResults:
                 return QVariant();
@@ -148,7 +148,7 @@ MockCategories::data(const QModelIndex& index, int role) const
                 map["title"] = "HOLA";
                 return map;
             }
-            case RoleExpansionQuery:
+            case RoleHeaderLink:
                 return QString();
             case RoleResults:
                 return QVariant::fromValue(resultsModel);

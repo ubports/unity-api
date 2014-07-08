@@ -196,7 +196,7 @@ Item {
                 { tag: "Model.roles[rawRendererTemplate]", role: "rawRendererTemplate", type: "string" },
                 { tag: "Model.roles[renderer]", role: "renderer", type: "object" },
                 { tag: "Model.roles[components]", role: "components", type: "object" },
-                { tag: "Model.roles[expansionQuery]", role: "expansionQuery", type: "string" },
+                { tag: "Model.roles[headerLink]", role: "headerLink", type: "string" },
                 { tag: "Model.roles[results]", role: "results", type: "object" },
                 { tag: "Model.roles[count]", role: "count", type: "number" },
             ];
