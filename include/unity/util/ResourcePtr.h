@@ -473,12 +473,12 @@ D const& ResourcePtr<R, D>::get_deleter() const noexcept
 }
 
 /**
-\brief Compares two instances for equality by calling the corresponding operator on the resource.
+\brief Compares two instances for equality.
 
 Two instances that do not hold a resource are equal. An instance that does not hold a resource is not equal
 to any instance that holds a resource.
 
-If the underlying operator throws an exception, that exception is propagated to the caller.
+If the underlying <code>operator==</code> throws an exception, that exception is propagated to the caller.
 
 \note This operator is available only if the underlying resource provides <code>operator==</code>.
 */
@@ -510,11 +510,11 @@ bool ResourcePtr<R, D>::operator==(ResourcePtr<R, D> const& rhs) const
 }
 
 /**
-\brief Compares two instances for inequality by calling the corresponding operator on the resource.
+\brief Compares two instances for inequality.
 
-If the underlying operator throws an exception, that exception is propagated to the caller.
+If the underlying <code>operator==</code> throws an exception, that exception is propagated to the caller.
 
-\note This operator is available only if the underlying resource provides <code>operator!=</code>.
+\note This operator is available only if the underlying resource provides <code>operator==</code>.
 */
 
 template<typename R, typename D>
@@ -525,12 +525,11 @@ bool ResourcePtr<R, D>::operator!=(ResourcePtr<R, D> const& rhs) const
 }
 
 /**
-\brief Returns <code>true</code> if <code>this</code> is less than <code>rhs</code> by calling the
-corresponding operator on the resource.
+\brief Returns <code>true</code> if <code>this</code> is less than <code>rhs</code>.
 
 An instance that does not hold a resource is less than any instance that holds a resource.
 
-If the underlying operator throws an exception, that exception is propagated to the caller.
+If the underlying <code>operator\<</code> throws an exception, that exception is propagated to the caller.
 
 \note This operator is available only if the underlying resource provides <code>operator\<</code>.
 */
@@ -562,15 +561,16 @@ bool ResourcePtr<R, D>::operator<(ResourcePtr<R, D> const& rhs) const
 }
 
 /**
-\brief Returns <code>true</code> if <code>this</code> is less than or equal to <code>rhs</code> by calling the
-corresponding operator on the resource.
+\brief Returns <code>true</code> if <code>this</code> is less than or equal to <code>rhs</code>.
 
 An instance that does not hold a resource is less than any instance that holds a resource.
 Two instances that do not hold a resource are equal.
 
-If the underlying operator throws an exception, that exception is propagated to the caller.
+If the underlying <code>operator\<</code> or <code>operator==</code> throws an exception,
+that exception is propagated to the caller.
 
-\note This operator is available only if the underlying resource provides <code>operator\<=</code>.
+\note This operator is available only if the underlying resource provides <code>operator\<</code>
+and <code>operator==</code>.
 */
 
 template<typename R, typename D>
@@ -596,14 +596,15 @@ bool ResourcePtr<R, D>::operator<=(ResourcePtr<R, D> const& rhs) const
 }
 
 /**
-\brief Returns <code>true</code> if <code>this</code> is greater than <code>rhs</code> by calling the
-corresponding operator on the resource.
+\brief Returns <code>true</code> if <code>this</code> is greater than <code>rhs</code>.
 
 An instance that holds a resource is greater than any instance that does not hold a resource.
 
-If the underlying operator throws an exception, that exception is propagated to the caller.
+If the underlying <code>operator\<</code> or <code>operator==</code> throws an exception,
+that exception is propagated to the caller.
 
-\note This operator is available only if the underlying resource provides <code>operator\></code>.
+\note This operator is available only if the underlying resource provides <code>operator\<</code>
+and <code>operator==</code>.
 */
 
 template<typename R, typename D>
@@ -614,15 +615,14 @@ bool ResourcePtr<R, D>::operator>(ResourcePtr<R, D> const& rhs) const
 }
 
 /**
-\brief Returns <code>true</code> if <code>this</code> is greater than or equal to <code>rhs</code> by calling the
-corresponding operator on the resource.
+\brief Returns <code>true</code> if <code>this</code> is greater than or equal to <code>rhs</code>.
 
 An instance that holds a resource is greater than any instance that does not hold a resource.
 Two instances that do not hold a resource are equal.
 
-If the underlying operator throws an exception, that exception is propagated to the caller.
+If the underlying <code>operator\<</code> throws an exception, that exception is propagated to the caller.
 
-\note This operator is available only if the underlying resource provides <code>operator\>=</code>.
+\note This operator is available only if the underlying resource provides <code>operator\<</code>.
 */
 
 template<typename R, typename D>
