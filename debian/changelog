@@ -1,6 +1,11 @@
 unity-api (7.85-0ubuntu1) UNRELEASED; urgency=medium
 
+  [ Marcus Tomlinson ]
   * Add settings support for shell
+
+  [ Michal Hruby ]
+  * Added header links CategoriesInterface and performQuery() to
+    ScopeInterface 
 
  -- Marcus Tomlinson <marcus.tomlinson@canonical.com>  Thu, 03 Jul 2014 07:22:24 +0200
 

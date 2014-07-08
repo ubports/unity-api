@@ -200,6 +200,11 @@ public:
      */
     Q_INVOKABLE virtual void loadDepartment(QString const& departmentId) = 0;
 
+    /**
+     * @brief Execute canned query.
+     */
+    Q_INVOKABLE virtual void performQuery(QString const& cannedQuery) = 0;
+
 Q_SIGNALS:
     // @cond
     void idChanged();
