@@ -221,6 +221,60 @@ Item {
     }
 
     Verifier {
+        id: settingsVerifier
+
+        Repeater {
+             id: settingsRepeater
+             model: root.scope.settings
+             delegate: Item {
+                 property var roles: model
+             }
+        }
+
+        function test_settings_data() {
+            return [
+                { tag: "Settings[object]", type: "object" },
+                { tag: "Settings[SettingsModelInterface]", type: "unity::shell::scopes::SettingsModelInterface" },
+            ];
+        }
+
+        function test_settings(data) {
+            object = settingsRepeater.model;
+            name = "Settings";
+            verifyData(data);
+        }
+
+        function test_settings_roles_data() {
+            return [
+                { tag: "Model.roles[settingId]", role: "settingId", type: "string" },
+                { tag: "Model.roles[displayName]", role: "displayName", type: "string" },
+                { tag: "Model.roles[type]", role: "type", type: "string" },
+                { tag: "Model.roles[properties]", role: "properties", type: "object" },
+                // the first mocked setting is of type boolean
+                { tag: "Model.roles[value]", role: "value", type: "boolean" },
+            ];
+        }
+
+        function test_settings_roles(data) {
+            object = settingsRepeater.itemAt(0).roles;
+            name = "Settings";
+            verifyData(data);
+        }
+
+        function test_settings_properties_data() {
+            return [
+                { tag: "Item.properties[count]", constant: "count", type: "number" }
+            ];
+        }
+
+        function test_settings_properties(data) {
+            object = settingsRepeater.model;
+            name = "Settings";
+            verifyData(data);
+        }
+    }
+
+    Verifier {
         id: resultsModelVerifier
 
         Repeater {
