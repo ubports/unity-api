@@ -19,6 +19,7 @@ set(ScopesMocks_SOURCES
     Mocks/MockPreviewWidgetModel.cpp
     Mocks/MockScope.cpp
     Mocks/MockScopes.cpp
+    Mocks/MockSettingsModel.cpp
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/CategoriesInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/DepartmentInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/ResultsModelInterface.h
@@ -27,6 +28,7 @@ set(ScopesMocks_SOURCES
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/PreviewStackInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/ScopeInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/ScopesInterface.h
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/SettingsModelInterface.h
 )
 
 add_library(ScopesMocks SHARED ${ScopesMocks_SOURCES})

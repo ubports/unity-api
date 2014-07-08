@@ -32,6 +32,7 @@ namespace scopes
 class CategoriesInterface;
 class PreviewStackInterface;
 class DepartmentInterface;
+class SettingsModelInterface;
 
 /**
  * @brief Object representing scope instance, which exposes model(s) with results.
@@ -84,6 +85,11 @@ class UNITY_API ScopeInterface : public QObject
      * @brief Categories model for scope's results.
      */
     Q_PROPERTY(unity::shell::scopes::CategoriesInterface* categories READ categories NOTIFY categoriesChanged)
+
+    /**
+     * @brief Settings model for the scope.
+     */
+    Q_PROPERTY(unity::shell::scopes::SettingsModelInterface* settings READ settings NOTIFY settingsChanged)
 
     /**
      * @brief Current search query.
@@ -143,6 +149,7 @@ public:
     virtual QString shortcut() const = 0;
     virtual bool searchInProgress() const = 0;
     virtual CategoriesInterface* categories() const = 0;
+    virtual SettingsModelInterface* settings() const = 0;
     virtual QString searchQuery() const = 0;
     virtual QString noResultsHint() const = 0;
     virtual QString formFactor() const = 0;
@@ -209,6 +216,7 @@ Q_SIGNALS:
     void visibleChanged();
     void shortcutChanged();
     void categoriesChanged();
+    void settingsChanged();
     void searchQueryChanged();
     void noResultsHintChanged();
     void formFactorChanged();

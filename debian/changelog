@@ -1,8 +1,12 @@
 unity-api (7.85-0ubuntu1) UNRELEASED; urgency=medium
 
+  [ Marcus Tomlinson ]
+  * Add settings support for shell
+
+  [ Michal Hruby ]
   * Added expansion queries to CategoriesInterface
 
- -- Michal Hruby <michal.hruby@canonical.com>  Fri, 04 Jul 2014 10:50:03 +0100
+ -- Marcus Tomlinson <marcus.tomlinson@canonical.com>  Thu, 03 Jul 2014 07:22:24 +0200
 
 unity-api (7.84+14.10.20140702.2-0ubuntu1) utopic; urgency=medium
 
