@@ -69,7 +69,8 @@ public:
         RoleEmblem,
         RoleSummary,
         RoleAttributes,
-        RoleBackground
+        RoleBackground,
+        RoleOverlayColor
     };
 
     // @cond
@@ -92,6 +93,7 @@ public:
         roles[RoleSummary] = "summary";
         roles[RoleAttributes] = "attributes";
         roles[RoleBackground] = "background";
+        roles[RoleOverlayColor] = "overlayColor";
         return roles;
     }
 
