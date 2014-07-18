@@ -1,3 +1,9 @@
+unity-api (7.86-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Explicitly select g++-4.9 to prevent ABI breakage.
+
+ -- Michi Henning <michi.henning@canonical.com>  Fri, 18 Jul 2014 10:35:32 +0100
+
 unity-api (7.85+14.10.20140708-0ubuntu1) utopic; urgency=medium
 
   [ Marcus Tomlinson ]
@@ -18,12 +24,6 @@ unity-api (7.84+14.10.20140702.2-0ubuntu1) utopic; urgency=medium
   * Added IniParser::get_locale_string_array
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 02 Jul 2014 15:17:16 +0000
-
-unity-api (7.83+14.10.20140626-0ubuntu2) UNRELEASED; urgency=medium
-
-  * Explicitly select g++-4.9 to prevent ABI breakage.
-
- -- Michi Henning <michi.henning@canonical.com>  Tue, 01 Jul 2014 17:53:40 +1000
 
 unity-api (7.83+14.10.20140626-0ubuntu1) utopic; urgency=medium
 
