@@ -1,3 +1,9 @@
+unity-api (7.86-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Explicitly select g++-4.9 to prevent ABI breakage.
+
+ -- Michi Henning <michi.henning@canonical.com>  Fri, 18 Jul 2014 10:35:32 +0100
+
 unity-api (7.85+14.10.20140708-0ubuntu1) utopic; urgency=medium
 
   [ Marcus Tomlinson ]
