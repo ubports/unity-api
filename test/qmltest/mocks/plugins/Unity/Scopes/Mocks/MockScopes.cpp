@@ -34,6 +34,11 @@ bool MockScopes::loaded() const
     return true;
 }
 
+unity::shell::scopes::ScopeInterface* MockScopes::overviewScope() const
+{
+    return nullptr;
+}
+
 int MockScopes::rowCount(const QModelIndex&) const
 {
     return m_scopes.count();
