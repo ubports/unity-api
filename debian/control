@@ -2,7 +2,8 @@ Source: unity-api
 Priority: optional
 Section: libs
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-Build-Depends: debhelper (>= 9),
+Build-Depends: g++-4.9,
+               debhelper (>= 9),
                cmake,
                doxygen,
                graphviz,

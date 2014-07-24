@@ -1,3 +1,10 @@
+unity-api (7.86+14.10.20140718.1-0ubuntu1) utopic; urgency=medium
+
+  [ Michi Henning ]
+  * Explicitly select g++-4.9 to prevent ABI breakage.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 18 Jul 2014 16:20:15 +0000
+
 unity-api (7.85+14.10.20140708-0ubuntu1) utopic; urgency=medium
 
   [ Marcus Tomlinson ]
