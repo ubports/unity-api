@@ -40,7 +40,7 @@ class UNITY_API NavigationInterface : public QAbstractListModel
     /**
      * @brief Id of the navigation.
      */
-    Q_PROPERTY(QString navigationId READ departmentId NOTIFY navigationIdChanged)
+    Q_PROPERTY(QString navigationId READ navigationId NOTIFY navigationIdChanged)
 
     /**
      * @brief Label of the navigation.
@@ -132,6 +132,6 @@ Q_SIGNALS:
 }
 }
 
-Q_DECLARE_METATYPE(unity::shell::scopes::DepartmentInterface*)
+Q_DECLARE_METATYPE(unity::shell::scopes::NavigationInterface*)
 
 #endif

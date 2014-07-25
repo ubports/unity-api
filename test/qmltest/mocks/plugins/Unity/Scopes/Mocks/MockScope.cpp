@@ -65,8 +65,12 @@ QString MockScope::shortcut() const {
     return QString("");
 }
 
-QString MockScope::currentDepartmentId() const {
+QString MockScope::currentNavigationId() const {
     return m_currentDepartmentId;
+}
+
+QString MockScope::currentAltNavigationId() const {
+    return m_currentAltDepartmentId;
 }
 
 bool MockScope::searchInProgress() const {
@@ -97,8 +101,12 @@ bool MockScope::isActive() const {
     return m_isActive;
 }
 
-bool MockScope::hasDepartments() const {
-    return m_hasDepartments;
+bool MockScope::hasNavigation() const {
+    return m_hasNavigation;
+}
+
+bool MockScope::hasAltNavigation() const {
+    return m_hasAltNavigation;
 }
 
 QVariantMap MockScope::customizations() const {
@@ -154,16 +162,18 @@ unity::shell::scopes::PreviewStackInterface* MockScope::preview(QVariant const& 
     return new MockPreviewStack;
 }
 
-unity::shell::scopes::DepartmentInterface* MockScope::getDepartment(QString const& departmentId)
+unity::shell::scopes::NavigationInterface* MockScope::getNavigation(QString const& navigationId)
 {
-    Q_UNUSED(departmentId);
+    Q_UNUSED(navigationId);
 
     return new MockDepartment();
 }
 
-void MockScope::loadDepartment(QString const& departmentId)
+unity::shell::scopes::NavigationInterface* MockScope::getAltNavigation(QString const& navigationId)
 {
-    Q_UNUSED(departmentId);
+    Q_UNUSED(navigationId);
+
+    return new MockDepartment();
 }
 
 void MockScope::cancelActivation()
