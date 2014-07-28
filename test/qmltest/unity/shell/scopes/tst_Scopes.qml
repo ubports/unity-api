@@ -130,7 +130,9 @@ Item {
                 { tag: "Item.properties[hasNavigation]", constant: "hasNavigation", type: "boolean" },
                 { tag: "Item.properties[currentAltNavigationId]", constant: "currentAltNavigationId", type: "string" },
                 { tag: "Item.properties[hasAltNavigation]", constant: "hasAltNavigation", type: "boolean" },
-                { tag: "Item.properties[customizations]", constant: "customizations", type: "object" }
+                { tag: "Item.properties[customizations]", constant: "customizations", type: "object" },
+                { tag: "Item.properties[status]", constant: "status", type: "number" },
+                { tag: "Item.properties[status]", constant: "details", type: "number" }
             ];
         }
 
