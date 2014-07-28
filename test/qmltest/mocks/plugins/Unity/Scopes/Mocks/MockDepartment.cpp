@@ -27,6 +27,11 @@ QString MockDepartment::navigationId() const
     return "root";
 }
 
+QString MockDepartment::query() const
+{
+    return "scope://foo?dep=root";
+}
+
 QString MockDepartment::label() const
 {
     return "All Departments";

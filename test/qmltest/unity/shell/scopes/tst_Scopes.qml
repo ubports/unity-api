@@ -549,6 +549,7 @@ Item {
         function test_navigation_properties_data() {
             return [
                 { tag: "Model.properties[navigationId]", constant: "navigationId", type: "string" },
+                { tag: "Model.properties[query]", constant: "query", type: "string" },
                 { tag: "Model.properties[label]", constant: "label", type: "string" },
                 { tag: "Model.properties[allLabel]", constant: "allLabel", type: "string" },
                 { tag: "Model.properties[parentNavigationId]", constant: "parentNavigationId", type: "string" },
