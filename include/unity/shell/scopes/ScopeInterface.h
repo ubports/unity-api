@@ -41,6 +41,9 @@ class UNITY_API ScopeInterface : public QObject
 {
     Q_OBJECT
 
+    Q_ENUMS(CompletionStatus)
+    Q_ENUMS(OperationInfoCode)
+
     /**
      * @brief Id of the scope.
      */
@@ -142,12 +145,46 @@ class UNITY_API ScopeInterface : public QObject
      */
     Q_PROPERTY(QVariantMap customizations READ customizations NOTIFY customizationsChanged)
 
+    /**
+     * @brief Enum representing the status of the last action performed on the scope.
+     */
+    Q_PROPERTY(unity::shell::scopes::ScopeInterface::CompletionStatus status READ status NOTIFY statusChanged)
+
+    /**
+     * @brief Enum code representing further information about the previous operation status.
+     */
+    Q_PROPERTY(unity::shell::scopes::ScopeInterface::OperationInfoCode details READ details NOTIFY detailsChanged)
+
 protected:
     /// @cond
     explicit ScopeInterface(QObject* parent = 0) : QObject(parent) { }
     /// @endcond
 
 public:
+    /**
+     * @brief Status of last scope operation
+     */
+    enum class CompletionStatus {
+        OK,
+        Cancelled,
+        Error
+    };
+
+    /**
+     * @brief Status info code following the last operation
+     */
+    enum class OperationInfoCode
+    {
+        Unknown,                        // A code unknown to the run-time was used
+        NoInternet,                     // No internet access
+        PoorInternet,                   // Slow or intermittent internet access
+        NoLocationData,                 // No location data available
+        InaccurateLocationData,         // Location data available, but "fuzzy"
+        ResultsIncomplete,              // Results are incomplete (e.g. not all data sources could be reached)
+        DefaultSettingsUsed,            // Default settings used; results may be better with explicit settings
+        SettingsProblem,                // Some required settings were not provided (e.g. URL for data source)
+        LastInfoCode_ = SettingsProblem // Dummy end marker
+    };
 
     // @cond
     virtual QString id() const = 0;
@@ -168,6 +205,8 @@ public:
     virtual bool hasNavigation() const = 0;
     virtual QString currentAltNavigationId() const = 0;
     virtual bool hasAltNavigation() const = 0;
+    virtual CompletionStatus status() const = 0;
+    virtual OperationInfoCode details() const = 0;
     virtual QVariantMap customizations() const = 0;
 
     /* setters */
@@ -236,6 +275,8 @@ Q_SIGNALS:
     void hasAltNavigationChanged();
     void currentAltNavigationIdChanged();
     void customizationsChanged();
+    void statusChanged();
+    void detailsChanged();
     // @endcond
 
     // signals triggered by activate(..) or preview(..) requests.
