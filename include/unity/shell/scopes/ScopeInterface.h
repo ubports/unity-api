@@ -41,8 +41,7 @@ class UNITY_API ScopeInterface : public QObject
 {
     Q_OBJECT
 
-    Q_ENUMS(CompletionStatus)
-    Q_ENUMS(OperationInfoCode)
+    Q_ENUMS(Status)
 
     /**
      * @brief Id of the scope.
@@ -146,14 +145,9 @@ class UNITY_API ScopeInterface : public QObject
     Q_PROPERTY(QVariantMap customizations READ customizations NOTIFY customizationsChanged)
 
     /**
-     * @brief Enum representing the status of the last action performed on the scope.
+     * @brief Enum representing the status of the scope.
      */
-    Q_PROPERTY(unity::shell::scopes::ScopeInterface::CompletionStatus status READ status NOTIFY statusChanged)
-
-    /**
-     * @brief Enum code representing further information about the previous operation status.
-     */
-    Q_PROPERTY(unity::shell::scopes::ScopeInterface::OperationInfoCode details READ details NOTIFY detailsChanged)
+    Q_PROPERTY(unity::shell::scopes::ScopeInterface::Status status READ status NOTIFY statusChanged)
 
 protected:
     /// @cond
@@ -162,28 +156,14 @@ protected:
 
 public:
     /**
-     * @brief Status of last scope operation
-     */
-    enum class CompletionStatus {
-        OK,
-        Cancelled,
-        Error
-    };
-
-    /**
      * @brief Status info code following the last operation
      */
-    enum class OperationInfoCode
+    enum class Status
     {
-        Unknown,                        // A code unknown to the run-time was used
-        NoInternet,                     // No internet access
-        PoorInternet,                   // Slow or intermittent internet access
+        Okay,                           // Everything is fine
+        NoInternet,                     // No Internet access
         NoLocationData,                 // No location data available
-        InaccurateLocationData,         // Location data available, but "fuzzy"
-        ResultsIncomplete,              // Results are incomplete (e.g. not all data sources could be reached)
-        DefaultSettingsUsed,            // Default settings used; results may be better with explicit settings
-        SettingsProblem,                // Some required settings were not provided (e.g. URL for data source)
-        LastInfoCode_ = SettingsProblem // Dummy end marker
+        Unknown,                        // A code unknown to the run-time was used
     };
 
     // @cond
@@ -205,8 +185,7 @@ public:
     virtual bool hasNavigation() const = 0;
     virtual QString currentAltNavigationId() const = 0;
     virtual bool hasAltNavigation() const = 0;
-    virtual CompletionStatus status() const = 0;
-    virtual OperationInfoCode details() const = 0;
+    virtual Status status() const = 0;
     virtual QVariantMap customizations() const = 0;
 
     /* setters */

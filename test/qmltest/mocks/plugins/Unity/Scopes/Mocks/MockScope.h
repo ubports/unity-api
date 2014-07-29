@@ -47,8 +47,7 @@ public:
     bool hasAltNavigation() const override;
     QString currentAltNavigationId() const override;
     QVariantMap customizations() const override;
-    CompletionStatus status() const override;
-    OperationInfoCode details() const override;
+    Status status() const override;
 
     /* setters */
     void setName(const QString& name);

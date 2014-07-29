@@ -113,12 +113,8 @@ QVariantMap MockScope::customizations() const {
     return m_customizations;
 }
 
-unity::shell::scopes::ScopeInterface::CompletionStatus MockScope::status() const {
-    return ScopeInterface::CompletionStatus::OK;
-}
-
-unity::shell::scopes::ScopeInterface::OperationInfoCode MockScope::details() const {
-    return ScopeInterface::OperationInfoCode::Unknown;
+unity::shell::scopes::ScopeInterface::Status MockScope::status() const {
+    return ScopeInterface::Status::Okay;
 }
 
 void MockScope::setName(const QString &str) {
