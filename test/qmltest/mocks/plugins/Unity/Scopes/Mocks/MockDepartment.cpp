@@ -47,6 +47,11 @@ QString MockDepartment::parentNavigationId() const
     return QString();
 }
 
+QString MockDepartment::parentQuery() const
+{
+    return "scope://foo";
+}
+
 QString MockDepartment::parentLabel() const
 {
     return QString();

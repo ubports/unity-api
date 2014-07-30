@@ -63,6 +63,11 @@ class UNITY_API NavigationInterface : public QAbstractListModel
     Q_PROPERTY(QString parentNavigationId READ parentNavigationId NOTIFY parentNavigationIdChanged)
 
     /**
+     * @brief Canned query that represents parent navigation.
+     */
+    Q_PROPERTY(QString parentQuery READ parentQuery NOTIFY parentQueryChanged)
+
+    /**
      * @brief Parent label of the navigation.
      */
     Q_PROPERTY(QString parentLabel READ parentLabel NOTIFY parentLabelChanged)
@@ -105,6 +110,7 @@ public:
     virtual QString label() const = 0;
     virtual QString allLabel() const = 0;
     virtual QString parentNavigationId() const = 0;
+    virtual QString parentQuery() const = 0;
     virtual QString parentLabel() const = 0;
     virtual bool loaded() const = 0;
     virtual bool isRoot() const = 0;
@@ -128,6 +134,7 @@ Q_SIGNALS:
     void labelChanged();
     void allLabelChanged();
     void parentNavigationIdChanged();
+    void parentQueryChanged();
     void parentLabelChanged();
     void loadedChanged();
     void isRootChanged();

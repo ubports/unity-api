@@ -557,6 +557,7 @@ Item {
                 { tag: "Model.properties[label]", constant: "label", type: "string" },
                 { tag: "Model.properties[allLabel]", constant: "allLabel", type: "string" },
                 { tag: "Model.properties[parentNavigationId]", constant: "parentNavigationId", type: "string" },
+                { tag: "Model.properties[parentQuery]", constant: "parentQuery", type: "string" },
                 { tag: "Model.properties[parentLabel]", constant: "parentLabel", type: "string" },
                 { tag: "Model.properties[loaded]", constant: "loaded", type: "boolean" },
                 { tag: "Model.properties[isRoot]", constant: "isRoot", type: "boolean" },
