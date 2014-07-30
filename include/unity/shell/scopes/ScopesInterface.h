@@ -84,6 +84,18 @@ public:
      */
     Q_INVOKABLE virtual unity::shell::scopes::ScopeInterface* getScope(QString const& scopeId) const = 0;
 
+    /**
+     * @brief Favourite a scope query.
+     */
+    Q_INVOKABLE virtual void addFavorite(QString const& query) const = 0;
+
+    /**
+     * @brief Remove a favorited scope page.
+     *
+     * Removes a scope page based on the index in the model.
+     */
+    Q_INVOKABLE virtual void removeFavorite(int index) const = 0;
+
     // @cond
     virtual bool loaded() const = 0;
     virtual unity::shell::scopes::ScopeInterface* overviewScope() const = 0;

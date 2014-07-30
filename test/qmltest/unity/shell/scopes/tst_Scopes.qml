@@ -84,7 +84,9 @@ Item {
 
         function test_scopes_methods_data() {
             return [
-                { tag: "Model.methods[get]", method: "getScope" }
+                { tag: "Model.methods[get]", method: "getScope" },
+                { tag: "Model.methods[addFavorite]", method: "addFavorite" },
+                { tag: "Model.methods[removeFavorite]", method: "removeFavorite" }
             ];
         }
 
