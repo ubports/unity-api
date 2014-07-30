@@ -87,14 +87,19 @@ public:
     /**
      * @brief Favourite a scope query.
      */
-    Q_INVOKABLE virtual void addFavorite(QString const& query) const = 0;
+    Q_INVOKABLE virtual bool isFavorited(QString const& query) const = 0;
+
+    /**
+     * @brief Favourite a scope query.
+     */
+    Q_INVOKABLE virtual void addFavorite(QString const& query) = 0;
 
     /**
      * @brief Remove a favorited scope page.
      *
      * Removes a scope page based on the index in the model.
      */
-    Q_INVOKABLE virtual void removeFavorite(int index) const = 0;
+    Q_INVOKABLE virtual void removeFavorite(int index) = 0;
 
     // @cond
     virtual bool loaded() const = 0;

@@ -79,3 +79,19 @@ unity::shell::scopes::ScopeInterface* MockScopes::getScope(QString const&) const
     // Unimplemented
     return nullptr;
 }
+
+bool MockScopes::isFavorited(const QString& query) const
+{
+    Q_UNUSED(query);
+    return false;
+}
+
+void MockScopes::addFavorite(const QString& query)
+{
+    Q_UNUSED(query);
+}
+
+void MockScopes::removeFavorite(int index)
+{
+    Q_UNUSED(index);
+}
