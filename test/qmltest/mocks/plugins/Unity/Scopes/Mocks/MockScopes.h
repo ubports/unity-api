@@ -37,7 +37,7 @@ public:
     Q_INVOKABLE unity::shell::scopes::ScopeInterface* getScope(int row) const override;
     Q_INVOKABLE unity::shell::scopes::ScopeInterface* getScope(const QString& scope_id) const override;
 
-    Q_INVOKABLE bool isFavorited(const QString& query) const override;
+    Q_INVOKABLE bool favorite(const QString& query) const override;
     Q_INVOKABLE void addFavorite(const QString& query) override;
     Q_INVOKABLE void removeFavorite(int index) override;
 

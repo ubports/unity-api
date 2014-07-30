@@ -80,7 +80,7 @@ unity::shell::scopes::ScopeInterface* MockScopes::getScope(QString const&) const
     return nullptr;
 }
 
-bool MockScopes::isFavorited(const QString& query) const
+bool MockScopes::favorite(const QString& query) const
 {
     Q_UNUSED(query);
     return false;

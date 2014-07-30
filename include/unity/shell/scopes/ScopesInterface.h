@@ -87,7 +87,7 @@ public:
     /**
      * @brief Favourite a scope query.
      */
-    Q_INVOKABLE virtual bool isFavorited(QString const& query) const = 0;
+    Q_INVOKABLE virtual bool favorite(QString const& query) const = 0;
 
     /**
      * @brief Favourite a scope query.
