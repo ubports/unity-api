@@ -71,7 +71,8 @@ Item {
 
         function test_scopes_properties_data() {
             return [
-                { tag: "Item.properties[loaded]", constant: "loaded", type: "boolean" }
+                { tag: "Item.properties[loaded]", constant: "loaded", type: "boolean" },
+                { tag: "Item.properties[overviewScope]", constant: "overviewScope", type: "object" }
             ];
         }
 
@@ -313,7 +314,8 @@ Item {
                 { tag: "Model.roles[emblem]", role: "emblem", type: "string" },
                 { tag: "Model.roles[summary]", role: "summary", type: "string" },
                 { tag: "Model.roles[attributes]", role: "attributes", type: "string" },
-                { tag: "Model.roles[background]", role: "background", type: "string" },
+                { tag: "Model.roles[background]", role: "background", type: "object" },
+                { tag: "Model.roles[overlayColor]", role: "overlayColor", type: "string" },
             ];
         }
 

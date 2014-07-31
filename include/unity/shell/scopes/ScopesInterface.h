@@ -46,6 +46,13 @@ class UNITY_API ScopesInterface : public QAbstractListModel
      */
     Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
 
+    /**
+     * @brief Scope instance representing the overview scope.
+     *
+     * Scope instance representing the overview scope, note that it might be null while scopes are not loaded.
+     */
+    Q_PROPERTY(unity::shell::scopes::ScopeInterface* overviewScope READ overviewScope NOTIFY overviewScopeChanged)
+
 protected:
     /// @cond
     explicit ScopesInterface(QObject* parent = 0) : QAbstractListModel(parent) { }
@@ -65,7 +72,7 @@ public:
     /**
      * @brief Get ScopeInterface instance associated with a row.
      *
-     * Returns ScopeInterface instance associated with a row or a null variant when
+     * Returns ScopeInterface instance associated with a row or null when
      * supplied with incorrect index.
      */
     Q_INVOKABLE virtual unity::shell::scopes::ScopeInterface* getScope(int row) const = 0;
@@ -73,13 +80,13 @@ public:
     /**
      * @brief Get ScopeInterface instance by scope id.
      *
-     * Returns ScopeInterface instance which with the supplied scope id or a null
-     * variant.
+     * Returns ScopeInterface instance which with the supplied scope id or null.
      */
     Q_INVOKABLE virtual unity::shell::scopes::ScopeInterface* getScope(QString const& scopeId) const = 0;
 
     // @cond
     virtual bool loaded() const = 0;
+    virtual unity::shell::scopes::ScopeInterface* overviewScope() const = 0;
     QHash<int, QByteArray> roleNames() const override
     {
         QHash<int, QByteArray> roles;
@@ -94,6 +101,7 @@ public:
 Q_SIGNALS:
     // @cond
     void loadedChanged();
+    void overviewScopeChanged();
     // @endcond
 };
 

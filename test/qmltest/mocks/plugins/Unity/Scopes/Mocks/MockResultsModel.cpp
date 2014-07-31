@@ -56,6 +56,10 @@ MockResultsModel::data(const QModelIndex& index, int role) const
             return QString("Title.%1.%2").arg(m_categoryId).arg(index.row());
         case RoleArt:
             return "dash.png";
+        case RoleOverlayColor:
+            return QString();
+        case RoleBackground:
+            return QVariantMap();
         case RoleSubtitle:
         case RoleMascot:
         case RoleEmblem:
