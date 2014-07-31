@@ -83,6 +83,11 @@ class UNITY_API NavigationInterface : public QAbstractListModel
     Q_PROPERTY(bool isRoot READ isRoot NOTIFY isRootChanged)
 
     /**
+     * @brief Is this a hidden navigation?
+     */
+    Q_PROPERTY(bool hidden READ hidden NOTIFY hiddenChanged)
+
+    /**
      * @brief Number of items of the navigation.
      */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
@@ -114,6 +119,7 @@ public:
     virtual QString parentLabel() const = 0;
     virtual bool loaded() const = 0;
     virtual bool isRoot() const = 0;
+    virtual bool hidden() const = 0;
     virtual int count() const = 0;
     QHash<int, QByteArray> roleNames() const override
     {
@@ -138,6 +144,7 @@ Q_SIGNALS:
     void parentLabelChanged();
     void loadedChanged();
     void isRootChanged();
+    void hiddenChanged();
     void countChanged();
     // @endcond
 };

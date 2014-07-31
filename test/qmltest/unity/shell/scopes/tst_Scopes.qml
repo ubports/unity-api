@@ -559,6 +559,7 @@ Item {
                 { tag: "Model.properties[parentLabel]", constant: "parentLabel", type: "string" },
                 { tag: "Model.properties[loaded]", constant: "loaded", type: "boolean" },
                 { tag: "Model.properties[isRoot]", constant: "isRoot", type: "boolean" },
+                { tag: "Model.properties[hidden]", constant: "hidden", type: "boolean" },
                 { tag: "Model.properties[count]", constant: "count", type: "number" }
             ];
         }

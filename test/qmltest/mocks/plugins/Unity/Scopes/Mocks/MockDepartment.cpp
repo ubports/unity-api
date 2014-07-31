@@ -67,6 +67,11 @@ bool MockDepartment::isRoot() const
     return true;
 }
 
+bool MockDepartment::hidden() const
+{
+    return false;
+}
+
 int MockDepartment::count() const
 {
     return rowCount();

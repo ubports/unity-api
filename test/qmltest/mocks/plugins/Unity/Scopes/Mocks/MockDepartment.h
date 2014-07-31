@@ -38,6 +38,7 @@ public:
     QString parentLabel() const override;
     bool loaded() const override;
     bool isRoot() const override;
+    bool hidden() const override;
     int count() const override;
 
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
