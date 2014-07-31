@@ -29,6 +29,7 @@ MockScope::MockScope(QString const& id, QString const& name, bool visible, QObje
     , m_id(id)
     , m_name(name)
     , m_visible(visible)
+    , m_favorite(false)
     , m_searching(false)
     , m_isActive(false)
     , m_previewRendererName("preview-generic")
@@ -97,6 +98,10 @@ bool MockScope::visible() const {
     return m_visible;
 }
 
+bool MockScope::favorite() const {
+    return m_favorite;
+}
+
 bool MockScope::isActive() const {
     return m_isActive;
 }
@@ -142,6 +147,13 @@ void MockScope::setActive(const bool active) {
     if (active != m_isActive) {
         m_isActive = active;
         Q_EMIT isActiveChanged();
+    }
+}
+
+void MockScope::setFavorite(const bool value) {
+    if (value != m_favorite) {
+        m_favorite = value;
+        Q_EMIT favoriteChanged();
     }
 }
 

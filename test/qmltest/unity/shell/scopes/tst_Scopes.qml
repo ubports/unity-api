@@ -84,10 +84,7 @@ Item {
 
         function test_scopes_methods_data() {
             return [
-                { tag: "Model.methods[get]", method: "getScope" },
-                { tag: "Model.methods[favorite]", method: "favorite" },
-                { tag: "Model.methods[addFavorite]", method: "addFavorite" },
-                { tag: "Model.methods[removeFavorite]", method: "removeFavorite" }
+                { tag: "Model.methods[get]", method: "getScope" }
             ];
         }
 
@@ -123,6 +120,7 @@ Item {
                 { tag: "Item.properties[searchHint]", constant: "searchHint", type: "string" },
                 { tag: "Item.properties[searchInProgress]", constant: "searchInProgress", type: "boolean" },
                 { tag: "Item.properties[visible]", constant: "visible", type: "boolean" },
+                { tag: "Item.properties[favorite]", constant: "favorite", type: "boolean" },
                 { tag: "Item.properties[shortcut]", constant: "shortcut", type: "string" },
                 { tag: "Item.properties[categories]", constant: "categories", type: "object" },
                 { tag: "Item.properties[searchQuery]", constant: "searchQuery", type: "string" },

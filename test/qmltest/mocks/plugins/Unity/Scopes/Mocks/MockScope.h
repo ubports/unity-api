@@ -34,6 +34,7 @@ public:
     QString description() const override;
     QString searchHint() const override;
     bool visible() const override;
+    bool favorite() const override;
     QString shortcut() const override;
     bool searchInProgress() const override;
     unity::shell::scopes::CategoriesInterface* categories() const override;
@@ -55,6 +56,7 @@ public:
     void setNoResultsHint(const QString& hint) override;
     void setFormFactor(const QString& form_factor) override;
     void setActive(const bool) override;
+    void setFavorite(const bool) override;
 
     Q_INVOKABLE void activate(QVariant const& result) override;
     Q_INVOKABLE unity::shell::scopes::PreviewStackInterface* preview(QVariant const& result) override;
@@ -75,6 +77,7 @@ protected:
     QString m_currentDepartmentId;
     QString m_currentAltDepartmentId;
     bool m_visible;
+    bool m_favorite;
     bool m_searching;
     bool m_isActive;
     bool m_hasNavigation;

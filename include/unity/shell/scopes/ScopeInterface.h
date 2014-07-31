@@ -79,6 +79,10 @@ class UNITY_API ScopeInterface : public QObject
     Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged)
 
     /**
+     * @brief Boolean specifying whether the scope should be visible.
+     */
+    Q_PROPERTY(bool favorite READ favorite WRITE setFavorite NOTIFY favoriteChanged)
+    /**
      * @brief Keyboard shortcut used to summon the scope.
      */
     Q_PROPERTY(QString shortcut READ shortcut NOTIFY shortcutChanged)
@@ -175,6 +179,7 @@ public:
     virtual bool visible() const = 0;
     virtual QString shortcut() const = 0;
     virtual bool searchInProgress() const = 0;
+    virtual bool favorite() const = 0;
     virtual CategoriesInterface* categories() const = 0;
     virtual SettingsModelInterface* settings() const = 0;
     virtual QString searchQuery() const = 0;
@@ -193,6 +198,7 @@ public:
     virtual void setNoResultsHint(const QString& hint) = 0;
     virtual void setFormFactor(const QString& form_factor) = 0;
     virtual void setActive(const bool) = 0;
+    virtual void setFavorite(const bool) = 0;
     // @endcond
 
     /**
@@ -242,6 +248,7 @@ Q_SIGNALS:
     void searchHintChanged();
     void searchInProgressChanged();
     void visibleChanged();
+    void favoriteChanged();
     void shortcutChanged();
     void categoriesChanged();
     void settingsChanged();
