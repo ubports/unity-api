@@ -85,7 +85,7 @@ public:
     Q_INVOKABLE virtual unity::shell::scopes::ScopeInterface* getScope(QString const& scopeId) const = 0;
 
     /**
-     * @brief Favourite a scope query.
+     * @brief Checks whether a query is favourited.
      */
     Q_INVOKABLE virtual bool favorite(QString const& query) const = 0;
 
