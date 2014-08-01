@@ -44,6 +44,11 @@ int MockScopes::rowCount(const QModelIndex&) const
     return m_scopes.count();
 }
 
+int MockScopes::count() const
+{
+    return m_scopes.count();
+}
+
 QVariant MockScopes::data(const QModelIndex& index, int role) const
 {
     if (!index.isValid() || index.row() >= m_scopes.size()) {

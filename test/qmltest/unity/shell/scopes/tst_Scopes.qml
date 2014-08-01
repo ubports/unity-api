@@ -71,6 +71,7 @@ Item {
         function test_scopes_properties_data() {
             return [
                 { tag: "Item.properties[loaded]", constant: "loaded", type: "boolean" },
+                { tag: "Item.properties[count]", constant: "count", type: "number" },
                 { tag: "Item.properties[overviewScope]", constant: "overviewScope", type: "object" }
             ];
         }

@@ -40,6 +40,7 @@ public:
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 
     bool loaded() const override;
+    int count() const override;
     unity::shell::scopes::ScopeInterface* overviewScope() const override;
 
 private:

@@ -47,6 +47,11 @@ class UNITY_API ScopesInterface : public QAbstractListModel
     Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
 
     /**
+     * @brief Interger specifying how many items are in the model.
+     */
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
+
+    /**
      * @brief Scope instance representing the overview scope.
      *
      * Scope instance representing the overview scope, note that it might be null while scopes are not loaded.
@@ -85,6 +90,7 @@ public:
 
     // @cond
     virtual bool loaded() const = 0;
+    virtual int count() const = 0;
     virtual unity::shell::scopes::ScopeInterface* overviewScope() const = 0;
     QHash<int, QByteArray> roleNames() const override
     {
@@ -99,6 +105,7 @@ public:
 Q_SIGNALS:
     // @cond
     void loadedChanged();
+    void countChanged();
     void overviewScopeChanged();
     // @endcond
 };
