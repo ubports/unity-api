@@ -25,7 +25,7 @@ class UNITY_API MockScope : public unity::shell::scopes::ScopeInterface
 
 public:
     MockScope(QObject* parent = 0);
-    MockScope(QString const& id, QString const& name, bool visible, QObject* parent);
+    MockScope(QString const& id, QString const& name, QObject* parent);
 
     /* getters */
     QString id() const override;
@@ -33,7 +33,6 @@ public:
     QString iconHint() const override;
     QString description() const override;
     QString searchHint() const override;
-    bool visible() const override;
     bool favorite() const override;
     QString shortcut() const override;
     bool searchInProgress() const override;
@@ -76,7 +75,6 @@ protected:
     QString m_formFactor;
     QString m_currentDepartmentId;
     QString m_currentAltDepartmentId;
-    bool m_visible;
     bool m_favorite;
     bool m_searching;
     bool m_isActive;

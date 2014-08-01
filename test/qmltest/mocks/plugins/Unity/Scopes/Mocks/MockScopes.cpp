@@ -23,10 +23,10 @@
 MockScopes::MockScopes(QObject *parent)
  : unity::shell::scopes::ScopesInterface(parent)
 {
-    m_scopes << new MockScope("MockScope1", "People", true, this);
-    m_scopes << new MockScope("MockScope2", "Music", false, this);
-    m_scopes << new MockScope("MockScope3", "Apps", true, this);
-    m_scopes << new MockScope("MockScope4", "Videos", true, this);
+    m_scopes << new MockScope("MockScope1", "People", this);
+    m_scopes << new MockScope("MockScope2", "Music", this);
+    m_scopes << new MockScope("MockScope3", "Apps", this);
+    m_scopes << new MockScope("MockScope4", "Videos", this);
 }
 
 bool MockScopes::loaded() const
@@ -56,8 +56,6 @@ QVariant MockScopes::data(const QModelIndex& index, int role) const
         return QVariant::fromValue(scope);
     } else if (role == MockScopes::RoleId) {
         return QVariant::fromValue(scope->id());
-    } else if (role == MockScopes::RoleVisible) {
-        return QVariant::fromValue(scope->visible());
     } else if (role == MockScopes::RoleTitle) {
         return QVariant::fromValue(scope->name());
     } else {

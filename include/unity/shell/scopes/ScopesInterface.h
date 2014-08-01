@@ -65,7 +65,6 @@ public:
     enum Roles {
         RoleScope,
         RoleId,
-        RoleVisible,
         RoleTitle
     };
 
@@ -92,7 +91,6 @@ public:
         QHash<int, QByteArray> roles;
         roles[RoleScope] = "scope";
         roles[RoleId] = "id";
-        roles[RoleVisible] = "visible";
         roles[RoleTitle] = "title";
         return roles;
     }

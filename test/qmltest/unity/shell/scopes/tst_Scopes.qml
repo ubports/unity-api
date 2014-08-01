@@ -58,7 +58,6 @@ Item {
             return [
                 { tag: "Model.roles[scope]", role: "scope", type: "object" },
                 { tag: "Model.roles[id]", role: "id", type: "string" },
-                { tag: "Model.roles[visible]", role: "visible", type: "boolean" },
                 { tag: "Model.roles[title]", role: "title", type: "string" },
             ];
         }
@@ -119,7 +118,6 @@ Item {
                 { tag: "Item.properties[description]", constant: "description", type: "string" },
                 { tag: "Item.properties[searchHint]", constant: "searchHint", type: "string" },
                 { tag: "Item.properties[searchInProgress]", constant: "searchInProgress", type: "boolean" },
-                { tag: "Item.properties[visible]", constant: "visible", type: "boolean" },
                 { tag: "Item.properties[favorite]", constant: "favorite", type: "boolean" },
                 { tag: "Item.properties[shortcut]", constant: "shortcut", type: "string" },
                 { tag: "Item.properties[categories]", constant: "categories", type: "object" },

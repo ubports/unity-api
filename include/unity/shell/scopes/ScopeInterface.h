@@ -74,12 +74,7 @@ class UNITY_API ScopeInterface : public QObject
     Q_PROPERTY(bool searchInProgress READ searchInProgress NOTIFY searchInProgressChanged)
 
     /**
-     * @brief Boolean specifying whether the scope should be visible.
-     */
-    Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged)
-
-    /**
-     * @brief Boolean specifying whether the scope should be visible.
+     * @brief Boolean specifying whether the scope is favourited.
      */
     Q_PROPERTY(bool favorite READ favorite WRITE setFavorite NOTIFY favoriteChanged)
     /**
@@ -119,7 +114,7 @@ class UNITY_API ScopeInterface : public QObject
     Q_PROPERTY(QString formFactor READ formFactor WRITE setFormFactor NOTIFY formFactorChanged)
 
     /**
-     * @brief Boolean specifying whether the scope is currently visible.
+     * @brief Boolean specifying whether the scope is currently active.
      */
     Q_PROPERTY(bool isActive READ isActive WRITE setActive NOTIFY isActiveChanged)
 
@@ -176,7 +171,6 @@ public:
     virtual QString iconHint() const = 0;
     virtual QString description() const = 0;
     virtual QString searchHint() const = 0;
-    virtual bool visible() const = 0;
     virtual QString shortcut() const = 0;
     virtual bool searchInProgress() const = 0;
     virtual bool favorite() const = 0;
@@ -247,7 +241,6 @@ Q_SIGNALS:
     void descriptionChanged();
     void searchHintChanged();
     void searchInProgressChanged();
-    void visibleChanged();
     void favoriteChanged();
     void shortcutChanged();
     void categoriesChanged();

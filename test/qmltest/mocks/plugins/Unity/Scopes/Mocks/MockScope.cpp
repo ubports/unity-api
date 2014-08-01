@@ -20,15 +20,14 @@
 #include "MockDepartment.h"
 #include "MockSettingsModel.h"
 
-MockScope::MockScope(QObject* parent) : MockScope(QString(), QString(), false, parent)
+MockScope::MockScope(QObject* parent) : MockScope(QString(), QString(), parent)
 {
 }
 
-MockScope::MockScope(QString const& id, QString const& name, bool visible, QObject* parent)
+MockScope::MockScope(QString const& id, QString const& name, QObject* parent)
     : unity::shell::scopes::ScopeInterface(parent)
     , m_id(id)
     , m_name(name)
-    , m_visible(visible)
     , m_favorite(false)
     , m_searching(false)
     , m_isActive(false)
@@ -92,10 +91,6 @@ QString MockScope::noResultsHint() const {
 
 QString MockScope::formFactor() const {
     return m_formFactor;
-}
-
-bool MockScope::visible() const {
-    return m_visible;
 }
 
 bool MockScope::favorite() const {
