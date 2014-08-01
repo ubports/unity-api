@@ -1,8 +1,15 @@
-unity-api (7.87-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.88-0ubuntu1) UNRELEASED; urgency=medium
 
+  * Define scopes interface version 4
+
+ -- Michal Hruby <michal.hruby@canonical.com>  Fri, 01 Aug 2014 08:39:21 +0100
+
+unity-api (7.87+14.10.20140731-0ubuntu1) utopic; urgency=medium
+
+  [ Michal Hruby ]
   * Added interface definition for scopes overview.
 
- -- Michal Hruby <michal.hruby@canonical.com>  Thu, 24 Jul 2014 11:06:55 +0100
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 31 Jul 2014 11:14:00 +0000
 
 unity-api (7.86+14.10.20140718.1-0ubuntu1) utopic; urgency=medium
 
