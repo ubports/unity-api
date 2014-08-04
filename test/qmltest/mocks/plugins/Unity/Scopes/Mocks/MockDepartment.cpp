@@ -27,11 +27,6 @@ QString MockDepartment::navigationId() const
     return "root";
 }
 
-QString MockDepartment::query() const
-{
-    return "scope://foo?dep=root";
-}
-
 QString MockDepartment::label() const
 {
     return "All Departments";
@@ -45,11 +40,6 @@ QString MockDepartment::allLabel() const
 QString MockDepartment::parentNavigationId() const
 {
     return QString();
-}
-
-QString MockDepartment::parentQuery() const
-{
-    return "scope://foo";
 }
 
 QString MockDepartment::parentLabel() const
@@ -87,8 +77,6 @@ QVariant MockDepartment::data(const QModelIndex& /*index*/, int role) const
     switch (role) {
         case RoleNavigationId:
             return "child";
-        case RoleQuery:
-            return "scope://scope-id?dep=child";
         case RoleLabel:
             return "Child Clothes";
         case RoleHasChildren:

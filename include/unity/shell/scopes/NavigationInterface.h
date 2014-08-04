@@ -43,11 +43,6 @@ class UNITY_API NavigationInterface : public QAbstractListModel
     Q_PROPERTY(QString navigationId READ navigationId NOTIFY navigationIdChanged)
 
     /**
-     * @brief Canned query that represents this navigation.
-     */
-    Q_PROPERTY(QString query READ query NOTIFY queryChanged)
-
-    /**
      * @brief Label of the navigation.
      */
     Q_PROPERTY(QString label READ label NOTIFY labelChanged)
@@ -61,11 +56,6 @@ class UNITY_API NavigationInterface : public QAbstractListModel
      * @brief Parent Id of the navigation.
      */
     Q_PROPERTY(QString parentNavigationId READ parentNavigationId NOTIFY parentNavigationIdChanged)
-
-    /**
-     * @brief Canned query that represents parent navigation.
-     */
-    Q_PROPERTY(QString parentQuery READ parentQuery NOTIFY parentQueryChanged)
 
     /**
      * @brief Parent label of the navigation.
@@ -103,7 +93,6 @@ public:
      */
     enum Roles {
         RoleNavigationId,
-        RoleQuery,
         RoleLabel,
         RoleHasChildren,
         RoleIsActive
@@ -111,11 +100,9 @@ public:
 
     // @cond
     virtual QString navigationId() const = 0;
-    virtual QString query() const = 0;
     virtual QString label() const = 0;
     virtual QString allLabel() const = 0;
     virtual QString parentNavigationId() const = 0;
-    virtual QString parentQuery() const = 0;
     virtual QString parentLabel() const = 0;
     virtual bool loaded() const = 0;
     virtual bool isRoot() const = 0;
@@ -125,7 +112,6 @@ public:
     {
         QHash<int, QByteArray> roles;
         roles[RoleNavigationId] = "navigationId";
-        roles[RoleQuery] = "query";
         roles[RoleLabel] = "label";
         roles[RoleHasChildren] = "hasChildren";
         roles[RoleIsActive] = "isActive";
@@ -136,11 +122,9 @@ public:
 Q_SIGNALS:
     // @cond
     void navigationIdChanged();
-    void queryChanged();
     void labelChanged();
     void allLabelChanged();
     void parentNavigationIdChanged();
-    void parentQueryChanged();
     void parentLabelChanged();
     void loadedChanged();
     void isRootChanged();

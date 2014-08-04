@@ -154,7 +154,6 @@ Item {
                 { tag: "Model.methods[gotoScope]", method: "gotoScope" },
                 { tag: "Model.methods[openScope]", method: "openScope" },
                 { tag: "Model.methods[performQuery]", method: "performQuery" },
-                { tag: "Model.methods[activateApplication]", method: "activateApplication" },
                 { tag: "Model.methods[getNavigation]", method: "getNavigation" },
                 { tag: "Model.methods[getAltNavigation]", method: "getAltNavigation" },
             ];
@@ -534,7 +533,6 @@ Item {
         function test_navigation_roles_data() {
             return [
                 { tag: "Model.roles[navigationId]", role: "navigationId", type: "string" },
-                { tag: "Model.roles[query]", role: "query", type: "string" },
                 { tag: "Model.roles[label]", role: "label", type: "string" },
                 { tag: "Model.roles[hasChildren]", role: "hasChildren", type: "boolean" },
                 { tag: "Model.roles[isActive]", role: "isActive", type: "boolean" }
@@ -550,11 +548,9 @@ Item {
         function test_navigation_properties_data() {
             return [
                 { tag: "Model.properties[navigationId]", constant: "navigationId", type: "string" },
-                { tag: "Model.properties[query]", constant: "query", type: "string" },
                 { tag: "Model.properties[label]", constant: "label", type: "string" },
                 { tag: "Model.properties[allLabel]", constant: "allLabel", type: "string" },
                 { tag: "Model.properties[parentNavigationId]", constant: "parentNavigationId", type: "string" },
-                { tag: "Model.properties[parentQuery]", constant: "parentQuery", type: "string" },
                 { tag: "Model.properties[parentLabel]", constant: "parentLabel", type: "string" },
                 { tag: "Model.properties[loaded]", constant: "loaded", type: "boolean" },
                 { tag: "Model.properties[isRoot]", constant: "isRoot", type: "boolean" },

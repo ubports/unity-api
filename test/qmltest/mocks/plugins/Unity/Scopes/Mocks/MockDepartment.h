@@ -30,11 +30,9 @@ public:
     explicit MockDepartment(QObject* parent = 0);
 
     QString navigationId() const override;
-    QString query() const override;
     QString label() const override;
     QString allLabel() const override;
     QString parentNavigationId() const override;
-    QString parentQuery() const override;
     QString parentLabel() const override;
     bool loaded() const override;
     bool isRoot() const override;

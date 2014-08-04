@@ -296,11 +296,6 @@ Q_SIGNALS:
      * @brief Signal requesting to show a temporary scope.
      */
     void openScope(unity::shell::scopes::ScopeInterface* scope);
-
-    /**
-     * @brief Signal requesting activation of an application.
-     */
-    void activateApplication(QString const& desktop);
 };
 
 }
