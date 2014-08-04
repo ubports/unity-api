@@ -229,6 +229,11 @@ public:
     Q_INVOKABLE virtual unity::shell::scopes::NavigationInterface* getAltNavigation(QString const& altNavigationId) = 0;
 
     /**
+     * @brief Request change to the current navigation or altNavigation id.
+     */
+    Q_INVOKABLE virtual void setNavigationState(QString const& navId, bool altNavigation) = 0;
+
+    /**
      * @brief Execute canned query.
      */
     Q_INVOKABLE virtual void performQuery(QString const& cannedQuery) = 0;

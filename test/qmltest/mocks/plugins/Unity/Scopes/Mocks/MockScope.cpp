@@ -187,6 +187,12 @@ unity::shell::scopes::NavigationInterface* MockScope::getAltNavigation(QString c
     return new MockDepartment();
 }
 
+void MockScope::setNavigationState(QString const& navId, bool altNavigation)
+{
+    Q_UNUSED(navId);
+    Q_UNUSED(altNavigation);
+}
+
 void MockScope::cancelActivation()
 {
 }

@@ -156,6 +156,7 @@ Item {
                 { tag: "Model.methods[performQuery]", method: "performQuery" },
                 { tag: "Model.methods[getNavigation]", method: "getNavigation" },
                 { tag: "Model.methods[getAltNavigation]", method: "getAltNavigation" },
+                { tag: "Model.methods[setNavigationState]", method: "setNavigationState" },
             ];
         }
 
