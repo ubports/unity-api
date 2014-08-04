@@ -238,6 +238,11 @@ public:
      */
     Q_INVOKABLE virtual void performQuery(QString const& cannedQuery) = 0;
 
+    /**
+     * @brief Force refresh of the scope contents.
+     */
+    Q_INVOKABLE virtual void refresh() = 0;
+
 Q_SIGNALS:
     // @cond
     void idChanged();

@@ -206,3 +206,7 @@ void MockScope::performQuery(QString const& cannedQuery)
 {
     Q_UNUSED(cannedQuery);
 }
+
+void MockScope::refresh()
+{
+}

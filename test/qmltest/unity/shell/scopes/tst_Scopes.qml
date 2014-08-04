@@ -154,6 +154,7 @@ Item {
                 { tag: "Model.methods[gotoScope]", method: "gotoScope" },
                 { tag: "Model.methods[openScope]", method: "openScope" },
                 { tag: "Model.methods[performQuery]", method: "performQuery" },
+                { tag: "Model.methods[refresh]", method: "refresh" },
                 { tag: "Model.methods[getNavigation]", method: "getNavigation" },
                 { tag: "Model.methods[getAltNavigation]", method: "getAltNavigation" },
                 { tag: "Model.methods[setNavigationState]", method: "setNavigationState" },

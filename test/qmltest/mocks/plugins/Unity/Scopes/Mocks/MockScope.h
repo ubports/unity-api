@@ -65,6 +65,7 @@ public:
     Q_INVOKABLE unity::shell::scopes::NavigationInterface* getAltNavigation(QString const& departmentId) override;
     Q_INVOKABLE void setNavigationState(QString const& navId, bool altNavigation) override;
     Q_INVOKABLE void performQuery(QString const& cannedQuery) override;
+    Q_INVOKABLE void refresh() override;
 
 protected:
     QString m_id;
