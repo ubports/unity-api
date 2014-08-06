@@ -20,15 +20,15 @@
 #include "MockDepartment.h"
 #include "MockSettingsModel.h"
 
-MockScope::MockScope(QObject* parent) : MockScope(QString(), QString(), false, parent)
+MockScope::MockScope(QObject* parent) : MockScope(QString(), QString(), parent)
 {
 }
 
-MockScope::MockScope(QString const& id, QString const& name, bool visible, QObject* parent)
+MockScope::MockScope(QString const& id, QString const& name, QObject* parent)
     : unity::shell::scopes::ScopeInterface(parent)
     , m_id(id)
     , m_name(name)
-    , m_visible(visible)
+    , m_favorite(false)
     , m_searching(false)
     , m_isActive(false)
     , m_previewRendererName("preview-generic")
@@ -65,8 +65,12 @@ QString MockScope::shortcut() const {
     return QString("");
 }
 
-QString MockScope::currentDepartmentId() const {
+QString MockScope::currentNavigationId() const {
     return m_currentDepartmentId;
+}
+
+QString MockScope::currentAltNavigationId() const {
+    return m_currentAltDepartmentId;
 }
 
 bool MockScope::searchInProgress() const {
@@ -89,20 +93,28 @@ QString MockScope::formFactor() const {
     return m_formFactor;
 }
 
-bool MockScope::visible() const {
-    return m_visible;
+bool MockScope::favorite() const {
+    return m_favorite;
 }
 
 bool MockScope::isActive() const {
     return m_isActive;
 }
 
-bool MockScope::hasDepartments() const {
-    return m_hasDepartments;
+bool MockScope::hasNavigation() const {
+    return m_hasNavigation;
+}
+
+bool MockScope::hasAltNavigation() const {
+    return m_hasAltNavigation;
 }
 
 QVariantMap MockScope::customizations() const {
     return m_customizations;
+}
+
+unity::shell::scopes::ScopeInterface::Status MockScope::status() const {
+    return ScopeInterface::Status::Okay;
 }
 
 void MockScope::setName(const QString &str) {
@@ -133,6 +145,13 @@ void MockScope::setActive(const bool active) {
     }
 }
 
+void MockScope::setFavorite(const bool value) {
+    if (value != m_favorite) {
+        m_favorite = value;
+        Q_EMIT favoriteChanged();
+    }
+}
+
 void MockScope::setNoResultsHint(const QString& str) {
     if (str != m_noResultsHint) {
         m_noResultsHint = str;
@@ -154,16 +173,24 @@ unity::shell::scopes::PreviewStackInterface* MockScope::preview(QVariant const& 
     return new MockPreviewStack;
 }
 
-unity::shell::scopes::DepartmentInterface* MockScope::getDepartment(QString const& departmentId)
+unity::shell::scopes::NavigationInterface* MockScope::getNavigation(QString const& navigationId)
 {
-    Q_UNUSED(departmentId);
+    Q_UNUSED(navigationId);
 
     return new MockDepartment();
 }
 
-void MockScope::loadDepartment(QString const& departmentId)
+unity::shell::scopes::NavigationInterface* MockScope::getAltNavigation(QString const& navigationId)
 {
-    Q_UNUSED(departmentId);
+    Q_UNUSED(navigationId);
+
+    return new MockDepartment();
+}
+
+void MockScope::setNavigationState(QString const& navId, bool altNavigation)
+{
+    Q_UNUSED(navId);
+    Q_UNUSED(altNavigation);
 }
 
 void MockScope::cancelActivation()
@@ -178,4 +205,8 @@ void MockScope::closeScope(unity::shell::scopes::ScopeInterface* /*scope*/)
 void MockScope::performQuery(QString const& cannedQuery)
 {
     Q_UNUSED(cannedQuery);
+}
+
+void MockScope::refresh()
+{
 }

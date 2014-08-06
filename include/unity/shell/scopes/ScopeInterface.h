@@ -31,7 +31,7 @@ namespace scopes
 
 class CategoriesInterface;
 class PreviewStackInterface;
-class DepartmentInterface;
+class NavigationInterface;
 class SettingsModelInterface;
 
 /**
@@ -40,6 +40,8 @@ class SettingsModelInterface;
 class UNITY_API ScopeInterface : public QObject
 {
     Q_OBJECT
+
+    Q_ENUMS(Status)
 
     /**
      * @brief Id of the scope.
@@ -72,10 +74,9 @@ class UNITY_API ScopeInterface : public QObject
     Q_PROPERTY(bool searchInProgress READ searchInProgress NOTIFY searchInProgressChanged)
 
     /**
-     * @brief Boolean specifying whether the scope should be visible.
+     * @brief Boolean specifying whether the scope is favourited.
      */
-    Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged)
-
+    Q_PROPERTY(bool favorite READ favorite WRITE setFavorite NOTIFY favoriteChanged)
     /**
      * @brief Keyboard shortcut used to summon the scope.
      */
@@ -113,24 +114,39 @@ class UNITY_API ScopeInterface : public QObject
     Q_PROPERTY(QString formFactor READ formFactor WRITE setFormFactor NOTIFY formFactorChanged)
 
     /**
-     * @brief Boolean specifying whether the scope is currently visible.
+     * @brief Boolean specifying whether the scope is currently active.
      */
     Q_PROPERTY(bool isActive READ isActive WRITE setActive NOTIFY isActiveChanged)
 
     /**
      * @brief String specifying currently selected department
      */
-    Q_PROPERTY(QString currentDepartmentId READ currentDepartmentId NOTIFY currentDepartmentIdChanged)
+    Q_PROPERTY(QString currentNavigationId READ currentNavigationId NOTIFY currentNavigationIdChanged)
 
     /**
      * @brief Boolean specifying whether current query has departments.
      */
-    Q_PROPERTY(bool hasDepartments READ hasDepartments NOTIFY hasDepartmentsChanged)
+    Q_PROPERTY(bool hasNavigation READ hasNavigation NOTIFY hasNavigationChanged)
+
+    /**
+     * @brief String specifying currently selected sort order
+     */
+    Q_PROPERTY(QString currentAltNavigationId READ currentAltNavigationId NOTIFY currentAltNavigationIdChanged)
+
+    /**
+     * @brief Boolean specifying whether current query has sort order.
+     */
+    Q_PROPERTY(bool hasAltNavigation READ hasAltNavigation NOTIFY hasAltNavigationChanged)
 
     /**
      * @brief VariantMap with customization properties
      */
     Q_PROPERTY(QVariantMap customizations READ customizations NOTIFY customizationsChanged)
+
+    /**
+     * @brief Enum representing the status of the scope.
+     */
+    Q_PROPERTY(unity::shell::scopes::ScopeInterface::Status status READ status NOTIFY statusChanged)
 
 protected:
     /// @cond
@@ -138,6 +154,16 @@ protected:
     /// @endcond
 
 public:
+    /**
+     * @brief Status info code following the last operation
+     */
+    enum class Status
+    {
+        Okay,                           // Everything is fine
+        NoInternet,                     // No Internet access
+        NoLocationData,                 // No location data available
+        Unknown,                        // A code unknown to the run-time was used
+    };
 
     // @cond
     virtual QString id() const = 0;
@@ -145,17 +171,20 @@ public:
     virtual QString iconHint() const = 0;
     virtual QString description() const = 0;
     virtual QString searchHint() const = 0;
-    virtual bool visible() const = 0;
     virtual QString shortcut() const = 0;
     virtual bool searchInProgress() const = 0;
+    virtual bool favorite() const = 0;
     virtual CategoriesInterface* categories() const = 0;
     virtual SettingsModelInterface* settings() const = 0;
     virtual QString searchQuery() const = 0;
     virtual QString noResultsHint() const = 0;
     virtual QString formFactor() const = 0;
     virtual bool isActive() const = 0;
-    virtual QString currentDepartmentId() const = 0;
-    virtual bool hasDepartments() const = 0;
+    virtual QString currentNavigationId() const = 0;
+    virtual bool hasNavigation() const = 0;
+    virtual QString currentAltNavigationId() const = 0;
+    virtual bool hasAltNavigation() const = 0;
+    virtual Status status() const = 0;
     virtual QVariantMap customizations() const = 0;
 
     /* setters */
@@ -163,6 +192,7 @@ public:
     virtual void setNoResultsHint(const QString& hint) = 0;
     virtual void setFormFactor(const QString& form_factor) = 0;
     virtual void setActive(const bool) = 0;
+    virtual void setFavorite(const bool) = 0;
     // @endcond
 
     /**
@@ -189,21 +219,29 @@ public:
     Q_INVOKABLE virtual void closeScope(unity::shell::scopes::ScopeInterface* scope) = 0;
 
     /**
-     * @brief Get a DepartmentInterface instance for the passed departmentId.
+     * @brief Get a NavigationInterface instance for the passed navigationId.
      */
-    Q_INVOKABLE virtual unity::shell::scopes::DepartmentInterface* getDepartment(QString const& departmentId) = 0;
+    Q_INVOKABLE virtual unity::shell::scopes::NavigationInterface* getNavigation(QString const& navigationId) = 0;
 
     /**
-     * @brief Activate department by its id.
-     *
-     * This effectively runs a new query.
+     * @brief Get a NavigationInterface instance for the passed altNavigationId.
      */
-    Q_INVOKABLE virtual void loadDepartment(QString const& departmentId) = 0;
+    Q_INVOKABLE virtual unity::shell::scopes::NavigationInterface* getAltNavigation(QString const& altNavigationId) = 0;
+
+    /**
+     * @brief Request change to the current navigation or altNavigation id.
+     */
+    Q_INVOKABLE virtual void setNavigationState(QString const& navId, bool altNavigation) = 0;
 
     /**
      * @brief Execute canned query.
      */
     Q_INVOKABLE virtual void performQuery(QString const& cannedQuery) = 0;
+
+    /**
+     * @brief Force refresh of the scope contents.
+     */
+    Q_INVOKABLE virtual void refresh() = 0;
 
 Q_SIGNALS:
     // @cond
@@ -213,7 +251,7 @@ Q_SIGNALS:
     void descriptionChanged();
     void searchHintChanged();
     void searchInProgressChanged();
-    void visibleChanged();
+    void favoriteChanged();
     void shortcutChanged();
     void categoriesChanged();
     void settingsChanged();
@@ -221,9 +259,13 @@ Q_SIGNALS:
     void noResultsHintChanged();
     void formFactorChanged();
     void isActiveChanged();
-    void hasDepartmentsChanged();
-    void currentDepartmentIdChanged();
+    void hasNavigationChanged();
+    void currentNavigationIdChanged();
+    void hasAltNavigationChanged();
+    void currentAltNavigationIdChanged();
     void customizationsChanged();
+    void statusChanged();
+    void detailsChanged();
     // @endcond
 
     // signals triggered by activate(..) or preview(..) requests.
@@ -264,11 +306,6 @@ Q_SIGNALS:
      * @brief Signal requesting to show a temporary scope.
      */
     void openScope(unity::shell::scopes::ScopeInterface* scope);
-
-    /**
-     * @brief Signal requesting activation of an application.
-     */
-    void activateApplication(QString const& desktop);
 };
 
 }

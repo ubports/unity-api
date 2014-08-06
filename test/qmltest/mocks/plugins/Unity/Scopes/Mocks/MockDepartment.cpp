@@ -18,11 +18,11 @@
 #include "MockDepartment.h"
 
 MockDepartment::MockDepartment(QObject* parent)
- : unity::shell::scopes::DepartmentInterface(parent)
+ : unity::shell::scopes::NavigationInterface(parent)
 {
 }
 
-QString MockDepartment::departmentId() const
+QString MockDepartment::navigationId() const
 {
     return "root";
 }
@@ -37,7 +37,7 @@ QString MockDepartment::allLabel() const
     return "All Departments";
 }
 
-QString MockDepartment::parentDepartmentId() const
+QString MockDepartment::parentNavigationId() const
 {
     return QString();
 }
@@ -57,6 +57,11 @@ bool MockDepartment::isRoot() const
     return true;
 }
 
+bool MockDepartment::hidden() const
+{
+    return false;
+}
+
 int MockDepartment::count() const
 {
     return rowCount();
@@ -70,7 +75,7 @@ int MockDepartment::rowCount(const QModelIndex&) const
 QVariant MockDepartment::data(const QModelIndex& /*index*/, int role) const
 {
     switch (role) {
-        case RoleDepartmentId:
+        case RoleNavigationId:
             return "child";
         case RoleLabel:
             return "Child Clothes";

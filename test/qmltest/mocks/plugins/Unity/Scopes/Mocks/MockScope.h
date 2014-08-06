@@ -25,7 +25,7 @@ class UNITY_API MockScope : public unity::shell::scopes::ScopeInterface
 
 public:
     MockScope(QObject* parent = 0);
-    MockScope(QString const& id, QString const& name, bool visible, QObject* parent);
+    MockScope(QString const& id, QString const& name, QObject* parent);
 
     /* getters */
     QString id() const override;
@@ -33,7 +33,7 @@ public:
     QString iconHint() const override;
     QString description() const override;
     QString searchHint() const override;
-    bool visible() const override;
+    bool favorite() const override;
     QString shortcut() const override;
     bool searchInProgress() const override;
     unity::shell::scopes::CategoriesInterface* categories() const override;
@@ -42,9 +42,12 @@ public:
     QString noResultsHint() const override;
     QString formFactor() const override;
     bool isActive() const override;
-    bool hasDepartments() const override;
-    QString currentDepartmentId() const override;
+    bool hasNavigation() const override;
+    QString currentNavigationId() const override;
+    bool hasAltNavigation() const override;
+    QString currentAltNavigationId() const override;
     QVariantMap customizations() const override;
+    Status status() const override;
 
     /* setters */
     void setName(const QString& name);
@@ -52,14 +55,17 @@ public:
     void setNoResultsHint(const QString& hint) override;
     void setFormFactor(const QString& form_factor) override;
     void setActive(const bool) override;
+    void setFavorite(const bool) override;
 
     Q_INVOKABLE void activate(QVariant const& result) override;
     Q_INVOKABLE unity::shell::scopes::PreviewStackInterface* preview(QVariant const& result) override;
     Q_INVOKABLE void cancelActivation() override;
     Q_INVOKABLE void closeScope(unity::shell::scopes::ScopeInterface* scope) override;
-    Q_INVOKABLE unity::shell::scopes::DepartmentInterface* getDepartment(QString const& departmentId) override;
-    Q_INVOKABLE void loadDepartment(QString const& departmentId) override;
+    Q_INVOKABLE unity::shell::scopes::NavigationInterface* getNavigation(QString const& departmentId) override;
+    Q_INVOKABLE unity::shell::scopes::NavigationInterface* getAltNavigation(QString const& departmentId) override;
+    Q_INVOKABLE void setNavigationState(QString const& navId, bool altNavigation) override;
     Q_INVOKABLE void performQuery(QString const& cannedQuery) override;
+    Q_INVOKABLE void refresh() override;
 
 protected:
     QString m_id;
@@ -70,10 +76,12 @@ protected:
     QString m_noResultsHint;
     QString m_formFactor;
     QString m_currentDepartmentId;
-    bool m_visible;
+    QString m_currentAltDepartmentId;
+    bool m_favorite;
     bool m_searching;
     bool m_isActive;
-    bool m_hasDepartments;
+    bool m_hasNavigation;
+    bool m_hasAltNavigation;
     QVariantMap m_customizations;
 
     QString m_previewRendererName;

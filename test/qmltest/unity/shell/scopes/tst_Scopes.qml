@@ -28,7 +28,7 @@ Item {
     }
     property var scope: scopes.getScope(0)
     property var preview: root.scope.preview("")
-    property var department: root.scope.getDepartment("root")
+    property var navigation: root.scope.getNavigation("root")
 
     Verifier {
         id: scopesVerifier
@@ -58,7 +58,6 @@ Item {
             return [
                 { tag: "Model.roles[scope]", role: "scope", type: "object" },
                 { tag: "Model.roles[id]", role: "id", type: "string" },
-                { tag: "Model.roles[visible]", role: "visible", type: "boolean" },
                 { tag: "Model.roles[title]", role: "title", type: "string" },
             ];
         }
@@ -72,6 +71,7 @@ Item {
         function test_scopes_properties_data() {
             return [
                 { tag: "Item.properties[loaded]", constant: "loaded", type: "boolean" },
+                { tag: "Item.properties[count]", constant: "count", type: "number" },
                 { tag: "Item.properties[overviewScope]", constant: "overviewScope", type: "object" }
             ];
         }
@@ -119,16 +119,19 @@ Item {
                 { tag: "Item.properties[description]", constant: "description", type: "string" },
                 { tag: "Item.properties[searchHint]", constant: "searchHint", type: "string" },
                 { tag: "Item.properties[searchInProgress]", constant: "searchInProgress", type: "boolean" },
-                { tag: "Item.properties[visible]", constant: "visible", type: "boolean" },
+                { tag: "Item.properties[favorite]", constant: "favorite", type: "boolean" },
                 { tag: "Item.properties[shortcut]", constant: "shortcut", type: "string" },
                 { tag: "Item.properties[categories]", constant: "categories", type: "object" },
                 { tag: "Item.properties[searchQuery]", constant: "searchQuery", type: "string" },
                 { tag: "Item.properties[noResultsHint]", constant: "noResultsHint", type: "string" },
                 { tag: "Item.properties[formFactor]", constant: "formFactor", type: "string" },
                 { tag: "Item.properties[isActive]", constant: "isActive", type: "boolean" },
-                { tag: "Item.properties[currentDepartmentId]", constant: "currentDepartmentId", type: "string" },
-                { tag: "Item.properties[hasDepartments]", constant: "hasDepartments", type: "boolean" },
-                { tag: "Item.properties[customizations]", constant: "customizations", type: "object" }
+                { tag: "Item.properties[currentNavigationId]", constant: "currentNavigationId", type: "string" },
+                { tag: "Item.properties[hasNavigation]", constant: "hasNavigation", type: "boolean" },
+                { tag: "Item.properties[currentAltNavigationId]", constant: "currentAltNavigationId", type: "string" },
+                { tag: "Item.properties[hasAltNavigation]", constant: "hasAltNavigation", type: "boolean" },
+                { tag: "Item.properties[customizations]", constant: "customizations", type: "object" },
+                { tag: "Item.properties[status]", constant: "status", type: "number" }
             ];
         }
 
@@ -151,9 +154,10 @@ Item {
                 { tag: "Model.methods[gotoScope]", method: "gotoScope" },
                 { tag: "Model.methods[openScope]", method: "openScope" },
                 { tag: "Model.methods[performQuery]", method: "performQuery" },
-                { tag: "Model.methods[activateApplication]", method: "activateApplication" },
-                { tag: "Model.methods[getDepartment]", method: "getDepartment" },
-                { tag: "Model.methods[loadDepartment]", method: "loadDepartment" }
+                { tag: "Model.methods[refresh]", method: "refresh" },
+                { tag: "Model.methods[getNavigation]", method: "getNavigation" },
+                { tag: "Model.methods[getAltNavigation]", method: "getAltNavigation" },
+                { tag: "Model.methods[setNavigationState]", method: "setNavigationState" },
             ];
         }
 
@@ -505,60 +509,61 @@ Item {
 
 
     Verifier {
-        id: departmentVerifier
+        id: navigationVerifier
 
         Repeater {
-             id: departmentRepeater
-             model: root.department
+             id: navigationRepeater
+             model: root.navigation
              delegate: Item {
                  property var roles: model
              }
         }
 
-        function test_department_data() {
+        function test_navigation_data() {
             return [
-                { tag: "Department[object]", type: "object" },
-                { tag: "Department[DepartmentInterface]", type: "unity::shell::scopes::DepartmentInterface" },
+                { tag: "Navigation[object]", type: "object" },
+                { tag: "Navigation[NavigationInterface]", type: "unity::shell::scopes::NavigationInterface" },
             ];
         }
 
-        function test_department(data) {
-            object = departmentRepeater.model;
-            name = "Department";
+        function test_navigation(data) {
+            object = navigationRepeater.model;
+            name = "Navigation";
             verifyData(data);
         }
 
-        function test_department_roles_data() {
+        function test_navigation_roles_data() {
             return [
-                { tag: "Model.roles[departmentId]", role: "departmentId", type: "string" },
+                { tag: "Model.roles[navigationId]", role: "navigationId", type: "string" },
                 { tag: "Model.roles[label]", role: "label", type: "string" },
                 { tag: "Model.roles[hasChildren]", role: "hasChildren", type: "boolean" },
                 { tag: "Model.roles[isActive]", role: "isActive", type: "boolean" }
             ];
         }
 
-        function test_department_roles(data) {
-            object = departmentRepeater.itemAt(0).roles;
-            name = "Department";
+        function test_navigation_roles(data) {
+            object = navigationRepeater.itemAt(0).roles;
+            name = "Navigation";
             verifyData(data);
         }
 
-        function test_department_properties_data() {
+        function test_navigation_properties_data() {
             return [
-                { tag: "Model.properties[departmentId]", constant: "departmentId", type: "string" },
+                { tag: "Model.properties[navigationId]", constant: "navigationId", type: "string" },
                 { tag: "Model.properties[label]", constant: "label", type: "string" },
                 { tag: "Model.properties[allLabel]", constant: "allLabel", type: "string" },
-                { tag: "Model.properties[parentDepartmentId]", constant: "parentDepartmentId", type: "string" },
+                { tag: "Model.properties[parentNavigationId]", constant: "parentNavigationId", type: "string" },
                 { tag: "Model.properties[parentLabel]", constant: "parentLabel", type: "string" },
                 { tag: "Model.properties[loaded]", constant: "loaded", type: "boolean" },
                 { tag: "Model.properties[isRoot]", constant: "isRoot", type: "boolean" },
+                { tag: "Model.properties[hidden]", constant: "hidden", type: "boolean" },
                 { tag: "Model.properties[count]", constant: "count", type: "number" }
             ];
         }
 
-        function test_department_properties(data) {
-            object = departmentRepeater.model;
-            name = "Department";
+        function test_navigation_properties(data) {
+            object = navigationRepeater.model;
+            name = "Navigation";
             verifyData(data);
         }
     }

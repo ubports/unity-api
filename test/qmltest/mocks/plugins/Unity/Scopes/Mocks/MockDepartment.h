@@ -18,24 +18,25 @@
 #ifndef MOCKDEPARTMENT_H
 #define MOCKDEPARTMENT_H
 
-#include <unity/shell/scopes/DepartmentInterface.h>
+#include <unity/shell/scopes/NavigationInterface.h>
 
 #include <QSharedPointer>
 
-class MockDepartment : public unity::shell::scopes::DepartmentInterface
+class MockDepartment : public unity::shell::scopes::NavigationInterface
 {
     Q_OBJECT
 
 public:
     explicit MockDepartment(QObject* parent = 0);
 
-    QString departmentId() const override;
+    QString navigationId() const override;
     QString label() const override;
     QString allLabel() const override;
-    QString parentDepartmentId() const override;
+    QString parentNavigationId() const override;
     QString parentLabel() const override;
     bool loaded() const override;
     bool isRoot() const override;
+    bool hidden() const override;
     int count() const override;
 
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;

@@ -21,7 +21,7 @@ set(ScopesMocks_SOURCES
     Mocks/MockScopes.cpp
     Mocks/MockSettingsModel.cpp
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/CategoriesInterface.h
-    ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/DepartmentInterface.h
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/NavigationInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/ResultsModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/PreviewModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/PreviewWidgetModelInterface.h
