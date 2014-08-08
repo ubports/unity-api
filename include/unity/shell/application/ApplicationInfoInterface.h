@@ -142,6 +142,16 @@ public:
         Stopped
     };
 
+    /**
+     * Takes a new screenshot and make it available in the screenshot property
+     */
+    Q_INVOKABLE virtual void updateScreenshot() = 0;
+
+    /**
+     * Discards the existing screenshot, if any, saving up memory.
+     */
+    Q_INVOKABLE virtual void discardScreenshot() = 0;
+
     /// @cond
     virtual ~ApplicationInfoInterface() {}
 

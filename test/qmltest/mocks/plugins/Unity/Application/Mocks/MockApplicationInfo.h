@@ -47,6 +47,10 @@ public:
     bool focused() const;
     void setFocused(bool focused);
 
+
+    Q_INVOKABLE void updateScreenshot() override;
+    Q_INVOKABLE void discardScreenshot() override;
+
 private:
     QString m_appId;
     QString m_name;

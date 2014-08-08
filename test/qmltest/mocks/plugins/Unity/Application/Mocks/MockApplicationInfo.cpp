@@ -100,3 +100,11 @@ void MockApplicationInfo::setFocused(bool focused)
         Q_EMIT focusedChanged(focused);
     }
 }
+
+void MockApplicationInfo::updateScreenshot()
+{
+}
+
+void MockApplicationInfo::discardScreenshot()
+{
+}
