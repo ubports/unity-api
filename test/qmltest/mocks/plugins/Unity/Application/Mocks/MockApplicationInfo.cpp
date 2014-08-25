@@ -54,11 +54,6 @@ QUrl MockApplicationInfo::icon() const
     return m_icon;
 }
 
-QUrl MockApplicationInfo::screenshot() const
-{
-    return m_screenshot;
-}
-
 ApplicationInfoInterface::Stage MockApplicationInfo::stage() const
 {
     return m_stage;
