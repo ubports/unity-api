@@ -1,8 +1,9 @@
-unity-api (7.89) UNRELEASED; urgency=medium
+unity-api (7.89+14.10.20140825-0ubuntu1) utopic; urgency=medium
 
+  [ Daniel d'Andrada ]
   * Remove all mentions to screenshotting from the API
 
- -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Fri, 21 Aug 2014 11:33:00 -0300
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 25 Aug 2014 07:04:31 +0000
 
 unity-api (7.88+14.10.20140806-0ubuntu1) utopic; urgency=medium
 
