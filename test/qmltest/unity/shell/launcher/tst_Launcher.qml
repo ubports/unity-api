@@ -85,6 +85,7 @@ Item {
                         { tag: "Model.roles[recent]", role: "recent", type: "boolean" },
                         { tag: "Model.roles[progress]", role: "progress", type: "number" },
                         { tag: "Model.roles[count]", role: "count", type: "number" },
+                        { tag: "Model.roles[countVisible]", role: "countVisible", type: "boolean" },
                         { tag: "Model.roles[focused]", role: "focused", type: "boolean" },
                     ];
         }
@@ -139,6 +140,7 @@ Item {
                 { tag: "Item.properties[running]", property: "running", type: "boolean" },
                 { tag: "Item.properties[progress]", property: "progress", type: "number" },
                 { tag: "Item.properties[count]", property: "count", type: "number" },
+                { tag: "Item.properties[countVisible]", property: "countVisible", type: "boolean" },
                 { tag: "Item.properties[focused]", property: "focused", type: "boolean" },
                 { tag: "Item.properties[quickList]", constant: "quickList", type: "object" },
             ];
