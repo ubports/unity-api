@@ -95,7 +95,7 @@ class UNITY_API LauncherItemInterface: public QObject
      *
      * True if the count emblem should be visible, false otherwise.
      */
-    Q_PROPERTY(bool countVisible READ count NOTIFY countChanged)
+    Q_PROPERTY(bool countVisible READ countVisible NOTIFY countVisibleChanged)
 
     /**
      * @brief The focused state of the item
