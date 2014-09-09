@@ -30,6 +30,10 @@ public:
     ~TestUtil();
 
     Q_INVOKABLE bool isInstanceOf(QObject*, QString);
+
+    Q_INVOKABLE bool objectHasPropertyOfType(QObject *qmlObject,
+                                             const QString &propertyName,
+                                             const QString &propertyTypeName);
 };
 
 QML_DECLARE_TYPE(TestUtil)
