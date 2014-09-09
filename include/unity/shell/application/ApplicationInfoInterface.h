@@ -124,6 +124,14 @@ class UNITY_API ApplicationInfoInterface: public QObject
     /**
      * @brief Whether an application header should be shown on the splash screen
      *
+     * We offer 2 kinds of splash screens for applications:
+     * 1. A splash with a gradient background and image
+     * 2. A splash faking a MainView with header text set. So it is possible to
+     *    arrange things so that once the app starts up, this splash and the app's
+     *    first frame are identical.
+     *
+     * This property is the switch to select between these.
+     *
      * The header will display the splashTitle, if defined, or the application
      * name otherwise.
      *
