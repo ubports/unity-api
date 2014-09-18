@@ -33,6 +33,7 @@ MockLauncherItem::MockLauncherItem(const QString &appId, const QString& desktopF
     m_recent(false),
     m_progress(8),
     m_count(8),
+    m_countVisible(false),
     m_quickListModel(new MockQuickListModel(this))
 {
 
@@ -125,6 +126,20 @@ void MockLauncherItem::setCount(int count)
     {
         m_count = count;
         Q_EMIT countChanged(count);
+    }
+}
+
+bool MockLauncherItem::countVisible() const
+{
+    return m_countVisible;
+}
+
+void MockLauncherItem::setCountVisible(bool countVisible)
+{
+    if (m_countVisible != countVisible)
+    {
+        m_countVisible = countVisible;
+        Q_EMIT countVisibleChanged(countVisible);
     }
 }
 

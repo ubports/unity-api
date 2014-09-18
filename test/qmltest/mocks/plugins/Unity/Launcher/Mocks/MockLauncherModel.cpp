@@ -84,6 +84,8 @@ QVariant MockLauncherModel::data(const QModelIndex& index, int role) const
         return item->progress();
     case RoleCount:
         return item->count();
+    case RoleCountVisible:
+        return item->countVisible();
     case RoleFocused:
         return item->focused();
     }
