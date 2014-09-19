@@ -43,6 +43,9 @@ public:
     bool suspended() const;
     void setSuspended(bool suspended);
 
+    bool dashActive() const;
+    void setDashActive(bool dashActive);
+
     Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *get(const int index) const;
 
     Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *findApplication(const QString &appId) const;
