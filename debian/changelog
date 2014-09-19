@@ -1,8 +1,16 @@
-unity-api (7.90+14.10.20140825-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.91+14.10.20140825-0ubuntu1) UNRELEASED; urgency=medium
 
   * Add dashActive property to application api
 
  -- Michael Zanetti <michael.zanetti@canonical.com>  Fri, 19 Sep 2014 13:19:32 +0200
+
+unity-api (7.90+14.10.20140918-0ubuntu1) utopic; urgency=medium
+
+  [ Michael Zanetti ]
+  * add countVisible property
+  * allow updating item's name and icon properties. They might change in case of updates
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 18 Sep 2014 16:42:26 +0000
 
 unity-api (7.89+14.10.20140825-0ubuntu1) utopic; urgency=medium
 
