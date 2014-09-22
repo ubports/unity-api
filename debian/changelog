@@ -1,8 +1,16 @@
-unity-api (7.90) UNRELEASED; urgency=medium
+unity-api (7.91) UNRELEASED; urgency=medium
 
   * Added splash screen data do ApplicationInfoInterface
 
  -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Mon, 22 Sep 2014 07:22:26 -0300
+
+unity-api (7.90+14.10.20140918-0ubuntu1) utopic; urgency=medium
+
+  [ Michael Zanetti ]
+  * add countVisible property
+  * allow updating item's name and icon properties. They might change in case of updates
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 18 Sep 2014 16:42:26 +0000
 
 unity-api (7.89+14.10.20140825-0ubuntu1) utopic; urgency=medium
 
