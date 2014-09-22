@@ -24,6 +24,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
+#include <QColor>
 
 namespace unity
 {
@@ -97,6 +98,84 @@ class UNITY_API ApplicationInfoInterface: public QObject
      */
     Q_PROPERTY(bool focused READ focused NOTIFY focusedChanged)
 
+    /**
+     * @brief Splash screen title
+     *
+     * @see splashShowHeader
+     * Title of the splash screen, to be displayed on its header.
+     *
+     * A splash screen is shown while the application is loading,
+     * before it has drawn its first frame.
+     */
+    Q_PROPERTY(QString splashTitle READ splashTitle CONSTANT)
+
+    /**
+     * @brief Splash image
+     *
+     * Url of the splash image to be shown while the application is loading,
+     * before it has drawn its first frame.
+     *
+     * The splash image is centered on the splash screen and displayed in
+     * its actual size (ie, it's not stretched or shrinked and aspect ratio
+     * is kept).
+     */
+    Q_PROPERTY(QUrl splashImage READ splashImage CONSTANT)
+
+    /**
+     * @brief Whether an application header should be shown on the splash screen
+     *
+     * We offer 2 kinds of splash screens for applications:
+     * 1. A splash with a gradient background and image
+     * 2. A splash faking a MainView with header text set. So it is possible to
+     *    arrange things so that once the app starts up, this splash and the app's
+     *    first frame are identical.
+     *
+     * This property is the switch to select between these.
+     *
+     * The header will display the splashTitle, if defined, or the application
+     * name otherwise.
+     *
+     * @see name, splashTitle
+     */
+    Q_PROPERTY(bool splashShowHeader READ splashShowHeader CONSTANT)
+
+    /**
+     * @brief Background color of the splash screen
+     *
+     * Any color that is not fully opaque (having an alpha value of less than
+     * 1.0) is ignored and the default background color will be used instead.
+     *
+     * A splash screen is shown while the application is loading,
+     * before it has drawn its first frame.
+     */
+    Q_PROPERTY(QColor splashColor READ splashColor CONSTANT)
+
+    /**
+     * @brief Color of the splash screen header
+     *
+     * Any color that is not fully opaque (having an alpha value of less than
+     * 1.0) is ignored and the splashColor will be used instead.
+     *
+     * A splash screen is shown while the application is loading,
+     * before it has drawn its first frame.
+     *
+     * @see splashColor
+     */
+    Q_PROPERTY(QColor splashColorHeader READ splashColorHeader CONSTANT)
+
+    /**
+     * @brief Color of the splash screen footer
+     *
+     * Any color that is not fully opaque (having an alpha value of less than
+     * 1.0) is ignored and the splashColor will be used instead.
+     *
+     * A splash screen is shown while the application is loading,
+     * before it has drawn its first frame.
+     *
+     * @see splashColor
+     */
+    Q_PROPERTY(QColor splashColorFooter READ splashColorFooter CONSTANT)
+
 protected:
     /// @cond
     ApplicationInfoInterface(const QString &appId, QObject* parent = 0): QObject(parent) { Q_UNUSED(appId) }
@@ -145,6 +224,12 @@ public:
     virtual Stage stage() const = 0;
     virtual State state() const = 0;
     virtual bool focused() const = 0;
+    virtual QString splashTitle() const = 0;
+    virtual QUrl splashImage() const = 0;
+    virtual bool splashShowHeader() const = 0;
+    virtual QColor splashColor() const = 0;
+    virtual QColor splashColorHeader() const = 0;
+    virtual QColor splashColorFooter() const = 0;
     /// @endcond
 
 Q_SIGNALS:

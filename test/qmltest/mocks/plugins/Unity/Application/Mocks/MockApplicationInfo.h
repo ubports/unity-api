@@ -46,6 +46,13 @@ public:
     bool focused() const;
     void setFocused(bool focused);
 
+    QString splashTitle() const override;
+    QUrl splashImage() const override;
+    bool splashShowHeader() const override;
+    QColor splashColor() const override;
+    QColor splashColorHeader() const override;
+    QColor splashColorFooter() const override;
+
 private:
     QString m_appId;
     QString m_name;

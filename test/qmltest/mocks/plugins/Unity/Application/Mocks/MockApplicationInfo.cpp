@@ -95,3 +95,33 @@ void MockApplicationInfo::setFocused(bool focused)
         Q_EMIT focusedChanged(focused);
     }
 }
+
+QString MockApplicationInfo::splashTitle() const
+{
+    return "Foo Bar";
+}
+
+QUrl MockApplicationInfo::splashImage() const
+{
+    return QUrl();
+}
+
+bool MockApplicationInfo::splashShowHeader() const
+{
+    return true;
+}
+
+QColor MockApplicationInfo::splashColor() const
+{
+    return QColor(0,0,0,0);
+}
+
+QColor MockApplicationInfo::splashColorHeader() const
+{
+    return QColor(0,0,0,0);
+}
+
+QColor MockApplicationInfo::splashColorFooter() const
+{
+    return QColor(0,0,0,0);
+}

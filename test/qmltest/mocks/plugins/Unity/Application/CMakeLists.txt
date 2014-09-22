@@ -7,6 +7,7 @@ add_definitions(-DQT_NO_KEYWORDS)
 set(CMAKE_AUTOMOC ON)
 
 find_package(Qt5Core REQUIRED)
+find_package(Qt5Gui REQUIRED)
 find_package(Qt5Quick REQUIRED)
 find_package(Qt5Qml REQUIRED)
 
@@ -19,7 +20,7 @@ set(ApplicationMocks_SOURCES
 
 add_library(ApplicationMocks SHARED ${ApplicationMocks_SOURCES})
 
-qt5_use_modules(ApplicationMocks Core)
+qt5_use_modules(ApplicationMocks Core Gui)
 
 set(TestApplicationPlugin_SOURCES
     TestApplicationPlugin.cpp
@@ -27,7 +28,7 @@ set(TestApplicationPlugin_SOURCES
 
 add_library(TestApplicationPlugin MODULE ${TestApplicationPlugin_SOURCES})
 
-qt5_use_modules(TestApplicationPlugin Core Quick)
+qt5_use_modules(TestApplicationPlugin Core Gui Quick)
 
 target_link_libraries(TestApplicationPlugin ApplicationMocks)
 
