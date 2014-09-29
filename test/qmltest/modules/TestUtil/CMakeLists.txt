@@ -18,12 +18,12 @@ add_library(TestUtilQml MODULE ${TestUtilQML_SOURCES})
 qt5_use_modules(TestUtilQml Core Quick)
 
 # copy qmldir file into build directory for shadow builds
-file(GLOB QML_JS_FILES *.js *.qml)
-
-file(COPY qmldir ${QML_JS_FILES}
-    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
-    )
-
+file(GLOB QML_JS_FILES qmldir *.js *.qml)
+add_custom_target(TestUtil-qmlfiles ALL
+                    COMMAND cp ${QML_JS_FILES} ${CMAKE_CURRENT_BINARY_DIR}
+                    DEPENDS ${QML_JS_FILES}
+                    SOURCES ${QML_JS_FILES}
+)
 
 # tests
 include(QmlTest)

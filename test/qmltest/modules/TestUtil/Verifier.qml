@@ -78,7 +78,17 @@ TestCase {
             fail(msg);
         }
 
-        verifyType(object[member], type, msg);
+        if (type === "url") {
+            if (!Util.objectHasPropertyOfType(object, member, "QUrl")) {
+                fail(msg);
+            }
+        } else if (type === "color") {
+            if (!Util.objectHasPropertyOfType(object, member, "QColor")) {
+                fail(msg);
+            }
+        } else {
+            verifyType(object[member], type, msg);
+        }
     }
 
     /* verify that the object is registered */
