@@ -71,7 +71,7 @@ class UNITY_API ApplicationManagerInterface: public QAbstractListModel
      *
      * If this is set to true, the dash will not be put to suspend or woken up from suspend.
      */
-    Q_PROPERTY(bool dashActive READ dashActive WRITE setDashActive NOTIFY dashActiveChanged)
+    Q_PROPERTY(bool forceDashActive READ forceDashActive WRITE setForceDashActive NOTIFY forceDashActiveChanged)
 
 protected:
     /// @cond
@@ -125,8 +125,8 @@ public:
     virtual bool suspended() const = 0;
     virtual void setSuspended(bool suspended) = 0;
 
-    virtual bool dashActive() const = 0;
-    virtual void setDashActive(bool dashActive) = 0;
+    virtual bool forceDashActive() const = 0;
+    virtual void setForceDashActive(bool forceDashActive) = 0;
     /// @endcond
 
     /**
@@ -217,9 +217,9 @@ Q_SIGNALS:
     void suspendedChanged();
 
     /**
-     * @brief Will be emitted when the dashActive property changes.
+     * @brief Will be emitted when the forceDashActive property changes.
      */
-    void dashActiveChanged();
+    void forceDashActiveChanged();
 
     /**
      * @brief Will be emitted when an application was added to the model.
