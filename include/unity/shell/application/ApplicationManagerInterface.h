@@ -69,7 +69,7 @@ class UNITY_API ApplicationManagerInterface: public QAbstractListModel
     /**
      * @brief Activate the dash, regardless of its focused state.
      *
-     * If this is set to true, the dash will not be put to suspend or woken up from suspend.
+     * If this is set to true, the dash will not be put to suspend or will be woken up from suspend.
      */
     Q_PROPERTY(bool forceDashActive READ forceDashActive WRITE setForceDashActive NOTIFY forceDashActiveChanged)
 
