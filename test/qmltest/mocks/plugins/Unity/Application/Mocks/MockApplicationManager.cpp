@@ -108,14 +108,14 @@ void MockApplicationManager::setSuspended(bool suspended)
     Q_UNUSED(suspended)
 }
 
-bool MockApplicationManager::dashActive() const
+bool MockApplicationManager::forceDashActive() const
 {
     return false;
 }
 
-void MockApplicationManager::setDashActive(bool dashActive)
+void MockApplicationManager::setForceDashActive(bool forceDashActive)
 {
-    Q_UNUSED(dashActive)
+    Q_UNUSED(forceDashActive)
 }
 
 bool MockApplicationManager::requestFocusApplication(const QString &appId)

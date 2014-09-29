@@ -43,8 +43,8 @@ public:
     bool suspended() const;
     void setSuspended(bool suspended);
 
-    bool dashActive() const;
-    void setDashActive(bool dashActive);
+    bool forceDashActive() const override;
+    void setForceDashActive(bool forceDashActive) override;
 
     Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *get(const int index) const;
 
