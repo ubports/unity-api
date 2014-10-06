@@ -165,6 +165,8 @@ Q_SIGNALS:
     void applicationManagerChanged();
     /// @endcond
 
+    void hintChanged();
+
 protected:
     /// @cond
     QHash<int, QByteArray> m_roleNames;
