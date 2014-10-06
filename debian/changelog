@@ -1,4 +1,4 @@
-unity-api (7.91+14.10.20141006-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.92+14.10.20141006-0ubuntu1) UNRELEASED; urgency=medium
 
   * add a signal to the launcher model to hint changes
 
