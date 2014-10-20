@@ -43,6 +43,9 @@ public:
     int count() const override;
     unity::shell::scopes::ScopeInterface* overviewScope() const override;
 
+    void setFavorite(QString const& scopeId, bool favorite) const override;
+    void moveFavoriteTo(QString const& scopeId, int index) const override;
+
 private:
     QList<MockScope*> m_scopes;
     QHash<int, QByteArray> m_roles;

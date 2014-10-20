@@ -88,6 +88,16 @@ public:
      */
     Q_INVOKABLE virtual unity::shell::scopes::ScopeInterface* getScope(QString const& scopeId) const = 0;
 
+    /**
+     * @brief Set the favorite bit of the given scope.
+     */
+    Q_INVOKABLE virtual void setFavorite(QString const& scopeId, bool favorite) const = 0;
+
+    /**
+     * @brief Move the given favorite scope to the given index.
+     */
+    Q_INVOKABLE virtual void moveFavoriteTo(QString const& scopeId, int index) const = 0;
+
     // @cond
     virtual bool loaded() const = 0;
     virtual int count() const = 0;
