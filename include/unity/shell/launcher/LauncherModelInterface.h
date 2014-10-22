@@ -65,6 +65,7 @@ protected:
         m_roleNames.insert(RoleRecent, "recent");
         m_roleNames.insert(RoleProgress, "progress");
         m_roleNames.insert(RoleCount, "count");
+        m_roleNames.insert(RoleCountVisible, "countVisible");
         m_roleNames.insert(RoleFocused, "focused");
     }
     /// @endcond
@@ -84,6 +85,7 @@ public:
         RoleRecent,
         RoleProgress,
         RoleCount,
+        RoleCountVisible,
         RoleFocused
     };
 

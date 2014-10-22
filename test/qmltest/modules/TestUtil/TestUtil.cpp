@@ -17,6 +17,8 @@
 
 #include <TestUtil.h>
 
+#include <QQmlProperty>
+
 TestUtil::TestUtil(QObject *parent)
     : QObject(parent)
 {
@@ -43,4 +45,17 @@ TestUtil::isInstanceOf(QObject *obj, QString name)
         }
     }
     return result;
+}
+
+bool TestUtil::objectHasPropertyOfType(QObject *qmlObject, const QString &propertyName,
+                                       const QString &expectedPropertyTypeName)
+{
+    if (!qmlObject) return false;
+
+    QQmlProperty property(qmlObject, propertyName);
+
+    if (!property.isValid()) return false;
+    if (!property.isProperty()) return false;
+    return QString(property.propertyTypeName()) == expectedPropertyTypeName;
+
 }

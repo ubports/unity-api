@@ -50,6 +50,9 @@ public:
     int count() const;
     void setCount(int count);
 
+    bool countVisible() const;
+    void setCountVisible(bool countVisible);
+
     bool focused() const;
     void setFocused(bool focused);
 
@@ -65,6 +68,7 @@ private:
     bool m_recent;
     int m_progress;
     int m_count;
+    bool m_countVisible;
     bool m_focused;
     QuickListModelInterface *m_quickListModel;
 };

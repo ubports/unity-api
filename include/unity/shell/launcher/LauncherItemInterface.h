@@ -91,6 +91,13 @@ class UNITY_API LauncherItemInterface: public QObject
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
     /**
+     * @brief The visibility of the count emblem.
+     *
+     * True if the count emblem should be visible, false otherwise.
+     */
+    Q_PROPERTY(bool countVisible READ countVisible NOTIFY countVisibleChanged)
+
+    /**
      * @brief The focused state of the item
      *
      * True if focused, false if not focused
@@ -121,15 +128,19 @@ public:
     virtual bool recent() const = 0;
     virtual int progress() const = 0;
     virtual int count() const = 0;
+    virtual bool countVisible() const = 0;
     virtual bool focused() const = 0;
     virtual unity::shell::launcher::QuickListModelInterface *quickList() const = 0;
 
 Q_SIGNALS:
+    void nameChanged(const QString &name);
+    void iconChanged(const QString &icon);
     void pinnedChanged(bool pinned);
     void runningChanged(bool running);
     void recentChanged(bool running);
     void progressChanged(int progress);
     void countChanged(int count);
+    void countVisibleChanged(bool countVisible);
     void focusedChanged(bool focused);
     /// @endcond
 };
