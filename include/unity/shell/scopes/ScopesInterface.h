@@ -91,12 +91,12 @@ public:
     /**
      * @brief Set the favorite bit of the given scope.
      */
-    Q_INVOKABLE virtual void setFavorite(QString const& scopeId, bool favorite) const = 0;
+    Q_INVOKABLE virtual void setFavorite(QString const& scopeId, bool favorite) = 0;
 
     /**
      * @brief Move the given favorite scope to the given index.
      */
-    Q_INVOKABLE virtual void moveFavoriteTo(QString const& scopeId, int index) const = 0;
+    Q_INVOKABLE virtual void moveFavoriteTo(QString const& scopeId, int index) = 0;
 
     // @cond
     virtual bool loaded() const = 0;
