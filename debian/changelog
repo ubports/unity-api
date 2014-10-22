@@ -1,3 +1,9 @@
+unity-api (7.93-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Add setFavorite/moveFavoriteTo
+
+ -- Albert Astals Cid <albert.astals@canonical.com>  Mon, 20 Oct 2014 16:43:28 -0400
+
 unity-api (7.92+14.10.20141003.1-0ubuntu1) utopic; urgency=medium
 
   [ Michael Zanetti ]
@@ -22,12 +28,6 @@ unity-api (7.90+14.10.20140918-0ubuntu1) utopic; urgency=medium
   * allow updating item's name and icon properties. They might change in case of updates
 
  -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 18 Sep 2014 16:42:26 +0000
-
-unity-api (7.89-0ubuntu1) UNRELEASED; urgency=medium
-
-  * Add setFavorite/moveFavoriteTo
-
- -- Albert Astals Cid <albert.astals@canonical.com>  Mon, 20 Oct 2014 16:43:28 -0400
 
 unity-api (7.89+14.10.20140825-0ubuntu1) utopic; urgency=medium
 
