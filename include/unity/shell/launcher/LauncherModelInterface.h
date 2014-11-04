@@ -165,6 +165,12 @@ Q_SIGNALS:
     void applicationManagerChanged();
     /// @endcond
 
+    /**
+      * @brief Emitted when the launcher should hint itself to the user, e.g. to indicate a
+      * change the user should be made aware of.
+      */
+    void hint();
+
 protected:
     /// @cond
     QHash<int, QByteArray> m_roleNames;
