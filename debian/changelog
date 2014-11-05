@@ -1,3 +1,9 @@
+unity-api (7.94) UNRELEASED; urgency=medium
+
+  * add supportedOrientations and rotatesWindowContents to ApplicationInfo
+
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Wed, 05 Nov 2014 10:44:15 -0200
+
 unity-api (7.93+15.04.20141104-0ubuntu1) vivid; urgency=medium
 
   [ Michael Zanetti ]
