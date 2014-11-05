@@ -1,8 +1,15 @@
-unity-api (7.93-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.94-0ubuntu1) UNRELEASED; urgency=medium
 
   * Add setFavorite/moveFavoriteTo
 
  -- Albert Astals Cid <albert.astals@canonical.com>  Mon, 20 Oct 2014 16:43:28 -0400
+
+unity-api (7.93+15.04.20141104-0ubuntu1) vivid; urgency=medium
+
+  [ Michael Zanetti ]
+  * add a signal to the launcher model to hint changes
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 04 Nov 2014 14:42:57 +0000
 
 unity-api (7.92+14.10.20141003.1-0ubuntu1) utopic; urgency=medium
 
