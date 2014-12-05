@@ -82,3 +82,13 @@ unity::shell::scopes::ScopeInterface* MockScopes::getScope(QString const&) const
     // Unimplemented
     return nullptr;
 }
+
+void MockScopes::setFavorite(QString const&, bool)
+{
+    // Unimplemented
+}
+
+void MockScopes::moveFavoriteTo(QString const&, int)
+{
+    // Unimplemented
+}
