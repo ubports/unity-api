@@ -1,8 +1,9 @@
-unity-api (7.94-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.94+15.04.20141205-0ubuntu1) vivid; urgency=medium
 
+  [ Albert Astals Cid ]
   * Add setFavorite/moveFavoriteTo
 
- -- Albert Astals Cid <albert.astals@canonical.com>  Mon, 20 Oct 2014 16:43:28 -0400
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 05 Dec 2014 10:51:44 +0000
 
 unity-api (7.93+15.04.20141104-0ubuntu1) vivid; urgency=medium
 
