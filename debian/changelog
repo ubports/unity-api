@@ -1,8 +1,15 @@
-unity-api (7.94) UNRELEASED; urgency=medium
+unity-api (7.95) UNRELEASED; urgency=medium
 
   * add supportedOrientations and rotatesWindowContents to ApplicationInfo
 
- -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Wed, 05 Nov 2014 10:44:15 -0200
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Mon, 08 Dec 2014 11:20:15 -0200
+
+unity-api (7.94+15.04.20141205-0ubuntu1) vivid; urgency=medium
+
+  [ Albert Astals Cid ]
+  * Add setFavorite/moveFavoriteTo
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 05 Dec 2014 10:51:44 +0000
 
 unity-api (7.93+15.04.20141104-0ubuntu1) vivid; urgency=medium
 
