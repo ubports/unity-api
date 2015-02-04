@@ -112,6 +112,8 @@ public:
     }
     // @endcond
 
+    Q_INVOKABLE virtual void closeScope(unity::shell::scopes::ScopeInterface* scope) = 0;
+
 Q_SIGNALS:
     // @cond
     void loadedChanged();
