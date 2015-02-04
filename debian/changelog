@@ -1,3 +1,9 @@
+unity-api (7.95-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Added closeScope method to Scopes interface.
+
+ -- Pawel Stolowski <pawel@mordor>  Wed, 04 Feb 2015 18:27:32 +0100
+
 unity-api (7.94+15.04.20141205-0ubuntu1) vivid; urgency=medium
 
   [ Albert Astals Cid ]
