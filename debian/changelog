@@ -1,8 +1,13 @@
-unity-api (7.95) UNRELEASED; urgency=medium
+unity-api (7.95+15.04.20150211-0ubuntu1) vivid; urgency=medium
 
+  [ Michael Zanetti ]
   * add onlyPinned property to launcher model
 
- -- Michael Zanetti <michael.zanetti@canonical.com>  Mon, 09 Feb 2015 18:16:30 +0100
+  [ Michał Sawicz ]
+  * Add :native to g++ dependency for cross-building and wrap-and-sort
+    for good measure. Python needs :any, too. (LP: #1353855)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 11 Feb 2015 16:28:29 +0000
 
 unity-api (7.94+15.04.20141205-0ubuntu1) vivid; urgency=medium
 
