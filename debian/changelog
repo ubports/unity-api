@@ -1,3 +1,9 @@
+unity-api (7.95) UNRELEASED; urgency=medium
+
+  * add onlyPinned property to launcher model
+
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Mon, 09 Feb 2015 18:16:30 +0100
+
 unity-api (7.94+15.04.20141205-0ubuntu1) vivid; urgency=medium
 
   [ Albert Astals Cid ]
