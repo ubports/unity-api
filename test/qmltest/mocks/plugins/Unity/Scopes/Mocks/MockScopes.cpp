@@ -92,3 +92,8 @@ void MockScopes::moveFavoriteTo(QString const&, int)
 {
     // Unimplemented
 }
+
+void MockScopes::closeScope(unity::shell::scopes::ScopeInterface*)
+{
+    // Unimplemented
+}
