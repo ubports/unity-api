@@ -2,23 +2,28 @@ Source: unity-api
 Priority: optional
 Section: libs
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-Build-Depends: g++-4.9,
+Build-Depends: cmake,
                debhelper (>= 9),
-               cmake,
                doxygen,
+# We rely on C++11 features, and to prevent from ABI breaks
+# in libstdc++ causing us issues, we explicitly select a G++
+# version. To allow cross-compiling to work, we also must
+# append :native to g++-4.9 so we don't try to run armhf g++
+# on an x86 CPU for example, when cross-compiling.
+               g++-4.9:native,
                graphviz,
-               libboost-regex-dev (>= 1.49),
                libboost-dev (>= 1.49),
+               libboost-regex-dev (>= 1.49),
+               libglib2.0-dev,
                libgtest-dev,
                pkg-config,
-               python3,
+               python3:any,
                qt5-default,
                qtbase5-dev,
                qtdeclarative5-dev,
                qtdeclarative5-dev-tools,
                qtdeclarative5-qtquick2-plugin,
                qtdeclarative5-test-plugin,
-               libglib2.0-dev,
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/unity-api
 # If you aren't a member of ~unity-team but need to upload
@@ -40,9 +45,9 @@ Package: libunity-api-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: ${misc:Depends},
-         libboost-dev (>= 1.49),
+Depends: libboost-dev (>= 1.49),
          libunity-api0 (= ${binary:Version}),
+         ${misc:Depends},
 Description: Header files for Unity API
  Library to integrate with the Unity shell (dev files)
 

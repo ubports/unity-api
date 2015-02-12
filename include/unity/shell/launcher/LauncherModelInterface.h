@@ -54,6 +54,11 @@ class UNITY_API LauncherModelInterface: public QAbstractListModel
     Q_PROPERTY(unity::shell::application::ApplicationManagerInterface* applicationManager
                READ applicationManager WRITE setApplicationManager NOTIFY applicationManagerChanged)
 
+    /**
+     * @brief Only show pinned apps, hiding the unpinned running/recent ones.
+     */
+    Q_PROPERTY(bool onlyPinned READ onlyPinned WRITE setOnlyPinned NOTIFY onlyPinnedChanged)
+
 protected:
     /// @cond
     LauncherModelInterface(QObject *parent = 0): QAbstractListModel(parent) {
@@ -154,6 +159,9 @@ public:
     virtual unity::shell::application::ApplicationManagerInterface *applicationManager() const = 0;
     virtual void setApplicationManager(unity::shell::application::ApplicationManagerInterface *applicationManager) = 0;
 
+    virtual bool onlyPinned() const = 0;
+    virtual void setOnlyPinned(bool onlyPinned) = 0;
+
     virtual QHash<int, QByteArray> roleNames() const
     {
         return m_roleNames;
@@ -163,6 +171,7 @@ public:
 Q_SIGNALS:
     /// @cond
     void applicationManagerChanged();
+    void onlyPinnedChanged();
     /// @endcond
 
     /**

@@ -141,3 +141,13 @@ void MockLauncherModel::setApplicationManager(unity::shell::application::Applica
 {
     Q_UNUSED(applicationManager)
 }
+
+bool MockLauncherModel::onlyPinned() const
+{
+    return false;
+}
+
+void MockLauncherModel::setOnlyPinned(bool onlyPinned)
+{
+    Q_UNUSED(onlyPinned)
+}
