@@ -121,6 +121,7 @@ Item {
         function test_model_properties_data() {
             return [
                 { tag: "Model.properties[applicationManager]", property: "applicationManager", type: "unity::shell::application::ApplicationManagerInterface" },
+                { tag: "Model.properties[onlyPinned]", property: "onlyPinned", type: "boolean" },
             ];
         }
 

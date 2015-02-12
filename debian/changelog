@@ -1,8 +1,19 @@
-unity-api (7.95-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.96-0ubuntu1) UNRELEASED; urgency=medium
 
-  * Added closeScope method to Scopes interface.
+  * Added close method to scopes interface.
 
- -- Pawel Stolowski <pawel@mordor>  Wed, 04 Feb 2015 18:27:32 +0100
+ -- Pawel Stolowski <pawel@mordor>  Thu, 12 Feb 2015 18:17:42 +0100
+
+unity-api (7.95+15.04.20150211-0ubuntu1) vivid; urgency=medium
+
+  [ Michael Zanetti ]
+  * add onlyPinned property to launcher model
+
+  [ Michał Sawicz ]
+  * Add :native to g++ dependency for cross-building and wrap-and-sort
+    for good measure. Python needs :any, too. (LP: #1353855)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 11 Feb 2015 16:28:29 +0000
 
 unity-api (7.94+15.04.20141205-0ubuntu1) vivid; urgency=medium
 
