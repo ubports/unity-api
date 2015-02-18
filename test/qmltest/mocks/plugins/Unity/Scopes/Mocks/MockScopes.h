@@ -36,6 +36,7 @@ public:
 
     Q_INVOKABLE unity::shell::scopes::ScopeInterface* getScope(int row) const override;
     Q_INVOKABLE unity::shell::scopes::ScopeInterface* getScope(const QString& scope_id) const override;
+    Q_INVOKABLE void closeScope(unity::shell::scopes::ScopeInterface* scope) override;
 
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 
