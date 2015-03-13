@@ -52,4 +52,6 @@ class FilterBaseInterface : public QObject
 }
 }
 
+Q_DECLARE_METATYPE(unity::shell::scopes::FilterBaseInterface*)
+
 #endif
