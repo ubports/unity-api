@@ -33,12 +33,19 @@ class UNITY_API FiltersInterface : public QAbstractListModel
     Q_OBJECT
 
     Q_ENUMS(Roles)
+    Q_ENUMS(FilterTypes)
 
 public:
     enum Roles {
         RoleFilterId = Qt::UserRole + 1,
         RoleFilterType,
         RoleFilter
+    };
+
+    enum FilterTypes {
+        OptionSelectorFilter,
+        RangeInputFilter
+        // TODO add remaining filters
     };
 
 protected:
