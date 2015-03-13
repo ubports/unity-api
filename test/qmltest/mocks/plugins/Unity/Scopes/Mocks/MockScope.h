@@ -38,6 +38,7 @@ public:
     bool searchInProgress() const override;
     unity::shell::scopes::CategoriesInterface* categories() const override;
     unity::shell::scopes::SettingsModelInterface* settings() const override;
+    unity::shell::scopes::FiltersInterface* filters() const override;
     QString searchQuery() const override;
     QString noResultsHint() const override;
     QString formFactor() const override;
@@ -88,6 +89,7 @@ protected:
 
     unity::shell::scopes::CategoriesInterface* m_categories;
     unity::shell::scopes::SettingsModelInterface* m_settings;
+    unity::shell::scopes::FiltersInterface* m_filters;
 };
 
 #endif

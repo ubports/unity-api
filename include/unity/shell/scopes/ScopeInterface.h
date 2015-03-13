@@ -33,6 +33,7 @@ class CategoriesInterface;
 class PreviewStackInterface;
 class NavigationInterface;
 class SettingsModelInterface;
+class FiltersInterface;
 
 /**
  * @brief Object representing scope instance, which exposes model(s) with results.
@@ -148,6 +149,11 @@ class UNITY_API ScopeInterface : public QObject
      */
     Q_PROPERTY(unity::shell::scopes::ScopeInterface::Status status READ status NOTIFY statusChanged)
 
+    /**
+     * @brief Filters model for the scope.
+     */
+    Q_PROPERTY(unity::shell::scopes::FiltersInterface* filters READ filters NOTIFY filtersChanged)
+
 protected:
     /// @cond
     explicit ScopeInterface(QObject* parent = 0) : QObject(parent) { }
@@ -186,6 +192,7 @@ public:
     virtual bool hasAltNavigation() const = 0;
     virtual Status status() const = 0;
     virtual QVariantMap customizations() const = 0;
+    virtual FiltersInterface* filters() const = 0;
 
     /* setters */
     virtual void setSearchQuery(const QString& search_query) = 0;
@@ -266,6 +273,7 @@ Q_SIGNALS:
     void customizationsChanged();
     void statusChanged();
     void detailsChanged();
+    void filtersChanged();
     // @endcond
 
     // signals triggered by activate(..) or preview(..) requests.

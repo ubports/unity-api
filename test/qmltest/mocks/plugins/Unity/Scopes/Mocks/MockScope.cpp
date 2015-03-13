@@ -34,6 +34,7 @@ MockScope::MockScope(QString const& id, QString const& name, QObject* parent)
     , m_previewRendererName("preview-generic")
     , m_categories(new MockCategories(20, this))
     , m_settings(new MockSettingsModel(this))
+    , m_filters(nullptr) // FIXME
 {
 }
 
@@ -83,6 +84,10 @@ unity::shell::scopes::CategoriesInterface* MockScope::categories() const {
 
 unity::shell::scopes::SettingsModelInterface* MockScope::settings() const {
     return m_settings;
+}
+
+unity::shell::scopes::FiltersInterface* MockScope::filters() const {
+    return m_filters;
 }
 
 QString MockScope::noResultsHint() const {
