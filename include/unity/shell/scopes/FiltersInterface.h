@@ -42,7 +42,8 @@ public:
         RoleFilter
     };
 
-    enum FilterTypes {
+    enum FilterType {
+        Invalid,
         OptionSelectorFilter,
         RangeInputFilter
         // TODO add remaining filters

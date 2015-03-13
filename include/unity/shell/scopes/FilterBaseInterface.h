@@ -28,7 +28,6 @@ namespace shell
 namespace scopes
 {
 
-
 class FilterBaseInterface : public QObject
 {
     Q_OBJECT
@@ -40,7 +39,7 @@ class FilterBaseInterface : public QObject
 
         virtual void update(unity::scopes::FilterBase::SCPtr const& filter, unity::scopes::FilterState::SPtr const& filterState) = 0;
         virtual QString id() const = 0;
-        virtual QString filterType() const = 0;
+        virtual Filters::FilterType filterType() const = 0;
 
     protected:
         /// @cond
