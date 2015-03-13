@@ -19,7 +19,7 @@
 
 #include <unity/scopes/FilterBase.h>
 #include <unity/scopes/FilterState.h>
-#include <unity/scopes/FiltersInterface.h>
+#include "FiltersInterface.h"
 #include <QObject>
 
 namespace unity
