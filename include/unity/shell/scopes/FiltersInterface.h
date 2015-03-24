@@ -49,6 +49,15 @@ public:
         // TODO add remaining filters
     };
 
+    QHash<int, QByteArray> roleNames() const override
+    {
+        QHash<int, QByteArray> roles;
+        roles[RoleFilterId] = "id";
+        roles[RoleFilterType] = "type";
+        roles[RoleFilter] = "filter";
+        return roles;
+    }
+
 protected:
     /// @cond
     explicit FiltersInterface(QObject* parent = 0) : QAbstractListModel(parent) {}

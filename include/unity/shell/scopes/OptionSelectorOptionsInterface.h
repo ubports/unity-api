@@ -30,27 +30,6 @@ namespace shell
 namespace scopes
 {
 
-class UNITY_API OptionSelectorOptionInterface : public QObject
-{
-    Q_OBJECT
-
-public:
-    Q_PROPERTY(QString id READ id)
-    Q_PROPERTY(QString label READ label NOTIFY labelChanged)
-    Q_PROPERTY(bool checked READ checked WRITE setChecked NOTIFY checkedChanged)
-
-    virtual QString id() const = 0;
-    virtual QString label() const = 0;
-    virtual bool checked() const = 0;
-
-public Q_SLOTS:
-    virtual void setChecked(bool) = 0;
-
-Q_SIGNALS:
-    void checkedChanged(bool);
-    void labelChanged(const QString&);
-};
-
 class UNITY_API OptionSelectorOptionsInterface : public QAbstractListModel
 {
     Q_OBJECT
@@ -59,8 +38,21 @@ class UNITY_API OptionSelectorOptionsInterface : public QAbstractListModel
 
 public:
     enum Roles {
-        RoleOption = Qt::UserRole + 1
+        RoleOptionId = Qt::UserRole + 1,
+        RoleOptionLabel,
+        RoleOptionChecked
     };
+
+    Q_INVOKABLE virtual void setChecked(int index, bool checked) = 0;
+
+    QHash<int, QByteArray> roleNames() const override
+    {
+        QHash<int, QByteArray> roles;
+        roles[RoleOptionId] = "id";
+        roles[RoleOptionLabel] = "label";
+        roles[RoleOptionChecked] = "checked";
+        return roles;
+    }
 
 protected:
     /// @cond
@@ -73,7 +65,6 @@ protected:
 }
 }
 
-Q_DECLARE_METATYPE(unity::shell::scopes::OptionSelectorOptionInterface*)
 Q_DECLARE_METATYPE(unity::shell::scopes::OptionSelectorOptionsInterface*)
 
 #endif
