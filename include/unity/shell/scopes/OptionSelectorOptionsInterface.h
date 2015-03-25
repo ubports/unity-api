@@ -19,8 +19,6 @@
 
 #include <unity/SymbolExport.h>
 #include <QAbstractListModel>
-#include <unity/scopes/FilterOption.h>
-#include <unity/scopes/FilterState.h>
 #include <list>
 
 namespace unity

@@ -14,41 +14,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FILTERBASEINTERHACE_H
-#define FILTERBASEINTERHACE_H
+#ifndef MOCKOPTIONSELECTOROPTIONS_H
+#define MOCKOPTIONSELECTOROPTIONS_H
 
-#include "FiltersInterface.h"
-#include <QObject>
+#include <unity/shell/scopes/OptionSelectorOptionsInterface.h>
 
-namespace unity
-{
-namespace shell
-{
-namespace scopes
-{
-
-class FilterBaseInterface : public QObject
+class MockSelectorOptions : public unity::shell::scopes::OptionSelectorOptionsInterface
 {
     Q_OBJECT
 
-    public:
+public:
+    MockSelectorOptions(int num = 2, QObject *parent = 0);
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+    void setChecked(int index, bool checked) override;
 
-        Q_PROPERTY(QString id READ id)
-        Q_PROPERTY(QString filterType READ filterType)
-
-        virtual QString id() const = 0;
-        virtual FiltersInterface::FilterType filterType() const = 0;
-
-    protected:
-        /// @cond
-        explicit FilterBaseInterface(QObject* parent = 0) : QObject(parent) {}
-        /// @endcond
+private:
+    int m_numOfOptions;
 };
-
-}
-}
-}
-
-Q_DECLARE_METATYPE(unity::shell::scopes::FilterBaseInterface*)
 
 #endif

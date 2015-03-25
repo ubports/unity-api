@@ -20,7 +20,14 @@ set(ScopesMocks_SOURCES
     Mocks/MockScope.cpp
     Mocks/MockScopes.cpp
     Mocks/MockSettingsModel.cpp
+    Mocks/MockFiltersModel.cpp
+    Mocks/MockOptionSelectorFilter.cpp
+    Mocks/MockSelectorOptions.cpp
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/CategoriesInterface.h
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/FiltersInterface.h
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/FilterBaseInterface.h
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/OptionSelectorFilterInterface.h
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/OptionSelectorOptionsInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/NavigationInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/ResultsModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/PreviewModelInterface.h

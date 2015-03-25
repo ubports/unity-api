@@ -38,6 +38,11 @@ public:
     Q_PROPERTY(bool multiSelect READ multiSelect NOTIFY multiSelectChanged)
     Q_PROPERTY(OptionSelectorOptionsInterface* options READ options)
 
+    FiltersInterface::FilterType filterType() const override
+    {
+        return FiltersInterface::OptionSelectorFilter;
+    }
+
     virtual QString label() const = 0;
     virtual bool multiSelect() const = 0;
     virtual OptionSelectorOptionsInterface* options() const = 0;

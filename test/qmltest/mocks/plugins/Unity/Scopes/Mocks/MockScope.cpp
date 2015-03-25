@@ -19,6 +19,7 @@
 #include "MockPreviewStack.h"
 #include "MockDepartment.h"
 #include "MockSettingsModel.h"
+#include "MockFiltersModel.h"
 
 MockScope::MockScope(QObject* parent) : MockScope(QString(), QString(), parent)
 {
@@ -34,7 +35,7 @@ MockScope::MockScope(QString const& id, QString const& name, QObject* parent)
     , m_previewRendererName("preview-generic")
     , m_categories(new MockCategories(20, this))
     , m_settings(new MockSettingsModel(this))
-    , m_filters(nullptr) // FIXME
+    , m_filters(new MockFiltersModel(this))
 {
 }
 
