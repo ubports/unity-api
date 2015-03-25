@@ -22,7 +22,6 @@
 #include <unity/shell/scopes/ScopeInterface.h>
 
 #include <QList>
-#include <QSharedPointer>
 
 class MockFiltersModel : public unity::shell::scopes::FiltersInterface
 {
@@ -35,7 +34,7 @@ public:
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
 private:
-    QList<QSharedPointer<unity::shell::scopes::FilterBaseInterface>> m_filters;
+    QList<unity::shell::scopes::FilterBaseInterface*> m_filters;
 };
 
 #endif // MOCKDEPARTMENT_H

@@ -20,8 +20,8 @@
 MockFiltersModel::MockFiltersModel(unity::shell::scopes::ScopeInterface *parent)
     : unity::shell::scopes::FiltersInterface(parent)
 {
-    QSharedPointer<MockOptionSelectorFilter> f(new MockOptionSelectorFilter("f1", "Filter 1", false, this));
-    m_filters.append(f);
+    MockOptionSelectorFilter *f = new MockOptionSelectorFilter("f1", "Filter 1", false, this);
+    m_filters.append(f); // owned by parent, so no need to manage it
 }
 
 QVariant MockFiltersModel::data(const QModelIndex& index, int role) const
@@ -37,7 +37,7 @@ QVariant MockFiltersModel::data(const QModelIndex& index, int role) const
             case unity::shell::scopes::FiltersInterface::RoleFilterType:
                 return QVariant(static_cast<int>(filter->filterType()));
             case unity::shell::scopes::FiltersInterface::RoleFilter:
-                return QVariant::fromValue(filter.data());
+                return QVariant::fromValue(filter);
             default:
                 return QVariant();
         }
