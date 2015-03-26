@@ -25,7 +25,7 @@ MockOptionSelectorFilter::MockOptionSelectorFilter(const QString &id, const QStr
 {
 }
 
-QString MockOptionSelectorFilter::id() const
+QString MockOptionSelectorFilter::filterId() const
 {
     return m_id;
 }

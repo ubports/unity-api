@@ -33,7 +33,7 @@ QVariant MockFiltersModel::data(const QModelIndex& index, int role) const
         {
             case Qt::DisplayRole:
             case unity::shell::scopes::FiltersInterface::RoleFilterId:
-                return QVariant(filter->id());
+                return QVariant(filter->filterId());
             case unity::shell::scopes::FiltersInterface::RoleFilterType:
                 return QVariant(static_cast<int>(filter->filterType()));
             case unity::shell::scopes::FiltersInterface::RoleFilter:
