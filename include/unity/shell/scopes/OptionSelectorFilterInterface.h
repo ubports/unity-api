@@ -36,7 +36,7 @@ class UNITY_API OptionSelectorFilterInterface : public FilterBaseInterface
 public:
     Q_PROPERTY(QString label READ label NOTIFY labelChanged)
     Q_PROPERTY(bool multiSelect READ multiSelect NOTIFY multiSelectChanged)
-    Q_PROPERTY(OptionSelectorOptionsInterface* options READ options NOTIFY optionsChanged)
+    Q_PROPERTY(OptionSelectorOptionsInterface* options READ options CONSTANT)
 
     FiltersInterface::FilterType filterType() const override
     {
@@ -50,7 +50,6 @@ public:
 Q_SIGNALS:
     void labelChanged(const QString&);
     void multiSelectChanged(bool);
-    void optionsChanged();
 
 protected:
     /// @cond

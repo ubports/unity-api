@@ -33,8 +33,8 @@ class FilterBaseInterface : public QObject
 
     public:
 
-        Q_PROPERTY(QString filterId READ filterId)
-        Q_PROPERTY(QString filterType READ filterType)
+        Q_PROPERTY(QString filterId READ filterId CONSTANT)
+        Q_PROPERTY(QString filterType READ filterType CONSTANT)
 
         virtual QString filterId() const = 0;
         virtual FiltersInterface::FilterType filterType() const = 0;
