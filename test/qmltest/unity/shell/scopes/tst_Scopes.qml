@@ -122,6 +122,7 @@ Item {
                 { tag: "Item.properties[favorite]", constant: "favorite", type: "boolean" },
                 { tag: "Item.properties[shortcut]", constant: "shortcut", type: "string" },
                 { tag: "Item.properties[categories]", constant: "categories", type: "object" },
+                { tag: "Item.properties[filters]", constant: "filters", type: "object" },
                 { tag: "Item.properties[searchQuery]", constant: "searchQuery", type: "string" },
                 { tag: "Item.properties[noResultsHint]", constant: "noResultsHint", type: "string" },
                 { tag: "Item.properties[formFactor]", constant: "formFactor", type: "string" },
@@ -165,6 +166,45 @@ Item {
             object = root.scope;
             name = "Scope"
             verifyData(data);
+        }
+    }
+
+    Verifier {
+        id: filtersVerifier
+
+        Repeater {
+            id: filtersRepeater
+            model: root.scope.filters
+            delegate: Item {
+                property var roles: model
+            }
+        }
+
+        function test_filters_data() {
+            return [
+                { tag: "Filters[object]", type: "object" },
+                { tag: "Filters[FiltersInterface]", type: "unity::shell::scopes::FiltersInterface" },
+            ];
+        }
+
+        function test_filters(data) {
+            object = filtersRepeater.model;
+            name = "Filters";
+            verifyData(data);
+        }
+
+        function test_filters_roles(data) {
+            object = filtersRepeater.itemAt(0).roles;
+            name = "Filters";
+            verifyData(data);
+        }
+
+        function test_filters_roles_data() {
+            return [
+                { tag: "Model.roles[filterId]", role: "filterId", type: "string" },
+                { tag: "Model.roles[filterType]", role: "filterType", type: "number" },
+                { tag: "Model.roles[filter]", role: "filter", type: "unity::shell::scopes::FilterBaseInterface" },
+            ];
         }
     }
 

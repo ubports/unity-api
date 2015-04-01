@@ -26,6 +26,8 @@
 #include "PreviewWidgetModelInterface.h"
 #include "PreviewStackInterface.h"
 #include "SettingsModelInterface.h"
+#include "FiltersInterface.h"
+#include "FilterBaseInterface.h"
 #include "Mocks/MockScopes.h"
 #include "Mocks/MockScope.h"
 
@@ -40,4 +42,6 @@ void TestScopesPlugin::registerTypes(const char* uri)
     qmlRegisterUncreatableType<unity::shell::scopes::PreviewWidgetModelInterface>(uri, 0, 2, "PreviewWidgetModel", "Can't create new PreviewWidgetModel in QML. Get them from PreviewModel instance.");
     qmlRegisterUncreatableType<unity::shell::scopes::PreviewStackInterface>(uri, 0, 2, "PreviewStack", "Can't create new PreviewStack in QML. Get them from Scope instance.");
     qmlRegisterUncreatableType<unity::shell::scopes::SettingsModelInterface>(uri, 0, 2, "Settings", "Can't create new Settings in QML. Get them from Scope instance.");
+    qmlRegisterUncreatableType<unity::shell::scopes::FilterBaseInterface>(uri, 0, 2, "FilterBase", "Can't create new Filter in QML. Get them from Filters instance.");
+    qmlRegisterUncreatableType<unity::shell::scopes::FiltersInterface>(uri, 0, 2, "Filters", "Can't create new Filters in QML. Get them from Scope instance.");
 }

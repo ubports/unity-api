@@ -52,8 +52,8 @@ public:
     QHash<int, QByteArray> roleNames() const override
     {
         QHash<int, QByteArray> roles;
-        roles[RoleFilterId] = "id";
-        roles[RoleFilterType] = "type";
+        roles[RoleFilterId] = "filterId";
+        roles[RoleFilterType] = "filterType";
         roles[RoleFilter] = "filter";
         return roles;
     }

@@ -27,7 +27,7 @@ namespace shell
 namespace scopes
 {
 
-class FilterBaseInterface : public QObject
+class UNITY_API FilterBaseInterface : public QObject
 {
     Q_OBJECT
 
