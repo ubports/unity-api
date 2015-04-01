@@ -33,7 +33,7 @@ class UNITY_API FiltersInterface : public QAbstractListModel
     Q_OBJECT
 
     Q_ENUMS(Roles)
-    Q_ENUMS(FilterTypes)
+    Q_ENUMS(FilterType)
 
 public:
     enum Roles {
