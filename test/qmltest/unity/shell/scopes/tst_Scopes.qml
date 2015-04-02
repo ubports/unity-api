@@ -180,17 +180,17 @@ Item {
             }
         }
 
+        function test_filters(data) {
+            object = filtersRepeater.model;
+            name = "Filters";
+            verifyData(data);
+        }
+
         function test_filters_data() {
             return [
                 { tag: "Filters[object]", type: "object" },
                 { tag: "Filters[FiltersInterface]", type: "unity::shell::scopes::FiltersInterface" },
             ];
-        }
-
-        function test_filters(data) {
-            object = filtersRepeater.model;
-            name = "Filters";
-            verifyData(data);
         }
 
         function test_filters_roles(data) {
