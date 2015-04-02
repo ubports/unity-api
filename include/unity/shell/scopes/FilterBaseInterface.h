@@ -14,8 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FILTERBASEINTERHACE_H
-#define FILTERBASEINTERHACE_H
+#ifndef UNITY_SHELL_SCOPES_FILTERBASEINTERHACE_H
+#define UNITY_SHELL_SCOPES_FILTERBASEINTERHACE_H
 
 #include "FiltersInterface.h"
 #include <QObject>

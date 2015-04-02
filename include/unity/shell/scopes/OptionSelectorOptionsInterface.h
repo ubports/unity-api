@@ -14,12 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef OPTIONSELECTOROPTIONSINTERFACE_H
-#define OPTIONSELECTOROPTIONSINTERFACE_H
+#ifndef UNITY_SHELL_SCOPES_OPTIONSELECTOROPTIONSINTERFACE_H
+#define UNITY_SHELL_SCOPES_OPTIONSELECTOROPTIONSINTERFACE_H
 
 #include <unity/SymbolExport.h>
 #include <QAbstractListModel>
-#include <list>
 
 namespace unity
 {
@@ -59,7 +58,6 @@ protected:
 };
 
 }
-
 }
 }
 

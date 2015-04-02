@@ -28,6 +28,8 @@
 #include "SettingsModelInterface.h"
 #include "FiltersInterface.h"
 #include "FilterBaseInterface.h"
+#include "OptionSelectorOptionsInterface.h"
+#include "OptionSelectorFilterInterface.h"
 #include "Mocks/MockScopes.h"
 #include "Mocks/MockScope.h"
 
@@ -44,4 +46,6 @@ void TestScopesPlugin::registerTypes(const char* uri)
     qmlRegisterUncreatableType<unity::shell::scopes::SettingsModelInterface>(uri, 0, 2, "Settings", "Can't create new Settings in QML. Get them from Scope instance.");
     qmlRegisterUncreatableType<unity::shell::scopes::FilterBaseInterface>(uri, 0, 2, "FilterBase", "Can't create new Filter in QML. Get them from Filters instance.");
     qmlRegisterUncreatableType<unity::shell::scopes::FiltersInterface>(uri, 0, 2, "Filters", "Can't create new Filters in QML. Get them from Scope instance.");
+    qmlRegisterUncreatableType<unity::shell::scopes::OptionSelectorOptionsInterface>(uri, 0, 2, "OptionSelectorOptions", "Can't create new OptionSelectorOptions in QML. Get them from OptionSelectorFilter instance.");
+    qmlRegisterUncreatableType<unity::shell::scopes::OptionSelectorFilterInterface>(uri, 0, 2, "OptionSelectorFilter", "Can't create new OptionSelectorFilter in QML. Get them from Scope instance.");
 }

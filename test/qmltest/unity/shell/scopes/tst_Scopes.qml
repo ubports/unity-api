@@ -201,10 +201,81 @@ Item {
 
         function test_filters_roles_data() {
             return [
-                { tag: "Model.roles[filterId]", role: "filterId", type: "string" },
-                { tag: "Model.roles[filterType]", role: "filterType", type: "number" },
+                { tag: "Model.roles[id]", role: "id", type: "string" },
+                { tag: "Model.roles[type]", role: "type", type: "number" },
                 { tag: "Model.roles[filter]", role: "filter", type: "unity::shell::scopes::FilterBaseInterface" },
             ];
+        }
+    }
+
+    Verifier {
+        id: optionSelectorFilterVerifier
+
+        function test_option_selector_filter(data) {
+            object = filtersRepeater.itemAt(0).roles.filter;
+            name = "Filter";
+            verifyData(data);
+        }
+
+        function test_option_selector_filter_data() {
+            return [
+                { tag: "Filter[object]", type: "object" },
+                { tag: "Filter[OptionSelectorFilterInterface]", type: "unity::shell::scopes::OptionSelectorFilterInterface" },
+            ];
+        }
+
+        function test_option_selector_filter_properties_data() {
+            return [
+                { tag: "Filter.properties[filterId]", constant: "filterId", type: "string" },
+                { tag: "Filter.properties[label]", constant: "label", type: "string" },
+                { tag: "Filter.properties[multiSelect]", constant: "multiSelect", type: "boolean" },
+                { tag: "Filter.properties[options]", constant: "options", type: "object" },
+            ];
+        }
+
+        function test_option_selector_filter_properties(data) {
+            object = filtersRepeater.itemAt(0).roles.filter;
+            name = "Filter";
+            verifyData(data);
+        }
+
+        function test_options_data() {
+            return [
+                { tag: "Options[object]", type: "object" },
+                { tag: "Options[OptionSelectorOptionsInterface]", type: "unity::shell::scopes::OptionSelectorOptionsInterface" },
+            ];
+        }
+
+        function test_options(data) {
+            object = filtersRepeater.itemAt(0).roles.filter.options;
+            name = "Options";
+            verifyData(data);
+        }
+    }
+
+    Verifier {
+        id: optionSelectorFilterOptionsVerifier
+
+        Repeater {
+            id: optionsRepeater
+            model: filtersRepeater.itemAt(0).roles.filter.options
+            delegate: Item {
+                property var roles: model
+            }
+        }
+
+        function test_option_selector_filter_options_roles_data() {
+            return [
+                { tag: "Model.roles[id]", role: "id", type: "string" },
+                { tag: "Model.roles[label]", role: "label", type: "string" },
+                { tag: "Model.roles[checked]", role: "checked", type: "boolean" },
+            ];
+        }
+
+        function test_option_selector_filter_options_roles(data) {
+            object = optionsRepeater.itemAt(0).roles;
+            name = "Options";
+            verifyData(data);
         }
     }
 
