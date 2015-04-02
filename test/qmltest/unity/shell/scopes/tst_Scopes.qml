@@ -258,7 +258,7 @@ Item {
 
         Repeater {
             id: optionsRepeater
-            model: filtersRepeater.itemAt(0).roles.filter.options
+            model: filtersRepeater.count > 0 ? filtersRepeater.itemAt(0).roles.filter.options : undefined
             delegate: Item {
                 property var roles: model
             }
