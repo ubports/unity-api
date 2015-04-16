@@ -4,6 +4,18 @@ unity-api (7.97) UNRELEASED; urgency=medium
 
  -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Mon, 08 Dec 2014 11:20:15 -0200
 
+unity-api (7.96+15.04.20150410.2-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michi Henning ]
+  * Reverted commit 93 because it cost me a cool 1.5 hours today. Turns
+    out that libmcheck is not thread-safe and causes the most amazing
+    crashes in unpredictable ways :-(
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 10 Apr 2015 16:07:39 +0000
+
 unity-api (7.96+15.04.20150213-0ubuntu1) vivid; urgency=medium
 
   [ Pawel Stolowski ]
