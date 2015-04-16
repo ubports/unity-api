@@ -28,6 +28,7 @@ set(ScopesMocks_SOURCES
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/FilterBaseInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/OptionSelectorFilterInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/OptionSelectorOptionsInterface.h
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/RangeInputFilterInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/NavigationInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/ResultsModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/PreviewModelInterface.h

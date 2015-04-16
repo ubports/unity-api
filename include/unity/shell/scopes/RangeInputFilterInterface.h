@@ -46,6 +46,10 @@ public:
     virtual void setStartValue(QVariant const& value) = 0;
     virtual void setEndValue(QVariant const& value)  = 0;
 
+Q_SIGNALS:
+    void startValueChanged(QVariant const&);
+    void endValueChanged(QVariant const&);
+
 protected:
     /// @cond
     explicit RangeInputFilterInterface(QObject* parent = 0) : FilterBaseInterface(parent) {}
