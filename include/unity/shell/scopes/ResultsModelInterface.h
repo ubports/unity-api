@@ -61,8 +61,7 @@ public:
         RoleCategoryId,
         RoleDndUri,
         RoleResult,
-        RoleActivationUri, ///< URI the UI can use for activation, if empty use RoleUri
-        RoleType, ///< Defines the type of this card, can be used to change UI layout or even activation patterns
+        RoleQuickPreviewUri, ///< URI the UI can use for UI previewing wihtout using preview widgets, if empty use RoleUri
         // card components
         RoleTitle,
         RoleArt,
@@ -86,8 +85,7 @@ public:
         roles[RoleUri] = "uri";
         roles[RoleCategoryId] = "categoryId";
         roles[RoleDndUri] = "dndUri";
-        roles[RoleActivationUri] = "activationUri";
-        roles[RoleType] = "type";
+        roles[RoleQuickPreviewUri] = "quickPreviewUri";
         roles[RoleResult] = "result";
         roles[RoleTitle] = "title";
         roles[RoleArt] = "art";
