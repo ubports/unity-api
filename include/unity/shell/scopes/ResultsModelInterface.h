@@ -61,7 +61,7 @@ public:
         RoleCategoryId,
         RoleDndUri,
         RoleResult,
-        RoleQuickPreviewUri, ///< URI the UI can use for UI previewing wihtout using preview widgets, if empty use RoleUri
+        RoleQuickPreviewUri, ///< URI the UI can use for UI previewing without using preview widgets, if empty use RoleUri
         // card components
         RoleTitle,
         RoleArt,
