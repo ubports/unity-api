@@ -61,7 +61,7 @@ public:
         RoleCategoryId,
         RoleDndUri,
         RoleResult,
-        RoleQuickPreviewUri, ///< URI the UI can use for UI previewing without using preview widgets, if empty use RoleUri
+        RoleQuickPreviewData, ///< Data for UI quick previewing. In case of audio should contain uri and duration
         // card components
         RoleTitle,
         RoleArt,
@@ -85,7 +85,7 @@ public:
         roles[RoleUri] = "uri";
         roles[RoleCategoryId] = "categoryId";
         roles[RoleDndUri] = "dndUri";
-        roles[RoleQuickPreviewUri] = "quickPreviewUri";
+        roles[RoleQuickPreviewData] = "quickPreviewData";
         roles[RoleResult] = "result";
         roles[RoleTitle] = "title";
         roles[RoleArt] = "art";
