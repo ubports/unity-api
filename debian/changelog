@@ -1,3 +1,10 @@
+unity-api (7.97+15.04.20150213-0ubuntu2) UNRELEASED; urgency=medium
+
+  [Albert Astals Cid ]
+  * New property to support more complex cards
+
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Fri, 29 May 2015 18:16:26 +0200
+
 unity-api (7.96+15.04.20150213-0ubuntu1) vivid; urgency=medium
 
   [ Pawel Stolowski ]
