@@ -157,6 +157,20 @@ void MockLauncherItem::setFocused(bool focused)
     }
 }
 
+bool MockLauncherItem::alerting() const
+{
+    return m_alerting;
+}
+
+void MockLauncherItem::setAlerting(bool alerting)
+{
+    if (m_alerting != alerting)
+    {
+        m_alerting = alerting;
+        Q_EMIT alertingChanged(alerting);
+    }
+}
+
 QuickListModelInterface *MockLauncherItem::quickList() const
 {
     return m_quickListModel;

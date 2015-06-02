@@ -72,6 +72,7 @@ protected:
         m_roleNames.insert(RoleCount, "count");
         m_roleNames.insert(RoleCountVisible, "countVisible");
         m_roleNames.insert(RoleFocused, "focused");
+        m_roleNames.insert(RoleAlerting, "alerting");
     }
     /// @endcond
 
@@ -91,7 +92,8 @@ public:
         RoleProgress,
         RoleCount,
         RoleCountVisible,
-        RoleFocused
+        RoleFocused,
+        RoleAlerting
     };
 
     virtual ~LauncherModelInterface() {}

@@ -105,6 +105,13 @@ class UNITY_API LauncherItemInterface: public QObject
     Q_PROPERTY(bool focused READ focused NOTIFY focusedChanged())
 
     /**
+     * @brief The alerting state of the item
+     *
+     * True if alerting/wobbling, false if not alerting/wobbling
+     */
+    Q_PROPERTY(bool alerting READ alerting NOTIFY alertingChanged())
+
+    /**
      * @brief The quick list menu contents for the item
      *
      * Items can have a quick list menu. This property holds a model for
@@ -130,6 +137,7 @@ public:
     virtual int count() const = 0;
     virtual bool countVisible() const = 0;
     virtual bool focused() const = 0;
+    virtual bool alerting() const = 0;
     virtual unity::shell::launcher::QuickListModelInterface *quickList() const = 0;
 
 Q_SIGNALS:
@@ -142,6 +150,7 @@ Q_SIGNALS:
     void countChanged(int count);
     void countVisibleChanged(bool countVisible);
     void focusedChanged(bool focused);
+    void alertingChanged(bool alerting);
     /// @endcond
 };
 

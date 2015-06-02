@@ -56,6 +56,9 @@ public:
     bool focused() const;
     void setFocused(bool focused);
 
+    bool alerting() const;
+    void setAlerting(bool alerting);
+
     unity::shell::launcher::QuickListModelInterface *quickList() const;
 
 private:
@@ -70,6 +73,7 @@ private:
     int m_count;
     bool m_countVisible;
     bool m_focused;
+    bool m_alerting;
     QuickListModelInterface *m_quickListModel;
 };
 
