@@ -164,6 +164,12 @@ void MockScope::activate(QVariant const& result)
     Q_UNUSED(result);
 }
 
+void MockScope::activateAction(QVariant const& result, QString const& actionId)
+{
+    Q_UNUSED(result);
+    Q_UNUSED(actionId);
+}
+
 unity::shell::scopes::PreviewStackInterface* MockScope::preview(QVariant const& result)
 {
     Q_UNUSED(result);
