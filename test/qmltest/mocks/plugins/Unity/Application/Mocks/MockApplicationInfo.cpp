@@ -125,3 +125,13 @@ QColor MockApplicationInfo::splashColorFooter() const
 {
     return QColor(0,0,0,0);
 }
+
+Qt::ScreenOrientations MockApplicationInfo::supportedOrientations() const
+{
+    return Qt::PortraitOrientation | Qt::LandscapeOrientation;
+}
+
+bool MockApplicationInfo::rotatesWindowContents() const
+{
+    return false;
+}
