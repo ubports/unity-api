@@ -102,14 +102,14 @@ class UNITY_API LauncherItemInterface: public QObject
      *
      * True if focused, false if not focused
      */
-    Q_PROPERTY(bool focused READ focused NOTIFY focusedChanged())
+    Q_PROPERTY(bool focused READ focused NOTIFY focusedChanged)
 
     /**
      * @brief The alerting state of the item
      *
      * True if alerting/wobbling, false if not alerting/wobbling
      */
-    Q_PROPERTY(bool alerting READ alerting NOTIFY alertingChanged())
+    Q_PROPERTY(bool alerting READ alerting NOTIFY alertingChanged)
 
     /**
      * @brief The quick list menu contents for the item
