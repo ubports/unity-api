@@ -1,3 +1,10 @@
+unity-api (7.97+15.10.20150611-0ubuntu1) wily; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * add supportedOrientations and rotatesWindowContents to ApplicationInfo
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 11 Jun 2015 09:11:57 +0000
+
 unity-api (7.96+15.04.20150410.2-0ubuntu1) vivid; urgency=medium
 
   [ CI Train Bot ]
