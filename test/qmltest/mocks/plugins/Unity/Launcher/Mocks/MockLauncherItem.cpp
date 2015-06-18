@@ -33,8 +33,8 @@ MockLauncherItem::MockLauncherItem(const QString &appId, const QString& desktopF
     m_recent(false),
     m_progress(8),
     m_count(8),
-    m_alerting(false),
     m_countVisible(false),
+    m_alerting(false),
     m_quickListModel(new MockQuickListModel(this))
 {
 
