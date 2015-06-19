@@ -12,10 +12,6 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Authors:
- *      Michael Zanetti <michael.zanetti@canonical.com>
- *      Daniel d'Andrada <daniel.dandrada@canonical.com>
  */
 
 #ifndef UNITY_SHELL_APPLICATION_APPLICATIONINFOINTERFACE_H
@@ -47,6 +43,7 @@ class UNITY_API ApplicationInfoInterface: public QObject
 
     Q_ENUMS(Stage)
     Q_ENUMS(State)
+    Q_ENUMS(RequestedState)
 
     /**
      * @brief The appId of the application.
@@ -91,6 +88,11 @@ class UNITY_API ApplicationInfoInterface: public QObject
      * Holds the current application state.
      */
     Q_PROPERTY(State state READ state NOTIFY stateChanged)
+
+    /**
+     * @brief The application's requested running state
+     */
+    Q_PROPERTY(RequestedState requestedState READ requestedState WRITE setRequestedState NOTIFY requestedStateChanged)
 
     /**
      * @brief The application's focus state.
@@ -235,6 +237,18 @@ public:
         Stopped
     };
 
+    /**
+     * @brief The desired state of an application
+     *
+     * RequestedRunning: If state is Suspended or Stopped, the application will be resumed
+     *                   or restarted, respectively.
+     * RequestedSuspended: If state is Running, the application will be suspended.
+     */
+    enum RequestedState {
+        RequestedRunning = Running,
+        RequestedSuspended = Suspended
+    };
+
     /// @cond
     virtual ~ApplicationInfoInterface() {}
 
@@ -244,6 +258,8 @@ public:
     virtual QUrl icon() const = 0;
     virtual Stage stage() const = 0;
     virtual State state() const = 0;
+    virtual RequestedState requestedState() const = 0;
+    virtual void setRequestedState(RequestedState) = 0;
     virtual bool focused() const = 0;
     virtual QString splashTitle() const = 0;
     virtual QUrl splashImage() const = 0;
@@ -262,6 +278,7 @@ Q_SIGNALS:
     void iconChanged(const QUrl &icon);
     void stageChanged(Stage stage);
     void stateChanged(State state);
+    void requestedStateChanged(RequestedState value);
     void focusedChanged(bool focused);
     /// @endcond
 };

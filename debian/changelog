@@ -1,3 +1,11 @@
+unity-api (7.98) UNRELEASED; urgency=medium
+
+  * Remove ApplicationManagerInterface.forceDashActive
+  * Remove ApplicationManagerInterface.suspended
+  * Add ApplicationInfoInterface.requestedState
+
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Mon, 15 Jun 2015 13:53:07 -0300
+
 unity-api (7.97+15.10.20150611-0ubuntu1) wily; urgency=medium
 
   [ Daniel d'Andrada ]
@@ -109,7 +117,7 @@ unity-api (7.85+14.10.20140708-0ubuntu1) utopic; urgency=medium
 
   [ Michal Hruby ]
   * Added header links CategoriesInterface and performQuery() to
-    ScopeInterface 
+    ScopeInterface
 
   [ Michi Henning ]
   * A few minor fixes to the doc comments for comparison operators.
@@ -474,7 +482,7 @@ unity-api (7.80.2+13.10.20130627ubuntu.unity.next-0ubuntu1) saucy; urgency=low
 
 unity-api (7.80.1) saucy; urgency=low
 
-  * This project forked from lp:unity/phablet. Updating the versioning to 
+  * This project forked from lp:unity/phablet. Updating the versioning to
     reflect that.
 
  -- Sergio Schvezov <sergio.schvezov@canonical.com>  Tue, 04 Jun 2013 16:06:54 -0300

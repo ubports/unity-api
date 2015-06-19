@@ -59,20 +59,6 @@ class UNITY_API ApplicationManagerInterface: public QAbstractListModel
      */
     Q_PROPERTY(QString focusedApplicationId READ focusedApplicationId NOTIFY focusedApplicationIdChanged)
 
-    /**
-     * @brief The suspended state of the ApplicationManager.
-     *
-     * If this is set to true, all apps (regardless if focused or not) will be suspended.
-     */
-    Q_PROPERTY(bool suspended READ suspended WRITE setSuspended NOTIFY suspendedChanged)
-
-    /**
-     * @brief Activate the dash, regardless of its focused state.
-     *
-     * If this is set to true, the dash will not be put to suspend or will be woken up from suspend.
-     */
-    Q_PROPERTY(bool forceDashActive READ forceDashActive WRITE setForceDashActive NOTIFY forceDashActiveChanged)
-
 protected:
     /// @cond
     ApplicationManagerInterface(QObject* parent = 0): QAbstractListModel(parent)
@@ -122,11 +108,6 @@ public:
 
     virtual QString focusedApplicationId() const = 0;
 
-    virtual bool suspended() const = 0;
-    virtual void setSuspended(bool suspended) = 0;
-
-    virtual bool forceDashActive() const = 0;
-    virtual void setForceDashActive(bool forceDashActive) = 0;
     /// @endcond
 
     /**
@@ -210,16 +191,6 @@ Q_SIGNALS:
      * @brief Will be emitted whenever the focused application changes.
      */
     void focusedApplicationIdChanged();
-
-    /**
-     * @brief Will be emitted when the suspended state of the ApplicationManager changes.
-     */
-    void suspendedChanged();
-
-    /**
-     * @brief Will be emitted when the forceDashActive property changes.
-     */
-    void forceDashActiveChanged();
 
     /**
      * @brief Will be emitted when an application was added to the model.
