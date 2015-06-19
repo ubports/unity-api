@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013,2015 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -15,6 +15,7 @@
  *
  * Authors:
  *      Michael Zanetti <michael.zanetti@canonical.com>
+ *      Daniel d'Andrada <daniel.dandrada@canonical.com>
  */
 
 #ifndef UNITY_SHELL_APPLICATION_APPLICATIONINFOINTERFACE_H
@@ -176,6 +177,26 @@ class UNITY_API ApplicationInfoInterface: public QObject
      */
     Q_PROPERTY(QColor splashColorFooter READ splashColorFooter CONSTANT)
 
+    /**
+     * @brief The orientations supported by the application UI
+     * @see rotatesContents
+     */
+    Q_PROPERTY(Qt::ScreenOrientations supportedOrientations READ supportedOrientations CONSTANT)
+
+    /**
+     * @brief Whether the application UI will rotate itself to match the screen orientation
+     *
+     * Returns true if the application will rotate the UI in its windows to match the screen
+     * orientation.
+     *
+     * If false, it means that the application never rotates its UI, so it will
+     * rely on the window manager to appropriately rotate his windows to match the screen
+     * orientation instead.
+     *
+     * @see supportedOrientations
+     */
+    Q_PROPERTY(bool rotatesWindowContents READ rotatesWindowContents CONSTANT)
+
 protected:
     /// @cond
     ApplicationInfoInterface(const QString &appId, QObject* parent = 0): QObject(parent) { Q_UNUSED(appId) }
@@ -230,6 +251,8 @@ public:
     virtual QColor splashColor() const = 0;
     virtual QColor splashColorHeader() const = 0;
     virtual QColor splashColorFooter() const = 0;
+    virtual Qt::ScreenOrientations supportedOrientations() const = 0;
+    virtual bool rotatesWindowContents() const = 0;
     /// @endcond
 
 Q_SIGNALS:

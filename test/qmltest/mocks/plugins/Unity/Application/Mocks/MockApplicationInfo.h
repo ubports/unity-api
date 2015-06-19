@@ -53,6 +53,9 @@ public:
     QColor splashColorHeader() const override;
     QColor splashColorFooter() const override;
 
+    Qt::ScreenOrientations supportedOrientations() const override;
+    bool rotatesWindowContents() const override;
+
 private:
     QString m_appId;
     QString m_name;

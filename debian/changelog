@@ -1,9 +1,16 @@
-unity-api (7.97+15.04.20150213-0ubuntu2) UNRELEASED; urgency=medium
+unity-api (7.97+15.04.20150619-0ubuntu1) UNRELEASED; urgency=medium
 
   [Albert Astals Cid ]
   * New property to support more complex cards
 
  -- Michael Zanetti <michael.zanetti@canonical.com>  Fri, 29 May 2015 18:16:26 +0200
+
+unity-api (7.97+15.10.20150611-0ubuntu1) wily; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * add supportedOrientations and rotatesWindowContents to ApplicationInfo
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 11 Jun 2015 09:11:57 +0000
 
 unity-api (7.96+15.04.20150410.2-0ubuntu1) vivid; urgency=medium
 
