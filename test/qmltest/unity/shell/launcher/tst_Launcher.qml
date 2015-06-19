@@ -104,7 +104,7 @@ Item {
 
         function test_model_methods_data() {
             return [
-                { tag: "Model.methods[alert]", method: "alert" },
+                { tag: "Model.methods[setAlerting]", method: "setAlerting" },
                 { tag: "Model.methods[get]", method: "get" },
                 { tag: "Model.methods[move]", method: "move" },
                 { tag: "Model.methods[pin]", method: "pin" },

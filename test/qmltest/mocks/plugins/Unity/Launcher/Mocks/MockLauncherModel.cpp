@@ -104,7 +104,7 @@ LauncherItemInterface *MockLauncherModel::get(int index) const
     return m_list.at(index);
 }
 
-void MockLauncherModel::alert(const QString &appId, bool alerting) {
+void MockLauncherModel::setAlerting(const QString &appId, bool alerting) {
     Q_UNUSED(appId)
     Q_UNUSED(alerting)
 }
