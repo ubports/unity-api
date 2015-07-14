@@ -164,9 +164,10 @@ void MockScope::activate(QVariant const& result)
     Q_UNUSED(result);
 }
 
-void MockScope::activateAction(QVariant const& result, QString const& actionId)
+void MockScope::activateAction(QVariant const& result, QString const& categoryId, QString const& actionId)
 {
     Q_UNUSED(result);
+    Q_UNUSED(categoryId);
     Q_UNUSED(actionId);
 }
 
