@@ -4,6 +4,13 @@ unity-api (7.98-0ubuntu1) UNRELEASED; urgency=medium
 
  -- Pawel Stolowski <pawel.stolowski@canonical.com>  Wed, 08 Jul 2015 12:03:47 +0000
 
+unity-api (7.97+15.10.20150721-0ubuntu1) wily; urgency=medium
+
+  [ Michi Henning ]
+  * Remove dependency on gcc 4.9. (LP: #1452342)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 21 Jul 2015 05:13:26 +0000
+
 unity-api (7.97+15.10.20150611-0ubuntu1) wily; urgency=medium
 
   [ Daniel d'Andrada ]
