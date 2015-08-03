@@ -39,6 +39,7 @@ public:
 
     QVariant data(const QModelIndex& index, int role) const;
 
+    Q_INVOKABLE void setAlerting(const QString& appId, bool alerting);
     Q_INVOKABLE unity::shell::launcher::LauncherItemInterface *get(int index) const;
     Q_INVOKABLE void move(int oldIndex, int newIndex);
     Q_INVOKABLE void pin(const QString &appId, int index = -1);
