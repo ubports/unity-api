@@ -1,10 +1,12 @@
-unity-api (7.99) UNRELEASED; urgency=medium
+unity-api (7.99+15.10.20150804-0ubuntu1) wily; urgency=medium
 
+  [ Daniel d'Andrada ]
   * Remove ApplicationManagerInterface.forceDashActive
   * Remove ApplicationManagerInterface.suspended
   * Add ApplicationInfoInterface.requestedState
+  * Add a NO_TESTS options to cmake
 
- -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Mon, 15 Jun 2015 13:53:07 -0300
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 04 Aug 2015 15:26:16 +0000
 
 unity-api (7.98+15.10.20150724-0ubuntu1) wily; urgency=medium
 
