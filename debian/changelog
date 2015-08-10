@@ -4,7 +4,7 @@ unity-api (7.99-0ubuntu1) UNRELEASED; urgency=medium
 
  -- Pawel Stolowski <pawel.stolowski@canonical.com>  Mon, 03 Aug 2015 14:03:47 +0000
 
-unity-api (7.98+15.10.20150724-0ubuntu1) wily; urgency=medium
+unity-api (7.98+15.04.20150724-0ubuntu1) vivid; urgency=medium
 
   [ Mirco Müller (MacSlow) ]
   * added alerting/setAlerting API to LauncherModel and LauncherItem interfaces
