@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013,2015 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -96,26 +96,6 @@ QString MockApplicationManager::focusedApplicationId() const
 {
     auto first = m_list.first();
     return (first) ? first->appId() : QString();
-}
-
-bool MockApplicationManager::suspended() const
-{
-    return false;
-}
-
-void MockApplicationManager::setSuspended(bool suspended)
-{
-    Q_UNUSED(suspended)
-}
-
-bool MockApplicationManager::forceDashActive() const
-{
-    return false;
-}
-
-void MockApplicationManager::setForceDashActive(bool forceDashActive)
-{
-    Q_UNUSED(forceDashActive)
 }
 
 bool MockApplicationManager::requestFocusApplication(const QString &appId)
