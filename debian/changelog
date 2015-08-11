@@ -1,4 +1,4 @@
-unity-api (7.99+15.10.20150804-0ubuntu1) wily; urgency=medium
+unity-api (7.99+15.04.20150804-0ubuntu1) vivid; urgency=medium
 
   [ Daniel d'Andrada ]
   * Remove ApplicationManagerInterface.forceDashActive
