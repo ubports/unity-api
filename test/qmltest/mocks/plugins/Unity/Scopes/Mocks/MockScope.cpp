@@ -159,14 +159,16 @@ void MockScope::setNoResultsHint(const QString& str) {
     }
 }
 
-void MockScope::activate(QVariant const& result)
+void MockScope::activate(QVariant const& result, QString const& categoryId)
 {
     Q_UNUSED(result);
+    Q_UNUSED(categoryId);
 }
 
-unity::shell::scopes::PreviewStackInterface* MockScope::preview(QVariant const& result)
+unity::shell::scopes::PreviewStackInterface* MockScope::preview(QVariant const& result, QString const& categoryId)
 {
     Q_UNUSED(result);
+    Q_UNUSED(categoryId);
 
     // This probably leaks, do we don't care
     // it's a  test after all
