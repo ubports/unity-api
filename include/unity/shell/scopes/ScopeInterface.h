@@ -198,7 +198,7 @@ public:
     /**
      * @brief Method used to activate a result.
      */
-    Q_INVOKABLE virtual void activate(QVariant const& result) = 0;
+    Q_INVOKABLE virtual void activate(QVariant const& result, QString const& categoryId) = 0;
 
     /**
      * @brief Method used to preview a result.
@@ -206,7 +206,7 @@ public:
      * Returns a new PreviewStackInterface instance. It's caller's responsibility
      * to free it.
      */
-    Q_INVOKABLE virtual unity::shell::scopes::PreviewStackInterface* preview(QVariant const& result) = 0;
+    Q_INVOKABLE virtual unity::shell::scopes::PreviewStackInterface* preview(QVariant const& result, QString const& categoryId) = 0;
 
     /**
      * @brief Cancels the current activation.
