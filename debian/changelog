@@ -1,3 +1,9 @@
+unity-api (7.100) UNRELEASED; urgency=medium
+
+  * Added MirSurface and MirSurfaceItem interfaces
+
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Wed, 19 Aug 2015 10:13:05 -0300
+
 unity-api (7.99+15.04.20150811-0ubuntu1) vivid; urgency=medium
 
   * New rebuild forced.
