@@ -1,8 +1,12 @@
-unity-api (7.99+15.10.20150814-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.99+15.10.20150826-0ubuntu1) wily; urgency=medium
 
+  [ Pawel Stolowski ]
   * Changes to activate and preview methods of ScopeInterface.
 
- -- Pawel Stolowski <pawel.stolowski@canonical.com>  Mon, 03 Aug 2015 14:03:47 +0000
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 26 Aug 2015 08:59:21 +0000
 
 unity-api (7.99+15.10.20150804-0ubuntu1) wily; urgency=medium
 
