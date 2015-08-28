@@ -1,8 +1,62 @@
-unity-api (7.97-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.100-0ubuntu1) UNRELEASED; urgency=medium
 
   * Added Filters interface.
 
- -- Pawel Stolowski <pawel.stolowski@canonical.com>  Wed, 25 Mar 2015 13:50:55 +0100
+ -- Pawel Stolowski <pawel.stolowski@canonical.com>  Wed, 28 Aug 2015 13:50:55 +0100
+
+unity-api (7.99+15.10.20150826-0ubuntu1) wily; urgency=medium
+
+  [ Pawel Stolowski ]
+  * Changes to activate and preview methods of ScopeInterface.
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Wed, 26 Aug 2015 08:59:21 +0000
+
+unity-api (7.99+15.10.20150804-0ubuntu1) wily; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * Remove ApplicationManagerInterface.forceDashActive
+  * Remove ApplicationManagerInterface.suspended
+  * Add ApplicationInfoInterface.requestedState
+  * Add a NO_TESTS options to cmake
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 04 Aug 2015 15:26:16 +0000
+
+unity-api (7.98+15.10.20150724-0ubuntu1) wily; urgency=medium
+
+  [ Mirco Müller (MacSlow) ]
+  * added alerting/setAlerting API to LauncherModel and LauncherItem interfaces
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 24 Jul 2015 09:53:01 +0000
+
+unity-api (7.97+15.10.20150721-0ubuntu1) wily; urgency=medium
+
+  [ Michi Henning ]
+  * Remove dependency on gcc 4.9. (LP: #1452342)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 21 Jul 2015 05:13:26 +0000
+
+unity-api (7.97+15.10.20150611-0ubuntu1) wily; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * add supportedOrientations and rotatesWindowContents to ApplicationInfo
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 11 Jun 2015 09:11:57 +0000
+
+unity-api (7.96+15.04.20150410.2-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michi Henning ]
+  * Reverted commit 93 because it cost me a cool 1.5 hours today. Turns
+    out that libmcheck is not thread-safe and causes the most amazing
+    crashes in unpredictable ways :-(
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 10 Apr 2015 16:07:39 +0000
+>>>>>>> MERGE-SOURCE
 
 unity-api (7.96+15.04.20150213-0ubuntu1) vivid; urgency=medium
 
@@ -96,7 +150,7 @@ unity-api (7.85+14.10.20140708-0ubuntu1) utopic; urgency=medium
 
   [ Michal Hruby ]
   * Added header links CategoriesInterface and performQuery() to
-    ScopeInterface 
+    ScopeInterface
 
   [ Michi Henning ]
   * A few minor fixes to the doc comments for comparison operators.
@@ -461,7 +515,7 @@ unity-api (7.80.2+13.10.20130627ubuntu.unity.next-0ubuntu1) saucy; urgency=low
 
 unity-api (7.80.1) saucy; urgency=low
 
-  * This project forked from lp:unity/phablet. Updating the versioning to 
+  * This project forked from lp:unity/phablet. Updating the versioning to
     reflect that.
 
  -- Sergio Schvezov <sergio.schvezov@canonical.com>  Tue, 04 Jun 2013 16:06:54 -0300

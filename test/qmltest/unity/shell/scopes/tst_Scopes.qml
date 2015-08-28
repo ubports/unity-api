@@ -27,7 +27,7 @@ Item {
         id: scopes
     }
     property var scope: scopes.getScope(0)
-    property var preview: root.scope.preview("")
+    property var preview: root.scope.preview("", "")
     property var navigation: root.scope.getNavigation("root")
 
     Verifier {

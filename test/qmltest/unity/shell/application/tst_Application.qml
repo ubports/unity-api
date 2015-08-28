@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013,2015 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -124,8 +124,6 @@ Item {
             return [
                 { tag: "ApplicationManager.count", property: "count", type: "number" },
                 { tag: "ApplicationManager.focusedApplicationId", property: "focusedApplicationId", type: "string" },
-                { tag: "ApplicationManager.suspended", property: "suspended", type: "boolean" },
-                { tag: "ApplicationManager.forceDashActive", property: "forceDashActive", type: "boolean" },
             ];
         }
 
@@ -143,6 +141,7 @@ Item {
                 { tag: "ApplicationInfo.properties[icon]", property: "icon", type: "object" },
                 { tag: "ApplicationInfo.properties[stage]", property: "stage", type: "number" },
                 { tag: "ApplicationInfo.properties[state]", property: "state", type: "number" },
+                { tag: "ApplicationInfo.properties[requestedState]", property: "requestedState", type: "number" },
                 { tag: "ApplicationInfo.properties[focused]", property: "focused", type: "boolean" },
                 { tag: "ApplicationInfo.properties[splashTitle]", constant: "splashTitle", type: "string" },
                 { tag: "ApplicationInfo.properties[splashImage]", constant: "splashImage", type: "url" },
@@ -150,6 +149,8 @@ Item {
                 { tag: "ApplicationInfo.properties[splashColor]", constant: "splashColor", type: "color"},
                 { tag: "ApplicationInfo.properties[splashColorHeader]", constant: "splashColorHeader", type: "color"},
                 { tag: "ApplicationInfo.properties[splashColorFooter]", constant: "splashColorFooter", type: "color"},
+                { tag: "ApplicationInfo.properties[supportedOrientations]", constant: "supportedOrientations", type: "number"},
+                { tag: "ApplicationInfo.properties[rotatesWindowContents]", constant: "rotatesWindowContents", type: "boolean"},
             ];
         }
 

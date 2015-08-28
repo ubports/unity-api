@@ -34,6 +34,7 @@ MockLauncherItem::MockLauncherItem(const QString &appId, const QString& desktopF
     m_progress(8),
     m_count(8),
     m_countVisible(false),
+    m_alerting(false),
     m_quickListModel(new MockQuickListModel(this))
 {
 
@@ -154,6 +155,20 @@ void MockLauncherItem::setFocused(bool focused)
     {
         m_focused = focused;
         Q_EMIT focusedChanged(focused);
+    }
+}
+
+bool MockLauncherItem::alerting() const
+{
+    return m_alerting;
+}
+
+void MockLauncherItem::setAlerting(bool alerting)
+{
+    if (m_alerting != alerting)
+    {
+        m_alerting = alerting;
+        Q_EMIT alertingChanged(alerting);
     }
 }
 
