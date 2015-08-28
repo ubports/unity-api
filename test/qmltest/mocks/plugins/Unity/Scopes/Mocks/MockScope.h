@@ -39,6 +39,7 @@ public:
     unity::shell::scopes::CategoriesInterface* categories() const override;
     unity::shell::scopes::SettingsModelInterface* settings() const override;
     unity::shell::scopes::FiltersInterface* filters() const override;
+    unity::shell::scopes::FilterBaseInterface* primaryNavigationFilter() const override;
     QString searchQuery() const override;
     QString noResultsHint() const override;
     QString formFactor() const override;
@@ -49,6 +50,8 @@ public:
     QString currentAltNavigationId() const override;
     QVariantMap customizations() const override;
     Status status() const override;
+    QString navigationBrickLabel() const override;
+    int activeFiltersCount() const override;
 
     /* setters */
     void setName(const QString& name);

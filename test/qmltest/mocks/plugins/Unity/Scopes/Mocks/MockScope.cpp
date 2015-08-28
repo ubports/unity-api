@@ -91,6 +91,10 @@ unity::shell::scopes::FiltersInterface* MockScope::filters() const {
     return m_filters;
 }
 
+unity::shell::scopes::FilterBaseInterface* MockScope::primaryNavigationFilter() const {
+    return nullptr;
+}
+
 QString MockScope::noResultsHint() const {
     return m_noResultsHint;
 }
@@ -217,4 +221,14 @@ void MockScope::performQuery(QString const& cannedQuery)
 
 void MockScope::refresh()
 {
+}
+
+QString MockScope::navigationBrickLabel() const
+{
+    return "";
+}
+
+int MockScope::activeFiltersCount() const
+{
+    return 0;
 }

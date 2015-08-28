@@ -34,6 +34,7 @@ class PreviewStackInterface;
 class NavigationInterface;
 class SettingsModelInterface;
 class FiltersInterface;
+class FilterBaseInterface;
 
 /**
  * @brief Object representing scope instance, which exposes model(s) with results.
@@ -154,6 +155,16 @@ class UNITY_API ScopeInterface : public QObject
      */
     Q_PROPERTY(unity::shell::scopes::FiltersInterface* filters READ filters NOTIFY filtersChanged)
 
+    /**
+     * @brief Label for the currently active top level navigation (department or primary filter).
+     */
+    Q_PROPERTY(QString navigationBrickLabel READ navigationBrickLabel NOTIFY navigationBrickLabelChanged)
+
+    /**
+     * @brief The number of currently selected filters.
+     */
+    Q_PROPERTY(int activeFiltersCount READ activeFiltersCount NOTIFY activeFiltersCountChanged)
+
 protected:
     /// @cond
     explicit ScopeInterface(QObject* parent = 0) : QObject(parent) { }
@@ -182,6 +193,7 @@ public:
     virtual bool favorite() const = 0;
     virtual CategoriesInterface* categories() const = 0;
     virtual SettingsModelInterface* settings() const = 0;
+    virtual FilterBaseInterface* primaryNavigationFilter() const = 0;
     virtual QString searchQuery() const = 0;
     virtual QString noResultsHint() const = 0;
     virtual QString formFactor() const = 0;
@@ -193,6 +205,8 @@ public:
     virtual Status status() const = 0;
     virtual QVariantMap customizations() const = 0;
     virtual FiltersInterface* filters() const = 0;
+    virtual QString navigationBrickLabel() const = 0;
+    virtual int activeFiltersCount() const = 0;
 
     /* setters */
     virtual void setSearchQuery(const QString& search_query) = 0;
@@ -274,6 +288,8 @@ Q_SIGNALS:
     void statusChanged();
     void detailsChanged();
     void filtersChanged();
+    void navigationBrickLabelChanged();
+    void activeFiltersCountChanged();
     // @endcond
 
     // signals triggered by activate(..) or preview(..) requests.
