@@ -95,6 +95,11 @@ class UNITY_API ScopeInterface : public QObject
     Q_PROPERTY(unity::shell::scopes::SettingsModelInterface* settings READ settings NOTIFY settingsChanged)
 
     /**
+     * @brief
+     */
+    Q_PROPERTY(unity::shell::scopes::FilterBaseInterface* primaryNavigationFilter READ primaryNavigationFilter NOTIFY primaryNavigationFilterChanged)
+
+    /**
      * @brief Current search query.
      *
      * Writing to this property issues a new search to the scope.
@@ -290,6 +295,7 @@ Q_SIGNALS:
     void filtersChanged();
     void navigationBrickLabelChanged();
     void activeFiltersCountChanged();
+    void primaryNavigationFilterChanged();
     // @endcond
 
     // signals triggered by activate(..) or preview(..) requests.
