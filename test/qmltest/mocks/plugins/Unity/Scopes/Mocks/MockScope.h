@@ -50,7 +50,7 @@ public:
     QString currentAltNavigationId() const override;
     QVariantMap customizations() const override;
     Status status() const override;
-    QString navigationBrickLabel() const override;
+    QString primaryNavigationTag() const override;
     int activeFiltersCount() const override;
 
     /* setters */
@@ -70,6 +70,7 @@ public:
     Q_INVOKABLE void setNavigationState(QString const& navId, bool altNavigation) override;
     Q_INVOKABLE void performQuery(QString const& cannedQuery) override;
     Q_INVOKABLE void refresh() override;
+    Q_INVOKABLE void resetPrimaryNavigationTag() override;
 
 protected:
     QString m_id;

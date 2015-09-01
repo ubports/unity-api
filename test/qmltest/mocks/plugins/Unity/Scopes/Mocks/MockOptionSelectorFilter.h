@@ -31,6 +31,7 @@ public:
     QString label() const override;
     bool multiSelect() const override;
     unity::shell::scopes::OptionSelectorOptionsInterface* options() const override;
+    QString filterTag() const override;
 
 private:
     QString m_id;

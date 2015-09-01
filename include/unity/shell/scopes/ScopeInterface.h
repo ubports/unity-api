@@ -163,7 +163,7 @@ class UNITY_API ScopeInterface : public QObject
     /**
      * @brief Label for the currently active top level navigation (department or primary filter).
      */
-    Q_PROPERTY(QString navigationBrickLabel READ navigationBrickLabel NOTIFY navigationBrickLabelChanged)
+    Q_PROPERTY(QString primaryNavigationTag READ primaryNavigationTag NOTIFY primaryNavigationTagChanged)
 
     /**
      * @brief The number of currently selected filters.
@@ -210,7 +210,7 @@ public:
     virtual Status status() const = 0;
     virtual QVariantMap customizations() const = 0;
     virtual FiltersInterface* filters() const = 0;
-    virtual QString navigationBrickLabel() const = 0;
+    virtual QString primaryNavigationTag() const = 0;
     virtual int activeFiltersCount() const = 0;
 
     /* setters */
@@ -269,6 +269,11 @@ public:
      */
     Q_INVOKABLE virtual void refresh() = 0;
 
+    /**
+     * @brief Reset primary navigation filter and its tag in the search bar.
+     */
+    Q_INVOKABLE virtual void resetPrimaryNavigationTag() = 0;
+
 Q_SIGNALS:
     // @cond
     void idChanged();
@@ -293,7 +298,7 @@ Q_SIGNALS:
     void statusChanged();
     void detailsChanged();
     void filtersChanged();
-    void navigationBrickLabelChanged();
+    void primaryNavigationTagChanged();
     void activeFiltersCountChanged();
     void primaryNavigationFilterChanged();
     // @endcond

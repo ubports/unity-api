@@ -38,6 +38,7 @@ class UNITY_API FilterBaseInterface : public QObject
 
         virtual QString filterId() const = 0;
         virtual FiltersInterface::FilterType filterType() const = 0;
+        virtual QString filterTag() const = 0;
 
     protected:
         /// @cond

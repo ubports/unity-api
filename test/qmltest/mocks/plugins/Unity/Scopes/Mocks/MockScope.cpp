@@ -223,9 +223,13 @@ void MockScope::refresh()
 {
 }
 
-QString MockScope::navigationBrickLabel() const
+QString MockScope::primaryNavigationTag() const
 {
     return "";
+}
+
+void MockScope::resetPrimaryNavigationTag()
+{
 }
 
 int MockScope::activeFiltersCount() const
