@@ -1,9 +1,19 @@
-unity-api (7.100+15.04.20150812-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.101+15.04.20150902-0ubuntu1) UNRELEASED; urgency=medium
 
   [Albert Astals Cid ]
   * New property to support more complex cards
 
  -- Michael Zanetti <michael.zanetti@canonical.com>  Fri, 29 May 2015 18:16:26 +0200
+
+unity-api (7.100+15.04.20150827-0ubuntu1) vivid; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * Added MirSurface and MirSurfaceItem interfaces
+
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 27 Aug 2015 08:50:45 +0000
 
 unity-api (7.99+15.04.20150811-0ubuntu1) vivid; urgency=medium
 
