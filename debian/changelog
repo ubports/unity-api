@@ -1,3 +1,11 @@
+unity-api (7.101) UNRELEASED; urgency=medium
+
+  * unity/shell/application: Add Mir.cursorName
+  * unity/shell/application: Added MirMousePointerInterface.h
+  * unity/shell/application: Added MirPlatformCursor.h
+
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Tue, 01 Sep 2015 13:38:11 -0300
+
 unity-api (7.100+15.10.20150903-0ubuntu1) wily; urgency=medium
 
   [ Michal Sawicz ]
