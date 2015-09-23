@@ -1,3 +1,10 @@
+unity-api (7.101) UNRELEASED; urgency=medium
+
+  [ Nick Dedekind ]
+  * Added visibility to surface interface. 
+
+ -- Nick Dedekind <nick.dedekind@canonical.com>  Tue, 22 Sep 2015 14:43:33 +0100
+
 unity-api (7.100+15.10.20150903-0ubuntu1) wily; urgency=medium
 
   [ Michal Sawicz ]
