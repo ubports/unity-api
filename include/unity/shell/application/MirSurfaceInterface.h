@@ -68,7 +68,7 @@ class MirSurfaceInterface : public QObject
     /**
      * @brief Visibility of the surface
      */
-    Q_PROPERTY(Mir::Visibility visibility READ visibility NOTIFY visibilityChanged)
+    Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged)
 
     /**
      * @brief Orientation angle of the surface
@@ -96,7 +96,7 @@ public:
 
     virtual bool live() const = 0;
 
-    virtual Mir::Visibility visibility() const = 0;
+    virtual bool visible() const = 0;
 
     virtual Mir::OrientationAngle orientationAngle() const = 0;
     virtual void setOrientationAngle(Mir::OrientationAngle angle) = 0;
@@ -106,7 +106,7 @@ Q_SIGNALS:
     /// @cond
     void typeChanged(Mir::Type value);
     void liveChanged(bool value);
-    void visibilityChanged(Mir::Visibility visibility);
+    void visibleChanged(bool visible);
     void stateChanged(Mir::State value);
     void orientationAngleChanged(Mir::OrientationAngle value);
     void sizeChanged(const QSize &value);

@@ -62,14 +62,6 @@ public:
     };
 
     /**
-        @brief Visibility
-     */
-    enum Visibility {
-        Occluded,
-        Exposed,
-    };
-
-    /**
         @brief Surface orientation angle
      */
     enum OrientationAngle {
