@@ -1,3 +1,9 @@
+unity-api (7.101+15.10.20150903-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Added allLabel role to the scopes NavigationInterface.
+
+ -- Pawel Stolowski <pawel.stolowski@canonical.com>  Mon, 28 Sep 2015 11:16:45 +0200
+
 unity-api (7.100+15.10.20150903-0ubuntu1) wily; urgency=medium
 
   [ Michal Sawicz ]
