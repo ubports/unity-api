@@ -93,6 +93,7 @@ public:
      */
     enum Roles {
         RoleNavigationId,
+        RoleLabel,
         RoleAllLabel,
         RoleHasChildren,
         RoleIsActive
