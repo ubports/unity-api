@@ -55,6 +55,10 @@ public:
     Qt::ScreenOrientations supportedOrientations() const override;
     bool rotatesWindowContents() const override;
 
+    bool isTouchApp() const override;
+    bool canSuspend() const override;
+    void setCanSuspend(bool canSuspend) override;
+
 private:
     QString m_appId;
     QString m_name;
@@ -63,6 +67,7 @@ private:
     ApplicationInfoInterface::Stage m_stage;
     ApplicationInfoInterface::State m_state;
     bool m_focused;
+    bool m_canSuspend;
 };
 
 #endif // MOCKAPPLICATIONINFO_H

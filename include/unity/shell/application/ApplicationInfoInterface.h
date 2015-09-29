@@ -199,6 +199,18 @@ class UNITY_API ApplicationInfoInterface: public QObject
      */
     Q_PROPERTY(bool rotatesWindowContents READ rotatesWindowContents CONSTANT)
 
+    /**
+     * @brief Whether the application is an app targeting the Ubuntu Touch platform.
+     */
+    Q_PROPERTY(bool isTouchApp READ isTouchApp CONSTANT)
+
+    /**
+     * @brief Whether the application is allowed to suspend.
+     *
+     * Default is true.
+     */
+    Q_PROPERTY(bool canSuspend READ canSuspend WRITE setCanSuspend NOTIFY canSuspendChanged)
+
 protected:
     /// @cond
     ApplicationInfoInterface(const QString &appId, QObject* parent = 0): QObject(parent) { Q_UNUSED(appId) }
@@ -269,6 +281,9 @@ public:
     virtual QColor splashColorFooter() const = 0;
     virtual Qt::ScreenOrientations supportedOrientations() const = 0;
     virtual bool rotatesWindowContents() const = 0;
+    virtual bool isTouchApp() const = 0;
+    virtual bool canSuspend() const = 0;
+    virtual void setCanSuspend(bool) = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -280,6 +295,7 @@ Q_SIGNALS:
     void stateChanged(State state);
     void requestedStateChanged(RequestedState value);
     void focusedChanged(bool focused);
+    void canSuspendChanged(bool canSuspend);
     /// @endcond
 };
 
