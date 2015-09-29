@@ -59,7 +59,7 @@ class MirSurfaceItemInterface : public QQuickItem
     /**
      * @brief Name of the given surface or an empty string if no surface is set
      */
-    Q_PROPERTY(QString name READ name CONSTANT)
+    Q_PROPERTY(QString name READ name NOTIFY nameChanged)
 
     /**
      * @brief True if the item has a surface and that surface has a mir client bound to it.
@@ -141,6 +141,7 @@ Q_SIGNALS:
     void consumesInputChanged(bool value);
     void surfaceWidthChanged(int value);
     void surfaceHeightChanged(int value);
+    void nameChanged(const QString &name);
     /// @endcond
 };
 
