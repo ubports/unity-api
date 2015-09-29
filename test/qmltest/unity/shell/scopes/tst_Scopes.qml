@@ -129,8 +129,6 @@ Item {
                 { tag: "Item.properties[isActive]", constant: "isActive", type: "boolean" },
                 { tag: "Item.properties[currentNavigationId]", constant: "currentNavigationId", type: "string" },
                 { tag: "Item.properties[hasNavigation]", constant: "hasNavigation", type: "boolean" },
-                { tag: "Item.properties[currentAltNavigationId]", constant: "currentAltNavigationId", type: "string" },
-                { tag: "Item.properties[hasAltNavigation]", constant: "hasAltNavigation", type: "boolean" },
                 { tag: "Item.properties[customizations]", constant: "customizations", type: "object" },
                 { tag: "Item.properties[status]", constant: "status", type: "number" }
             ];
@@ -157,7 +155,6 @@ Item {
                 { tag: "Model.methods[performQuery]", method: "performQuery" },
                 { tag: "Model.methods[refresh]", method: "refresh" },
                 { tag: "Model.methods[getNavigation]", method: "getNavigation" },
-                { tag: "Model.methods[getAltNavigation]", method: "getAltNavigation" },
                 { tag: "Model.methods[setNavigationState]", method: "setNavigationState" },
             ];
         }

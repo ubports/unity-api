@@ -46,8 +46,6 @@ public:
     bool isActive() const override;
     bool hasNavigation() const override;
     QString currentNavigationId() const override;
-    bool hasAltNavigation() const override;
-    QString currentAltNavigationId() const override;
     QVariantMap customizations() const override;
     Status status() const override;
     QString primaryNavigationTag() const override;
@@ -66,8 +64,7 @@ public:
     Q_INVOKABLE void cancelActivation() override;
     Q_INVOKABLE void closeScope(unity::shell::scopes::ScopeInterface* scope) override;
     Q_INVOKABLE unity::shell::scopes::NavigationInterface* getNavigation(QString const& departmentId) override;
-    Q_INVOKABLE unity::shell::scopes::NavigationInterface* getAltNavigation(QString const& departmentId) override;
-    Q_INVOKABLE void setNavigationState(QString const& navId, bool altNavigation) override;
+    Q_INVOKABLE void setNavigationState(QString const& navId) override;
     Q_INVOKABLE void performQuery(QString const& cannedQuery) override;
     Q_INVOKABLE void refresh() override;
     Q_INVOKABLE void resetPrimaryNavigationTag() override;
@@ -81,12 +78,10 @@ protected:
     QString m_noResultsHint;
     QString m_formFactor;
     QString m_currentDepartmentId;
-    QString m_currentAltDepartmentId;
     bool m_favorite;
     bool m_searching;
     bool m_isActive;
     bool m_hasNavigation;
-    bool m_hasAltNavigation;
     QVariantMap m_customizations;
 
     QString m_previewRendererName;

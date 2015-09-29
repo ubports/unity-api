@@ -136,16 +136,6 @@ class UNITY_API ScopeInterface : public QObject
     Q_PROPERTY(bool hasNavigation READ hasNavigation NOTIFY hasNavigationChanged)
 
     /**
-     * @brief String specifying currently selected sort order
-     */
-    Q_PROPERTY(QString currentAltNavigationId READ currentAltNavigationId NOTIFY currentAltNavigationIdChanged)
-
-    /**
-     * @brief Boolean specifying whether current query has sort order.
-     */
-    Q_PROPERTY(bool hasAltNavigation READ hasAltNavigation NOTIFY hasAltNavigationChanged)
-
-    /**
      * @brief VariantMap with customization properties
      */
     Q_PROPERTY(QVariantMap customizations READ customizations NOTIFY customizationsChanged)
@@ -205,8 +195,6 @@ public:
     virtual bool isActive() const = 0;
     virtual QString currentNavigationId() const = 0;
     virtual bool hasNavigation() const = 0;
-    virtual QString currentAltNavigationId() const = 0;
-    virtual bool hasAltNavigation() const = 0;
     virtual Status status() const = 0;
     virtual QVariantMap customizations() const = 0;
     virtual FiltersInterface* filters() const = 0;
@@ -250,14 +238,9 @@ public:
     Q_INVOKABLE virtual unity::shell::scopes::NavigationInterface* getNavigation(QString const& navigationId) = 0;
 
     /**
-     * @brief Get a NavigationInterface instance for the passed altNavigationId.
+     * @brief Request change to the current navigation id.
      */
-    Q_INVOKABLE virtual unity::shell::scopes::NavigationInterface* getAltNavigation(QString const& altNavigationId) = 0;
-
-    /**
-     * @brief Request change to the current navigation or altNavigation id.
-     */
-    Q_INVOKABLE virtual void setNavigationState(QString const& navId, bool altNavigation) = 0;
+    Q_INVOKABLE virtual void setNavigationState(QString const& navId) = 0;
 
     /**
      * @brief Execute canned query.
@@ -292,8 +275,6 @@ Q_SIGNALS:
     void isActiveChanged();
     void hasNavigationChanged();
     void currentNavigationIdChanged();
-    void hasAltNavigationChanged();
-    void currentAltNavigationIdChanged();
     void customizationsChanged();
     void statusChanged();
     void detailsChanged();
