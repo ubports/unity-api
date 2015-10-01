@@ -69,6 +69,7 @@ Item {
                         { enum: "RoleStage" },
                         { enum: "RoleState" },
                         { enum: "RoleFocused" },
+                        { enum: "RoleIsTouchApp" },
                     ];
         }
 
@@ -88,6 +89,7 @@ Item {
                         { tag: "ApplicationManager.roles[stage]", role: "stage", type: "number" },
                         { tag: "ApplicationManager.roles[state]", role: "state", type: "number" },
                         { tag: "ApplicationManager.roles[focused]", role: "focused", type: "boolean" },
+                        { tag: "ApplicationManager.roles[isTouchApp]", role: "isTouchApp", type: "boolean" },
                     ];
         }
 
@@ -143,6 +145,7 @@ Item {
                 { tag: "ApplicationInfo.properties[state]", property: "state", type: "number" },
                 { tag: "ApplicationInfo.properties[requestedState]", property: "requestedState", type: "number" },
                 { tag: "ApplicationInfo.properties[focused]", property: "focused", type: "boolean" },
+                { tag: "ApplicationInfo.properties[isTouchApp]", constant: "isTouchApp", type: "boolean" },
                 { tag: "ApplicationInfo.properties[splashTitle]", constant: "splashTitle", type: "string" },
                 { tag: "ApplicationInfo.properties[splashImage]", constant: "splashImage", type: "url" },
                 { tag: "ApplicationInfo.properties[splashShowHeader]", constant: "splashShowHeader", type: "boolean"},
