@@ -1,6 +1,6 @@
 unity-api (7.101) UNRELEASED; urgency=medium
 
-  * Add canSuspend and isTouchApp to ApplicationInfoInterface
+  * Add isTouchApp to ApplicationInfoInterface
 
  -- Michael Terry <mterry@ubuntu.com>  Tue, 29 Sep 2015 13:36:51 -0400
 

@@ -29,8 +29,7 @@ MockApplicationInfo::MockApplicationInfo(const QString &appId, const QString& co
     m_icon(icon),
     m_stage(MainStage),
     m_state(Running),
-    m_focused(false),
-    m_canSuspend(true)
+    m_focused(false)
 {
 
 }
@@ -149,18 +148,4 @@ bool MockApplicationInfo::rotatesWindowContents() const
 bool MockApplicationInfo::isTouchApp() const
 {
     return true;
-}
-
-bool MockApplicationInfo::canSuspend() const
-{
-    return m_canSuspend;
-}
-
-void MockApplicationInfo::setCanSuspend(bool canSuspend)
-{
-    if (m_canSuspend != canSuspend)
-    {
-        m_canSuspend = canSuspend;
-        Q_EMIT canSuspendChanged(canSuspend);
-    }
 }
