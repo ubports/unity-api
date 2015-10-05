@@ -5,12 +5,10 @@ Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Build-Depends: cmake,
                debhelper (>= 9),
                doxygen,
-# We rely on C++11 features, and to prevent from ABI breaks
-# in libstdc++ causing us issues, we explicitly select a G++
-# version. To allow cross-compiling to work, we also must
-# append :native to g++-4.9 so we don't try to run armhf g++
+# To allow cross-compiling to work, we append :native
+# to g++-4.9 so we don't try to run armhf g++
 # on an x86 CPU for example, when cross-compiling.
-               g++-4.9:native,
+               g++:native,
                graphviz,
                libboost-dev (>= 1.49),
                libboost-regex-dev (>= 1.49),

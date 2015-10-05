@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013,2015 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -12,9 +12,6 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Authors:
- *      Michael Zanetti <michael.zanetti@canonical.com>
  */
 
 #ifndef MOCKAPPLICATIONINFO_H
@@ -52,6 +49,11 @@ public:
     QColor splashColor() const override;
     QColor splashColorHeader() const override;
     QColor splashColorFooter() const override;
+    RequestedState requestedState() const override;
+    void setRequestedState(RequestedState) override;
+
+    Qt::ScreenOrientations supportedOrientations() const override;
+    bool rotatesWindowContents() const override;
 
 private:
     QString m_appId;

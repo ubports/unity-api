@@ -15,15 +15,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/mod
 
 string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower) # Build types should always be lowercase but sometimes they are not.
 
-# We require g++ 4.9, to avoid ABI breakage with earlier version.
-# Note that this must match what is specifed in debian/control.
-set(cxx_version_required 4.9)
-if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-    if (NOT CMAKE_CXX_COMPILER_VERSION MATCHES "^${cxx_version_required}")
-        message(FATAL_ERROR "g++ version must be ${cxx_version_required}!")
-    endif()
-endif()
-
 include(PrecompiledHeaders)
 include(EnableCoverageReport)
 #####################################################################
@@ -131,7 +122,7 @@ endif()
 # API version
 set(UNITY_API_MAJOR 0)
 set(UNITY_API_MINOR 1)
-set(UNITY_API_MICRO 4)
+set(UNITY_API_MICRO 5)
 set(UNITY_API_VERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}.${UNITY_API_MICRO}")
 
 # API library
@@ -154,13 +145,17 @@ set(TESTLIBS ${UNITY_API_STATIC_LIB} ${OTHER_API_LIBS})
 set(LIB_INSTALL_PREFIX lib/${CMAKE_LIBRARY_ARCHITECTURE})
 
 # Tests
-include(CTest)
-enable_testing()
+if (NOT NO_TESTS)
+    include(CTest)
+    enable_testing()
+    add_subdirectory(test)
+else()
+    message(STATUS "Tests disabled")
+endif()
 
 # add subdirectories to build
 add_subdirectory(include)
 add_subdirectory(src)
-add_subdirectory(test)
 add_subdirectory(data)
 
 if (cmake_build_type_lower MATCHES coverage)

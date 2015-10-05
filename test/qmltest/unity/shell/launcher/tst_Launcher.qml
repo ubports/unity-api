@@ -87,6 +87,7 @@ Item {
                         { tag: "Model.roles[count]", role: "count", type: "number" },
                         { tag: "Model.roles[countVisible]", role: "countVisible", type: "boolean" },
                         { tag: "Model.roles[focused]", role: "focused", type: "boolean" },
+                        { tag: "Model.roles[alerting]", role: "alerting", type: "boolean" },
                     ];
         }
 
@@ -103,6 +104,7 @@ Item {
 
         function test_model_methods_data() {
             return [
+                { tag: "Model.methods[setAlerting]", method: "setAlerting" },
                 { tag: "Model.methods[get]", method: "get" },
                 { tag: "Model.methods[move]", method: "move" },
                 { tag: "Model.methods[pin]", method: "pin" },
@@ -143,6 +145,7 @@ Item {
                 { tag: "Item.properties[count]", property: "count", type: "number" },
                 { tag: "Item.properties[countVisible]", property: "countVisible", type: "boolean" },
                 { tag: "Item.properties[focused]", property: "focused", type: "boolean" },
+                { tag: "Item.properties[alerting]", property: "alerting", type: "boolean" },
                 { tag: "Item.properties[quickList]", constant: "quickList", type: "object" },
             ];
         }
