@@ -1,3 +1,9 @@
+unity-api (7.101+15.10.20150903-0ubuntu1) UNRELEASED; urgency=medium
+
+  * New method for in-card actions.
+
+ -- Pawel Stolowski <pawel@mordor>  Tue, 06 Oct 2015 18:06:37 +0200
+
 unity-api (7.100+15.10.20150903-0ubuntu1) wily; urgency=medium
 
   [ Michal Sawicz ]
