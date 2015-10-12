@@ -27,7 +27,6 @@ class Mir
     Q_GADGET
     Q_ENUMS(Type)
     Q_ENUMS(State)
-    Q_ENUMS(Visibility)
     Q_ENUMS(OrientationAngle)
 
 public:
