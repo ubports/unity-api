@@ -91,7 +91,7 @@ public Q_SLOTS:
      *
      * @param movement Movement vector
      */
-    virtual void handleMouseEvent(ulong timestamp, QPointF movement, Qt::MouseButton buttons,
+    virtual void handleMouseEvent(ulong timestamp, QPointF movement, Qt::MouseButtons buttons,
             Qt::KeyboardModifiers modifiers) = 0;
 
 };
