@@ -1,4 +1,4 @@
-unity-api (7.101) UNRELEASED; urgency=medium
+unity-api (7.101+15.10.20151021-0ubuntu1) wily; urgency=medium
 
   [ Daniel d'Andrada ]
   * unity/shell/application: Add Mir.cursorName
@@ -8,7 +8,13 @@ unity-api (7.101) UNRELEASED; urgency=medium
   [ Lukáš Tinkl ]
   * unity/shell/application: Add MirSurfaceInterface.nameChanged
 
- -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Tue, 01 Sep 2015 13:38:11 -0300
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michał Sawicz ]
+  * Resync trunk
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Wed, 21 Oct 2015 11:48:38 +0000
 
 unity-api (7.100+15.10.20150903-0ubuntu1) wily; urgency=medium
 
