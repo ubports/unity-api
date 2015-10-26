@@ -47,7 +47,7 @@ class MirSurfaceInterface : public QObject
     /**
      * @brief Name of the surface, given by the client application
      */
-    Q_PROPERTY(QString name READ name CONSTANT)
+    Q_PROPERTY(QString name READ name NOTIFY nameChanged)
 
     /**
      * @brief Size of the current surface buffer, in pixels.
@@ -110,6 +110,7 @@ Q_SIGNALS:
     void stateChanged(Mir::State value);
     void orientationAngleChanged(Mir::OrientationAngle value);
     void sizeChanged(const QSize &value);
+    void nameChanged(const QString &name);
     /// @endcond
 };
 
