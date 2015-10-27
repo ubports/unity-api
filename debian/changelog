@@ -1,8 +1,102 @@
-unity-api (7.97-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.102+15.10.20150903-0ubuntu1) UNRELEASED; urgency=medium
 
   * Added Filters interface.
+  * Added allLabel role to the scopes NavigationInterface.
 
- -- Pawel Stolowski <pawel.stolowski@canonical.com>  Wed, 25 Mar 2015 13:50:55 +0100
+ -- Pawel Stolowski <pawel.stolowski@canonical.com>  Mon, 28 Sep 2015 11:16:45 +0200
+
+unity-api (7.101+15.10.20151021-0ubuntu1) wily; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * unity/shell/application: Add Mir.cursorName
+  * unity/shell/application: Added MirMousePointerInterface.h
+  * unity/shell/application: Added MirPlatformCursor.h
+
+  [ Lukáš Tinkl ]
+  * unity/shell/application: Add MirSurfaceInterface.nameChanged
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michał Sawicz ]
+  * Resync trunk
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Wed, 21 Oct 2015 11:48:38 +0000
+
+unity-api (7.100+15.10.20150903-0ubuntu1) wily; urgency=medium
+
+  [ Michal Sawicz ]
+  * No change rebuild to resync vivid+overlay and wily
+
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 03 Sep 2015 08:54:03 +0000
+
+unity-api (7.100+15.04.20150827-0ubuntu1) vivid; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * Added MirSurface and MirSurfaceItem interfaces
+
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 27 Aug 2015 08:50:45 +0000
+
+unity-api (7.99+15.04.20150811-0ubuntu1) vivid; urgency=medium
+
+  * New rebuild forced.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 11 Aug 2015 14:05:55 +0000
+
+unity-api (7.99+15.04.20150804-0ubuntu1) vivid; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * Remove ApplicationManagerInterface.forceDashActive
+  * Remove ApplicationManagerInterface.suspended
+  * Add ApplicationInfoInterface.requestedState
+  * Add a NO_TESTS options to cmake
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 04 Aug 2015 15:26:16 +0000
+
+unity-api (7.99-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Changes to activate and preview methods of ScopeInterface.
+
+ -- Pawel Stolowski <pawel.stolowski@canonical.com>  Mon, 03 Aug 2015 14:03:47 +0000
+
+unity-api (7.98+15.04.20150724-0ubuntu1) vivid; urgency=medium
+
+  [ Mirco Müller (MacSlow) ]
+  * added alerting/setAlerting API to LauncherModel and LauncherItem interfaces
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 24 Jul 2015 09:53:01 +0000
+
+unity-api (7.97+15.10.20150721-0ubuntu1) wily; urgency=medium
+
+  [ Michi Henning ]
+  * Remove dependency on gcc 4.9. (LP: #1452342)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 21 Jul 2015 05:13:26 +0000
+
+unity-api (7.97+15.10.20150611-0ubuntu1) wily; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * add supportedOrientations and rotatesWindowContents to ApplicationInfo
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Thu, 11 Jun 2015 09:11:57 +0000
+
+unity-api (7.96+15.04.20150410.2-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michi Henning ]
+  * Reverted commit 93 because it cost me a cool 1.5 hours today. Turns
+    out that libmcheck is not thread-safe and causes the most amazing
+    crashes in unpredictable ways :-(
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Fri, 10 Apr 2015 16:07:39 +0000
 
 unity-api (7.96+15.04.20150213-0ubuntu1) vivid; urgency=medium
 
@@ -96,7 +190,7 @@ unity-api (7.85+14.10.20140708-0ubuntu1) utopic; urgency=medium
 
   [ Michal Hruby ]
   * Added header links CategoriesInterface and performQuery() to
-    ScopeInterface 
+    ScopeInterface
 
   [ Michi Henning ]
   * A few minor fixes to the doc comments for comparison operators.
@@ -461,7 +555,7 @@ unity-api (7.80.2+13.10.20130627ubuntu.unity.next-0ubuntu1) saucy; urgency=low
 
 unity-api (7.80.1) saucy; urgency=low
 
-  * This project forked from lp:unity/phablet. Updating the versioning to 
+  * This project forked from lp:unity/phablet. Updating the versioning to
     reflect that.
 
  -- Sergio Schvezov <sergio.schvezov@canonical.com>  Tue, 04 Jun 2013 16:06:54 -0300

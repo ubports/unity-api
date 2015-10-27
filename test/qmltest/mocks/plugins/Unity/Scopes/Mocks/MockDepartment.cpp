@@ -79,6 +79,8 @@ QVariant MockDepartment::data(const QModelIndex& /*index*/, int role) const
             return "child";
         case RoleLabel:
             return "Child Clothes";
+        case RoleAllLabel:
+            return "All Child Clothes";
         case RoleHasChildren:
             return true;
         case RoleIsActive:

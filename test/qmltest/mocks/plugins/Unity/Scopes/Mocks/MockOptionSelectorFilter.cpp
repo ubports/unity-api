@@ -44,3 +44,8 @@ unity::shell::scopes::OptionSelectorOptionsInterface* MockOptionSelectorFilter::
 {
     return m_options;
 }
+
+QString MockOptionSelectorFilter::filterTag() const
+{
+    return "";
+}

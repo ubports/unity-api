@@ -34,6 +34,7 @@ class PreviewStackInterface;
 class NavigationInterface;
 class SettingsModelInterface;
 class FiltersInterface;
+class FilterBaseInterface;
 
 /**
  * @brief Object representing scope instance, which exposes model(s) with results.
@@ -94,6 +95,11 @@ class UNITY_API ScopeInterface : public QObject
     Q_PROPERTY(unity::shell::scopes::SettingsModelInterface* settings READ settings NOTIFY settingsChanged)
 
     /**
+     * @brief
+     */
+    Q_PROPERTY(unity::shell::scopes::FilterBaseInterface* primaryNavigationFilter READ primaryNavigationFilter NOTIFY primaryNavigationFilterChanged)
+
+    /**
      * @brief Current search query.
      *
      * Writing to this property issues a new search to the scope.
@@ -130,16 +136,6 @@ class UNITY_API ScopeInterface : public QObject
     Q_PROPERTY(bool hasNavigation READ hasNavigation NOTIFY hasNavigationChanged)
 
     /**
-     * @brief String specifying currently selected sort order
-     */
-    Q_PROPERTY(QString currentAltNavigationId READ currentAltNavigationId NOTIFY currentAltNavigationIdChanged)
-
-    /**
-     * @brief Boolean specifying whether current query has sort order.
-     */
-    Q_PROPERTY(bool hasAltNavigation READ hasAltNavigation NOTIFY hasAltNavigationChanged)
-
-    /**
      * @brief VariantMap with customization properties
      */
     Q_PROPERTY(QVariantMap customizations READ customizations NOTIFY customizationsChanged)
@@ -153,6 +149,16 @@ class UNITY_API ScopeInterface : public QObject
      * @brief Filters model for the scope.
      */
     Q_PROPERTY(unity::shell::scopes::FiltersInterface* filters READ filters NOTIFY filtersChanged)
+
+    /**
+     * @brief Label for the currently active top level navigation (department or primary filter).
+     */
+    Q_PROPERTY(QString primaryNavigationTag READ primaryNavigationTag NOTIFY primaryNavigationTagChanged)
+
+    /**
+     * @brief The number of currently selected filters.
+     */
+    Q_PROPERTY(int activeFiltersCount READ activeFiltersCount NOTIFY activeFiltersCountChanged)
 
 protected:
     /// @cond
@@ -182,17 +188,18 @@ public:
     virtual bool favorite() const = 0;
     virtual CategoriesInterface* categories() const = 0;
     virtual SettingsModelInterface* settings() const = 0;
+    virtual FilterBaseInterface* primaryNavigationFilter() const = 0;
     virtual QString searchQuery() const = 0;
     virtual QString noResultsHint() const = 0;
     virtual QString formFactor() const = 0;
     virtual bool isActive() const = 0;
     virtual QString currentNavigationId() const = 0;
     virtual bool hasNavigation() const = 0;
-    virtual QString currentAltNavigationId() const = 0;
-    virtual bool hasAltNavigation() const = 0;
     virtual Status status() const = 0;
     virtual QVariantMap customizations() const = 0;
     virtual FiltersInterface* filters() const = 0;
+    virtual QString primaryNavigationTag() const = 0;
+    virtual int activeFiltersCount() const = 0;
 
     /* setters */
     virtual void setSearchQuery(const QString& search_query) = 0;
@@ -205,7 +212,7 @@ public:
     /**
      * @brief Method used to activate a result.
      */
-    Q_INVOKABLE virtual void activate(QVariant const& result) = 0;
+    Q_INVOKABLE virtual void activate(QVariant const& result, QString const& categoryId) = 0;
 
     /**
      * @brief Method used to preview a result.
@@ -213,7 +220,7 @@ public:
      * Returns a new PreviewStackInterface instance. It's caller's responsibility
      * to free it.
      */
-    Q_INVOKABLE virtual unity::shell::scopes::PreviewStackInterface* preview(QVariant const& result) = 0;
+    Q_INVOKABLE virtual unity::shell::scopes::PreviewStackInterface* preview(QVariant const& result, QString const& categoryId) = 0;
 
     /**
      * @brief Cancels the current activation.
@@ -231,14 +238,9 @@ public:
     Q_INVOKABLE virtual unity::shell::scopes::NavigationInterface* getNavigation(QString const& navigationId) = 0;
 
     /**
-     * @brief Get a NavigationInterface instance for the passed altNavigationId.
+     * @brief Request change to the current navigation id.
      */
-    Q_INVOKABLE virtual unity::shell::scopes::NavigationInterface* getAltNavigation(QString const& altNavigationId) = 0;
-
-    /**
-     * @brief Request change to the current navigation or altNavigation id.
-     */
-    Q_INVOKABLE virtual void setNavigationState(QString const& navId, bool altNavigation) = 0;
+    Q_INVOKABLE virtual void setNavigationState(QString const& navId) = 0;
 
     /**
      * @brief Execute canned query.
@@ -249,6 +251,11 @@ public:
      * @brief Force refresh of the scope contents.
      */
     Q_INVOKABLE virtual void refresh() = 0;
+
+    /**
+     * @brief Reset primary navigation filter and its tag in the search bar.
+     */
+    Q_INVOKABLE virtual void resetPrimaryNavigationTag() = 0;
 
 Q_SIGNALS:
     // @cond
@@ -268,12 +275,13 @@ Q_SIGNALS:
     void isActiveChanged();
     void hasNavigationChanged();
     void currentNavigationIdChanged();
-    void hasAltNavigationChanged();
-    void currentAltNavigationIdChanged();
     void customizationsChanged();
     void statusChanged();
     void detailsChanged();
     void filtersChanged();
+    void primaryNavigationTagChanged();
+    void activeFiltersCountChanged();
+    void primaryNavigationFilterChanged();
     // @endcond
 
     // signals triggered by activate(..) or preview(..) requests.
