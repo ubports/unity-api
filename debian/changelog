@@ -3,6 +3,9 @@ unity-api (7.102) UNRELEASED; urgency=medium
   [ Nick Dedekind ]
   * Added visibility to surface interface. 
 
+  [ Michael Terry ]
+  * Add isTouchApp to ApplicationInfoInterface
+
  -- Nick Dedekind <nick.dedekind@canonical.com>  Tue, 22 Sep 2015 14:43:33 +0100
 
 unity-api (7.101+15.10.20151021-0ubuntu1) wily; urgency=medium
