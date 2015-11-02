@@ -144,3 +144,8 @@ bool MockApplicationInfo::rotatesWindowContents() const
 {
     return false;
 }
+
+bool MockApplicationInfo::isTouchApp() const
+{
+    return true;
+}

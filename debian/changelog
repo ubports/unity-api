@@ -1,3 +1,9 @@
+unity-api (7.102) UNRELEASED; urgency=medium
+
+  * Add isTouchApp to ApplicationInfoInterface
+
+ -- Michael Terry <mterry@ubuntu.com>  Tue, 29 Sep 2015 13:36:51 -0400
+
 unity-api (7.101+15.10.20151021-0ubuntu1) wily; urgency=medium
 
   [ Daniel d'Andrada ]
