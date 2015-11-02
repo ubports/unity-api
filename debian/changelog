@@ -4,6 +4,24 @@ unity-api (7.102-0ubuntu1) UNRELEASED; urgency=medium
 
  -- Pawel Stolowski <pawel.stolowski@canonical.com>  Tue, 06 Oct 2015 18:06:37 +0200
 
+unity-api (7.101+15.10.20151021-0ubuntu1) wily; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * unity/shell/application: Add Mir.cursorName
+  * unity/shell/application: Added MirMousePointerInterface.h
+  * unity/shell/application: Added MirPlatformCursor.h
+
+  [ Lukáš Tinkl ]
+  * unity/shell/application: Add MirSurfaceInterface.nameChanged
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Michał Sawicz ]
+  * Resync trunk
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Wed, 21 Oct 2015 11:48:38 +0000
+
 unity-api (7.100+15.10.20150903-0ubuntu1) wily; urgency=medium
 
   [ Michal Sawicz ]

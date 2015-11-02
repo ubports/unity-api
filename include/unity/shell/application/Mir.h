@@ -20,14 +20,21 @@
 #include <QObject>
 
 /**
-    @brief Acting as a namespace to hold enums and such for use in QML
+    @brief Acting mostly as a namespace to hold enums and such for use in QML
  */
-class Mir
+class Mir : public QObject
 {
-    Q_GADGET
+    Q_OBJECT
     Q_ENUMS(Type)
     Q_ENUMS(State)
     Q_ENUMS(OrientationAngle)
+
+    /**
+        @brief Name of the mouse cursor to be used. Follows the X Cursor naming convention.
+
+        Eg.: "left_ptr" is a left-sided pointer arrow
+     */
+    Q_PROPERTY(QString cursorName READ cursorName WRITE setCursorName NOTIFY cursorNameChanged)
 
 public:
     /**
@@ -69,6 +76,16 @@ public:
         Angle180 = 180,
         Angle270 = 270
     };
+
+    /// @cond
+    virtual void setCursorName(const QString &cursorName) = 0;
+    virtual QString cursorName() const = 0;
+    /// @endcond
+
+Q_SIGNALS:
+    /// @cond
+    void cursorNameChanged(const QString &cursorName);
+    /// @endcond
 };
 
 Q_DECLARE_METATYPE(Mir::OrientationAngle)
