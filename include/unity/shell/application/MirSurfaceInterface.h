@@ -66,6 +66,11 @@ class MirSurfaceInterface : public QObject
     Q_PROPERTY(bool live READ live NOTIFY liveChanged)
 
     /**
+     * @brief Visibility of the surface
+     */
+    Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged)
+
+    /**
      * @brief Orientation angle of the surface
      *
      * How many degrees, clockwise, the UI in the surface has to rotate to match shell's UI orientation
@@ -91,6 +96,8 @@ public:
 
     virtual bool live() const = 0;
 
+    virtual bool visible() const = 0;
+
     virtual Mir::OrientationAngle orientationAngle() const = 0;
     virtual void setOrientationAngle(Mir::OrientationAngle angle) = 0;
     /// @endcond
@@ -99,6 +106,7 @@ Q_SIGNALS:
     /// @cond
     void typeChanged(Mir::Type value);
     void liveChanged(bool value);
+    void visibleChanged(bool visible);
     void stateChanged(Mir::State value);
     void orientationAngleChanged(Mir::OrientationAngle value);
     void sizeChanged(const QSize &value);
