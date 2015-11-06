@@ -199,6 +199,11 @@ class UNITY_API ApplicationInfoInterface: public QObject
      */
     Q_PROPERTY(bool rotatesWindowContents READ rotatesWindowContents CONSTANT)
 
+    /**
+     * @brief Whether the application is an app targeting the Ubuntu Touch platform.
+     */
+    Q_PROPERTY(bool isTouchApp READ isTouchApp CONSTANT)
+
 protected:
     /// @cond
     ApplicationInfoInterface(const QString &appId, QObject* parent = 0): QObject(parent) { Q_UNUSED(appId) }
@@ -269,6 +274,7 @@ public:
     virtual QColor splashColorFooter() const = 0;
     virtual Qt::ScreenOrientations supportedOrientations() const = 0;
     virtual bool rotatesWindowContents() const = 0;
+    virtual bool isTouchApp() const = 0;
     /// @endcond
 
 Q_SIGNALS:

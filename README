@@ -218,6 +218,14 @@ Consider running astyle over the code before checking it in.
 See astyle-config for more details.
 
 
+Versioning
+----------
+
+When adding API, remember to both bump:
+- the debian/changelog version and
+- the VERSION field in the relevant CMakeLists.txt file
+
+
 Test suite
 ----------
 
