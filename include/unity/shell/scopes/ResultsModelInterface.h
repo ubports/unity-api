@@ -61,6 +61,7 @@ public:
         RoleCategoryId,
         RoleDndUri,
         RoleResult,
+        RoleQuickPreviewData, ///< Data for UI quick previewing. In case of audio should contain uri and duration
         // card components
         RoleTitle,
         RoleArt,
@@ -84,6 +85,7 @@ public:
         roles[RoleUri] = "uri";
         roles[RoleCategoryId] = "categoryId";
         roles[RoleDndUri] = "dndUri";
+        roles[RoleQuickPreviewData] = "quickPreviewData";
         roles[RoleResult] = "result";
         roles[RoleTitle] = "title";
         roles[RoleArt] = "art";
