@@ -66,6 +66,8 @@ QVariant MockApplicationManager::data(const QModelIndex& index, int role) const
         return item->state();
     case RoleFocused:
         return item->focused();
+    case RoleIsTouchApp:
+        return item->isTouchApp();
     }
 
     return QVariant();
