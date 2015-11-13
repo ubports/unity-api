@@ -50,11 +50,11 @@ public:
     virtual double endValue() const = 0;
     virtual void setStartValue(double value) = 0;
     virtual void setEndValue(double value)  = 0;
-    virtual QString startPrefixLabel() = 0;
-    virtual QString startPostfixLabel() = 0;
-    virtual QString centralLabel() = 0;
-    virtual QString endPrefixLabel() = 0;
-    virtual QString endPostfixLabel() = 0;
+    virtual QString startPrefixLabel() const = 0;
+    virtual QString startPostfixLabel() const = 0;
+    virtual QString centralLabel() const = 0;
+    virtual QString endPrefixLabel() const = 0;
+    virtual QString endPostfixLabel() const = 0;
 
 Q_SIGNALS:
     void startValueChanged(double);
