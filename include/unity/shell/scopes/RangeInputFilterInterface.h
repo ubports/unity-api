@@ -33,22 +33,22 @@ class UNITY_API RangeInputFilterInterface : public FilterBaseInterface
     Q_OBJECT
 
 public:
-    Q_PROPERTY(QVariant startValue READ startValue WRITE setStartValue NOTIFY startValueChanged)
-    Q_PROPERTY(QVariant endValue READ endValue WRITE setEndValue NOTIFY endValueChanged)
+    Q_PROPERTY(double startValue READ startValue WRITE setStartValue NOTIFY startValueChanged)
+    Q_PROPERTY(double endValue READ endValue WRITE setEndValue NOTIFY endValueChanged)
 
     FiltersInterface::FilterType filterType() const override
     {
         return FiltersInterface::RangeInputFilter;
     }
 
-    virtual QVariant startValue() const = 0;
-    virtual QVariant endValue() const = 0;
-    virtual void setStartValue(QVariant const& value) = 0;
-    virtual void setEndValue(QVariant const& value)  = 0;
+    virtual double startValue() const = 0;
+    virtual double endValue() const = 0;
+    virtual void setStartValue(double value) = 0;
+    virtual void setEndValue(double value)  = 0;
 
 Q_SIGNALS:
-    void startValueChanged(QVariant const&);
-    void endValueChanged(QVariant const&);
+    void startValueChanged(double);
+    void endValueChanged(double);
 
 protected:
     /// @cond
