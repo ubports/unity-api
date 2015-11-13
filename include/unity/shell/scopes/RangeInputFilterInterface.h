@@ -35,6 +35,11 @@ class UNITY_API RangeInputFilterInterface : public FilterBaseInterface
 public:
     Q_PROPERTY(double startValue READ startValue WRITE setStartValue NOTIFY startValueChanged)
     Q_PROPERTY(double endValue READ endValue WRITE setEndValue NOTIFY endValueChanged)
+    Q_PROPERTY(QString startPrefixLabel READ startPrefixLabel NOTIFY startPrefixLabelChanged)
+    Q_PROPERTY(QString startPostfixLabel READ startPostfixLabel NOTIFY startPostfixLabelChanged)
+    Q_PROPERTY(QString centralLabel READ centralLabel NOTIFY centralLabelChanged)
+    Q_PROPERTY(QString endPrefixLabel READ endPrefixLabel NOTIFY endPrefixLabelChanged)
+    Q_PROPERTY(QString endPostfixLabel READ endPostfixLabel NOTIFY endPostfixLabelChanged)
 
     FiltersInterface::FilterType filterType() const override
     {
@@ -45,10 +50,20 @@ public:
     virtual double endValue() const = 0;
     virtual void setStartValue(double value) = 0;
     virtual void setEndValue(double value)  = 0;
+    virtual QString startPrefixLabel() = 0;
+    virtual QString startPostfixLabel() = 0;
+    virtual QString centralLabel() = 0;
+    virtual QString endPrefixLabel() = 0;
+    virtual QString endPostfixLabel() = 0;
 
 Q_SIGNALS:
     void startValueChanged(double);
     void endValueChanged(double);
+    void startPrefixLabelChanged(QString);
+    void startPostfixLabelChanged(QString);
+    void centralLabelChanged(QString);
+    void endPrefixLabelChanged(QString);
+    void endPostfixLabelChanged(QString);
 
 protected:
     /// @cond
