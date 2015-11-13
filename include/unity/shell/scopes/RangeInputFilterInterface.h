@@ -56,9 +56,15 @@ public:
     virtual QString endPrefixLabel() const = 0;
     virtual QString endPostfixLabel() const = 0;
 
+    Q_INVOKABLE virtual bool hasStartValue() const = 0;
+    Q_INVOKABLE virtual bool hasEndValue() const = 0;
+
+    Q_INVOKABLE virtual void eraseStartValue() = 0;
+    Q_INVOKABLE virtual void eraseEndValue() = 0;
+
 Q_SIGNALS:
-    void startValueChanged(double);
-    void endValueChanged(double);
+    void startValueChanged();
+    void endValueChanged();
     void startPrefixLabelChanged(QString);
     void startPostfixLabelChanged(QString);
     void centralLabelChanged(QString);
