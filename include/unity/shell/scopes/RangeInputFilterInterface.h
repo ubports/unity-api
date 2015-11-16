@@ -40,6 +40,8 @@ public:
     Q_PROPERTY(QString centralLabel READ centralLabel NOTIFY centralLabelChanged)
     Q_PROPERTY(QString endPrefixLabel READ endPrefixLabel NOTIFY endPrefixLabelChanged)
     Q_PROPERTY(QString endPostfixLabel READ endPostfixLabel NOTIFY endPostfixLabelChanged)
+    Q_PROPERTY(bool hasStartValue READ hasStartValue NOTIFY hasStartValueChanged)
+    Q_PROPERTY(bool hasEndValue READ hasEndValue NOTIFY hasEndValueChanged)
 
     FiltersInterface::FilterType filterType() const override
     {
@@ -55,9 +57,8 @@ public:
     virtual QString centralLabel() const = 0;
     virtual QString endPrefixLabel() const = 0;
     virtual QString endPostfixLabel() const = 0;
-
-    Q_INVOKABLE virtual bool hasStartValue() const = 0;
-    Q_INVOKABLE virtual bool hasEndValue() const = 0;
+    virtual bool hasStartValue() const = 0;
+    virtual bool hasEndValue() const = 0;
 
     Q_INVOKABLE virtual void eraseStartValue() = 0;
     Q_INVOKABLE virtual void eraseEndValue() = 0;
@@ -65,11 +66,13 @@ public:
 Q_SIGNALS:
     void startValueChanged();
     void endValueChanged();
-    void startPrefixLabelChanged(QString);
-    void startPostfixLabelChanged(QString);
-    void centralLabelChanged(QString);
-    void endPrefixLabelChanged(QString);
-    void endPostfixLabelChanged(QString);
+    void hasStartValueChanged();
+    void hasEndValueChanged();
+    void startPrefixLabelChanged(const QString&);
+    void startPostfixLabelChanged(const QString&);
+    void centralLabelChanged(const QString&);
+    void endPrefixLabelChanged(const QString&);
+    void endPostfixLabelChanged(const QString&);
 
 protected:
     /// @cond
