@@ -68,11 +68,11 @@ Q_SIGNALS:
     void endValueChanged();
     void hasStartValueChanged();
     void hasEndValueChanged();
-    void startPrefixLabelChanged(const QString&);
-    void startPostfixLabelChanged(const QString&);
-    void centralLabelChanged(const QString&);
-    void endPrefixLabelChanged(const QString&);
-    void endPostfixLabelChanged(const QString&);
+    void startPrefixLabelChanged();
+    void startPostfixLabelChanged();
+    void centralLabelChanged();
+    void endPrefixLabelChanged();
+    void endPostfixLabelChanged();
 
 protected:
     /// @cond
