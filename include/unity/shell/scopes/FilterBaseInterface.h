@@ -34,11 +34,16 @@ class UNITY_API FilterBaseInterface : public QObject
     public:
 
         Q_PROPERTY(QString filterId READ filterId CONSTANT)
+        Q_PROPERTY(QString title READ title NOTIFY titleChanged)
         Q_PROPERTY(unity::shell::scopes::FiltersInterface::FilterType filterType READ filterType CONSTANT)
 
         virtual QString filterId() const = 0;
+        virtual QString title() const = 0;
         virtual FiltersInterface::FilterType filterType() const = 0;
         virtual QString filterTag() const = 0;
+
+    Q_SIGNALS:
+        void titleChanged();
 
     protected:
         /// @cond

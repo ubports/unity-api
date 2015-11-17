@@ -16,9 +16,10 @@
 
 #include "MockOptionSelectorFilter.h"
 
-MockOptionSelectorFilter::MockOptionSelectorFilter(const QString &id, const QString &label, bool multi, QObject *parent)
+MockOptionSelectorFilter::MockOptionSelectorFilter(const QString &id, const QString &title, const QString &label, bool multi, QObject *parent)
     : unity::shell::scopes::OptionSelectorFilterInterface(parent),
       m_id(id),
+      m_title(title),
       m_label(label),
       m_multiSelect(multi),
       m_options(new MockSelectorOptions(2, this))
@@ -28,6 +29,11 @@ MockOptionSelectorFilter::MockOptionSelectorFilter(const QString &id, const QStr
 QString MockOptionSelectorFilter::filterId() const
 {
     return m_id;
+}
+
+QString MockOptionSelectorFilter::title() const
+{
+    return m_title;
 }
 
 QString MockOptionSelectorFilter::label() const

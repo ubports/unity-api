@@ -26,8 +26,9 @@ class MockOptionSelectorFilter : public unity::shell::scopes::OptionSelectorFilt
     Q_OBJECT
 
 public:
-    MockOptionSelectorFilter(const QString &id, const QString &label, bool multi, QObject *parent = 0);
+    MockOptionSelectorFilter(const QString &id, const QString& title, const QString &label, bool multi, QObject *parent = 0);
     QString filterId() const override;
+    QString title() const override;
     QString label() const override;
     bool multiSelect() const override;
     unity::shell::scopes::OptionSelectorOptionsInterface* options() const override;
@@ -35,6 +36,7 @@ public:
 
 private:
     QString m_id;
+    QString m_title;
     QString m_label;
     bool m_multiSelect;
     MockSelectorOptions *m_options;
