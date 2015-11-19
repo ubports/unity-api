@@ -94,6 +94,12 @@ public Q_SLOTS:
     virtual void handleMouseEvent(ulong timestamp, QPointF movement, Qt::MouseButtons buttons,
             Qt::KeyboardModifiers modifiers) = 0;
 
+    /**
+     * @brief Handler for Mir mouse wheel events
+     * This is called by Mir's platform cursor.
+     */
+    virtual void handleWheelEvent(ulong timestamp, QPoint angleDelta, Qt::KeyboardModifiers modifiers) = 0;
+
 };
 
 #endif // MIR_MOUSE_POINTER_INTERFACE_H

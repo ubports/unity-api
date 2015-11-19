@@ -1,7 +1,13 @@
+unity-api (7.103) UNRELEASED; urgency=medium
+
+  * Added MirMousePointerInterface::handleWheelEvent
+
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Thu, 19 Nov 2015 11:30:52 -0200
+
 unity-api (7.102+16.04.20151102-0ubuntu1) xenial; urgency=medium
 
   [ Nick Dedekind ]
-  * Added visibility to surface interface. 
+  * Added visibility to surface interface.
 
   [ Michael Terry ]
   * Add isTouchApp to ApplicationInfoInterface
