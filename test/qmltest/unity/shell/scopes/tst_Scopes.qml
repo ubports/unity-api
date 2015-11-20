@@ -215,8 +215,7 @@ Item {
 
         function test_categories_methods_data() {
             return [
-                { tag: "Model.methods[overrideCategoryJson]", method: "overrideCategoryJson" },
-                { tag: "Model.methods[addSpecialCategory]", method: "addSpecialCategory" }
+                { tag: "Model.methods[overrideCategoryJson]", method: "overrideCategoryJson" }
             ];
         }
 

@@ -69,16 +69,6 @@ public:
      */
     Q_INVOKABLE virtual bool overrideCategoryJson(QString const& categoryId, QString const& json) = 0;
 
-    /**
-     * @brief Allows the shell to define a special category that isn't provided by
-     * the scope.
-     *
-     * Allows the shell to use specialized renderers for certain categories.
-     * The plugin implementation should prepend the category before any others
-     * provided by the scope.
-     */
-    Q_INVOKABLE virtual void addSpecialCategory(QString const& categoryId, QString const& name, QString const& icon, QString const& rawTemplate, QObject* countObject) = 0;
-
     // @cond
     QHash<int, QByteArray> roleNames() const override
     {

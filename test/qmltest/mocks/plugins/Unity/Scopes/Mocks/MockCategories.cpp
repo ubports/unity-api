@@ -29,48 +29,13 @@ MockCategories::MockCategories(int category_count, QObject* parent)
 
 int MockCategories::rowCount(const QModelIndex& /*parent*/) const
 {
-    return m_category_count + m_specialCategories.count();
-}
-
-void MockCategories::addSpecialCategory(QString const& categoryId, QString const& name, QString const& icon, QString const& rawTemplate, QObject* countObject)
-{
-    CategoryData catData;
-    catData.categoryId = categoryId;
-    catData.name = name;
-    catData.icon = icon;
-    catData.rawTemplate = rawTemplate;
-    catData.countObject = countObject;
-
-    beginInsertRows(QModelIndex(), 0, 0);
-    m_specialCategories.prepend(catData);
-    endInsertRows();
-
-    if (countObject) {
-        connect(countObject, SIGNAL(countChanged()), this, SLOT(countChanged()));
-    }
+    return m_category_count;
 }
 
 bool MockCategories::overrideCategoryJson(QString const& , QString const& )
 {
     qFatal("Using un-implemented MockCategories::overrideCategoryJson");
     return false;
-}
-
-void MockCategories::countChanged()
-{
-    QObject* countObject = sender();
-
-    for (int i = 0; i < m_specialCategories.count(); ++i) {
-        const CategoryData &catData = m_specialCategories.at(i);
-        if (catData.countObject == countObject) {
-            QVector<int> roles;
-            roles.append(RoleCount);
-
-            QModelIndex changedIndex(index(i));
-            dataChanged(changedIndex, changedIndex, roles);
-            break;
-        }
-    }
 }
 
 QVariant
@@ -85,78 +50,39 @@ MockCategories::data(const QModelIndex& index, int role) const
         resultsModel = new MockResultsModel(15, index.row());
         m_resultsModels[index.row()] = resultsModel;
     }
-    if (index.row() < m_specialCategories.count()) {
-        const CategoryData &catData = m_specialCategories.at(index.row());
-        switch (role) {
-            case RoleCategoryId:
-                return catData.categoryId;
-            case RoleName:
-                return catData.name;
-            case RoleIcon:
-                return catData.icon;
-            case RoleRawRendererTemplate:
-                return catData.rawTemplate;
-            case RoleRenderer:
-            {
-                QVariantMap map;
-                map["category-layout"] = index.row() % 2 == 0 ? "grid" : "carousel";
-                map["card-size"] = "small";
-                return map;
-            }
-            case RoleComponents:
-            {
-                QVariantMap map, artMap;
-                artMap["aspect-ratio"] = "1.0";
-                artMap["field"] = "art";
-                map["art"] = artMap;
-                map["title"] = "HOLA";
-                return map;
-            }
-            case RoleHeaderLink:
-                return QString();
-            case RoleResults:
-                return QVariant();
-            case RoleCount:
-                return catData.countObject->property("count");
-            default:
-                qFatal("Using un-implemented Categories role");
-                return QVariant();
+    switch (role) {
+        case RoleCategoryId:
+            return QString("%1").arg(index.row());
+        case RoleName:
+            return QString("Category %1").arg(index.row());
+        case RoleIcon:
+            return "gtk-apply";
+        case RoleRawRendererTemplate:
+            return QString();
+        case RoleRenderer:
+        {
+            QVariantMap map;
+            map["category-layout"] = index.row() % 2 == 0 ? "grid" : "carousel";
+            map["card-size"] = "small";
+            return map;
         }
-    } else {
-        switch (role) {
-            case RoleCategoryId:
-                return QString("%1").arg(index.row());
-            case RoleName:
-                return QString("Category %1").arg(index.row());
-            case RoleIcon:
-                return "gtk-apply";
-            case RoleRawRendererTemplate:
-                return QString();
-            case RoleRenderer:
-            {
-                QVariantMap map;
-                map["category-layout"] = index.row() % 2 == 0 ? "grid" : "carousel";
-                map["card-size"] = "small";
-                return map;
-            }
-            case RoleComponents:
-            {
-                QVariantMap map, artMap;
-                artMap["aspect-ratio"] = "1.0";
-                artMap["field"] = "art";
-                map["art"] = artMap;
-                map["title"] = "HOLA";
-                return map;
-            }
-            case RoleHeaderLink:
-                return QString();
-            case RoleResults:
-                return QVariant::fromValue(resultsModel);
-            case RoleCount:
-                return resultsModel->rowCount();
-            default:
-                qFatal("Using un-implemented Categories role");
-                return QVariant();
+        case RoleComponents:
+        {
+            QVariantMap map, artMap;
+            artMap["aspect-ratio"] = "1.0";
+            artMap["field"] = "art";
+            map["art"] = artMap;
+            map["title"] = "HOLA";
+            return map;
         }
+        case RoleHeaderLink:
+            return QString();
+        case RoleResults:
+            return QVariant::fromValue(resultsModel);
+        case RoleCount:
+            return resultsModel->rowCount();
+        default:
+            qFatal("Using un-implemented Categories role");
+            return QVariant();
     }
 }
