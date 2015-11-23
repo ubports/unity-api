@@ -167,6 +167,13 @@ void MockScope::activate(QVariant const& result, QString const& categoryId)
     Q_UNUSED(categoryId);
 }
 
+void MockScope::activateAction(QVariant const& result, QString const& categoryId, QString const& actionId)
+{
+    Q_UNUSED(result);
+    Q_UNUSED(categoryId);
+    Q_UNUSED(actionId);
+}
+
 unity::shell::scopes::PreviewStackInterface* MockScope::preview(QVariant const& result, QString const& categoryId)
 {
     Q_UNUSED(result);
@@ -213,6 +220,10 @@ QString MockScope::primaryNavigationTag() const
 }
 
 void MockScope::resetPrimaryNavigationTag()
+{
+}
+
+void MockScope::resetFilters()
 {
 }
 

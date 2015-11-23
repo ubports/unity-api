@@ -60,6 +60,7 @@ public:
     void setFavorite(const bool) override;
 
     Q_INVOKABLE void activate(QVariant const& result, QString const& categoryId) override;
+    Q_INVOKABLE void activateAction(QVariant const& result, QString const& categoryId, QString const& actionId) override;
     Q_INVOKABLE unity::shell::scopes::PreviewStackInterface* preview(QVariant const& result, QString const& categoryId) override;
     Q_INVOKABLE void cancelActivation() override;
     Q_INVOKABLE void closeScope(unity::shell::scopes::ScopeInterface* scope) override;
@@ -68,6 +69,7 @@ public:
     Q_INVOKABLE void performQuery(QString const& cannedQuery) override;
     Q_INVOKABLE void refresh() override;
     Q_INVOKABLE void resetPrimaryNavigationTag() override;
+    Q_INVOKABLE void resetFilters() override;
 
 protected:
     QString m_id;
