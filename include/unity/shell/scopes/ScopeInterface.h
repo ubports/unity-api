@@ -262,6 +262,11 @@ public:
      */
     Q_INVOKABLE virtual void resetFilters() = 0;
 
+    /*
+     * @brief Method used to activate an action of a result.
+     */
+    Q_INVOKABLE virtual void activateAction(QVariant const& result, QString const& categoryId, QString const& actionId) = 0;
+
 Q_SIGNALS:
     // @cond
     void idChanged();

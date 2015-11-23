@@ -5,6 +5,13 @@ unity-api (7.103+15.10.20150903-0ubuntu1) UNRELEASED; urgency=medium
 
  -- Pawel Stolowski <pawel.stolowski@canonical.com>  Mon, 28 Sep 2015 11:16:45 +0200
 
+unity-api (7.102+16.04.20151109-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Mon, 09 Nov 2015 14:40:51 +0000
+
 unity-api (7.102+16.04.20151102-0ubuntu1) xenial; urgency=medium
 
   [ Nick Dedekind ]
@@ -17,6 +24,12 @@ unity-api (7.102+16.04.20151102-0ubuntu1) xenial; urgency=medium
   * New rebuild forced.
 
  -- Michał Sawicz <michal.sawicz@canonical.com>  Mon, 02 Nov 2015 11:23:42 +0000
+
+unity-api (7.102-0ubuntu1) UNRELEASED; urgency=medium
+
+  * New method for in-card actions.
+
+ -- Pawel Stolowski <pawel.stolowski@canonical.com>  Tue, 06 Oct 2015 18:06:37 +0200
 
 unity-api (7.101+15.10.20151021-0ubuntu1) wily; urgency=medium
 

@@ -34,25 +34,11 @@ public:
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
-    Q_INVOKABLE void addSpecialCategory(QString const& categoryId, QString const& name, QString const& icon, QString const& rawTemplate, QObject* countObject) override;
     Q_INVOKABLE bool overrideCategoryJson(QString const& categoryId, QString const& json) override;
-
-private Q_SLOTS:
-    void countChanged();
 
 private:
     mutable QHash<int, MockResultsModel*> m_resultsModels;
     int m_category_count;
-
-    struct CategoryData {
-        QString categoryId;
-        QString name;
-        QString icon;
-        QString rawTemplate;
-        QObject* countObject;
-    };
-
-    QList<CategoryData> m_specialCategories;
 };
 
 #endif
