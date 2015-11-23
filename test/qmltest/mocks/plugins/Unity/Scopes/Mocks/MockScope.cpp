@@ -216,6 +216,10 @@ void MockScope::resetPrimaryNavigationTag()
 {
 }
 
+void MockScope::resetFilters()
+{
+}
+
 int MockScope::activeFiltersCount() const
 {
     return 0;

@@ -257,6 +257,11 @@ public:
      */
     Q_INVOKABLE virtual void resetPrimaryNavigationTag() = 0;
 
+    /**
+     * @brief Reset filters to default values.
+     */
+    Q_INVOKABLE virtual void resetFilters() = 0;
+
 Q_SIGNALS:
     // @cond
     void idChanged();

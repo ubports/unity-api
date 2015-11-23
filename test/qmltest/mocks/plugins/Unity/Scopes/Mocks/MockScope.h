@@ -68,6 +68,7 @@ public:
     Q_INVOKABLE void performQuery(QString const& cannedQuery) override;
     Q_INVOKABLE void refresh() override;
     Q_INVOKABLE void resetPrimaryNavigationTag() override;
+    Q_INVOKABLE void resetFilters() override;
 
 protected:
     QString m_id;
