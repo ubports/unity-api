@@ -44,6 +44,12 @@ public:
         return FiltersInterface::ValueSliderFilter;
     }
 
+    virtual int value() const = 0;
+    virtual void setValue()  = 0;
+    virtual int minValue() const = 0;
+    virtual int maxValue() const = 0;
+    virtual ValueSliderValuesInterface* values() const = 0;
+
 Q_SIGNALS:
     void valueChanged();
     void valuesChanged();
