@@ -14,11 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UNITY_SHELL_SCOPES_FILTERSINTERFACE_H
-#define UNITY_SHELL_SCOPES_FILTERSINTERFACE_H
+#ifndef UNITY_SHELL_SCOPES_VALUESLIDERVALUESINTERFACE_H
+#define UNITY_SHELL_SCOPES_VALUESLIDERVALUESINTERFACE_H
 
 #include <unity/SymbolExport.h>
-
 #include <QAbstractListModel>
 
 namespace unity
@@ -28,48 +27,36 @@ namespace shell
 namespace scopes
 {
 
-class UNITY_API FiltersInterface : public QAbstractListModel
+class UNITY_API ValueSliderValuesInterface : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_ENUMS(Roles)
-    Q_ENUMS(FilterType)
+    Q_ENUMS(SliderValueRoles)
 
 public:
-    enum Roles {
-        RoleFilterId = Qt::UserRole + 1,
-        RoleFilterType,
-        RoleFilter
-    };
-
-    enum FilterType {
-        Invalid,
-        OptionSelectorFilter,
-        RangeInputFilter,
-        ValueSlider
-        // TODO add remaining filters
+    enum SliderValueRoles {
+        RoleValue = Qt::UserRole + 1,
+        RoleLabel
     };
 
     QHash<int, QByteArray> roleNames() const override
     {
         QHash<int, QByteArray> roles;
-        roles[RoleFilterId] = "id";
-        roles[RoleFilterType] = "type";
-        roles[RoleFilter] = "filter";
+        roles[RoleValue] = "value";
+        roles[RoleLabel] = "label";
         return roles;
     }
 
 protected:
     /// @cond
-    explicit FiltersInterface(QObject* parent = 0) : QAbstractListModel(parent) {}
+    explicit ValueSliderValuesInterface(QObject* parent = 0) : QAbstractListModel(parent) {}
     /// @endcond
 };
 
 }
-
 }
 }
 
-Q_DECLARE_METATYPE(unity::shell::scopes::FiltersInterface*)
+Q_DECLARE_METATYPE(unity::shell::scopes::ValueSliderValuesInterface*)
 
 #endif
