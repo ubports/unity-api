@@ -20,6 +20,7 @@
 #include <unity/SymbolExport.h>
 
 #include "FilterBaseInterface.h"
+#include "ValueSliderValuesInterface.h"
 
 namespace unity
 {
@@ -45,7 +46,7 @@ public:
     }
 
     virtual int value() const = 0;
-    virtual void setValue()  = 0;
+    virtual void setValue(int)  = 0;
     virtual int minValue() const = 0;
     virtual int maxValue() const = 0;
     virtual ValueSliderValuesInterface* values() const = 0;
