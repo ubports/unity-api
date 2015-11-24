@@ -46,7 +46,7 @@ public:
         Invalid,
         OptionSelectorFilter,
         RangeInputFilter,
-        ValueSlider
+        ValueSliderFilter
         // TODO add remaining filters
     };
 

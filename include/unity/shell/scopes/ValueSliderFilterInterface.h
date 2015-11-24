@@ -41,7 +41,7 @@ public:
 public:
     FiltersInterface::FilterType filterType() const override
     {
-        return FiltersInterface::ValueSliderFilterInterface;
+        return FiltersInterface::ValueSliderFilter;
     }
 
 Q_SIGNALS:
