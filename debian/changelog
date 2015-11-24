@@ -1,3 +1,10 @@
+unity-api (7.102+16.04.20151124-0ubuntu1) xenial; urgency=medium
+
+  * Depend on devscripts, needed by licensecheck. Disable licensecheck
+    on xenial for now.
+
+ -- Pawel Stolowski <ci-train-bot@canonical.com>  Tue, 24 Nov 2015 12:01:48 +0000
+
 unity-api (7.102+16.04.20151109-0ubuntu1) xenial; urgency=medium
 
   [ CI Train Bot ]
