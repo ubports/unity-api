@@ -36,8 +36,8 @@ class UNITY_API ValueSliderFilterInterface : public FilterBaseInterface
 public:
     Q_PROPERTY(int value READ value WRITE setValue NOTIFY valueChanged)
     Q_PROPERTY(unity::shell::scopes::ValueSliderValuesInterface* values READ values NOTIFY valuesChanged)
-    Q_PROPERTY(int minValue READ minValue NOTIFY minValueChanged);
-    Q_PROPERTY(int maxValue READ maxValue NOTIFY maxValueChanged);
+    Q_PROPERTY(int minValue READ minValue NOTIFY minValueChanged)
+    Q_PROPERTY(int maxValue READ maxValue NOTIFY maxValueChanged)
 
 public:
     FiltersInterface::FilterType filterType() const override
