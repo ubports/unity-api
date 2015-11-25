@@ -70,6 +70,15 @@ public:
     virtual qreal hotspotY() const = 0;
     /// @endcond
 
+    /**
+     * @brief Sets the custom cursor
+     *
+     * If it's not a pixmap cursor it will be ignored.
+     *
+     * To use it, cursorName must be set to "custom". themeName is ignored in this case.
+     */
+    virtual void setCustomCursor(const QCursor &) = 0;
+
 Q_SIGNALS:
     /// @cond
     void cursorNameChanged(QString name);
