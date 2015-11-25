@@ -1,10 +1,13 @@
-unity-api (7.103) UNRELEASED; urgency=medium
+unity-api (7.103+16.04.20151125-0ubuntu1) xenial; urgency=medium
 
   [ Daniel d'Andrada ]
   * Added MirMousePointerInterface::setCustomCursor
   * Added MirMousePointerInterface::handleWheelEvent
 
- -- Michal Sawicz <michal.sawicz@canonical.com>  Mon, 23 Nov 2015 11:12:50 +0100
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Wed, 25 Nov 2015 14:13:25 +0000
 
 unity-api (7.102+16.04.20151124-0ubuntu1) xenial; urgency=medium
 
