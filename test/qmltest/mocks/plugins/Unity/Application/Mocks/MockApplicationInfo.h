@@ -55,6 +55,8 @@ public:
     Qt::ScreenOrientations supportedOrientations() const override;
     bool rotatesWindowContents() const override;
 
+    bool isTouchApp() const override;
+
 private:
     QString m_appId;
     QString m_name;
