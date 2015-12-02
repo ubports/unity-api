@@ -33,6 +33,12 @@ usage()
 [ $# -lt 1 ] && usage
 [ $# -gt 2 ] && usage
 
+
+# TODO: Temporary hack to work around broken licensecheck on xenial (see LP #1519292).
+# Remove this once that is fixed.
+distro=$(lsb_release -c -s)
+[ "$distro" = "xenial" ] && exit 0
+
 ignore_pat="\\.sci$|CMakeFiles"
 
 #

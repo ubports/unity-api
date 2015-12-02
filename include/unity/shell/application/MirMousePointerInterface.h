@@ -70,6 +70,15 @@ public:
     virtual qreal hotspotY() const = 0;
     /// @endcond
 
+    /**
+     * @brief Sets the custom cursor
+     *
+     * If it's not a pixmap cursor it will be ignored.
+     *
+     * To use it, cursorName must be set to "custom". themeName is ignored in this case.
+     */
+    virtual void setCustomCursor(const QCursor &) = 0;
+
 Q_SIGNALS:
     /// @cond
     void cursorNameChanged(QString name);
@@ -93,6 +102,12 @@ public Q_SLOTS:
      */
     virtual void handleMouseEvent(ulong timestamp, QPointF movement, Qt::MouseButtons buttons,
             Qt::KeyboardModifiers modifiers) = 0;
+
+    /**
+     * @brief Handler for Mir mouse wheel events
+     * This is called by Mir's platform cursor.
+     */
+    virtual void handleWheelEvent(ulong timestamp, QPoint angleDelta, Qt::KeyboardModifiers modifiers) = 0;
 
 };
 
