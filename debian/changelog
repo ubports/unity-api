@@ -1,8 +1,12 @@
 unity-api (7.104) UNRELEASED; urgency=medium
 
+  [ Daniel d'Andrada ]
+  * Add MirSurfaceItem.fillMode
+
+  [ Michael Terry ]
   * Added ApplicationInfoInterface::exemptFromLifecycle
 
- -- Michael Terry <mterry@ubuntu.com>  Thu, 03 Dec 2015 10:28:00 -0500
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Fri, 11 Sep 2015 08:54:29 -0300
 
 unity-api (7.103+16.04.20151125-0ubuntu1) xenial; urgency=medium
 
