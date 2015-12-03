@@ -205,9 +205,9 @@ class UNITY_API ApplicationInfoInterface: public QObject
     Q_PROPERTY(bool isTouchApp READ isTouchApp CONSTANT)
 
     /**
-     * @brief The application's focus state.
+     * @brief Whether this app is exempt from lifecycle management
      *
-     * Holds the current application focus state. True if focused, false otherwise.
+     * If true, this app will never entirely suspend its process.
      */
     Q_PROPERTY(bool exemptFromLifecycle READ exemptFromLifecycle WRITE setExemptFromLifecycle NOTIFY exemptFromLifecycleChanged)
 
