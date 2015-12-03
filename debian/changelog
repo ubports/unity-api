@@ -1,3 +1,9 @@
+unity-api (7.104) UNRELEASED; urgency=medium
+
+  * Added ApplicationInfoInterface::exemptFromLifecycle
+
+ -- Michael Terry <mterry@ubuntu.com>  Thu, 03 Dec 2015 10:28:00 -0500
+
 unity-api (7.103+16.04.20151125-0ubuntu1) xenial; urgency=medium
 
   [ Daniel d'Andrada ]
