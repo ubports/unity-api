@@ -34,10 +34,10 @@ class UNITY_API ValueSliderFilterInterface : public FilterBaseInterface
     Q_OBJECT
 
 public:
-    Q_PROPERTY(int value READ value WRITE setValue NOTIFY valueChanged)
+    Q_PROPERTY(double value READ value WRITE setValue NOTIFY valueChanged)
     Q_PROPERTY(unity::shell::scopes::ValueSliderValuesInterface* values READ values NOTIFY valuesChanged)
-    Q_PROPERTY(int minValue READ minValue NOTIFY minValueChanged)
-    Q_PROPERTY(int maxValue READ maxValue NOTIFY maxValueChanged)
+    Q_PROPERTY(double minValue READ minValue NOTIFY minValueChanged)
+    Q_PROPERTY(double maxValue READ maxValue NOTIFY maxValueChanged)
 
 public:
     FiltersInterface::FilterType filterType() const override
@@ -45,10 +45,10 @@ public:
         return FiltersInterface::ValueSliderFilter;
     }
 
-    virtual int value() const = 0;
-    virtual void setValue(int)  = 0;
-    virtual int minValue() const = 0;
-    virtual int maxValue() const = 0;
+    virtual double value() const = 0;
+    virtual void setValue(double)  = 0;
+    virtual double minValue() const = 0;
+    virtual double maxValue() const = 0;
     virtual ValueSliderValuesInterface* values() const = 0;
 
 Q_SIGNALS:
