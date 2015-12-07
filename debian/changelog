@@ -1,6 +1,10 @@
 unity-api (7.104) UNRELEASED; urgency=medium
 
+  [ Daniel d'Andrada ]
   * Add MirSurfaceItem.fillMode
+
+  [ Michael Terry ]
+  * Added ApplicationInfoInterface::exemptFromLifecycle
 
  -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Fri, 11 Sep 2015 08:54:29 -0300
 
