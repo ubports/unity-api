@@ -34,7 +34,8 @@ usage()
 [ $# -gt 2 ] && usage
 
 
-# TODO: Temporary hack to work around broken licensecheck on xenial. Remove this once that is fixed.
+# TODO: Temporary hack to work around broken licensecheck on xenial (see LP #1519292).
+# Remove this once that is fixed.
 distro=$(lsb_release -c -s)
 [ "$distro" = "xenial" ] && exit 0
 
