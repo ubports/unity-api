@@ -1,9 +1,20 @@
-unity-api (7.103+15.10.20150903-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.104-0ubuntu1) UNRELEASED; urgency=medium
 
   * Added Filters interface.
   * Added allLabel role to the scopes NavigationInterface.
 
  -- Pawel Stolowski <pawel.stolowski@canonical.com>  Mon, 28 Sep 2015 11:16:45 +0200
+
+unity-api (7.103+16.04.20151125-0ubuntu1) xenial; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * Added MirMousePointerInterface::setCustomCursor
+  * Added MirMousePointerInterface::handleWheelEvent
+
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Wed, 25 Nov 2015 14:13:25 +0000
 
 unity-api (7.102+16.04.20151124-0ubuntu1) xenial; urgency=medium
 
@@ -22,7 +33,7 @@ unity-api (7.102+16.04.20151109-0ubuntu1) xenial; urgency=medium
 unity-api (7.102+16.04.20151102-0ubuntu1) xenial; urgency=medium
 
   [ Nick Dedekind ]
-  * Added visibility to surface interface. 
+  * Added visibility to surface interface.
 
   [ Michael Terry ]
   * Add isTouchApp to ApplicationInfoInterface
