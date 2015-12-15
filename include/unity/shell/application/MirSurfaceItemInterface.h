@@ -41,6 +41,8 @@ class MirSurfaceItemInterface : public QQuickItem
 {
     Q_OBJECT
 
+    Q_ENUMS(FillMode)
+
     /**
      * @brief The surface to be displayed
      */
@@ -103,7 +105,15 @@ class MirSurfaceItemInterface : public QQuickItem
                                 WRITE setSurfaceHeight
                                 NOTIFY surfaceHeightChanged)
 
+    Q_PROPERTY(FillMode fillMode READ fillMode WRITE setFillMode NOTIFY fillModeChanged)
+
 public:
+
+    enum FillMode {
+        Stretch,
+        PadOrCrop
+    };
+
     /// @cond
     MirSurfaceItemInterface(QQuickItem *parent = 0) : QQuickItem(parent) {}
     virtual ~MirSurfaceItemInterface() {}
@@ -129,6 +139,9 @@ public:
 
     virtual int surfaceHeight() const = 0;
     virtual void setSurfaceHeight(int value) = 0;
+
+    virtual FillMode fillMode() const = 0;
+    virtual void setFillMode(FillMode value) = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -142,6 +155,7 @@ Q_SIGNALS:
     void surfaceWidthChanged(int value);
     void surfaceHeightChanged(int value);
     void nameChanged(const QString &name);
+    void fillModeChanged(FillMode value);
     /// @endcond
 };
 

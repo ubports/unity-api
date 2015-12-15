@@ -29,7 +29,8 @@ MockApplicationInfo::MockApplicationInfo(const QString &appId, const QString& co
     m_icon(icon),
     m_stage(MainStage),
     m_state(Running),
-    m_focused(false)
+    m_focused(false),
+    m_exemptFromLifecycle(false)
 {
 
 }
@@ -148,4 +149,18 @@ bool MockApplicationInfo::rotatesWindowContents() const
 bool MockApplicationInfo::isTouchApp() const
 {
     return true;
+}
+
+bool MockApplicationInfo::exemptFromLifecycle() const
+{
+    return m_exemptFromLifecycle;
+}
+
+void MockApplicationInfo::setExemptFromLifecycle(bool exemptFromLifecycle)
+{
+    if (m_exemptFromLifecycle != exemptFromLifecycle)
+    {
+        m_exemptFromLifecycle = exemptFromLifecycle;
+        Q_EMIT exemptFromLifecycleChanged(m_exemptFromLifecycle);
+    }
 }

@@ -204,6 +204,13 @@ class UNITY_API ApplicationInfoInterface: public QObject
      */
     Q_PROPERTY(bool isTouchApp READ isTouchApp CONSTANT)
 
+    /**
+     * @brief Whether this app is exempt from lifecycle management
+     *
+     * If true, this app will never entirely suspend its process.
+     */
+    Q_PROPERTY(bool exemptFromLifecycle READ exemptFromLifecycle WRITE setExemptFromLifecycle NOTIFY exemptFromLifecycleChanged)
+
 protected:
     /// @cond
     ApplicationInfoInterface(const QString &appId, QObject* parent = 0): QObject(parent) { Q_UNUSED(appId) }
@@ -275,6 +282,8 @@ public:
     virtual Qt::ScreenOrientations supportedOrientations() const = 0;
     virtual bool rotatesWindowContents() const = 0;
     virtual bool isTouchApp() const = 0;
+    virtual bool exemptFromLifecycle() const = 0;
+    virtual void setExemptFromLifecycle(bool) = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -286,6 +295,7 @@ Q_SIGNALS:
     void stateChanged(State state);
     void requestedStateChanged(RequestedState value);
     void focusedChanged(bool focused);
+    void exemptFromLifecycleChanged(bool exemptFromLifecycle);
     /// @endcond
 };
 
