@@ -1,9 +1,22 @@
-unity-api (7.104-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.105-0ubuntu1) UNRELEASED; urgency=medium
 
   * Added Filters interface.
   * Added allLabel role to the scopes NavigationInterface.
 
  -- Pawel Stolowski <pawel.stolowski@canonical.com>  Mon, 28 Sep 2015 11:16:45 +0200
+
+unity-api (7.104+16.04.20151207-0ubuntu1) xenial; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * Add MirSurfaceItem.fillMode
+
+  [ Michael Terry ]
+  * Added ApplicationInfoInterface::exemptFromLifecycle
+
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- Gerry Boland <ci-train-bot@canonical.com>  Mon, 07 Dec 2015 16:21:29 +0000
 
 unity-api (7.103+16.04.20151125-0ubuntu1) xenial; urgency=medium
 
