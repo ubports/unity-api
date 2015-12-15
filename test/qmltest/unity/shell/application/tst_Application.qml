@@ -70,6 +70,7 @@ Item {
                         { enum: "RoleState" },
                         { enum: "RoleFocused" },
                         { enum: "RoleIsTouchApp" },
+                        { enum: "RoleExemptFromLifecycle" },
                     ];
         }
 
@@ -90,6 +91,7 @@ Item {
                         { tag: "ApplicationManager.roles[state]", role: "state", type: "number" },
                         { tag: "ApplicationManager.roles[focused]", role: "focused", type: "boolean" },
                         { tag: "ApplicationManager.roles[isTouchApp]", role: "isTouchApp", type: "boolean" },
+                        { tag: "ApplicationManager.roles[exemptFromLifecycle]", role: "exemptFromLifecycle", type: "boolean" },
                     ];
         }
 
@@ -146,6 +148,7 @@ Item {
                 { tag: "ApplicationInfo.properties[requestedState]", property: "requestedState", type: "number" },
                 { tag: "ApplicationInfo.properties[focused]", property: "focused", type: "boolean" },
                 { tag: "ApplicationInfo.properties[isTouchApp]", constant: "isTouchApp", type: "boolean" },
+                { tag: "ApplicationInfo.properties[exemptFromLifecycle]", constant: "exemptFromLifecycle", type: "boolean" },
                 { tag: "ApplicationInfo.properties[splashTitle]", constant: "splashTitle", type: "string" },
                 { tag: "ApplicationInfo.properties[splashImage]", constant: "splashImage", type: "url" },
                 { tag: "ApplicationInfo.properties[splashShowHeader]", constant: "splashShowHeader", type: "boolean"},

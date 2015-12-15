@@ -71,6 +71,7 @@ protected:
         m_roleNames.insert(RoleState, "state");
         m_roleNames.insert(RoleFocused, "focused");
         m_roleNames.insert(RoleIsTouchApp, "isTouchApp");
+        m_roleNames.insert(RoleExemptFromLifecycle, "exemptFromLifecycle");
 
         connect(this, SIGNAL(rowsInserted(QModelIndex, int, int)), SIGNAL(countChanged()));
         connect(this, SIGNAL(rowsRemoved(QModelIndex, int, int)), SIGNAL(countChanged()));
@@ -94,6 +95,7 @@ public:
         RoleState,
         RoleFocused,
         RoleIsTouchApp,
+        RoleExemptFromLifecycle,
     };
 
     /// @cond
