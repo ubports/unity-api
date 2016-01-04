@@ -1,9 +1,13 @@
-unity-api (7.105-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.105+16.04.20160104-0ubuntu1) xenial; urgency=medium
 
+  [ Michael Zanetti ]
   [Albert Astals Cid ]
   * New property to support more complex cards
 
- -- Michael Zanetti <michael.zanetti@canonical.com>  Fri, 29 May 2015 18:16:26 +0200
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 04 Jan 2016 15:09:55 +0000
 
 unity-api (7.104+16.04.20151207-0ubuntu1) xenial; urgency=medium
 
