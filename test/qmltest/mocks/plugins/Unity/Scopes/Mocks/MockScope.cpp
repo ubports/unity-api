@@ -77,6 +77,10 @@ bool MockScope::searchInProgress() const {
     return m_searching;
 }
 
+bool MockScope::activationInProgress() const {
+    return false;
+}
+
 unity::shell::scopes::CategoriesInterface* MockScope::categories() const {
     return m_categories;
 }
