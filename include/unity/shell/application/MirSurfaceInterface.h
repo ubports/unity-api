@@ -81,7 +81,7 @@ class MirSurfaceInterface : public QObject
     /**
      * @brief Keymap layout
      *
-     * Returns the keyboard layout component (first part of e.g. "cz+qwerty");
+     * Keyboard layout component (first part of e.g. "cz+qwerty");
      * use setKeymap() to set it.
      */
     Q_PROPERTY(QString keymapLayout READ keymapLayout NOTIFY keymapChanged)
@@ -89,7 +89,7 @@ class MirSurfaceInterface : public QObject
     /**
      * @brief Keymap variant
      *
-     * Returns the keyboard variant component (second part of e.g. "cz+qwerty");
+     * Keyboard variant component (second part of e.g. "cz+qwerty");
      * use setKeymap() to set it.
      */
     Q_PROPERTY(QString keymapVariant READ keymapVariant NOTIFY keymapChanged)
