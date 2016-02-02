@@ -78,6 +78,22 @@ class MirSurfaceInterface : public QObject
     Q_PROPERTY(Mir::OrientationAngle orientationAngle READ orientationAngle WRITE setOrientationAngle
                NOTIFY orientationAngleChanged DESIGNABLE false)
 
+    /**
+     * @brief Keymap layout
+     *
+     * Returns the keyboard layout component (first part of e.g. "cz+qwerty");
+     * use setKeymap() to set it.
+     */
+    Q_PROPERTY(QString keymapLayout READ keymapLayout NOTIFY keymapChanged)
+
+    /**
+     * @brief Keymap variant
+     *
+     * Returns the keyboard variant component (second part of e.g. "cz+qwerty");
+     * use setKeymap() to set it.
+     */
+    Q_PROPERTY(QString keymapVariant READ keymapVariant NOTIFY keymapChanged)
+
 public:
     /// @cond
     MirSurfaceInterface(QObject *parent = nullptr) : QObject(parent) {}
@@ -100,6 +116,10 @@ public:
 
     virtual Mir::OrientationAngle orientationAngle() const = 0;
     virtual void setOrientationAngle(Mir::OrientationAngle angle) = 0;
+
+    virtual QString keymapLayout() const = 0;
+    virtual QString keymapVariant() const = 0;
+    virtual void setKeymap(const QString &layout, const QString &variant) = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -111,6 +131,7 @@ Q_SIGNALS:
     void orientationAngleChanged(Mir::OrientationAngle value);
     void sizeChanged(const QSize &value);
     void nameChanged(const QString &name);
+    void keymapChanged(const QString &layout, const QString &variant);
     /// @endcond
 };
 
