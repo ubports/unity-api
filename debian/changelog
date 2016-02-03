@@ -1,9 +1,3 @@
-unity-api (7.106-0ubuntu1) UNRELEASED; urgency=medium
-
-  * Added activationInProgress property to ScopeInterface.
-
- -- Pawel Stolowski <pawel.stolowski@canonical.com>  Fri, 29 Jan 2016 10:28:33 +0100
-
 unity-api (7.105+16.04.20160104-0ubuntu1) xenial; urgency=medium
 
   [ Michael Zanetti ]
