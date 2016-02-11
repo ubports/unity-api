@@ -30,7 +30,7 @@ namespace scopes
 {
 
 class CategoriesInterface;
-class PreviewStackInterface;
+class PreviewModelInterface;
 class NavigationInterface;
 class SettingsModelInterface;
 
@@ -203,10 +203,10 @@ public:
     /**
      * @brief Method used to preview a result.
      *
-     * Returns a new PreviewStackInterface instance. It's caller's responsibility
+     * Returns a new PreviewModelInterface instance. It's caller's responsibility
      * to free it.
      */
-    Q_INVOKABLE virtual unity::shell::scopes::PreviewStackInterface* preview(QVariant const& result, QString const& categoryId) = 0;
+    Q_INVOKABLE virtual unity::shell::scopes::PreviewModelInterface* preview(QVariant const& result, QString const& categoryId) = 0;
 
     /**
      * @brief Cancels the current activation.
