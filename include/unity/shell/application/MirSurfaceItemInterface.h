@@ -107,6 +107,13 @@ class MirSurfaceItemInterface : public QQuickItem
 
     Q_PROPERTY(FillMode fillMode READ fillMode WRITE setFillMode NOTIFY fillModeChanged)
 
+    /**
+     * @brief The desired height for the contained MirSurface.
+     * It's ignored if set to zero or a negative number
+     * The default value is zero
+     */
+    Q_PROPERTY(Mir::ShellChrome shellChrome READ shellChrome NOTIFY shellChromeChanged)
+
 public:
 
     enum FillMode {
@@ -142,6 +149,8 @@ public:
 
     virtual FillMode fillMode() const = 0;
     virtual void setFillMode(FillMode value) = 0;
+
+    virtual Mir::ShellChrome shellChrome() const = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -156,6 +165,7 @@ Q_SIGNALS:
     void surfaceHeightChanged(int value);
     void nameChanged(const QString &name);
     void fillModeChanged(FillMode value);
+    void shellChromeChanged(Mir::ShellChrome value);
     /// @endcond
 };
 

@@ -77,6 +77,26 @@ public:
         Angle270 = 270
     };
 
+    /**
+        @brief Shell chrome
+     */
+    enum ShellChrome {
+        NormalChrome,
+        LowChrome,
+    };
+
+    /**
+        @brief Form Factor
+     */
+    enum FormFactor {
+        FormFactorUnknown,
+        FormFactorPhone,
+        FormFactorTablet,
+        FormFactorMonitor,
+        FormFactorTV,
+        FormFactorProjector,
+    };
+
     /// @cond
     virtual void setCursorName(const QString &cursorName) = 0;
     virtual QString cursorName() const = 0;
@@ -89,5 +109,6 @@ Q_SIGNALS:
 };
 
 Q_DECLARE_METATYPE(Mir::OrientationAngle)
+Q_DECLARE_METATYPE(Mir::ShellChrome)
 
 #endif // UNITY_SHELL_APPLICATION_MIR_H
