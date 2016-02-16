@@ -1,3 +1,11 @@
+unity-api (7.106+16.04.20160211.1-0ubuntu1) xenial; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * Added ApplicationInfoInterface.initialSurfaceSize (LP: #1532974)
+  * MirSurfaceInterface: added size hints
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Thu, 11 Feb 2016 23:53:29 +0000
+
 unity-api (7.105+16.04.20160104-0ubuntu2) UNRELEASED; urgency=medium
 
   [ Nick Dedekind ]
