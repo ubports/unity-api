@@ -1,3 +1,11 @@
+unity-api (7.106+16.04.20160211.1-0ubuntu1) xenial; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * Added ApplicationInfoInterface.initialSurfaceSize (LP: #1532974)
+  * MirSurfaceInterface: added size hints
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Thu, 11 Feb 2016 23:53:29 +0000
+
 unity-api (7.105+16.04.20160104-0ubuntu1) xenial; urgency=medium
 
   [ Michael Zanetti ]
@@ -8,13 +16,6 @@ unity-api (7.105+16.04.20160104-0ubuntu1) xenial; urgency=medium
   * No-change rebuild.
 
  -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 04 Jan 2016 15:09:55 +0000
-
-unity-api (7.105-0ubuntu1) UNRELEASED; urgency=medium
-
-  [ Nick Dedekind ]
-  * Added ApplicationInfoInterface::setStage
-
- -- Nick Dedekind <nick.dedekind@canonical.com>  Thu, 03 Dec 2015 09:02:58 +0000
 
 unity-api (7.104+16.04.20151207-0ubuntu1) xenial; urgency=medium
 

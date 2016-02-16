@@ -59,6 +59,9 @@ public:
     bool exemptFromLifecycle() const override;
     void setExemptFromLifecycle(bool exemptFromLifecycle) override;
 
+    QSize initialSurfaceSize() const override { return QSize(); }
+    void setInitialSurfaceSize(const QSize &) override {}
+
 private:
     QString m_appId;
     QString m_name;

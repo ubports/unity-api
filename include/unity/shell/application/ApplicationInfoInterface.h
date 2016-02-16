@@ -1,5 +1,5 @@
 /*
- * Copyright 2013,2015 Canonical Ltd.
+ * Copyright 2013,2015,2016 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -22,6 +22,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
 #include <QColor>
+#include <QSize>
 
 namespace unity
 {
@@ -211,6 +212,11 @@ class UNITY_API ApplicationInfoInterface: public QObject
      */
     Q_PROPERTY(bool exemptFromLifecycle READ exemptFromLifecycle WRITE setExemptFromLifecycle NOTIFY exemptFromLifecycleChanged)
 
+    /**
+     * @brief The size to be given for new surfaces created by this application
+     */
+    Q_PROPERTY(QSize initialSurfaceSize READ initialSurfaceSize WRITE setInitialSurfaceSize NOTIFY initialSurfaceSizeChanged)
+
 protected:
     /// @cond
     ApplicationInfoInterface(const QString &appId, QObject* parent = 0): QObject(parent) { Q_UNUSED(appId) }
@@ -285,6 +291,8 @@ public:
     virtual bool isTouchApp() const = 0;
     virtual bool exemptFromLifecycle() const = 0;
     virtual void setExemptFromLifecycle(bool) = 0;
+    virtual QSize initialSurfaceSize() const = 0;
+    virtual void setInitialSurfaceSize(const QSize &size) = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -297,6 +305,7 @@ Q_SIGNALS:
     void requestedStateChanged(RequestedState value);
     void focusedChanged(bool focused);
     void exemptFromLifecycleChanged(bool exemptFromLifecycle);
+    void initialSurfaceSizeChanged(const QSize &size);
     /// @endcond
 };
 
