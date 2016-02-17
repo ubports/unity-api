@@ -148,7 +148,7 @@ public:
     virtual int maximumHeight() const = 0;
     virtual int widthIncrement() const = 0;
     virtual int heightIncrement() const = 0;
-    
+
     virtual Mir::ShellChrome shellChrome() const = 0;
     /// @endcond
 
