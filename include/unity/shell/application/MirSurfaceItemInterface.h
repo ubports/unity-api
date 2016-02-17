@@ -108,9 +108,7 @@ class MirSurfaceItemInterface : public QQuickItem
     Q_PROPERTY(FillMode fillMode READ fillMode WRITE setFillMode NOTIFY fillModeChanged)
 
     /**
-     * @brief The desired height for the contained MirSurface.
-     * It's ignored if set to zero or a negative number
-     * The default value is zero
+     * @brief The Shell crhome mode
      */
     Q_PROPERTY(Mir::ShellChrome shellChrome READ shellChrome NOTIFY shellChromeChanged)
 

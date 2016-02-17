@@ -28,6 +28,8 @@ class Mir : public QObject
     Q_ENUMS(Type)
     Q_ENUMS(State)
     Q_ENUMS(OrientationAngle)
+    Q_ENUMS(ShellChrome)
+    Q_ENUMS(FormFactor)
 
     /**
         @brief Name of the mouse cursor to be used. Follows the X Cursor naming convention.
