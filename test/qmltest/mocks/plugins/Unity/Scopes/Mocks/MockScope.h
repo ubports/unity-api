@@ -36,6 +36,7 @@ public:
     bool favorite() const override;
     QString shortcut() const override;
     bool searchInProgress() const override;
+    bool activationInProgress() const override;
     unity::shell::scopes::CategoriesInterface* categories() const override;
     unity::shell::scopes::SettingsModelInterface* settings() const override;
     QString searchQuery() const override;

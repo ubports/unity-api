@@ -74,6 +74,11 @@ class UNITY_API ScopeInterface : public QObject
     Q_PROPERTY(bool searchInProgress READ searchInProgress NOTIFY searchInProgressChanged)
 
     /**
+     * @brief Boolean specifying whether an activation request is currently running.
+     */
+    Q_PROPERTY(bool activationInProgress READ activationInProgress NOTIFY activationInProgressChanged)
+
+    /**
      * @brief Boolean specifying whether the scope is favourited.
      */
     Q_PROPERTY(bool favorite READ favorite WRITE setFavorite NOTIFY favoriteChanged)
@@ -173,6 +178,7 @@ public:
     virtual QString searchHint() const = 0;
     virtual QString shortcut() const = 0;
     virtual bool searchInProgress() const = 0;
+    virtual bool activationInProgress() const = 0;
     virtual bool favorite() const = 0;
     virtual CategoriesInterface* categories() const = 0;
     virtual SettingsModelInterface* settings() const = 0;
@@ -256,6 +262,7 @@ Q_SIGNALS:
     void descriptionChanged();
     void searchHintChanged();
     void searchInProgressChanged();
+    void activationInProgressChanged();
     void favoriteChanged();
     void shortcutChanged();
     void categoriesChanged();
