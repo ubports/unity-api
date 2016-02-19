@@ -1,9 +1,17 @@
-unity-api (7.106-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.107-0ubuntu1) UNRELEASED; urgency=medium
 
   * Added Filters interface.
   * Added allLabel role to the scopes NavigationInterface.
 
- -- Pawel Stolowski <pawel.stolowski@canonical.com>  Mon, 28 Sep 2015 11:16:45 +0200
+ -- Pawel Stolowski <pawel.stolowski@canonical.com>  Fri, 19 Feb 2016 11:16:45 +0200
+
+unity-api (7.106+16.04.20160211.1-0ubuntu1) xenial; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * Added ApplicationInfoInterface.initialSurfaceSize (LP: #1532974)
+  * MirSurfaceInterface: added size hints
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Thu, 11 Feb 2016 23:53:29 +0000
 
 unity-api (7.105+16.04.20160104-0ubuntu1) xenial; urgency=medium
 
