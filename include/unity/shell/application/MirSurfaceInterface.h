@@ -78,6 +78,42 @@ class MirSurfaceInterface : public QObject
     Q_PROPERTY(Mir::OrientationAngle orientationAngle READ orientationAngle WRITE setOrientationAngle
                NOTIFY orientationAngleChanged DESIGNABLE false)
 
+    /**
+     * @brief The requested minimum width for the surface
+     * Zero if not set
+     */
+    Q_PROPERTY(int minimumWidth READ minimumWidth NOTIFY minimumWidthChanged)
+
+    /**
+     * @brief The requested minimum height for the surface
+     * Zero if not set
+     */
+    Q_PROPERTY(int minimumHeight READ minimumHeight NOTIFY minimumHeightChanged)
+
+    /**
+     * @brief The requested maximum width for the surface
+     * Zero if not set
+     */
+    Q_PROPERTY(int maximumWidth READ maximumWidth NOTIFY maximumWidthChanged)
+
+    /**
+     * @brief The requested maximum height for the surface
+     * Zero if not set
+     */
+    Q_PROPERTY(int maximumHeight READ maximumHeight NOTIFY maximumHeightChanged)
+
+    /**
+     * @brief The requested width increment for the surface
+     * Zero if not set
+     */
+    Q_PROPERTY(int widthIncrement READ widthIncrement NOTIFY widthIncrementChanged)
+
+    /**
+     * @brief The requested height increment for the surface
+     * Zero if not set
+     */
+    Q_PROPERTY(int heightIncrement READ heightIncrement NOTIFY heightIncrementChanged)
+
 public:
     /// @cond
     MirSurfaceInterface(QObject *parent = nullptr) : QObject(parent) {}
@@ -100,6 +136,13 @@ public:
 
     virtual Mir::OrientationAngle orientationAngle() const = 0;
     virtual void setOrientationAngle(Mir::OrientationAngle angle) = 0;
+
+    virtual int minimumWidth() const = 0;
+    virtual int minimumHeight() const = 0;
+    virtual int maximumWidth() const = 0;
+    virtual int maximumHeight() const = 0;
+    virtual int widthIncrement() const = 0;
+    virtual int heightIncrement() const = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -111,6 +154,12 @@ Q_SIGNALS:
     void orientationAngleChanged(Mir::OrientationAngle value);
     void sizeChanged(const QSize &value);
     void nameChanged(const QString &name);
+    void minimumWidthChanged(int value);
+    void minimumHeightChanged(int value);
+    void maximumWidthChanged(int value);
+    void maximumHeightChanged(int value);
+    void widthIncrementChanged(int value);
+    void heightIncrementChanged(int value);
     /// @endcond
 };
 
