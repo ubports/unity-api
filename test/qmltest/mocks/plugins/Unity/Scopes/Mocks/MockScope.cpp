@@ -16,7 +16,7 @@
 
 #include "MockScope.h"
 #include "MockCategories.h"
-#include "MockPreviewStack.h"
+#include "MockPreviewModel.h"
 #include "MockDepartment.h"
 #include "MockSettingsModel.h"
 
@@ -176,14 +176,14 @@ void MockScope::activateAction(QVariant const& result, QString const& categoryId
     Q_UNUSED(actionId);
 }
 
-unity::shell::scopes::PreviewStackInterface* MockScope::preview(QVariant const& result, QString const& categoryId)
+unity::shell::scopes::PreviewModelInterface* MockScope::preview(QVariant const& result, QString const& categoryId)
 {
     Q_UNUSED(result);
     Q_UNUSED(categoryId);
 
     // This probably leaks, do we don't care
     // it's a  test after all
-    return new MockPreviewStack;
+    return new MockPreviewModel;
 }
 
 unity::shell::scopes::NavigationInterface* MockScope::getNavigation(QString const& navigationId)
