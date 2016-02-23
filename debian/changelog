@@ -1,9 +1,10 @@
-unity-api (7.107) UNRELEASED; urgency=medium
+unity-api (7.107+16.04.20160223-0ubuntu1) xenial; urgency=medium
 
   * Removed PreviewStackInterface, modified ScopeInterface to return
     PreviewModelInterface on preview().
+  * Interface for activationInProgress flag. (LP: #1537132)
 
- -- Pawel Stolowski <pawel.stolowski@canonical.com>  Wed, 17 Feb 2016 17:46:13 +0100
+ -- Pawel Stolowski <ci-train-bot@canonical.com>  Tue, 23 Feb 2016 12:12:26 +0000
 
 unity-api (7.106+16.04.20160211.1-0ubuntu1) xenial; urgency=medium
 
