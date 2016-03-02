@@ -67,6 +67,8 @@ MockResultsModel::data(const QModelIndex& index, int role) const
         case RoleUri:
         case RoleCategoryId:
         case RoleDndUri:
+        case RoleAttributes:
+        case RoleSocialAttributes:
         default:
             return QString();
     }

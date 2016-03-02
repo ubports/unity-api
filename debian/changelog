@@ -1,3 +1,9 @@
+unity-api (7.107) UNRELEASED; urgency=medium
+
+  * Added RoleSocialAttributes to ResultsModelInterface of scopes.
+
+ -- Pawel Stolowski <pawel.stolowski@canonical.com>  Wed, 02 Mar 2016 16:29:42 +0100
+
 unity-api (7.106+16.04.20160211.1-0ubuntu1) xenial; urgency=medium
 
   [ Daniel d'Andrada ]

@@ -71,7 +71,8 @@ public:
         RoleAttributes,
         RoleBackground,
         RoleOverlayColor,
-        RoleQuickPreviewData ///< Data for UI quick previewing. In case of audio should contain uri and duration
+        RoleQuickPreviewData, ///< Data for UI quick previewing. In case of audio should contain uri and duration
+        RoleSocialAttributes  ///< Data for social attributes (in-card actions such as "+1").
     };
 
     // @cond
@@ -96,6 +97,7 @@ public:
         roles[RoleAttributes] = "attributes";
         roles[RoleBackground] = "background";
         roles[RoleOverlayColor] = "overlayColor";
+        roles[RoleSocialAttributes] = "socialAttributes";
         return roles;
     }
 
