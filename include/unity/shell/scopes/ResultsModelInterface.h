@@ -72,7 +72,7 @@ public:
         RoleBackground,
         RoleOverlayColor,
         RoleQuickPreviewData, ///< Data for UI quick previewing. In case of audio should contain uri and duration
-        RoleSocialActions  ///< Data for social attributes (in-card actions such as "+1").
+        RoleSocialActions  ///< Data for social actions (in-card actions such as "+1").
     };
 
     // @cond
