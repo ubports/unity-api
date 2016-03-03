@@ -319,7 +319,7 @@ Item {
                 { tag: "Model.roles[attributes]", role: "attributes", type: "string" },
                 { tag: "Model.roles[background]", role: "background", type: "object" },
                 { tag: "Model.roles[overlayColor]", role: "overlayColor", type: "string" },
-                { tag: "Model.roles[socialAttributes]", role: "overlayColor", type: "string" },
+                { tag: "Model.roles[socialActions]", role: "overlayColor", type: "string" },
             ];
         }
 
