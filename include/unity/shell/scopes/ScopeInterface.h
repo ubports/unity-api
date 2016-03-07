@@ -30,7 +30,7 @@ namespace scopes
 {
 
 class CategoriesInterface;
-class PreviewStackInterface;
+class PreviewModelInterface;
 class NavigationInterface;
 class SettingsModelInterface;
 
@@ -72,6 +72,11 @@ class UNITY_API ScopeInterface : public QObject
      * @brief Boolean specifying whether a search is currently running.
      */
     Q_PROPERTY(bool searchInProgress READ searchInProgress NOTIFY searchInProgressChanged)
+
+    /**
+     * @brief Boolean specifying whether an activation request is currently running.
+     */
+    Q_PROPERTY(bool activationInProgress READ activationInProgress NOTIFY activationInProgressChanged)
 
     /**
      * @brief Boolean specifying whether the scope is favourited.
@@ -173,6 +178,7 @@ public:
     virtual QString searchHint() const = 0;
     virtual QString shortcut() const = 0;
     virtual bool searchInProgress() const = 0;
+    virtual bool activationInProgress() const = 0;
     virtual bool favorite() const = 0;
     virtual CategoriesInterface* categories() const = 0;
     virtual SettingsModelInterface* settings() const = 0;
@@ -203,10 +209,10 @@ public:
     /**
      * @brief Method used to preview a result.
      *
-     * Returns a new PreviewStackInterface instance. It's caller's responsibility
+     * Returns a new PreviewModelInterface instance. It's caller's responsibility
      * to free it.
      */
-    Q_INVOKABLE virtual unity::shell::scopes::PreviewStackInterface* preview(QVariant const& result, QString const& categoryId) = 0;
+    Q_INVOKABLE virtual unity::shell::scopes::PreviewModelInterface* preview(QVariant const& result, QString const& categoryId) = 0;
 
     /**
      * @brief Cancels the current activation.
@@ -256,6 +262,7 @@ Q_SIGNALS:
     void descriptionChanged();
     void searchHintChanged();
     void searchInProgressChanged();
+    void activationInProgressChanged();
     void favoriteChanged();
     void shortcutChanged();
     void categoriesChanged();

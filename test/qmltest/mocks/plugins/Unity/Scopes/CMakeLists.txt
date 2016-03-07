@@ -15,7 +15,6 @@ set(ScopesMocks_SOURCES
     Mocks/MockDepartment.cpp
     Mocks/MockResultsModel.cpp
     Mocks/MockPreviewModel.cpp
-    Mocks/MockPreviewStack.cpp
     Mocks/MockPreviewWidgetModel.cpp
     Mocks/MockScope.cpp
     Mocks/MockScopes.cpp
@@ -25,7 +24,6 @@ set(ScopesMocks_SOURCES
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/ResultsModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/PreviewModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/PreviewWidgetModelInterface.h
-    ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/PreviewStackInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/ScopeInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/ScopesInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/scopes/SettingsModelInterface.h
