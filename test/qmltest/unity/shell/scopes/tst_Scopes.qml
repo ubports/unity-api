@@ -451,72 +451,11 @@ Item {
     }
 
     Verifier {
-        id: previewStackVerifier
-
-        Repeater {
-             id: previewStackRepeater
-             model: preview
-             delegate: Item {
-                 property var roles: model
-             }
-        }
-
-        function test_previewStack_data() {
-            return [
-                { tag: "PreviewStack[object]", type: "object" },
-                { tag: "PreviewStack[PreviewStackInterface]", type: "unity::shell::scopes::PreviewStackInterface" },
-            ];
-        }
-
-        function test_previewStack(data) {
-            object = previewStackRepeater.model;
-            name = "PreviewStack";
-            verifyData(data);
-        }
-
-        function test_previewStack_roles_data() {
-            return [
-                { tag: "Model.roles[previewModel]", role: "previewModel", type: "object" }
-            ];
-        }
-
-        function test_previewStack_roles(data) {
-            object = previewStackRepeater.itemAt(0).roles;
-            name = "PreviewStack";
-            verifyData(data);
-        }
-
-        function test_previewStack_properties_data() {
-            return [
-                { tag: "Item.properties[widgetColumnCount]", constant: "widgetColumnCount", type: "number" }
-            ];
-        }
-
-        function test_previewStack_properties(data) {
-            object = previewStackRepeater.model;
-            name = "PreviewStack";
-            verifyData(data);
-        }
-
-        function test_previewStack_methods_data() {
-            return [
-                { tag: "Model.methods[get]", method: "getPreviewModel" }
-            ];
-        }
-
-        function test_previewStack_methods(data) {
-            object = previewStackRepeater.model;
-            name = "PreviewStack"
-            verifyData(data);
-        }
-    }
-
-    Verifier {
         id: previewModelVerifier
 
         Repeater {
              id: previewModelRepeater
-             model: preview.getPreviewModel(0)
+             model: preview
              delegate: Item {
                  property var roles: model
                  property var columnModel: model.columnModel
