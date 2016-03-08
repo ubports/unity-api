@@ -86,6 +86,7 @@ public:
     //{@
     bool has_group(const std::string& group) const noexcept;
     bool has_key(const std::string& group, const std::string& key) const;
+
     std::string get_string(const std::string& group, const std::string& key) const;
     std::string get_locale_string(const std::string& group,
                                   const std::string& key,
@@ -99,6 +100,22 @@ public:
                                                      const std::string& locale = std::string()) const;
     std::vector<int> get_int_array(const std::string& group, const std::string& key) const;
     std::vector<bool> get_boolean_array(const std::string& group, const std::string& key) const;
+
+    void set_string(const std::string& group, const std::string& key, const std::string& value);
+    void set_locale_string(const std::string& group,
+                           const std::string& key,
+                           const std::string& value,
+                           const std::string& locale = std::string());
+    void set_boolean(const std::string& group, const std::string& key, bool value);
+    void set_int(const std::string& group, const std::string& key, int value);
+
+    void set_string_array(const std::string& group, const std::string& key, const std::vector<std::string>& value);
+    void set_locale_string_array(const std::string& group,
+                                 const std::string& key,
+                                 const std::vector<std::string>& value,
+                                 const std::string& locale = std::string());
+    void set_int_array(const std::string& group, const std::string& key, const std::vector<int>& value);
+    void set_boolean_array(const std::string& group, const std::string& key, const std::vector<bool>& value);
 
     std::string get_start_group() const;
     std::vector<std::string> get_groups() const;

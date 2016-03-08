@@ -226,6 +226,49 @@ vector<bool> IniParser::get_boolean_array(const std::string& group, const std::s
     return result;
 }
 
+void IniParser::set_string(const std::string& group, const std::string& key, const std::string& value)
+{
+
+}
+
+void IniParser::set_locale_string(const std::string& group, const std::string& key,
+                                  const std::string& value, const std::string& locale)
+{
+
+}
+
+void IniParser::set_boolean(const std::string& group, const std::string& key, bool value)
+{
+
+}
+
+void IniParser::set_int(const std::string& group, const std::string& key, int value)
+{
+
+}
+
+void IniParser::set_string_array(const std::string& group, const std::string& key,
+                                 const std::vector<std::string>& value)
+{
+
+}
+
+void IniParser::set_locale_string_array(const std::string& group, const std::string& key,
+                                        const std::vector<std::string>& value, const std::string& locale)
+{
+
+}
+
+void IniParser::set_int_array(const std::string& group, const std::string& key, const std::vector<int>& value)
+{
+
+}
+
+void IniParser::set_boolean_array(const std::string& group, const std::string& key, const std::vector<bool>& value)
+{
+
+}
+
 string IniParser::get_start_group() const
 {
     gchar* sg = g_key_file_get_start_group(p->k);
