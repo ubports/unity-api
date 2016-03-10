@@ -1,9 +1,16 @@
-unity-api (7.107-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.108-0ubuntu1) UNRELEASED; urgency=medium
 
   * Added Filters interface.
-  * Added allLabel role to the scopes NavigationInterface.
 
  -- Pawel Stolowski <pawel.stolowski@canonical.com>  Fri, 19 Feb 2016 11:16:45 +0200
+
+unity-api (7.107+16.04.20160223-0ubuntu1) xenial; urgency=medium
+
+  * Removed PreviewStackInterface, modified ScopeInterface to return
+    PreviewModelInterface on preview().
+  * Interface for activationInProgress flag. (LP: #1537132)
+
+ -- Pawel Stolowski <ci-train-bot@canonical.com>  Tue, 23 Feb 2016 12:12:26 +0000
 
 unity-api (7.106+16.04.20160211.1-0ubuntu1) xenial; urgency=medium
 
