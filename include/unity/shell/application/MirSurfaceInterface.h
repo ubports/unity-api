@@ -115,7 +115,7 @@ class MirSurfaceInterface : public QObject
     Q_PROPERTY(int heightIncrement READ heightIncrement NOTIFY heightIncrementChanged)
 
     /**
-     * @brief The Shell crhome mode
+     * @brief The Shell chrome mode
      */
     Q_PROPERTY(Mir::ShellChrome shellChrome READ shellChrome NOTIFY shellChromeChanged)
 

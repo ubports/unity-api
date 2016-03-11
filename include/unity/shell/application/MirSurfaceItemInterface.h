@@ -108,7 +108,7 @@ class MirSurfaceItemInterface : public QQuickItem
     Q_PROPERTY(FillMode fillMode READ fillMode WRITE setFillMode NOTIFY fillModeChanged)
 
     /**
-     * @brief The Shell crhome mode
+     * @brief The Shell chrome mode
      */
     Q_PROPERTY(Mir::ShellChrome shellChrome READ shellChrome NOTIFY shellChromeChanged)
 
