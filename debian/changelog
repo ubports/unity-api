@@ -1,9 +1,3 @@
-unity-api (7.108-0ubuntu1) UNRELEASED; urgency=medium
-
-  * Added Filters interface.
-
- -- Pawel Stolowski <pawel.stolowski@canonical.com>  Fri, 19 Feb 2016 11:16:45 +0200
-
 unity-api (7.107+16.04.20160223-0ubuntu1) xenial; urgency=medium
 
   * Removed PreviewStackInterface, modified ScopeInterface to return
