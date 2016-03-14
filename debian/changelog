@@ -1,3 +1,9 @@
+unity-api (7.108) UNRELEASED; urgency=medium
+
+  * Add set*() methods to IniParser
+
+ -- Marcus Tomlinson <marcus.tomlinson@canonical.com>  Mon, 14 Mar 2016 10:11:13 +0200
+
 unity-api (7.107+16.04.20160223-0ubuntu1) xenial; urgency=medium
 
   * Removed PreviewStackInterface, modified ScopeInterface to return
