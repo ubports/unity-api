@@ -95,6 +95,7 @@ public:
                                   const std::string& locale = std::string()) const;
     bool get_boolean(const std::string& group, const std::string& key) const;
     int get_int(const std::string& group, const std::string& key) const;
+    double get_double(const std::string& group, const std::string& key) const;
 
     std::vector<std::string> get_string_array(const std::string& group, const std::string& key) const;
     std::vector<std::string> get_locale_string_array(const std::string& group,
@@ -110,6 +111,7 @@ public:
                            const std::string& locale = std::string());
     void set_boolean(const std::string& group, const std::string& key, bool value);
     void set_int(const std::string& group, const std::string& key, int value);
+    void set_double(const std::string& group, const std::string& key, double value);
 
     void set_string_array(const std::string& group, const std::string& key, const std::vector<std::string>& value);
     void set_locale_string_array(const std::string& group,

@@ -160,6 +160,15 @@ int IniParser::get_int(const std::string& group, const std::string& key) const
     return rval;
 }
 
+double IniParser::get_double(const std::string& group, const std::string& key) const
+{
+    double rval;
+    GError* e = nullptr;
+    rval = g_key_file_get_double(p->k, group.c_str(), key.c_str(), &e);
+    inspect_error(e, "Could not get double value", p->filename, group);
+    return rval;
+}
+
 std::vector<std::string> IniParser::get_string_array(const std::string& group, const std::string& key) const
 {
     vector<string> result;
@@ -249,6 +258,12 @@ void IniParser::set_boolean(const std::string& group, const std::string& key, bo
 void IniParser::set_int(const std::string& group, const std::string& key, int value)
 {
     g_key_file_set_integer(p->k, group.c_str(), key.c_str(), value);
+    p->dirty = true;
+}
+
+void IniParser::set_double(const std::string& group, const std::string& key, double value)
+{
+    g_key_file_set_double(p->k, group.c_str(), key.c_str(), value);
     p->dirty = true;
 }
 
