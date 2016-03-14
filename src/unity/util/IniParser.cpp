@@ -37,6 +37,7 @@ struct IniParserPrivate
 {
     GKeyFile *k;
     string filename;
+    bool dirty = false;
 };
 
 static std::mutex parser_mutex;
@@ -229,22 +230,26 @@ vector<bool> IniParser::get_boolean_array(const std::string& group, const std::s
 void IniParser::set_string(const std::string& group, const std::string& key, const std::string& value)
 {
     g_key_file_set_string(p->k, group.c_str(), key.c_str(), value.c_str());
+    p->dirty = true;
 }
 
 void IniParser::set_locale_string(const std::string& group, const std::string& key,
                                   const std::string& value, const std::string& locale)
 {
     g_key_file_set_locale_string(p->k, group.c_str(), key.c_str(), locale.c_str(), value.c_str());
+    p->dirty = true;
 }
 
 void IniParser::set_boolean(const std::string& group, const std::string& key, bool value)
 {
     g_key_file_set_boolean(p->k, group.c_str(), key.c_str(), value);
+    p->dirty = true;
 }
 
 void IniParser::set_int(const std::string& group, const std::string& key, int value)
 {
     g_key_file_set_integer(p->k, group.c_str(), key.c_str(), value);
+    p->dirty = true;
 }
 
 void IniParser::set_string_array(const std::string& group, const std::string& key,
@@ -259,6 +264,7 @@ void IniParser::set_string_array(const std::string& group, const std::string& ke
     }
 
     g_key_file_set_string_list(p->k, group.c_str(), key.c_str(), strlist, count);
+    p->dirty = true;
 
     g_strfreev(strlist);
 }
@@ -275,6 +281,7 @@ void IniParser::set_locale_string_array(const std::string& group, const std::str
     }
 
     g_key_file_set_locale_string_list(p->k, group.c_str(), key.c_str(), locale.c_str(), strlist, count);
+    p->dirty = true;
 
     g_strfreev(strlist);
 }
@@ -290,6 +297,7 @@ void IniParser::set_int_array(const std::string& group, const std::string& key, 
     }
 
     g_key_file_set_integer_list(p->k, group.c_str(), key.c_str(), intlist, count);
+    p->dirty = true;
 
     g_free(intlist);
 }
@@ -305,15 +313,20 @@ void IniParser::set_boolean_array(const std::string& group, const std::string& k
     }
 
     g_key_file_set_boolean_list(p->k, group.c_str(), key.c_str(), boollist, count);
+    p->dirty = true;
 
     g_free(boollist);
 }
 
 void IniParser::sync()
 {
-    GError* e = nullptr;
-    g_key_file_save_to_file(p->k, p->filename.c_str(), &e);
-    inspect_error(e, "Failed to write key_file contents to file", p->filename, "-");
+    if (p->dirty)
+    {
+        GError* e = nullptr;
+        g_key_file_save_to_file(p->k, p->filename.c_str(), &e);
+        inspect_error(e, "Failed to write key_file contents to file", p->filename, "-");
+        p->dirty = false;
+    }
 }
 
 string IniParser::get_start_group() const

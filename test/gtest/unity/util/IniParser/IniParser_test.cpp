@@ -26,6 +26,7 @@ using namespace unity;
 using namespace unity::util;
 
 #define INI_FILE UNITY_API_TEST_DATADIR "/sample.ini"
+#define INI_TEMP_FILE TEST_RUNTIME_PATH "/temp.ini"
 
 TEST(IniParser, basic)
 {
@@ -147,4 +148,16 @@ TEST(IniParser, failingQueries)
         FAIL();
     } catch(const LogicException &e) {
     }
+}
+
+TEST(IniParser, write)
+{
+    // Create empty ini file for writing
+    FILE* f = fopen(INI_TEMP_FILE, "w");
+    fclose(f);
+
+    IniParser conf(INI_TEMP_FILE);
+
+    conf.set_boolean("hello", "there", true);
+    conf.sync();
 }
