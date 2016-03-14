@@ -256,12 +256,13 @@ void IniParser::set_string_array(const std::string& group, const std::string& ke
                                  const std::vector<std::string>& value)
 {
     int count = value.size();
-    gchar** strlist = g_new(gchar*, count);
+    gchar** strlist = g_new(gchar*, count+1);
 
     for (int i = 0; i < count; ++i)
     {
-        strlist[i] = const_cast<gchar*>(value[i].c_str());
+        strlist[i] = g_strdup(value[i].c_str());
     }
+    strlist[count] = nullptr;
 
     g_key_file_set_string_list(p->k, group.c_str(), key.c_str(), strlist, count);
     p->dirty = true;
@@ -273,12 +274,13 @@ void IniParser::set_locale_string_array(const std::string& group, const std::str
                                         const std::vector<std::string>& value, const std::string& locale)
 {
     int count = value.size();
-    gchar** strlist = g_new(gchar*, count);
+    gchar** strlist = g_new(gchar*, count+1);
 
     for (int i = 0; i < count; ++i)
     {
-        strlist[i] = const_cast<gchar*>(value[i].c_str());
+        strlist[i] = g_strdup(value[i].c_str());
     }
+    strlist[count] = nullptr;
 
     g_key_file_set_locale_string_list(p->k, group.c_str(), key.c_str(), locale.c_str(), strlist, count);
     p->dirty = true;

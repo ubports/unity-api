@@ -150,14 +150,156 @@ TEST(IniParser, failingQueries)
     }
 }
 
-TEST(IniParser, write)
+TEST(IniParser, write_values)
 {
-    // Create empty ini file for writing
+    // Create an empty ini file for writing
     FILE* f = fopen(INI_TEMP_FILE, "w");
     fclose(f);
 
     IniParser conf(INI_TEMP_FILE);
 
-    conf.set_boolean("hello", "there", true);
+    conf.set_string("g1", "k1", "s1");
+    conf.set_locale_string("g1", "k2", "s2", "en");
+    conf.set_locale_string("g1", "k2", "s3", "pt_BR");
+
+    // Check temp file before sync()
+    {
+        IniParser conf2(INI_TEMP_FILE);
+        EXPECT_EQ("s1", conf.get_string("g1", "k1"));
+        EXPECT_THROW(conf2.get_string("g1", "k1"), LogicException);
+
+        EXPECT_EQ("s2", conf.get_locale_string("g1", "k2", "en"));
+        EXPECT_THROW(conf2.get_locale_string("g1", "k2", "en"), LogicException);
+
+        EXPECT_EQ("s3", conf.get_locale_string("g1", "k2", "pt_BR"));
+        EXPECT_THROW(conf2.get_locale_string("g1", "k2", "pt_BR"), LogicException);
+    }
+
+    // Sync
     conf.sync();
+
+    // Write some post-sync values
+    conf.set_boolean("g2", "k1", false);
+    conf.set_int("g2", "k2", 123);
+
+    // Check temp file after first sync()
+    {
+        IniParser conf2(INI_TEMP_FILE);
+        EXPECT_EQ("s1", conf.get_string("g1", "k1"));
+        EXPECT_EQ("s1", conf2.get_string("g1", "k1"));
+
+        EXPECT_EQ("s2", conf.get_locale_string("g1", "k2", "en"));
+        EXPECT_EQ("s2", conf2.get_locale_string("g1", "k2", "en"));
+
+        EXPECT_EQ("s3", conf.get_locale_string("g1", "k2", "pt_BR"));
+        EXPECT_EQ("s3", conf2.get_locale_string("g1", "k2", "pt_BR"));
+
+        EXPECT_EQ(false, conf.get_boolean("g2", "k1"));
+        EXPECT_THROW(conf2.get_boolean("g2", "k1"), LogicException);
+
+        EXPECT_EQ(123, conf.get_int("g2", "k2"));
+        EXPECT_THROW(conf2.get_int("g2", "k2"), LogicException);
+    }
+
+    // Sync
+    conf.sync();
+
+    // Check temp file after second sync()
+    {
+        IniParser conf2(INI_TEMP_FILE);
+        EXPECT_EQ("s1", conf.get_string("g1", "k1"));
+        EXPECT_EQ("s1", conf2.get_string("g1", "k1"));
+
+        EXPECT_EQ("s2", conf.get_locale_string("g1", "k2", "en"));
+        EXPECT_EQ("s2", conf2.get_locale_string("g1", "k2", "en"));
+
+        EXPECT_EQ("s3", conf.get_locale_string("g1", "k2", "pt_BR"));
+        EXPECT_EQ("s3", conf2.get_locale_string("g1", "k2", "pt_BR"));
+
+        EXPECT_EQ(false, conf.get_boolean("g2", "k1"));
+        EXPECT_EQ(false, conf2.get_boolean("g2", "k1"));
+
+        EXPECT_EQ(123, conf.get_int("g2", "k2"));
+        EXPECT_EQ(123, conf2.get_int("g2", "k2"));
+    }
+}
+
+template<class T>
+void EXPECT_ARRAY_EQ(const vector<T>& expected, const vector<T>& actual)
+{
+    EXPECT_TRUE(expected == actual);
+}
+
+TEST(IniParser, write_arrays)
+{
+    // Create an empty ini file for writing
+    FILE* f = fopen(INI_TEMP_FILE, "w");
+    fclose(f);
+
+    IniParser conf(INI_TEMP_FILE);
+
+    conf.set_string_array("g1", "k1", {"s1", "s2", "s3"});
+    conf.set_locale_string_array("g1", "k2", {"s4", "s5", "s6"}, "en");
+    conf.set_locale_string_array("g1", "k2", {"s7", "s8", "s9"}, "pt_BR");
+
+    // Check temp file before sync()
+    {
+        IniParser conf2(INI_TEMP_FILE);
+        EXPECT_ARRAY_EQ({"s1", "s2", "s3"}, conf.get_string_array("g1", "k1"));
+        EXPECT_THROW(conf2.get_string_array("g1", "k1"), LogicException);
+
+        EXPECT_ARRAY_EQ({"s4", "s5", "s6"}, conf.get_locale_string_array("g1", "k2", "en"));
+        EXPECT_THROW(conf2.get_locale_string_array("g1", "k2", "en"), LogicException);
+
+        EXPECT_ARRAY_EQ({"s7", "s8", "s9"}, conf.get_locale_string_array("g1", "k2", "pt_BR"));
+        EXPECT_THROW(conf2.get_locale_string_array("g1", "k2", "pt_BR"), LogicException);
+    }
+
+    // Sync
+    conf.sync();
+
+    // Write some post-sync values
+    conf.set_boolean_array("g2", "k1", {true, false, false});
+    conf.set_int_array("g2", "k2", {123, 456789, 101112});
+
+    // Check temp file after first sync()
+    {
+        IniParser conf2(INI_TEMP_FILE);
+        EXPECT_ARRAY_EQ({"s1", "s2", "s3"}, conf.get_string_array("g1", "k1"));
+        EXPECT_ARRAY_EQ({"s1", "s2", "s3"}, conf2.get_string_array("g1", "k1"));
+
+        EXPECT_ARRAY_EQ({"s4", "s5", "s6"}, conf.get_locale_string_array("g1", "k2", "en"));
+        EXPECT_ARRAY_EQ({"s4", "s5", "s6"}, conf2.get_locale_string_array("g1", "k2", "en"));
+
+        EXPECT_ARRAY_EQ({"s7", "s8", "s9"}, conf.get_locale_string_array("g1", "k2", "pt_BR"));
+        EXPECT_ARRAY_EQ({"s7", "s8", "s9"}, conf2.get_locale_string_array("g1", "k2", "pt_BR"));
+
+        EXPECT_ARRAY_EQ({true, false, false}, conf.get_boolean_array("g2", "k1"));
+        EXPECT_THROW(conf2.get_boolean_array("g2", "k1"), LogicException);
+
+        EXPECT_ARRAY_EQ({123, 456789, 101112}, conf.get_int_array("g2", "k2"));
+        EXPECT_THROW(conf2.get_int_array("g2", "k2"), LogicException);
+    }
+
+    // Sync
+    conf.sync();
+
+    // Check temp file after second sync()
+    {
+        IniParser conf2(INI_TEMP_FILE);
+        EXPECT_ARRAY_EQ({"s1", "s2", "s3"}, conf.get_string_array("g1", "k1"));
+        EXPECT_ARRAY_EQ({"s1", "s2", "s3"}, conf2.get_string_array("g1", "k1"));
+
+        EXPECT_ARRAY_EQ({"s4", "s5", "s6"}, conf.get_locale_string_array("g1", "k2", "en"));
+        EXPECT_ARRAY_EQ({"s4", "s5", "s6"}, conf2.get_locale_string_array("g1", "k2", "en"));
+
+        EXPECT_ARRAY_EQ({"s7", "s8", "s9"}, conf.get_locale_string_array("g1", "k2", "pt_BR"));
+        EXPECT_ARRAY_EQ({"s7", "s8", "s9"}, conf2.get_locale_string_array("g1", "k2", "pt_BR"));
+
+        EXPECT_ARRAY_EQ({true, false, false}, conf.get_boolean_array("g2", "k1"));
+        EXPECT_ARRAY_EQ({true, false, false}, conf2.get_boolean_array("g2", "k1"));
+
+        EXPECT_ARRAY_EQ({123, 456789, 101112}, conf.get_int_array("g2", "k2"));
+        EXPECT_ARRAY_EQ({123, 456789, 101112}, conf2.get_int_array("g2", "k2"));
+    }
 }
