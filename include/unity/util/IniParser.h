@@ -117,6 +117,8 @@ public:
     void set_int_array(const std::string& group, const std::string& key, const std::vector<int>& value);
     void set_boolean_array(const std::string& group, const std::string& key, const std::vector<bool>& value);
 
+    void sync();
+
     std::string get_start_group() const;
     std::vector<std::string> get_groups() const;
     std::vector<std::string> get_keys(const std::string& group) const;
