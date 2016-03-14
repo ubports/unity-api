@@ -34,6 +34,8 @@ class UNITY_API ExpandableFilterWidgetInterface : public FilterBaseInterface
     Q_OBJECT
 
 public:
+    Q_PROPERTY(unity::shell::scopes::FiltersInterface* filters READ filters CONSTANT)
+
     FiltersInterface::FilterType filterType() const override
     {
         return FiltersInterface::ExpandableFilterWidget;
