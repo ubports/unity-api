@@ -37,11 +37,11 @@ struct IniParserPrivate;
 }
 
 /**
-\brief Helper class to read configuration files.
+\brief Helper class to read and write configuration files.
 
 This class reads configuration files in the .ini format
 and provides for a simple and type safe way of extracting
-information. A typical ini file looks like this:
+and inserting information. A typical ini file looks like this:
 
 ~~~
 [group1]
@@ -55,11 +55,13 @@ key1 = othervalue1
 key2 = othervalue2
 ~~~
 
-To obtain a value, simply specify the group and key names to
-the get* functions of this class. The array functions use
-a semicolon as a separator.
+To extract / insert a value, simply specify the group and key names
+to the get* / set* methods of this class respectively. The array
+methods use a semicolon as a separator.
 
-The get functions indicate errors by throwing LogicExceptions.
+To write unsaved changes back to the configuration file, call sync().
+
+The get methods indicate errors by throwing LogicExceptions.
 Examples why this might happen is because a value can't be
 coerced into the given type (i.e trying to convert the value
 "hello" into a boolean).
@@ -79,7 +81,7 @@ public:
     /// @endcond
 
     /** @name Accessors
-     * These member functions provide access to configuration entries by group and key.
+     * These member methods provide access to configuration entries by group and key.
      * Attempts to retrieve a value as the wrong type, such as retrieving a string value
      * "abc" as an integer, throw LogicException.
       **/
