@@ -81,7 +81,7 @@ public:
     /// @endcond
 
     /** @name Accessors
-     * These member methods provide access to configuration entries by group and key.
+     * These member functions provide access to configuration entries by group and key.
      * Attempts to retrieve a value as the wrong type, such as retrieving a string value
      * "abc" as an integer, throw LogicException.
       **/
