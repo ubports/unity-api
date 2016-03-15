@@ -55,11 +55,13 @@ key1 = othervalue1
 key2 = othervalue2
 ~~~
 
-To extract / insert a value, simply specify the group and key names
-to the get* / set* methods of this class respectively. The array
-methods use a semicolon as a separator.
+To extract / insert a value, simply specify the group and key
+names to the get* / set* methods of this class respectively.
+The array methods use a semicolon as a separator.
 
-To write unsaved changes back to the configuration file, call sync().
+To write unsaved changes back to the configuration file, call
+sync(). The sync() method will throw a LogicException if it
+fails to write to file.
 
 The get methods indicate errors by throwing LogicExceptions.
 Examples why this might happen is because a value can't be
