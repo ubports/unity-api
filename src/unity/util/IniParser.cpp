@@ -107,22 +107,13 @@ static FileLock unix_lock(string const& path)
 IniParser::IniParser(const char* filename)
 {
     lock_guard<std::mutex> lock(internal::parser_mutex);
+    FileLock flock = unix_lock(filename);
 
     GKeyFile* kf = g_key_file_new();
     GError* e = nullptr;
     if (!kf)
     {
         throw ResourceException("Could not create keyfile parser."); // LCOV_EXCL_LINE
-    }
-
-    try
-    {
-        FileLock flock = unix_lock(filename);
-    }
-    catch (const FileException&)
-    {
-        g_key_file_free(kf);
-        throw;
     }
 
     if (!g_key_file_load_from_file(kf, filename, G_KEY_FILE_KEEP_TRANSLATIONS, &e))
@@ -429,10 +420,9 @@ void IniParser::sync()
 
     if (p->dirty)
     {
-        GError* e = nullptr;
-
         FileLock flock = unix_lock(p->filename);
 
+        GError* e = nullptr;
         if (!g_key_file_save_to_file(p->k, p->filename.c_str(), &e))
         {
             string message = "Could not write ini file ";
