@@ -84,7 +84,10 @@ static FileLock unix_lock(string const& path)
 
     if (file_lock.get() == -1)
     {
-        throw FileException("Couldn't open file " + path, errno);
+        string message = "Could not load ini file ";
+        message += path;
+        message += ": No such file or directory";
+        throw FileException(message, 4);
     }
 
     struct flock fl;
