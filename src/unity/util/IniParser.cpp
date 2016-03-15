@@ -115,7 +115,15 @@ IniParser::IniParser(const char* filename)
         throw ResourceException("Could not create keyfile parser."); // LCOV_EXCL_LINE
     }
 
-    FileLock flock = unix_lock(filename);
+    try
+    {
+        FileLock flock = unix_lock(filename);
+    }
+    catch (const FileException&)
+    {
+        g_key_file_free(kf);
+        throw;
+    }
 
     if (!g_key_file_load_from_file(kf, filename, G_KEY_FILE_KEEP_TRANSLATIONS, &e))
     {
