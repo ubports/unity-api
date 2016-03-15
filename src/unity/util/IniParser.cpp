@@ -104,6 +104,8 @@ IniParser::~IniParser() noexcept
 
 bool IniParser::has_group(const std::string& group) const noexcept
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     gboolean rval;
     rval = g_key_file_has_group(p->k, group.c_str());
     return rval;
@@ -111,6 +113,8 @@ bool IniParser::has_group(const std::string& group) const noexcept
 
 bool IniParser::has_key(const std::string& group, const std::string& key) const
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     gboolean rval;
     GError* e = nullptr;
     rval = g_key_file_has_key(p->k, group.c_str(), key.c_str(), &e);
@@ -120,6 +124,8 @@ bool IniParser::has_key(const std::string& group, const std::string& key) const
 
 std::string IniParser::get_string(const std::string& group, const std::string& key) const
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     gchar* value;
     GError* e = nullptr;
     string result;
@@ -132,6 +138,8 @@ std::string IniParser::get_string(const std::string& group, const std::string& k
 
 std::string IniParser::get_locale_string(const std::string& group, const std::string& key, const std::string& locale) const
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     gchar* value;
     GError* e = nullptr;
     string result;
@@ -144,6 +152,8 @@ std::string IniParser::get_locale_string(const std::string& group, const std::st
 
 bool IniParser::get_boolean(const std::string& group, const std::string& key) const
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     bool rval;
     GError* e = nullptr;
     rval = g_key_file_get_boolean(p->k, group.c_str(), key.c_str(), &e);
@@ -153,6 +163,8 @@ bool IniParser::get_boolean(const std::string& group, const std::string& key) co
 
 int IniParser::get_int(const std::string& group, const std::string& key) const
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     int rval;
     GError* e = nullptr;
     rval = g_key_file_get_integer(p->k, group.c_str(), key.c_str(), &e);
@@ -162,6 +174,8 @@ int IniParser::get_int(const std::string& group, const std::string& key) const
 
 double IniParser::get_double(const std::string& group, const std::string& key) const
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     double rval;
     GError* e = nullptr;
     rval = g_key_file_get_double(p->k, group.c_str(), key.c_str(), &e);
@@ -171,6 +185,8 @@ double IniParser::get_double(const std::string& group, const std::string& key) c
 
 std::vector<std::string> IniParser::get_string_array(const std::string& group, const std::string& key) const
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     vector<string> result;
     GError* e = nullptr;
     gchar** strlist;
@@ -189,6 +205,8 @@ std::vector<std::string> IniParser::get_locale_string_array(const std::string& g
                                                             const std::string& key,
                                                             const std::string& locale) const
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     vector<string> result;
     GError* e = nullptr;
     gchar** strlist;
@@ -206,6 +224,8 @@ std::vector<std::string> IniParser::get_locale_string_array(const std::string& g
 
 vector<int> IniParser::get_int_array(const std::string& group, const std::string& key) const
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     vector<int> result;
     GError* e = nullptr;
     gint* ints;
@@ -222,6 +242,8 @@ vector<int> IniParser::get_int_array(const std::string& group, const std::string
 
 vector<bool> IniParser::get_boolean_array(const std::string& group, const std::string& key) const
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     vector<bool> result;
     GError* e = nullptr;
     gboolean* bools;
@@ -238,6 +260,8 @@ vector<bool> IniParser::get_boolean_array(const std::string& group, const std::s
 
 void IniParser::set_string(const std::string& group, const std::string& key, const std::string& value)
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     g_key_file_set_string(p->k, group.c_str(), key.c_str(), value.c_str());
     p->dirty = true;
 }
@@ -245,24 +269,32 @@ void IniParser::set_string(const std::string& group, const std::string& key, con
 void IniParser::set_locale_string(const std::string& group, const std::string& key,
                                   const std::string& value, const std::string& locale)
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     g_key_file_set_locale_string(p->k, group.c_str(), key.c_str(), locale.c_str(), value.c_str());
     p->dirty = true;
 }
 
 void IniParser::set_boolean(const std::string& group, const std::string& key, bool value)
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     g_key_file_set_boolean(p->k, group.c_str(), key.c_str(), value);
     p->dirty = true;
 }
 
 void IniParser::set_int(const std::string& group, const std::string& key, int value)
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     g_key_file_set_integer(p->k, group.c_str(), key.c_str(), value);
     p->dirty = true;
 }
 
 void IniParser::set_double(const std::string& group, const std::string& key, double value)
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     g_key_file_set_double(p->k, group.c_str(), key.c_str(), value);
     p->dirty = true;
 }
@@ -270,6 +302,8 @@ void IniParser::set_double(const std::string& group, const std::string& key, dou
 void IniParser::set_string_array(const std::string& group, const std::string& key,
                                  const std::vector<std::string>& value)
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     int count = value.size();
     gchar** strlist = g_new(gchar*, count+1);
 
@@ -288,6 +322,8 @@ void IniParser::set_string_array(const std::string& group, const std::string& ke
 void IniParser::set_locale_string_array(const std::string& group, const std::string& key,
                                         const std::vector<std::string>& value, const std::string& locale)
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     int count = value.size();
     gchar** strlist = g_new(gchar*, count+1);
 
@@ -305,6 +341,8 @@ void IniParser::set_locale_string_array(const std::string& group, const std::str
 
 void IniParser::set_int_array(const std::string& group, const std::string& key, const std::vector<int>& value)
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     int count = value.size();
     gint* intlist = g_new(gint, count);
 
@@ -321,6 +359,8 @@ void IniParser::set_int_array(const std::string& group, const std::string& key, 
 
 void IniParser::set_boolean_array(const std::string& group, const std::string& key, const std::vector<bool>& value)
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     int count = value.size();
     gboolean* boollist = g_new(gboolean, count);
 
@@ -337,6 +377,8 @@ void IniParser::set_boolean_array(const std::string& group, const std::string& k
 
 void IniParser::sync()
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     if (p->dirty)
     {
         GError* e = nullptr;
@@ -348,6 +390,8 @@ void IniParser::sync()
 
 string IniParser::get_start_group() const
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     gchar* sg = g_key_file_get_start_group(p->k);
     string result(sg);
     g_free(sg);
@@ -356,6 +400,8 @@ string IniParser::get_start_group() const
 
 vector<string> IniParser::get_groups() const
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     vector<string> result;
     gsize count;
     gchar** groups = g_key_file_get_groups(p->k, &count);
@@ -369,6 +415,8 @@ vector<string> IniParser::get_groups() const
 
 vector<string> IniParser::get_keys(const std::string& group) const
 {
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
     vector<string> result;
     GError* e = nullptr;
     gchar** strlist;
