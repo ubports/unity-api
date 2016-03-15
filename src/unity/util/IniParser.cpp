@@ -115,7 +115,6 @@ IniParser::IniParser(const char* filename)
     {
         throw ResourceException("Could not create keyfile parser."); // LCOV_EXCL_LINE
     }
-
     if (!g_key_file_load_from_file(kf, filename, G_KEY_FILE_KEEP_TRANSLATIONS, &e))
     {
         string message = "Could not load ini file ";
