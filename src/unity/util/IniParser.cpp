@@ -16,10 +16,14 @@
  * Authored by: Jussi Pakkanen <jussi.pakkanen@canonical.com>
  */
 
-#include<unity/UnityExceptions.h>
-#include<unity/util/IniParser.h>
-#include<glib.h>
-#include<mutex>
+#include <unity/UnityExceptions.h>
+#include <unity/util/IniParser.h>
+#include <unity/util/ResourcePtr.h>
+
+#include <fcntl.h>
+#include <glib.h>
+#include <mutex>
+#include <unistd.h>
 
 using namespace std;
 
@@ -28,7 +32,6 @@ namespace unity
 
 namespace util
 {
-
 
 namespace internal
 {
@@ -67,6 +70,37 @@ static void inspect_error(GError* e, const char* prefix, const string& filename,
     }
 }
 
+typedef ResourcePtr<int, function<void(int)>> FileLock;
+
+static FileLock unix_lock(string const& path)
+{
+    FileLock file_lock(::open(path.c_str(), O_RDONLY), [](int fd)
+    {
+        if (fd != -1)
+        {
+            close(fd);
+        }
+    });
+
+    if (file_lock.get() == -1)
+    {
+        throw FileException("Couldn't open file " + path, errno);
+    }
+
+    struct flock fl;
+    fl.l_whence = SEEK_SET;
+    fl.l_start = 0;
+    fl.l_len = 0;
+    fl.l_type = F_RDLCK;
+
+    if (::fcntl(file_lock.get(), F_SETLKW, &fl) != 0)
+    {
+        throw FileException("Couldn't get file lock for " + path, errno);
+    }
+
+    return file_lock;
+}
+
 IniParser::IniParser(const char* filename)
 {
     lock_guard<std::mutex> lock(internal::parser_mutex);
@@ -77,6 +111,9 @@ IniParser::IniParser(const char* filename)
     {
         throw ResourceException("Could not create keyfile parser."); // LCOV_EXCL_LINE
     }
+
+    FileLock flock = unix_lock(filename);
+
     if (!g_key_file_load_from_file(kf, filename, G_KEY_FILE_KEEP_TRANSLATIONS, &e))
     {
         string message = "Could not load ini file ";
@@ -382,8 +419,20 @@ void IniParser::sync()
     if (p->dirty)
     {
         GError* e = nullptr;
-        g_key_file_save_to_file(p->k, p->filename.c_str(), &e);
-        inspect_error(e, "Failed to write key_file contents to file", p->filename, "-");
+
+        FileLock flock = unix_lock(p->filename);
+
+        if (!g_key_file_save_to_file(p->k, p->filename.c_str(), &e))
+        {
+            string message = "Could not write ini file ";
+            message += p->filename;
+            message += ": ";
+            message += e->message;
+            int errnum = e->code;
+            g_error_free(e);
+            throw FileException(message, errnum);
+        }
+
         p->dirty = false;
     }
 }

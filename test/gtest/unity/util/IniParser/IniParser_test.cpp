@@ -335,5 +335,5 @@ TEST(IniParser, write_error)
     conf.set_boolean("g1", "k1", true);
 
     // Sync (exception as target is a directory)
-    EXPECT_THROW(conf.sync(), LogicException);
+    EXPECT_THROW(conf.sync(), FileException);
 }

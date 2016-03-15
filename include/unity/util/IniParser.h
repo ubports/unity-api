@@ -22,8 +22,8 @@
 #include <unity/SymbolExport.h>
 #include <unity/util/DefinesPtrs.h>
 
-#include<string>
-#include<vector>
+#include <string>
+#include <vector>
 
 namespace unity
 {
@@ -60,7 +60,7 @@ names to the get* / set* methods of this class respectively.
 The array methods use a semicolon as a separator.
 
 To write unsaved changes back to the configuration file, call
-sync(). The sync() method will throw a LogicException if it
+sync(). The sync() method will throw a FileException if it
 fails to write to file.
 
 The get methods indicate errors by throwing LogicExceptions.
