@@ -18,12 +18,8 @@
 
 #include <unity/UnityExceptions.h>
 #include <unity/util/IniParser.h>
-#include <unity/util/ResourcePtr.h>
 
-#include <fcntl.h>
 #include <glib.h>
-#include <mutex>
-#include <unistd.h>
 
 using namespace std;
 
@@ -70,44 +66,9 @@ static void inspect_error(GError* e, const char* prefix, const string& filename,
     }
 }
 
-typedef ResourcePtr<int, function<void(int)>> FileLock;
-
-static FileLock unix_lock(string const& path)
-{
-    FileLock file_lock(::open(path.c_str(), O_RDONLY), [](int fd)
-    {
-        if (fd != -1)
-        {
-            close(fd);
-        }
-    });
-
-    if (file_lock.get() == -1)
-    {
-        string message = "Could not load ini file ";
-        message += path;
-        message += ": No such file or directory";
-        throw FileException(message, 4);
-    }
-
-    struct flock fl;
-    fl.l_whence = SEEK_SET;
-    fl.l_start = 0;
-    fl.l_len = 0;
-    fl.l_type = F_RDLCK;
-
-    if (::fcntl(file_lock.get(), F_SETLKW, &fl) != 0)
-    {
-        throw FileException("Couldn't get file lock for " + path, errno);
-    }
-
-    return file_lock;
-}
-
 IniParser::IniParser(const char* filename)
 {
     lock_guard<std::mutex> lock(internal::parser_mutex);
-    FileLock flock = unix_lock(filename);
 
     GKeyFile* kf = g_key_file_new();
     GError* e = nullptr;
@@ -419,8 +380,6 @@ void IniParser::sync()
 
     if (p->dirty)
     {
-        FileLock flock = unix_lock(p->filename);
-
         GError* e = nullptr;
         if (!g_key_file_save_to_file(p->k, p->filename.c_str(), &e))
         {
