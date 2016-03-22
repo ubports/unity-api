@@ -119,6 +119,22 @@ class MirSurfaceInterface : public QObject
      */
     Q_PROPERTY(Mir::ShellChrome shellChrome READ shellChrome NOTIFY shellChromeChanged)
 
+    /**
+     * @brief Keymap layout
+     *
+     * Keyboard layout component (first part of e.g. "cz+qwerty");
+     * use setKeymap() to set it.
+     */
+    Q_PROPERTY(QString keymapLayout READ keymapLayout NOTIFY keymapChanged)
+
+    /**
+     * @brief Keymap variant
+     *
+     * Keyboard variant component (second part of e.g. "cz+qwerty");
+     * use setKeymap() to set it.
+     */
+    Q_PROPERTY(QString keymapVariant READ keymapVariant NOTIFY keymapChanged)
+
 public:
     /// @cond
     MirSurfaceInterface(QObject *parent = nullptr) : QObject(parent) {}
@@ -150,6 +166,9 @@ public:
     virtual int heightIncrement() const = 0;
 
     virtual Mir::ShellChrome shellChrome() const = 0;
+    virtual QString keymapLayout() const = 0;
+    virtual QString keymapVariant() const = 0;
+    virtual void setKeymap(const QString &layout, const QString &variant) = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -168,6 +187,7 @@ Q_SIGNALS:
     void widthIncrementChanged(int value);
     void heightIncrementChanged(int value);
     void shellChromeChanged(Mir::ShellChrome value);
+    void keymapChanged(const QString &layout, const QString &variant);
     /// @endcond
 };
 
