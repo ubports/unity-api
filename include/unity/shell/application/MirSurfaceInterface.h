@@ -114,6 +114,11 @@ class MirSurfaceInterface : public QObject
      */
     Q_PROPERTY(int heightIncrement READ heightIncrement NOTIFY heightIncrementChanged)
 
+    /**
+     * @brief The Shell chrome mode
+     */
+    Q_PROPERTY(Mir::ShellChrome shellChrome READ shellChrome NOTIFY shellChromeChanged)
+
 public:
     /// @cond
     MirSurfaceInterface(QObject *parent = nullptr) : QObject(parent) {}
@@ -143,6 +148,8 @@ public:
     virtual int maximumHeight() const = 0;
     virtual int widthIncrement() const = 0;
     virtual int heightIncrement() const = 0;
+
+    virtual Mir::ShellChrome shellChrome() const = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -160,6 +167,7 @@ Q_SIGNALS:
     void maximumHeightChanged(int value);
     void widthIncrementChanged(int value);
     void heightIncrementChanged(int value);
+    void shellChromeChanged(Mir::ShellChrome value);
     /// @endcond
 };
 
