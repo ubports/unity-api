@@ -1,6 +1,19 @@
-unity-api (7.108) UNRELEASED; urgency=medium
+unity-api (7.108+16.04.20160322-0ubuntu1) xenial; urgency=medium
 
- -- Michal Sawicz <michal.sawicz@canonical.com>  Fri, 11 Mar 2016 13:08:28 +0100
+  [ Lukáš Tinkl, Michał Sawicz ]
+  * Add API for setting keyboard layout+variant on a surface (LP:
+    #1524400, #1491340)
+
+  [ Nick Dedekind ]
+  * Added setStage for sidestage redesign.
+  * Added support for low shell chrome (LP: #1535397)
+
+  [ Pawel Stolowski ]
+  * Base interfaces for filters.
+  * Interface for RangeInputFilter.
+  * ValueSliderFilter interface.
+
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Tue, 22 Mar 2016 07:48:55 +0000
 
 unity-api (7.107+16.04.20160223-0ubuntu1) xenial; urgency=medium
 
