@@ -268,6 +268,7 @@ TEST(IniParser, write_arrays)
     // Write some post-sync values
     conf.set_boolean_array("g2", "k1", {true, false, false});
     conf.set_int_array("g2", "k2", {123, 456789, 101112});
+    conf.set_double_array("g2", "k3", {13.14, 15.161718, 19.2});
 
     // Check temp file after first sync()
     {
@@ -286,6 +287,9 @@ TEST(IniParser, write_arrays)
 
         EXPECT_ARRAY_EQ({123, 456789, 101112}, conf.get_int_array("g2", "k2"));
         EXPECT_THROW(conf2.get_int_array("g2", "k2"), LogicException);
+
+        EXPECT_ARRAY_EQ({13.14, 15.161718, 19.2}, conf.get_double_array("g2", "k3"));
+        EXPECT_THROW(conf2.get_double_array("g2", "k3"), LogicException);
     }
 
     // Sync
@@ -308,6 +312,9 @@ TEST(IniParser, write_arrays)
 
         EXPECT_ARRAY_EQ({123, 456789, 101112}, conf.get_int_array("g2", "k2"));
         EXPECT_ARRAY_EQ({123, 456789, 101112}, conf2.get_int_array("g2", "k2"));
+
+        EXPECT_ARRAY_EQ({13.14, 15.161718, 19.2}, conf.get_double_array("g2", "k3"));
+        EXPECT_ARRAY_EQ({13.14, 15.161718, 19.2}, conf2.get_double_array("g2", "k3"));
     }
 }
 
