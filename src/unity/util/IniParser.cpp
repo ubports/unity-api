@@ -275,6 +275,28 @@ vector<double> IniParser::get_double_array(const std::string& group, const std::
     return result;
 }
 
+bool IniParser::remove_group(const std::string& group)
+{
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
+    gboolean rval;
+    GError* e = nullptr;
+    rval = g_key_file_remove_group(p->k, group.c_str(), &e);
+    inspect_error(e, "Error removing group", p->filename, group);
+    return rval;
+}
+
+bool IniParser::remove_key(const std::string& group, const std::string& key)
+{
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
+    gboolean rval;
+    GError* e = nullptr;
+    rval = g_key_file_remove_key(p->k, group.c_str(), key.c_str(), &e);
+    inspect_error(e, "Error removing key", p->filename, group);
+    return rval;
+}
+
 void IniParser::set_string(const std::string& group, const std::string& key, const std::string& value)
 {
     lock_guard<std::mutex> lock(internal::parser_mutex);

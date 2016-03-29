@@ -107,6 +107,9 @@ public:
     std::vector<int> get_int_array(const std::string& group, const std::string& key) const;
     std::vector<double> get_double_array(const std::string& group, const std::string& key) const;
 
+    bool remove_group(const std::string& group);
+    bool remove_key(const std::string& group, const std::string& key);
+
     void set_string(const std::string& group, const std::string& key, const std::string& value);
     void set_locale_string(const std::string& group,
                            const std::string& key,
