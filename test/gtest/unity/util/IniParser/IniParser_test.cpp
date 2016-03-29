@@ -77,11 +77,13 @@ TEST(IniParser, simpleQueries)
     ASSERT_EQ("second", groups[1]);
 
     vector<string> firstKeys = conf.get_keys("first");
-    ASSERT_EQ(10, firstKeys.size());
-    ASSERT_EQ("boolvalue", firstKeys[1]);
+    ASSERT_EQ(11, firstKeys.size());
+    ASSERT_EQ("boolvalue", firstKeys[2]);
 
     ASSERT_EQ(conf.get_string("first", "stringvalue"), "hello");
     ASSERT_EQ(1, conf.get_int("first", "intvalue"));
+    ASSERT_EQ(1, conf.get_double("first", "intvalue"));
+    ASSERT_EQ(2.345, conf.get_double("first", "doublevalue"));
     ASSERT_FALSE(conf.get_boolean("second", "boolvalue"));
 
     ASSERT_EQ("world", conf.get_string("first", "locstring"));
@@ -104,6 +106,18 @@ TEST(IniParser, arrayQueries)
     ASSERT_EQ(9, intArr.size());
     ASSERT_EQ(4, intArr[0]);
     ASSERT_EQ(3, intArr[8]);
+
+    vector<double> intToDblArr = conf.get_double_array("second", "intarray");
+    ASSERT_EQ(9, intToDblArr.size());
+    ASSERT_EQ(4, intToDblArr[0]);
+    ASSERT_EQ(3, intToDblArr[8]);
+
+    vector<double> dblArr = conf.get_double_array("second", "doublearray");
+    ASSERT_EQ(4, dblArr.size());
+    ASSERT_EQ(4.5, dblArr[0]);
+    ASSERT_EQ(6.78, dblArr[1]);
+    ASSERT_EQ(9, dblArr[2]);
+    ASSERT_EQ(10.11, dblArr[3]);
 
     vector<bool> boolArr = conf.get_boolean_array("first", "boolarray");
     ASSERT_EQ(3, boolArr.size());
@@ -128,12 +142,70 @@ TEST(IniParser, failingQueries)
 {
     IniParser conf(INI_FILE);
 
-    EXPECT_THROW(conf.get_string("foo", "bar"), LogicException);
-    EXPECT_THROW(conf.get_locale_string("foo", "bar"), LogicException);
-    EXPECT_THROW(conf.get_int("foo", "bar"), LogicException);
-    EXPECT_THROW(conf.get_boolean("foo", "bar"), LogicException);
-    EXPECT_THROW(conf.get_int_array("first", "array"), LogicException);
-    EXPECT_THROW(conf.get_boolean_array("first", "array"), LogicException);
+    try
+    {
+        conf.get_string("foo", "bar");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("Key file does not have group 'foo'"));
+    }
+    try
+    {
+        conf.get_locale_string("foo", "bar");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("Key file does not have group 'foo'"));
+    }
+    try
+    {
+        conf.get_int("foo", "bar");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("Key file does not have group 'foo'"));
+    }
+    try
+    {
+        conf.get_int("first", "doublevalue");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("Key file contains key 'doublevalue' in group 'first' which has a value that cannot be interpreted."));
+    }
+    try
+    {
+        conf.get_boolean("foo", "bar");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("Key file does not have group 'foo'"));
+    }
+    try
+    {
+        conf.get_int_array("first", "array");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("Value 'foo' cannot be interpreted as a number."));
+    }
+    try
+    {
+        conf.get_int_array("second", "doublearray");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("Value '4.5' cannot be interpreted as a number."));
+    }
+    try
+    {
+        conf.get_boolean_array("first", "array");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("Value 'foo' cannot be interpreted as a boolean."));
+    }
 }
 
 TEST(IniParser, writeValues)
