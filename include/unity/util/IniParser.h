@@ -103,8 +103,9 @@ public:
     std::vector<std::string> get_locale_string_array(const std::string& group,
                                                      const std::string& key,
                                                      const std::string& locale = std::string()) const;
-    std::vector<int> get_int_array(const std::string& group, const std::string& key) const;
     std::vector<bool> get_boolean_array(const std::string& group, const std::string& key) const;
+    std::vector<int> get_int_array(const std::string& group, const std::string& key) const;
+    std::vector<double> get_double_array(const std::string& group, const std::string& key) const;
 
     void set_string(const std::string& group, const std::string& key, const std::string& value);
     void set_locale_string(const std::string& group,
@@ -120,8 +121,9 @@ public:
                                  const std::string& key,
                                  const std::vector<std::string>& value,
                                  const std::string& locale = std::string());
-    void set_int_array(const std::string& group, const std::string& key, const std::vector<int>& value);
     void set_boolean_array(const std::string& group, const std::string& key, const std::vector<bool>& value);
+    void set_int_array(const std::string& group, const std::string& key, const std::vector<int>& value);
+    void set_double_array(const std::string& group, const std::string& key, const std::vector<double>& value);
 
     void sync();
 

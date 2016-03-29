@@ -221,6 +221,24 @@ std::vector<std::string> IniParser::get_locale_string_array(const std::string& g
     return result;
 }
 
+vector<bool> IniParser::get_boolean_array(const std::string& group, const std::string& key) const
+{
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
+    vector<bool> result;
+    GError* e = nullptr;
+    gboolean* bools;
+    gsize count;
+    bools = g_key_file_get_boolean_list(p->k, group.c_str(), key.c_str(), &count, &e);
+    inspect_error(e, "Could not get boolean array", p->filename, group);
+    for (gsize i = 0; i < count; i++)
+    {
+        result.push_back(bools[i]);
+    }
+    g_free(bools);
+    return result;
+}
+
 vector<int> IniParser::get_int_array(const std::string& group, const std::string& key) const
 {
     lock_guard<std::mutex> lock(internal::parser_mutex);
@@ -239,21 +257,21 @@ vector<int> IniParser::get_int_array(const std::string& group, const std::string
     return result;
 }
 
-vector<bool> IniParser::get_boolean_array(const std::string& group, const std::string& key) const
+vector<double> IniParser::get_double_array(const std::string& group, const std::string& key) const
 {
     lock_guard<std::mutex> lock(internal::parser_mutex);
 
-    vector<bool> result;
+    vector<double> result;
     GError* e = nullptr;
-    gboolean* bools;
+    gdouble* doubles;
     gsize count;
-    bools = g_key_file_get_boolean_list(p->k, group.c_str(), key.c_str(), &count, &e);
-    inspect_error(e, "Could not get boolean array", p->filename, group);
+    doubles = g_key_file_get_double_list(p->k, group.c_str(), key.c_str(), &count, &e);
+    inspect_error(e, "Could not get double array", p->filename, group);
     for (gsize i = 0; i < count; i++)
     {
-        result.push_back(bools[i]);
+        result.push_back(doubles[i]);
     }
-    g_free(bools);
+    g_free(doubles);
     return result;
 }
 
@@ -338,6 +356,24 @@ void IniParser::set_locale_string_array(const std::string& group, const std::str
     g_strfreev(strlist);
 }
 
+void IniParser::set_boolean_array(const std::string& group, const std::string& key, const std::vector<bool>& value)
+{
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
+    int count = value.size();
+    gboolean* boollist = g_new(gboolean, count);
+
+    for (int i = 0; i < count; ++i)
+    {
+        boollist[i] = value[i];
+    }
+
+    g_key_file_set_boolean_list(p->k, group.c_str(), key.c_str(), boollist, count);
+    p->dirty = true;
+
+    g_free(boollist);
+}
+
 void IniParser::set_int_array(const std::string& group, const std::string& key, const std::vector<int>& value)
 {
     lock_guard<std::mutex> lock(internal::parser_mutex);
@@ -356,22 +392,22 @@ void IniParser::set_int_array(const std::string& group, const std::string& key, 
     g_free(intlist);
 }
 
-void IniParser::set_boolean_array(const std::string& group, const std::string& key, const std::vector<bool>& value)
+void IniParser::set_double_array(const std::string& group, const std::string& key, const std::vector<double>& value)
 {
     lock_guard<std::mutex> lock(internal::parser_mutex);
 
     int count = value.size();
-    gboolean* boollist = g_new(gboolean, count);
+    gdouble* doublelist = g_new(gdouble, count);
 
     for (int i = 0; i < count; ++i)
     {
-        boollist[i] = value[i];
+        doublelist[i] = value[i];
     }
 
-    g_key_file_set_boolean_list(p->k, group.c_str(), key.c_str(), boollist, count);
+    g_key_file_set_double_list(p->k, group.c_str(), key.c_str(), doublelist, count);
     p->dirty = true;
 
-    g_free(boollist);
+    g_free(doublelist);
 }
 
 void IniParser::sync()
