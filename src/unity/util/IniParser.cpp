@@ -275,6 +275,50 @@ vector<double> IniParser::get_double_array(const std::string& group, const std::
     return result;
 }
 
+string IniParser::get_start_group() const
+{
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
+    gchar* sg = g_key_file_get_start_group(p->k);
+    string result(sg);
+    g_free(sg);
+    return result;
+}
+
+vector<string> IniParser::get_groups() const
+{
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
+    vector<string> result;
+    gsize count;
+    gchar** groups = g_key_file_get_groups(p->k, &count);
+    for (gsize i = 0; i < count; i++)
+    {
+        result.push_back(groups[i]);
+    }
+    g_strfreev(groups);
+    return result;
+}
+
+vector<string> IniParser::get_keys(const std::string& group) const
+{
+    lock_guard<std::mutex> lock(internal::parser_mutex);
+
+    vector<string> result;
+    GError* e = nullptr;
+    gchar** strlist;
+    gsize count = 0;
+    IniParserPrivate f;
+    strlist = g_key_file_get_keys(p->k, group.c_str(), &count, &e);
+    inspect_error(e, "Could not get list of keys", p->filename, group);
+    for (gsize i = 0; i < count; i++)
+    {
+        result.push_back(strlist[i]);
+    }
+    g_strfreev(strlist);
+    return result;
+}
+
 bool IniParser::remove_group(const std::string& group)
 {
     lock_guard<std::mutex> lock(internal::parser_mutex);
@@ -453,51 +497,6 @@ void IniParser::sync()
         p->dirty = false;
     }
 }
-
-string IniParser::get_start_group() const
-{
-    lock_guard<std::mutex> lock(internal::parser_mutex);
-
-    gchar* sg = g_key_file_get_start_group(p->k);
-    string result(sg);
-    g_free(sg);
-    return result;
-}
-
-vector<string> IniParser::get_groups() const
-{
-    lock_guard<std::mutex> lock(internal::parser_mutex);
-
-    vector<string> result;
-    gsize count;
-    gchar** groups = g_key_file_get_groups(p->k, &count);
-    for (gsize i = 0; i < count; i++)
-    {
-        result.push_back(groups[i]);
-    }
-    g_strfreev(groups);
-    return result;
-}
-
-vector<string> IniParser::get_keys(const std::string& group) const
-{
-    lock_guard<std::mutex> lock(internal::parser_mutex);
-
-    vector<string> result;
-    GError* e = nullptr;
-    gchar** strlist;
-    gsize count = 0;
-    IniParserPrivate f;
-    strlist = g_key_file_get_keys(p->k, group.c_str(), &count, &e);
-    inspect_error(e, "Could not get list of keys", p->filename, group);
-    for (gsize i = 0; i < count; i++)
-    {
-        result.push_back(strlist[i]);
-    }
-    g_strfreev(strlist);
-    return result;
-}
-
 
 } // namespace util
 

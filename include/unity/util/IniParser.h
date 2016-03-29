@@ -82,12 +82,14 @@ public:
     IniParser() = delete;
     /// @endcond
 
-    /** @name Accessors
-     * These member functions provide access to configuration entries by group and key.
+    //{@
+
+    /** @name Read Methods
+     * These member functions provide read access to configuration entries by group and key.<br>
      * Attempts to retrieve a value as the wrong type, such as retrieving a string value
      * "abc" as an integer, throw LogicException.
       **/
-    //{@
+
     bool has_group(const std::string& group) const noexcept;
     bool has_key(const std::string& group, const std::string& key) const;
 
@@ -106,6 +108,15 @@ public:
     std::vector<bool> get_boolean_array(const std::string& group, const std::string& key) const;
     std::vector<int> get_int_array(const std::string& group, const std::string& key) const;
     std::vector<double> get_double_array(const std::string& group, const std::string& key) const;
+
+    std::string get_start_group() const;
+    std::vector<std::string> get_groups() const;
+    std::vector<std::string> get_keys(const std::string& group) const;
+
+    /** @name Write Methods
+     * These member functions provide write access to configuration entries by group and key.<br>
+     * Attempts to remove groups or keys that do not exist, throw LogicException.
+      **/
 
     bool remove_group(const std::string& group);
     bool remove_key(const std::string& group, const std::string& key);
@@ -128,11 +139,13 @@ public:
     void set_int_array(const std::string& group, const std::string& key, const std::vector<int>& value);
     void set_double_array(const std::string& group, const std::string& key, const std::vector<double>& value);
 
+    /** @name Sync Method
+     * This member function will write unsaved changes back to the configuration file.<br>
+     * A failure to write to file will throw a FileException.
+      **/
+
     void sync();
 
-    std::string get_start_group() const;
-    std::vector<std::string> get_groups() const;
-    std::vector<std::string> get_keys(const std::string& group) const;
     //@}
 
 private:
