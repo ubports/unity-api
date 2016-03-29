@@ -94,6 +94,7 @@ public:
     enum Roles {
         RoleNavigationId,
         RoleLabel,
+        RoleAllLabel,
         RoleHasChildren,
         RoleIsActive
     };
@@ -113,6 +114,7 @@ public:
         QHash<int, QByteArray> roles;
         roles[RoleNavigationId] = "navigationId";
         roles[RoleLabel] = "label";
+        roles[RoleAllLabel] = "allLabel";
         roles[RoleHasChildren] = "hasChildren";
         roles[RoleIsActive] = "isActive";
         return roles;

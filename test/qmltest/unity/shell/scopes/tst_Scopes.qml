@@ -122,14 +122,13 @@ Item {
                 { tag: "Item.properties[favorite]", constant: "favorite", type: "boolean" },
                 { tag: "Item.properties[shortcut]", constant: "shortcut", type: "string" },
                 { tag: "Item.properties[categories]", constant: "categories", type: "object" },
+                { tag: "Item.properties[filters]", constant: "filters", type: "object" },
                 { tag: "Item.properties[searchQuery]", constant: "searchQuery", type: "string" },
                 { tag: "Item.properties[noResultsHint]", constant: "noResultsHint", type: "string" },
                 { tag: "Item.properties[formFactor]", constant: "formFactor", type: "string" },
                 { tag: "Item.properties[isActive]", constant: "isActive", type: "boolean" },
                 { tag: "Item.properties[currentNavigationId]", constant: "currentNavigationId", type: "string" },
                 { tag: "Item.properties[hasNavigation]", constant: "hasNavigation", type: "boolean" },
-                { tag: "Item.properties[currentAltNavigationId]", constant: "currentAltNavigationId", type: "string" },
-                { tag: "Item.properties[hasAltNavigation]", constant: "hasAltNavigation", type: "boolean" },
                 { tag: "Item.properties[customizations]", constant: "customizations", type: "object" },
                 { tag: "Item.properties[status]", constant: "status", type: "number" }
             ];
@@ -156,7 +155,6 @@ Item {
                 { tag: "Model.methods[performQuery]", method: "performQuery" },
                 { tag: "Model.methods[refresh]", method: "refresh" },
                 { tag: "Model.methods[getNavigation]", method: "getNavigation" },
-                { tag: "Model.methods[getAltNavigation]", method: "getAltNavigation" },
                 { tag: "Model.methods[setNavigationState]", method: "setNavigationState" },
             ];
         }
@@ -164,6 +162,116 @@ Item {
         function test_scope_methods(data) {
             object = root.scope;
             name = "Scope"
+            verifyData(data);
+        }
+    }
+
+    Verifier {
+        id: filtersVerifier
+
+        Repeater {
+            id: filtersRepeater
+            model: root.scope.filters
+            delegate: Item {
+                property var roles: model
+            }
+        }
+
+        function test_filters(data) {
+            object = filtersRepeater.model;
+            name = "Filters";
+            verifyData(data);
+        }
+
+        function test_filters_data() {
+            return [
+                { tag: "Filters[object]", type: "object" },
+                { tag: "Filters[FiltersInterface]", type: "unity::shell::scopes::FiltersInterface" },
+            ];
+        }
+
+        function test_filters_roles(data) {
+            object = filtersRepeater.itemAt(0).roles;
+            name = "Filters";
+            verifyData(data);
+        }
+
+        function test_filters_roles_data() {
+            return [
+                { tag: "Model.roles[id]", role: "id", type: "string" },
+                { tag: "Model.roles[type]", role: "type", type: "number" },
+                { tag: "Model.roles[filter]", role: "filter", type: "unity::shell::scopes::FilterBaseInterface" },
+            ];
+        }
+    }
+
+    Verifier {
+        id: optionSelectorFilterVerifier
+
+        function test_option_selector_filter(data) {
+            object = filtersRepeater.itemAt(0).roles.filter;
+            name = "Filter";
+            verifyData(data);
+        }
+
+        function test_option_selector_filter_data() {
+            return [
+                { tag: "Filter[object]", type: "object" },
+                { tag: "Filter[OptionSelectorFilterInterface]", type: "unity::shell::scopes::OptionSelectorFilterInterface" },
+            ];
+        }
+
+        function test_option_selector_filter_properties_data() {
+            return [
+                { tag: "Filter.properties[filterId]", constant: "filterId", type: "string" },
+                { tag: "Filter.properties[label]", constant: "label", type: "string" },
+                { tag: "Filter.properties[multiSelect]", constant: "multiSelect", type: "boolean" },
+                { tag: "Filter.properties[options]", constant: "options", type: "object" },
+            ];
+        }
+
+        function test_option_selector_filter_properties(data) {
+            object = filtersRepeater.itemAt(0).roles.filter;
+            name = "Filter";
+            verifyData(data);
+        }
+
+        function test_options_data() {
+            return [
+                { tag: "Options[object]", type: "object" },
+                { tag: "Options[OptionSelectorOptionsInterface]", type: "unity::shell::scopes::OptionSelectorOptionsInterface" },
+            ];
+        }
+
+        function test_options(data) {
+            object = filtersRepeater.itemAt(0).roles.filter.options;
+            name = "Options";
+            verifyData(data);
+        }
+    }
+
+    Verifier {
+        id: optionSelectorFilterOptionsVerifier
+
+        Repeater {
+            id: optionsRepeater
+            model: filtersRepeater.count > 0 ? filtersRepeater.itemAt(0).roles.filter.options : undefined
+            delegate: Item {
+                property var roles: model
+            }
+        }
+
+        function test_option_selector_filter_options_roles_data() {
+            return [
+                { tag: "Model.roles[id]", role: "id", type: "string" },
+                { tag: "Model.roles[label]", role: "label", type: "string" },
+                { tag: "Model.roles[checked]", role: "checked", type: "boolean" },
+            ];
+        }
+
+        function test_option_selector_filter_options_roles(data) {
+            object = optionsRepeater.itemAt(0).roles;
+            name = "Options";
             verifyData(data);
         }
     }
