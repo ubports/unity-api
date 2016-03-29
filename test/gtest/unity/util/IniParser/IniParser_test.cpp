@@ -46,11 +46,23 @@ TEST(IniParser, has)
 {
     IniParser conf(INI_FILE);
 
-    ASSERT_TRUE(conf.has_group("first"));
+    ASSERT_FALSE(conf.has_key("first", "missingvalue"));
     ASSERT_FALSE(conf.has_group("nonexisting"));
 
     ASSERT_TRUE(conf.has_key("first", "stringvalue"));
-    ASSERT_FALSE(conf.has_key("first", "missingvalue"));
+    ASSERT_TRUE(conf.has_group("first"));
+
+    ASSERT_TRUE(conf.remove_key("first", "stringvalue"));
+    EXPECT_THROW(conf.remove_key("first", "missingvalue"), LogicException);
+
+    ASSERT_FALSE(conf.has_key("first", "stringvalue"));
+    ASSERT_TRUE(conf.has_group("first"));
+
+    ASSERT_TRUE(conf.remove_group("first"));
+    EXPECT_THROW(conf.remove_group("nonexisting"), LogicException);
+
+    EXPECT_THROW(conf.has_key("first", "stringvalue"), LogicException);
+    ASSERT_FALSE(conf.has_group("first"));
 }
 
 TEST(IniParser, simpleQueries)
@@ -116,41 +128,15 @@ TEST(IniParser, failingQueries)
 {
     IniParser conf(INI_FILE);
 
-    try {
-        conf.get_string("foo", "bar");
-        FAIL();
-    } catch(const LogicException &e) {
-    }
-    try {
-        conf.get_locale_string("foo", "bar");
-        FAIL();
-    } catch(const LogicException &e) {
-    }
-    try {
-        conf.get_int("foo", "bar");
-        FAIL();
-    } catch(const LogicException &e) {
-    }
-    try {
-        conf.get_boolean("foo", "bar");
-        FAIL();
-    } catch(const LogicException &e) {
-    }
-
-    try {
-        conf.get_int_array("first", "array");
-        FAIL();
-    } catch(const LogicException &e) {
-    }
-
-    try {
-        conf.get_boolean_array("first", "array");
-        FAIL();
-    } catch(const LogicException &e) {
-    }
+    EXPECT_THROW(conf.get_string("foo", "bar"), LogicException);
+    EXPECT_THROW(conf.get_locale_string("foo", "bar"), LogicException);
+    EXPECT_THROW(conf.get_int("foo", "bar"), LogicException);
+    EXPECT_THROW(conf.get_boolean("foo", "bar"), LogicException);
+    EXPECT_THROW(conf.get_int_array("first", "array"), LogicException);
+    EXPECT_THROW(conf.get_boolean_array("first", "array"), LogicException);
 }
 
-TEST(IniParser, write_values)
+TEST(IniParser, writeValues)
 {
     // Create an empty ini file for writing
     auto f = fopen(INI_TEMP_FILE, "w");
@@ -237,7 +223,7 @@ void EXPECT_ARRAY_EQ(const vector<T>& expected, const vector<T>& actual)
     EXPECT_TRUE(expected == actual);
 }
 
-TEST(IniParser, write_arrays)
+TEST(IniParser, writeArrays)
 {
     // Create an empty ini file for writing
     auto f = fopen(INI_TEMP_FILE, "w");
@@ -318,7 +304,7 @@ TEST(IniParser, write_arrays)
     }
 }
 
-TEST(IniParser, write_error)
+TEST(IniParser, writeError)
 {
     // Create an empty ini file for writing
     auto f = fopen(INI_TEMP_FILE, "w");
