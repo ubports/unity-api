@@ -19,6 +19,8 @@
 #include <unity/UnityExceptions.h>
 #include <unity/util/IniParser.h>
 
+#include <mutex>
+
 #include <glib.h>
 
 using namespace std;
