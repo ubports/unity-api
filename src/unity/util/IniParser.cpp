@@ -68,8 +68,6 @@ static void inspect_error(GError* e, const char* prefix, const string& filename,
 
 IniParser::IniParser(const char* filename)
 {
-    lock_guard<std::mutex> lock(internal::parser_mutex);
-
     GKeyFile* kf = g_key_file_new();
     GError* e = nullptr;
     if (!kf)
@@ -95,8 +93,6 @@ IniParser::IniParser(const char* filename)
 
 IniParser::~IniParser() noexcept
 {
-    lock_guard<std::mutex> lock(internal::parser_mutex);
-
     g_key_file_free(p->k);
     delete p;
 }

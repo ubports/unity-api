@@ -55,18 +55,17 @@ key1 = othervalue1
 key2 = othervalue2
 ~~~
 
-To extract / insert a value, simply specify the group and key
-names to the get* / set* methods of this class respectively.
+To extract/insert a value, simply specify the group and key
+names to the get/set methods of this class, respectively.
 The array methods use a semicolon as a separator.
 
 To write unsaved changes back to the configuration file, call
 sync(). The sync() method will throw a FileException if it
 fails to write to file.
 
-The get methods indicate errors by throwing LogicExceptions.
-Examples why this might happen is because a value can't be
-coerced into the given type (i.e trying to convert the value
-"hello" into a boolean).
+The get methods indicate errors by throwing LogicException.
+
+All methods are thread-safe.
 */
 
 class UNITY_API IniParser final {
@@ -86,9 +85,9 @@ public:
 
     /** @name Read Methods
      * These member functions provide read access to configuration entries by group and key.<br>
-     * Attempts to retrieve a value as the wrong type, such as retrieving a string value
-     * "abc" as an integer, throw LogicException.
-      **/
+     * Attempts to retrieve a value as the wrong type (such as retrieving a string value as an
+     * integer) or to retrieve a value for a non-existent group or key throw LogicException.
+     **/
 
     bool has_group(const std::string& group) const noexcept;
     bool has_key(const std::string& group, const std::string& key) const;
@@ -115,7 +114,9 @@ public:
 
     /** @name Write Methods
      * These member functions provide write access to configuration entries by group and key.<br>
-     * Attempts to remove groups or keys that do not exist, throw LogicException.
+     * Attempts to remove groups or keys that do not exist throw LogicException.<br>
+     * The set methods replace the value for a key if the key exists. Calling a set method for a
+     * non-existent group and/or key creates the group and/or key.
       **/
 
     bool remove_group(const std::string& group);
@@ -140,8 +141,8 @@ public:
     void set_double_array(const std::string& group, const std::string& key, const std::vector<double>& value);
 
     /** @name Sync Method
-     * This member function will write unsaved changes back to the configuration file.<br>
-     * A failure to write to file will throw a FileException.
+     * This member function writes unsaved changes back to the configuration file.<br>
+     * A failure to write to the file throws a FileException.
       **/
 
     void sync();
