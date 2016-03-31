@@ -34,12 +34,7 @@ usage()
 [ $# -gt 2 ] && usage
 
 
-# TODO: Temporary hack to work around broken licensecheck on xenial (see LP #1519292).
-# Remove this once that is fixed.
-distro=$(lsb_release -c -s)
-[ "$distro" = "xenial" ] && exit 0
-
-ignore_pat="\\.sci$|CMakeFiles"
+ignore_pat="\\.sci$|\\.bzr|CMakeFiles|debian|qmldir|valgrind-suppress|astyle-config"
 
 #
 # We don't use the -i option of licensecheck to add ignore_dir to the pattern because Jenkins creates directories
