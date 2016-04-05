@@ -1,3 +1,9 @@
+unity-api (7.109-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Add set*() methods to IniParser
+
+ -- Marcus Tomlinson <marcus.tomlinson@canonical.com>  Tue, 29 Mar 2016 08:32:15 +0200
+
 unity-api (7.108+16.04.20160322-0ubuntu1) xenial; urgency=medium
 
   [ Lukáš Tinkl, Michał Sawicz ]
