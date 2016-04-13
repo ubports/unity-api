@@ -31,6 +31,8 @@ namespace shell
 namespace application
 {
 
+class MirSurfaceListInterface;
+
 /**
  * @brief A class that holds information about applications
  *
@@ -217,6 +219,11 @@ class UNITY_API ApplicationInfoInterface: public QObject
      */
     Q_PROPERTY(QSize initialSurfaceSize READ initialSurfaceSize WRITE setInitialSurfaceSize NOTIFY initialSurfaceSizeChanged)
 
+    /**
+     * @brief List of the top-level surfaces created by this application
+     */
+    Q_PROPERTY(unity::shell::application::MirSurfaceListInterface* surfaceList READ surfaceList CONSTANT)
+
 protected:
     /// @cond
     ApplicationInfoInterface(const QString &appId, QObject* parent = 0): QObject(parent) { Q_UNUSED(appId) }
@@ -293,6 +300,7 @@ public:
     virtual void setExemptFromLifecycle(bool) = 0;
     virtual QSize initialSurfaceSize() const = 0;
     virtual void setInitialSurfaceSize(const QSize &size) = 0;
+    virtual MirSurfaceListInterface* surfaceList() = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -307,10 +315,17 @@ Q_SIGNALS:
     void exemptFromLifecycleChanged(bool exemptFromLifecycle);
     void initialSurfaceSizeChanged(const QSize &size);
     /// @endcond
+
+    /**
+     * @brief The application is requesting focus
+     */
+    void focusRequested();
 };
 
 } // namespace application
 } // namespace shell
 } // namespace unity
+
+Q_DECLARE_METATYPE(unity::shell::application::ApplicationInfoInterface*)
 
 #endif // UNITY_SHELL_APPLICATIONMANAGER_APPLICATIONINFOINTERFACE_H
