@@ -1,9 +1,13 @@
-unity-api (7.110) UNRELEASED; urgency=medium
+unity-api (7.110+16.04.20160413-0ubuntu1) xenial; urgency=medium
 
+  [ Daniel d'Andrada ]
   * MirSurfaceInterface: replace keymapLayout and keymapVariant with keymap
   * Unity.Application: Added and refactored APIs for surface-based window management
 
- -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Wed, 13 Apr 2016 13:39:29 -0300
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- Gerry Boland <ci-train-bot@canonical.com>  Wed, 13 Apr 2016 18:39:21 +0000
 
 unity-api (7.109+16.04.20160405-0ubuntu1) xenial; urgency=medium
 
