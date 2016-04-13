@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Canonical, Ltd.
+ * Copyright (C) 2015-2016 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -120,20 +120,10 @@ class MirSurfaceInterface : public QObject
     Q_PROPERTY(Mir::ShellChrome shellChrome READ shellChrome NOTIFY shellChromeChanged)
 
     /**
-     * @brief Keymap layout
-     *
-     * Keyboard layout component (first part of e.g. "cz+qwerty");
-     * use setKeymap() to set it.
+     * @brief The requested keymap for this surface
+     * Its format is "layout+variant".
      */
-    Q_PROPERTY(QString keymapLayout READ keymapLayout NOTIFY keymapChanged)
-
-    /**
-     * @brief Keymap variant
-     *
-     * Keyboard variant component (second part of e.g. "cz+qwerty");
-     * use setKeymap() to set it.
-     */
-    Q_PROPERTY(QString keymapVariant READ keymapVariant NOTIFY keymapChanged)
+    Q_PROPERTY(QString keymap READ keymap WRITE setKeymap NOTIFY keymapChanged)
 
 public:
     /// @cond
@@ -165,10 +155,10 @@ public:
     virtual int widthIncrement() const = 0;
     virtual int heightIncrement() const = 0;
 
+    virtual void setKeymap(const QString &) = 0;
+    virtual QString keymap() const = 0;
+
     virtual Mir::ShellChrome shellChrome() const = 0;
-    virtual QString keymapLayout() const = 0;
-    virtual QString keymapVariant() const = 0;
-    virtual void setKeymap(const QString &layout, const QString &variant) = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -187,7 +177,7 @@ Q_SIGNALS:
     void widthIncrementChanged(int value);
     void heightIncrementChanged(int value);
     void shellChromeChanged(Mir::ShellChrome value);
-    void keymapChanged(const QString &layout, const QString &variant);
+    void keymapChanged(const QString &value);
     /// @endcond
 };
 
