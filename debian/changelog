@@ -1,3 +1,9 @@
+unity-api (7.110) UNRELEASED; urgency=medium
+
+  * MirSurfaceInterface: replace keymapLayout and keymapVariant with keymap
+
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Wed, 13 Apr 2016 13:39:29 -0300
+
 unity-api (7.109+16.04.20160405-0ubuntu1) xenial; urgency=medium
 
   [ Marcus Tomlinson ]
