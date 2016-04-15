@@ -1,8 +1,18 @@
-unity-api (7.109) UNRELEASED; urgency=medium
+unity-api (7.110) UNRELEASED; urgency=medium
 
   * Added RoleSocialActions to ResultsModelInterface of scopes.
 
  -- Pawel Stolowski <pawel.stolowski@canonical.com>  Thu, 24 Mar 2016 10:00:42 +0100
+
+unity-api (7.109+16.04.20160405-0ubuntu1) xenial; urgency=medium
+
+  [ Marcus Tomlinson ]
+  * Add set*() methods to IniParser
+
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- Marcus Tomlinson <marcus.tomlinson@canonical.com>  Tue, 05 Apr 2016 06:03:34 +0000
 
 unity-api (7.108+16.04.20160322-0ubuntu1) xenial; urgency=medium
 

@@ -22,8 +22,8 @@
 #include <unity/SymbolExport.h>
 #include <unity/util/DefinesPtrs.h>
 
-#include<string>
-#include<vector>
+#include <string>
+#include <vector>
 
 namespace unity
 {
@@ -37,11 +37,11 @@ struct IniParserPrivate;
 }
 
 /**
-\brief Helper class to read configuration files.
+\brief Helper class to read and write configuration files.
 
 This class reads configuration files in the .ini format
 and provides for a simple and type safe way of extracting
-information. A typical ini file looks like this:
+and inserting information. A typical ini file looks like this:
 
 ~~~
 [group1]
@@ -55,14 +55,17 @@ key1 = othervalue1
 key2 = othervalue2
 ~~~
 
-To obtain a value, simply specify the group and key names to
-the get* functions of this class. The array functions use
-a semicolon as a separator.
+To extract/insert a value, simply specify the group and key
+names to the get/set methods of this class, respectively.
+The array methods use a semicolon as a separator.
 
-The get functions indicate errors by throwing LogicExceptions.
-Examples why this might happen is because a value can't be
-coerced into the given type (i.e trying to convert the value
-"hello" into a boolean).
+To write unsaved changes back to the configuration file, call
+sync(). The sync() method will throw a FileException if it
+fails to write to file.
+
+The get methods indicate errors by throwing LogicException.
+
+All methods are thread-safe.
 */
 
 class UNITY_API IniParser final {
@@ -78,31 +81,72 @@ public:
     IniParser() = delete;
     /// @endcond
 
-    /** @name Accessors
-     * These member functions provide access to configuration entries by group and key.
-     * Attempts to retrieve a value as the wrong type, such as retrieving a string value
-     * "abc" as an integer, throw LogicException.
-      **/
     //{@
+
+    /** @name Read Methods
+     * These member functions provide read access to configuration entries by group and key.<br>
+     * Attempts to retrieve a value as the wrong type (such as retrieving a string value as an
+     * integer) or to retrieve a value for a non-existent group or key throw LogicException.
+     **/
+
     bool has_group(const std::string& group) const noexcept;
     bool has_key(const std::string& group, const std::string& key) const;
+
     std::string get_string(const std::string& group, const std::string& key) const;
     std::string get_locale_string(const std::string& group,
                                   const std::string& key,
                                   const std::string& locale = std::string()) const;
     bool get_boolean(const std::string& group, const std::string& key) const;
     int get_int(const std::string& group, const std::string& key) const;
+    double get_double(const std::string& group, const std::string& key) const;
 
     std::vector<std::string> get_string_array(const std::string& group, const std::string& key) const;
     std::vector<std::string> get_locale_string_array(const std::string& group,
                                                      const std::string& key,
                                                      const std::string& locale = std::string()) const;
-    std::vector<int> get_int_array(const std::string& group, const std::string& key) const;
     std::vector<bool> get_boolean_array(const std::string& group, const std::string& key) const;
+    std::vector<int> get_int_array(const std::string& group, const std::string& key) const;
+    std::vector<double> get_double_array(const std::string& group, const std::string& key) const;
 
     std::string get_start_group() const;
     std::vector<std::string> get_groups() const;
     std::vector<std::string> get_keys(const std::string& group) const;
+
+    /** @name Write Methods
+     * These member functions provide write access to configuration entries by group and key.<br>
+     * Attempts to remove groups or keys that do not exist throw LogicException.<br>
+     * The set methods replace the value for a key if the key exists. Calling a set method for a
+     * non-existent group and/or key creates the group and/or key.
+      **/
+
+    bool remove_group(const std::string& group);
+    bool remove_key(const std::string& group, const std::string& key);
+
+    void set_string(const std::string& group, const std::string& key, const std::string& value);
+    void set_locale_string(const std::string& group,
+                           const std::string& key,
+                           const std::string& value,
+                           const std::string& locale = std::string());
+    void set_boolean(const std::string& group, const std::string& key, bool value);
+    void set_int(const std::string& group, const std::string& key, int value);
+    void set_double(const std::string& group, const std::string& key, double value);
+
+    void set_string_array(const std::string& group, const std::string& key, const std::vector<std::string>& value);
+    void set_locale_string_array(const std::string& group,
+                                 const std::string& key,
+                                 const std::vector<std::string>& value,
+                                 const std::string& locale = std::string());
+    void set_boolean_array(const std::string& group, const std::string& key, const std::vector<bool>& value);
+    void set_int_array(const std::string& group, const std::string& key, const std::vector<int>& value);
+    void set_double_array(const std::string& group, const std::string& key, const std::vector<double>& value);
+
+    /** @name Sync Method
+     * This member function writes unsaved changes back to the configuration file.<br>
+     * A failure to write to the file throws a FileException.
+      **/
+
+    void sync();
+
     //@}
 
 private:
