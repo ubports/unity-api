@@ -1,3 +1,9 @@
+unity-api (7.110) UNRELEASED; urgency=medium
+
+  * Added ExpandableFilterWidgetInterface.
+
+ -- Pawel Stolowski <pawel.stolowski@canonical.com>  Tue, 19 Apr 2016 14:59:23 +0200
+
 unity-api (7.109+16.04.20160405-0ubuntu1) xenial; urgency=medium
 
   [ Marcus Tomlinson ]
