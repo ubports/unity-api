@@ -81,7 +81,7 @@ class UNITY_API ApplicationInfoInterface: public QObject
      *
      * Holds the stage where this application is currently located.
      */
-    Q_PROPERTY(Stage stage READ stage NOTIFY stageChanged)
+    Q_PROPERTY(Stage stage READ stage WRITE setStage NOTIFY stageChanged)
 
     /**
      * @brief The application's state.
@@ -275,6 +275,7 @@ public:
     virtual QString comment() const = 0;
     virtual QUrl icon() const = 0;
     virtual Stage stage() const = 0;
+    virtual void setStage(Stage) = 0;
     virtual State state() const = 0;
     virtual RequestedState requestedState() const = 0;
     virtual void setRequestedState(RequestedState) = 0;

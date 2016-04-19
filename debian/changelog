@@ -1,8 +1,29 @@
-unity-api (7.108-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (7.109+16.04.20160405-0ubuntu1) xenial; urgency=medium
 
-  * Added Filters interface.
+  [ Marcus Tomlinson ]
+  * Add set*() methods to IniParser
 
- -- Pawel Stolowski <pawel.stolowski@canonical.com>  Fri, 19 Feb 2016 11:16:45 +0200
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- Marcus Tomlinson <marcus.tomlinson@canonical.com>  Tue, 05 Apr 2016 06:03:34 +0000
+
+unity-api (7.108+16.04.20160322-0ubuntu1) xenial; urgency=medium
+
+  [ Lukáš Tinkl, Michał Sawicz ]
+  * Add API for setting keyboard layout+variant on a surface (LP:
+    #1524400, #1491340)
+
+  [ Nick Dedekind ]
+  * Added setStage for sidestage redesign.
+  * Added support for low shell chrome (LP: #1535397)
+
+  [ Pawel Stolowski ]
+  * Base interfaces for filters.
+  * Interface for RangeInputFilter.
+  * ValueSliderFilter interface.
+
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Tue, 22 Mar 2016 07:48:55 +0000
 
 unity-api (7.107+16.04.20160223-0ubuntu1) xenial; urgency=medium
 
@@ -11,6 +32,10 @@ unity-api (7.107+16.04.20160223-0ubuntu1) xenial; urgency=medium
   * Interface for activationInProgress flag. (LP: #1537132)
 
  -- Pawel Stolowski <ci-train-bot@canonical.com>  Tue, 23 Feb 2016 12:12:26 +0000
+
+unity-api (7.107-0ubuntu1) UNRELEASED; urgency=medium
+
+ -- Michal Sawicz <michal.sawicz@canonical.com>  Tue, 16 Feb 2016 10:06:55 +0100
 
 unity-api (7.106+16.04.20160211.1-0ubuntu1) xenial; urgency=medium
 
