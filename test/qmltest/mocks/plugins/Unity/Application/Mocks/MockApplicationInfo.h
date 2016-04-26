@@ -62,6 +62,8 @@ public:
     QSize initialSurfaceSize() const override { return QSize(); }
     void setInitialSurfaceSize(const QSize &) override {}
 
+    MirSurfaceListInterface* surfaceList() override { return nullptr; }
+
 private:
     QString m_appId;
     QString m_name;
