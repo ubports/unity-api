@@ -46,7 +46,8 @@ public:
         Invalid,
         OptionSelectorFilter,
         RangeInputFilter,
-        ValueSliderFilter
+        ValueSliderFilter,
+        ExpandableFilterWidget
         // TODO add remaining filters
     };
 
