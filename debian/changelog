@@ -1,3 +1,9 @@
+unity-api (7.111) UNRELEASED; urgency=medium
+
+  * Added RoleSocialActions to ResultsModelInterface of scopes.
+
+ -- Pawel Stolowski <pawel.stolowski@canonical.com>  Thu, 25 Apr 2016 10:00:42 +0100
+
 unity-api (7.110+16.04.20160413-0ubuntu1) xenial; urgency=medium
 
   [ Daniel d'Andrada ]

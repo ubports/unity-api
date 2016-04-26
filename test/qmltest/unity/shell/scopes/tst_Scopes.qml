@@ -427,6 +427,7 @@ Item {
                 { tag: "Model.roles[attributes]", role: "attributes", type: "string" },
                 { tag: "Model.roles[background]", role: "background", type: "object" },
                 { tag: "Model.roles[overlayColor]", role: "overlayColor", type: "string" },
+                { tag: "Model.roles[socialActions]", role: "socialActions", type: "string" },
             ];
         }
 
