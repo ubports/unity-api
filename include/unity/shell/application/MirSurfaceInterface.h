@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Canonical, Ltd.
+ * Copyright (C) 2015-2016 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,6 +28,8 @@ namespace shell
 {
 namespace application
 {
+
+class MirSurfaceListInterface;
 
 /**
    @brief Holds a Mir surface. Pretty much an opaque class.
@@ -120,20 +122,22 @@ class MirSurfaceInterface : public QObject
     Q_PROPERTY(Mir::ShellChrome shellChrome READ shellChrome NOTIFY shellChromeChanged)
 
     /**
-     * @brief Keymap layout
-     *
-     * Keyboard layout component (first part of e.g. "cz+qwerty");
-     * use setKeymap() to set it.
+     * @brief The requested keymap for this surface
+     * Its format is "layout+variant".
      */
-    Q_PROPERTY(QString keymapLayout READ keymapLayout NOTIFY keymapChanged)
+    Q_PROPERTY(QString keymap READ keymap WRITE setKeymap NOTIFY keymapChanged)
 
     /**
-     * @brief Keymap variant
+     * @brief Whether the surface is focused
      *
-     * Keyboard variant component (second part of e.g. "cz+qwerty");
-     * use setKeymap() to set it.
+     * It will be true if this surface is MirFocusControllerInterface::focusedSurface
      */
-    Q_PROPERTY(QString keymapVariant READ keymapVariant NOTIFY keymapChanged)
+    Q_PROPERTY(bool focused READ focused NOTIFY focusedChanged)
+
+    /**
+     * @brief The list of prompt surfaces under this one
+     */
+    Q_PROPERTY(unity::shell::application::MirSurfaceListInterface* promptSurfaceList READ promptSurfaceList CONSTANT)
 
 public:
     /// @cond
@@ -165,11 +169,33 @@ public:
     virtual int widthIncrement() const = 0;
     virtual int heightIncrement() const = 0;
 
+    virtual void setKeymap(const QString &) = 0;
+    virtual QString keymap() const = 0;
+
     virtual Mir::ShellChrome shellChrome() const = 0;
-    virtual QString keymapLayout() const = 0;
-    virtual QString keymapVariant() const = 0;
-    virtual void setKeymap(const QString &layout, const QString &variant) = 0;
+
+    virtual bool focused() const = 0;
+
+    virtual MirSurfaceListInterface* promptSurfaceList() = 0;
     /// @endcond
+
+    /**
+     * @brief Requests focus for this surface
+     *
+     * Causes the emission of focusRequested()
+     */
+    Q_INVOKABLE virtual void requestFocus() = 0;
+
+    /**
+     * @brief Sends a close request
+     *
+     */
+    Q_INVOKABLE virtual void close() = 0;
+
+    /**
+     * @brief Raises this surface to be the first/top one among its siblings
+     */
+    Q_INVOKABLE virtual void raise() = 0;
 
 Q_SIGNALS:
     /// @cond
@@ -187,8 +213,14 @@ Q_SIGNALS:
     void widthIncrementChanged(int value);
     void heightIncrementChanged(int value);
     void shellChromeChanged(Mir::ShellChrome value);
-    void keymapChanged(const QString &layout, const QString &variant);
+    void keymapChanged(const QString &value);
+    void focusedChanged(bool value);
     /// @endcond
+
+    /**
+     * @brief Emitted in response to a requestFocus() call
+     */
+    void focusRequested();
 };
 
 } // namespace application
