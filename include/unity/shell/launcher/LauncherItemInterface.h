@@ -138,6 +138,7 @@ public:
     virtual bool countVisible() const = 0;
     virtual bool focused() const = 0;
     virtual bool alerting() const = 0;
+    virtual int surfaceCount() const = 0;
     virtual unity::shell::launcher::QuickListModelInterface *quickList() const = 0;
 
 Q_SIGNALS:
@@ -151,6 +152,7 @@ Q_SIGNALS:
     void countVisibleChanged(bool countVisible);
     void focusedChanged(bool focused);
     void alertingChanged(bool alerting);
+    void surfaceCountChanged(int surfaceCount);
     /// @endcond
 };
 
