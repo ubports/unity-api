@@ -227,7 +227,7 @@ class UNITY_API ApplicationInfoInterface: public QObject
     /**
      * @brief Count of application's surfaces
      *
-     * This is a conveniece property and will always be the same as surfaceList->count().
+     * This is a convenience property and will always be the same as surfaceList->count().
      * It allows to connect to an application and listen for surface creations/removals for
      * that particular application without having to keep track of the
      * application <-> surfaceList relationship.
