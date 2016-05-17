@@ -1,6 +1,7 @@
 unity-api (7.112) UNRELEASED; urgency=medium
 
   * Move promptSurfaceList from MirSurfaceInterface to ApplicationInfoInterface
+  * Added MirSurfaceListInterface::first property
 
  -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Tue, 17 May 2016 09:54:25 -0300
 
