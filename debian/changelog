@@ -1,3 +1,9 @@
+unity-api (7.112) UNRELEASED; urgency=medium
+
+  * Move promptSurfaceList from MirSurfaceInterface to ApplicationInfoInterface
+
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Tue, 17 May 2016 09:54:25 -0300
+
 unity-api (7.111+16.04.20160426.2-0ubuntu1) xenial; urgency=medium
 
   [ Pawel Stolowski ]

@@ -224,6 +224,11 @@ class UNITY_API ApplicationInfoInterface: public QObject
      */
     Q_PROPERTY(unity::shell::application::MirSurfaceListInterface* surfaceList READ surfaceList CONSTANT)
 
+    /**
+     * @brief The list of top-level prompt surfaces for this application
+     */
+    Q_PROPERTY(unity::shell::application::MirSurfaceListInterface* promptSurfaceList READ promptSurfaceList CONSTANT)
+
 protected:
     /// @cond
     ApplicationInfoInterface(const QString &appId, QObject* parent = 0): QObject(parent) { Q_UNUSED(appId) }
@@ -301,6 +306,7 @@ public:
     virtual QSize initialSurfaceSize() const = 0;
     virtual void setInitialSurfaceSize(const QSize &size) = 0;
     virtual MirSurfaceListInterface* surfaceList() = 0;
+    virtual MirSurfaceListInterface* promptSurfaceList() = 0;
     /// @endcond
 
 Q_SIGNALS:
