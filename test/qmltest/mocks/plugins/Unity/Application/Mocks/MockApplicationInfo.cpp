@@ -164,3 +164,8 @@ void MockApplicationInfo::setExemptFromLifecycle(bool exemptFromLifecycle)
         Q_EMIT exemptFromLifecycleChanged(m_exemptFromLifecycle);
     }
 }
+
+int MockApplicationInfo::surfaceCount() const
+{
+    return 1;
+}
