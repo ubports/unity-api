@@ -134,11 +134,6 @@ class MirSurfaceInterface : public QObject
      */
     Q_PROPERTY(bool focused READ focused NOTIFY focusedChanged)
 
-    /**
-     * @brief The list of prompt surfaces under this one
-     */
-    Q_PROPERTY(unity::shell::application::MirSurfaceListInterface* promptSurfaceList READ promptSurfaceList CONSTANT)
-
 public:
     /// @cond
     MirSurfaceInterface(QObject *parent = nullptr) : QObject(parent) {}
@@ -175,8 +170,6 @@ public:
     virtual Mir::ShellChrome shellChrome() const = 0;
 
     virtual bool focused() const = 0;
-
-    virtual MirSurfaceListInterface* promptSurfaceList() = 0;
     /// @endcond
 
     /**
