@@ -1,3 +1,9 @@
+unity-api (7.113) UNRELEASED; urgency=medium
+
+  * Drop Launchermodel::setAlerting, it's not needed
+
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Mon, 09 May 2016 18:43:38 +0200
+
 unity-api (7.112) UNRELEASED; urgency=medium
 
   * Add ApplicationInfoInterface::surfaceCount property

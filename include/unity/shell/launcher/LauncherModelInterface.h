@@ -101,14 +101,6 @@ public:
     virtual ~LauncherModelInterface() {}
 
     /**
-     * @brief Set or unset alert-state on launcher item.
-     *
-     * @param appId The appId of the item to affect.
-     * @param alerting The flag to set/unset launcher item's alert state.
-     */
-    Q_INVOKABLE virtual void setAlerting(const QString& appId, bool alerting) = 0;
-
-    /**
      * @brief Move an item in the model.
      *
      * @param oldIndex The current (old) index of the item to be moved.
