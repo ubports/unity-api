@@ -90,6 +90,8 @@ QVariant MockLauncherModel::data(const QModelIndex& index, int role) const
         return item->focused();
     case RoleAlerting:
         return item->alerting();
+    case RoleSurfaceCount:
+        return item->surfaceCount();
     }
 
     return QVariant();

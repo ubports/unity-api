@@ -35,6 +35,7 @@ MockLauncherItem::MockLauncherItem(const QString &appId, const QString& desktopF
     m_count(8),
     m_countVisible(false),
     m_alerting(false),
+    m_surfaceCount(1),
     m_quickListModel(new MockQuickListModel(this))
 {
 
@@ -170,6 +171,11 @@ void MockLauncherItem::setAlerting(bool alerting)
         m_alerting = alerting;
         Q_EMIT alertingChanged(alerting);
     }
+}
+
+int MockLauncherItem::surfaceCount() const
+{
+    return m_surfaceCount;
 }
 
 QuickListModelInterface *MockLauncherItem::quickList() const
