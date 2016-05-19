@@ -225,6 +225,11 @@ class UNITY_API ApplicationInfoInterface: public QObject
     Q_PROPERTY(unity::shell::application::MirSurfaceListInterface* surfaceList READ surfaceList CONSTANT)
 
     /**
+     * @brief The list of top-level prompt surfaces for this application
+     */
+    Q_PROPERTY(unity::shell::application::MirSurfaceListInterface* promptSurfaceList READ promptSurfaceList CONSTANT)
+
+    /**
      * @brief Count of application's surfaces
      *
      * This is a convenience property and will always be the same as surfaceList->count().
@@ -311,6 +316,7 @@ public:
     virtual QSize initialSurfaceSize() const = 0;
     virtual void setInitialSurfaceSize(const QSize &size) = 0;
     virtual MirSurfaceListInterface* surfaceList() const = 0;
+    virtual MirSurfaceListInterface* promptSurfaceList() const = 0;
     virtual int surfaceCount() const = 0;
     /// @endcond
 

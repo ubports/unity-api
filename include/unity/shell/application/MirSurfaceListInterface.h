@@ -39,6 +39,14 @@ class MirSurfaceListInterface : public QAbstractListModel
      * This is the same as rowCount, added in order to keep compatibility with QML ListModels.
      */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+
+    /**
+     * @brief The first (index 0) surface in this model
+     *
+     * Will always match the result of get(0). But being a property, it's more appropriate
+     * for use in qml bindinds (JS expression gets reevaluated when it changes)
+     */
+    Q_PROPERTY(unity::shell::application::MirSurfaceInterface* first READ first NOTIFY firstChanged)
 public:
     /**
      * @brief The Roles supported by the model
@@ -69,11 +77,20 @@ public:
     }
 
     int count() const { return rowCount(); }
+
+    MirSurfaceInterface *first() {
+        if (rowCount() > 0) {
+            return get(0);
+        } else {
+            return nullptr;
+        }
+    }
     /// @endcond
 
 Q_SIGNALS:
     /// @cond
     void countChanged(int count);
+    void firstChanged();
     /// @endcond
 };
 

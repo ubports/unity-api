@@ -1,5 +1,5 @@
 /*
- * Copyright 2013,2015 Canonical Ltd.
+ * Copyright 2013,2015,2016 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -63,6 +63,7 @@ public:
     void setInitialSurfaceSize(const QSize &) override {}
 
     MirSurfaceListInterface* surfaceList() const override { return nullptr; }
+    MirSurfaceListInterface* promptSurfaceList() const override { return nullptr; }
     int surfaceCount() const override;
 
 private:

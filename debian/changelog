@@ -4,6 +4,17 @@ unity-api (7.113) UNRELEASED; urgency=medium
 
  -- Michael Zanetti <michael.zanetti@canonical.com>  Mon, 09 May 2016 18:43:38 +0200
 
+unity-api (7.112+16.04.20160518-0ubuntu1) xenial; urgency=medium
+
+  [ Daniel d'Andrada ]
+  * Move promptSurfaceList from MirSurfaceInterface to ApplicationInfoInterface
+  * Added MirSurfaceListInterface::first property
+
+  [ CI Train Bot ]
+  * No-change rebuild.
+
+ -- Nick Dedekind <ci-train-bot@canonical.com>  Wed, 18 May 2016 09:31:07 +0000
+
 unity-api (7.112) UNRELEASED; urgency=medium
 
   * Add ApplicationInfoInterface::surfaceCount property
