@@ -1,8 +1,15 @@
-unity-api (7.113) UNRELEASED; urgency=medium
+unity-api (7.113+16.10.20160525-0ubuntu1) yakkety; urgency=medium
 
+  [ Daniel d'Andrada ]
   * Remove hotspot property from MirMousePointerInterface
 
- -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Tue, 03 May 2016 10:40:00 -0300
+  [ Albert Astals Cid ]
+  * Mark roleNames as override
+
+  [ Michi Henning ]
+  * Re-enabled license/copyright test for xenial. (LP: #1194867)
+
+ -- Michael Terry <michael.terry@canonical.com>  Wed, 25 May 2016 06:02:38 +0000
 
 unity-api (7.112+16.04.20160518-0ubuntu1) xenial; urgency=medium
 
