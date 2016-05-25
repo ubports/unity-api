@@ -103,7 +103,7 @@ public:
     /// @cond
     virtual ~ApplicationManagerInterface() {}
 
-    virtual QHash<int, QByteArray> roleNames() const
+    QHash<int, QByteArray> roleNames() const override
     {
         return m_roleNames;
     }
