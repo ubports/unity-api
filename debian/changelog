@@ -1,3 +1,15 @@
+unity-api (7.115) UNRELEASED; urgency=medium
+
+  * Drop Launchermodel::setAlerting, it's not needed
+
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Mon, 09 May 2016 18:43:38 +0200
+
+unity-api (7.114) UNRELEASED; urgency=medium
+
+  * Add ApplicationInfoInterface::surfaceCount property
+
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Mon, 09 May 2016 18:43:38 +0200
+
 unity-api (7.113+16.10.20160525-0ubuntu1) yakkety; urgency=medium
 
   [ Daniel d'Andrada ]
@@ -11,12 +23,6 @@ unity-api (7.113+16.10.20160525-0ubuntu1) yakkety; urgency=medium
 
  -- Michael Terry <michael.terry@canonical.com>  Wed, 25 May 2016 06:02:38 +0000
 
-unity-api (7.113) UNRELEASED; urgency=medium
-
-  * Drop Launchermodel::setAlerting, it's not needed
-
- -- Michael Zanetti <michael.zanetti@canonical.com>  Mon, 09 May 2016 18:43:38 +0200
-
 unity-api (7.112+16.04.20160518-0ubuntu1) xenial; urgency=medium
 
   [ Daniel d'Andrada ]
@@ -27,12 +33,6 @@ unity-api (7.112+16.04.20160518-0ubuntu1) xenial; urgency=medium
   * No-change rebuild.
 
  -- Nick Dedekind <ci-train-bot@canonical.com>  Wed, 18 May 2016 09:31:07 +0000
-
-unity-api (7.112) UNRELEASED; urgency=medium
-
-  * Add ApplicationInfoInterface::surfaceCount property
-
- -- Michael Zanetti <michael.zanetti@canonical.com>  Mon, 09 May 2016 18:43:38 +0200
 
 unity-api (7.111+16.04.20160426.2-0ubuntu1) xenial; urgency=medium
 
