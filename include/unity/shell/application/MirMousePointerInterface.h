@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Canonical, Ltd.
+ * Copyright (C) 2015-2016 Canonical, Ltd.
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License version 3, as published by
@@ -42,17 +42,6 @@ class MirMousePointerInterface : public QQuickItem {
      */
     Q_PROPERTY(QString themeName READ themeName NOTIFY themeNameChanged)
 
-    /**
-     * @brief X coordinate of the cursor hotspot
-     * Is value depends on the current cursor name and theme
-     */
-    Q_PROPERTY(qreal hotspotX READ hotspotX NOTIFY hotspotXChanged)
-
-    /**
-     * @brief Y coordinate of the cursor hotspot
-     * Is value depends on the current cursor name and theme
-     */
-    Q_PROPERTY(qreal hotspotY READ hotspotY NOTIFY hotspotYChanged)
 public:
     /**
      * @brief The constructor
@@ -65,9 +54,6 @@ public:
 
     virtual void setThemeName(const QString &themeName) = 0;
     virtual QString themeName() const = 0;
-
-    virtual qreal hotspotX() const = 0;
-    virtual qreal hotspotY() const = 0;
     /// @endcond
 
     /**
@@ -83,8 +69,6 @@ Q_SIGNALS:
     /// @cond
     void cursorNameChanged(QString name);
     void themeNameChanged(QString name);
-    void hotspotXChanged(qreal value);
-    void hotspotYChanged(qreal value);
     /// @endcond
 
 public Q_SLOTS:
