@@ -52,6 +52,11 @@ class MirSurfaceInterface : public QObject
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
 
     /**
+     * @brief Persistent Id of the surface
+     */
+    Q_PROPERTY(QString persistentId READ persistentId CONSTANT)
+
+    /**
      * @brief Size of the current surface buffer, in pixels.
      */
     Q_PROPERTY(QSize size READ size NOTIFY sizeChanged)
@@ -142,6 +147,8 @@ public:
     virtual Mir::Type type() const = 0;
 
     virtual QString name() const = 0;
+
+    virtual QString persistentId() const = 0;
 
     virtual QSize size() const = 0;
     virtual void resize(int width, int height) = 0;
