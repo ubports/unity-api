@@ -1,8 +1,9 @@
-unity-api (7.115) UNRELEASED; urgency=medium
+unity-api (7.115+16.10.20160614-0ubuntu1) yakkety; urgency=medium
 
+  [ Michael Zanetti ]
   * Drop Launchermodel::setAlerting, it's not needed
 
- -- Michael Zanetti <michael.zanetti@canonical.com>  Mon, 09 May 2016 18:43:38 +0200
+ -- Albert Astals Cid <albert.astals@canonical.com>  Tue, 14 Jun 2016 08:34:16 +0000
 
 unity-api (7.114) UNRELEASED; urgency=medium
 
