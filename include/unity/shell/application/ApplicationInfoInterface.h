@@ -229,6 +229,16 @@ class UNITY_API ApplicationInfoInterface: public QObject
      */
     Q_PROPERTY(unity::shell::application::MirSurfaceListInterface* promptSurfaceList READ promptSurfaceList CONSTANT)
 
+    /**
+     * @brief Count of application's surfaces
+     *
+     * This is a convenience property and will always be the same as surfaceList->count().
+     * It allows to connect to an application and listen for surface creations/removals for
+     * that particular application without having to keep track of the
+     * application <-> surfaceList relationship.
+     */
+     Q_PROPERTY(int surfaceCount READ surfaceCount NOTIFY surfaceCountChanged)
+
 protected:
     /// @cond
     ApplicationInfoInterface(const QString &appId, QObject* parent = 0): QObject(parent) { Q_UNUSED(appId) }
@@ -305,8 +315,9 @@ public:
     virtual void setExemptFromLifecycle(bool) = 0;
     virtual QSize initialSurfaceSize() const = 0;
     virtual void setInitialSurfaceSize(const QSize &size) = 0;
-    virtual MirSurfaceListInterface* surfaceList() = 0;
-    virtual MirSurfaceListInterface* promptSurfaceList() = 0;
+    virtual MirSurfaceListInterface* surfaceList() const = 0;
+    virtual MirSurfaceListInterface* promptSurfaceList() const = 0;
+    virtual int surfaceCount() const = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -320,6 +331,7 @@ Q_SIGNALS:
     void focusedChanged(bool focused);
     void exemptFromLifecycleChanged(bool exemptFromLifecycle);
     void initialSurfaceSizeChanged(const QSize &size);
+    void surfaceCountChanged(int surfaceCount);
     /// @endcond
 
     /**

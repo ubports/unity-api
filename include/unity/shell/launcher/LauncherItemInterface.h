@@ -112,6 +112,13 @@ class UNITY_API LauncherItemInterface: public QObject
     Q_PROPERTY(bool alerting READ alerting NOTIFY alertingChanged)
 
     /**
+     * @brief The number of surfaces that this application entry has opened
+     *
+     * The Launcher will display up to 3 pips, one for each surface
+     */
+    Q_PROPERTY(int surfaceCount READ surfaceCount NOTIFY surfaceCountChanged)
+
+    /**
      * @brief The quick list menu contents for the item
      *
      * Items can have a quick list menu. This property holds a model for
@@ -138,6 +145,7 @@ public:
     virtual bool countVisible() const = 0;
     virtual bool focused() const = 0;
     virtual bool alerting() const = 0;
+    virtual int surfaceCount() const = 0;
     virtual unity::shell::launcher::QuickListModelInterface *quickList() const = 0;
 
 Q_SIGNALS:
@@ -151,6 +159,7 @@ Q_SIGNALS:
     void countVisibleChanged(bool countVisible);
     void focusedChanged(bool focused);
     void alertingChanged(bool alerting);
+    void surfaceCountChanged(int surfaceCount);
     /// @endcond
 };
 

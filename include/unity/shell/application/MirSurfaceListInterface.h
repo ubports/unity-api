@@ -89,7 +89,7 @@ public:
 
 Q_SIGNALS:
     /// @cond
-    void countChanged();
+    void countChanged(int count);
     void firstChanged();
     /// @endcond
 };
