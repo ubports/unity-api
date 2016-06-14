@@ -57,7 +57,6 @@ public:
     void setFocused(bool focused);
 
     bool alerting() const;
-    void setAlerting(bool alerting);
 
     int surfaceCount() const override;
 

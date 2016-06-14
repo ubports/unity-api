@@ -164,15 +164,6 @@ bool MockLauncherItem::alerting() const
     return m_alerting;
 }
 
-void MockLauncherItem::setAlerting(bool alerting)
-{
-    if (m_alerting != alerting)
-    {
-        m_alerting = alerting;
-        Q_EMIT alertingChanged(alerting);
-    }
-}
-
 int MockLauncherItem::surfaceCount() const
 {
     return m_surfaceCount;
