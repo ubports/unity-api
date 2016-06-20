@@ -18,6 +18,7 @@
 #define UNITY_SHELL_APPLICATION_MIRSURFACE_H
 
 #include <QObject>
+#include <QRect>
 #include <QSize>
 
 #include "Mir.h"
@@ -134,6 +135,13 @@ class MirSurfaceInterface : public QObject
      */
     Q_PROPERTY(bool focused READ focused NOTIFY focusedChanged)
 
+    /**
+     * @brief Input bounds
+     *
+     * Bounding rectangle of the surface region that accepts input.
+     */
+    Q_PROPERTY(QRect inputBounds READ inputBounds NOTIFY inputBoundsChanged)
+
 public:
     /// @cond
     MirSurfaceInterface(QObject *parent = nullptr) : QObject(parent) {}
@@ -170,6 +178,8 @@ public:
     virtual Mir::ShellChrome shellChrome() const = 0;
 
     virtual bool focused() const = 0;
+
+    virtual QRect inputBounds() const = 0;
     /// @endcond
 
     /**
@@ -208,6 +218,7 @@ Q_SIGNALS:
     void shellChromeChanged(Mir::ShellChrome value);
     void keymapChanged(const QString &value);
     void focusedChanged(bool value);
+    void inputBoundsChanged(QRect value);
     /// @endcond
 
     /**
