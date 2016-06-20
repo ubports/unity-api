@@ -1,8 +1,8 @@
-unity-api (7.116) UNRELEASED; urgency=medium
+unity-api (7.116+16.10.20160620-0ubuntu1) yakkety; urgency=medium
 
   * MirSurfaceInterface: add inputBounds property
 
- -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Mon, 20 Jun 2016 11:04:39 -0300
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Mon, 20 Jun 2016 14:39:15 +0000
 
 unity-api (7.115+16.10.20160614-0ubuntu1) yakkety; urgency=medium
 
