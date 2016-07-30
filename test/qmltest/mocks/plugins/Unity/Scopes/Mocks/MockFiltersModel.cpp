@@ -20,7 +20,7 @@
 MockFiltersModel::MockFiltersModel(unity::shell::scopes::ScopeInterface *parent)
     : unity::shell::scopes::FiltersInterface(parent)
 {
-    MockOptionSelectorFilter *f = new MockOptionSelectorFilter("f1", "Filter 1", false, this);
+    MockOptionSelectorFilter *f = new MockOptionSelectorFilter("f1", "Filter 1 title", "Filter 1 label", false, this);
     m_filters.append(f); // owned by parent, so no need to manage it
 }
 
