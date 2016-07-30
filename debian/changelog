@@ -1,3 +1,13 @@
+unity-api (7.116+16.10.20160730-0ubuntu1) yakkety; urgency=medium
+
+  [ Michał Sawicz ]
+  * Don't run tests on powerpc (LP: #1606927)
+
+  [ Stephen Kelly ]
+  * Silence some gcc warnings.
+
+ -- Lukáš Tinkl <lukas.tinkl@canonical.com>  Sat, 30 Jul 2016 21:18:50 +0000
+
 unity-api (7.116+16.10.20160620-0ubuntu1) yakkety; urgency=medium
 
   * MirSurfaceInterface: add inputBounds property
