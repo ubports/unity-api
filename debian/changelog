@@ -1,3 +1,9 @@
+unity-api (7.116+16.10.20160805-0ubuntu1) yakkety; urgency=medium
+
+  * Remove unnecessary Boost dependency from package.
+
+ -- James Henstridge <james.henstridge@canonical.com>  Fri, 05 Aug 2016 04:08:06 +0000
+
 unity-api (7.116+16.10.20160730-0ubuntu1) yakkety; urgency=medium
 
   [ Michał Sawicz ]
