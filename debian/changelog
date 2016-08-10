@@ -1,3 +1,10 @@
+unity-api (7.117) UNRELEASED; urgency=medium
+
+  * ApplicationInfoInterface: remove "stage" property
+  * ApplicationManagerInterface: remove "stage" role
+
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Mon, 25 Jul 2016 10:55:56 -0300
+
 unity-api (7.116+16.10.20160805-0ubuntu1) yakkety; urgency=medium
 
   * Remove unnecessary Boost dependency from package.

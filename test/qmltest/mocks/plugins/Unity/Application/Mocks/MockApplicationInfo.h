@@ -34,9 +34,6 @@ public:
     QString comment() const;
     QUrl icon() const;
 
-    ApplicationInfoInterface::Stage stage() const;
-    void setStage(ApplicationInfoInterface::Stage stage);
-
     ApplicationInfoInterface::State state() const;
     void setState(ApplicationInfoInterface::State state);
 
@@ -71,7 +68,6 @@ private:
     QString m_name;
     QString m_comment;
     QUrl m_icon;
-    ApplicationInfoInterface::Stage m_stage;
     ApplicationInfoInterface::State m_state;
     bool m_focused;
     bool m_exemptFromLifecycle;

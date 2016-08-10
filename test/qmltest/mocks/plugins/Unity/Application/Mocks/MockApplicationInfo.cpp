@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013,2016 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,6 @@ MockApplicationInfo::MockApplicationInfo(const QString &appId, const QString& co
     m_name(name),
     m_comment(comment),
     m_icon(icon),
-    m_stage(MainStage),
     m_state(Running),
     m_focused(false),
     m_exemptFromLifecycle(false)
@@ -53,20 +52,6 @@ QString MockApplicationInfo::name() const
 QUrl MockApplicationInfo::icon() const
 {
     return m_icon;
-}
-
-ApplicationInfoInterface::Stage MockApplicationInfo::stage() const
-{
-    return m_stage;
-}
-
-void MockApplicationInfo::setStage(ApplicationInfoInterface::Stage stage)
-{
-    if (m_stage != stage)
-    {
-        m_stage = stage;
-        Q_EMIT stageChanged(m_stage);
-    }
 }
 
 ApplicationInfoInterface::State MockApplicationInfo::state() const

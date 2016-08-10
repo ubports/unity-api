@@ -67,7 +67,6 @@ protected:
         m_roleNames.insert(RoleName, "name");
         m_roleNames.insert(RoleComment, "comment");
         m_roleNames.insert(RoleIcon, "icon");
-        m_roleNames.insert(RoleStage, "stage");
         m_roleNames.insert(RoleState, "state");
         m_roleNames.insert(RoleFocused, "focused");
         m_roleNames.insert(RoleIsTouchApp, "isTouchApp");
@@ -92,7 +91,6 @@ public:
         RoleName,
         RoleComment,
         RoleIcon,
-        RoleStage,
         RoleState,
         RoleFocused,
         RoleIsTouchApp,
