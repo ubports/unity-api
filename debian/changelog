@@ -1,9 +1,10 @@
-unity-api (7.117) UNRELEASED; urgency=medium
+unity-api (7.117+16.10.20160810-0ubuntu1) yakkety; urgency=medium
 
+  [ Daniel d'Andrada ]
   * ApplicationInfoInterface: remove "stage" property
   * ApplicationManagerInterface: remove "stage" role
 
- -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Mon, 25 Jul 2016 10:55:56 -0300
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Wed, 10 Aug 2016 08:20:08 +0000
 
 unity-api (7.116+16.10.20160805-0ubuntu1) yakkety; urgency=medium
 
