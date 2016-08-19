@@ -122,10 +122,6 @@ unity-api (7.107+16.04.20160223-0ubuntu1) xenial; urgency=medium
 
  -- Pawel Stolowski <ci-train-bot@canonical.com>  Tue, 23 Feb 2016 12:12:26 +0000
 
-unity-api (7.107-0ubuntu1) UNRELEASED; urgency=medium
-
- -- Michal Sawicz <michal.sawicz@canonical.com>  Tue, 16 Feb 2016 10:06:55 +0100
-
 unity-api (7.106+16.04.20160211.1-0ubuntu1) xenial; urgency=medium
 
   [ Daniel d'Andrada ]
