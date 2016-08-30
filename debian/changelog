@@ -1,8 +1,9 @@
-unity-api (7.118) UNRELEASED; urgency=medium
+unity-api (7.118+16.10.20160830-0ubuntu1) yakkety; urgency=medium
 
+  [ Nick Dedekind ]
   * Added persistent Id property for MirSurface
 
- -- Nick Dedekind <nick.dedekind@canonical.com>  Thu, 09 Jun 2016 14:40:35 +0100
+ -- Ken VanDine <ken.vandine@canonical.com>  Tue, 30 Aug 2016 13:40:30 +0000
 
 unity-api (7.117+16.10.20160819-0ubuntu1) yakkety; urgency=medium
 
