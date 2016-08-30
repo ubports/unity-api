@@ -1,3 +1,9 @@
+unity-api (7.118) UNRELEASED; urgency=medium
+
+  * Added persistent Id property for MirSurface
+
+ -- Nick Dedekind <nick.dedekind@canonical.com>  Thu, 09 Jun 2016 14:40:35 +0100
+
 unity-api (7.117+16.10.20160819-0ubuntu1) yakkety; urgency=medium
 
   * Removed empty unreleased entry from changelog. (LP: #1613563)
