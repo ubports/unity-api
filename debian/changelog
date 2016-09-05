@@ -1,3 +1,9 @@
+unity-api (7.119) UNRELEASED; urgency=medium
+
+  * Added MirSurfaceInterface::confinesMousePointer
+
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Mon, 27 Jun 2016 11:32:43 -0300
+
 unity-api (7.118+16.10.20160830-0ubuntu1) yakkety; urgency=medium
 
   [ Nick Dedekind ]

@@ -147,6 +147,13 @@ class MirSurfaceInterface : public QObject
      */
     Q_PROPERTY(QRect inputBounds READ inputBounds NOTIFY inputBoundsChanged)
 
+    /**
+     * @brief Whether the surface wants to confine the mouse pointer within its boundaries
+     *
+     * If true, the surface doesn't want the mouse pointer to leave its boundaries while it's focused.
+     */
+    Q_PROPERTY(bool confinesMousePointer READ confinesMousePointer NOTIFY confinesMousePointerChanged)
+
 public:
     /// @cond
     MirSurfaceInterface(QObject *parent = nullptr) : QObject(parent) {}
@@ -187,6 +194,8 @@ public:
     virtual bool focused() const = 0;
 
     virtual QRect inputBounds() const = 0;
+
+    virtual bool confinesMousePointer() const = 0;
     /// @endcond
 
     /**
@@ -226,6 +235,7 @@ Q_SIGNALS:
     void keymapChanged(const QString &value);
     void focusedChanged(bool value);
     void inputBoundsChanged(QRect value);
+    void confinesMousePointerChanged(bool value);
     /// @endcond
 
     /**
