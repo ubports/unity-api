@@ -1,3 +1,9 @@
+unity-api (7.120) UNRELEASED; urgency=medium
+
+  * Added Mir::currentKeymap
+
+ -- Lukáš Tinkl <lukas.tinkl@canonical.com>  Fri, 30 Sep 2016 13:20:00 +0200
+
 unity-api (7.119+16.10.20160909-0ubuntu1) yakkety; urgency=medium
 
   [ Daniel d'Andrada ]
