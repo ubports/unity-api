@@ -1,4 +1,4 @@
-unity-api (7.120) UNRELEASED; urgency=medium
+unity-api (8.0) UNRELEASED; urgency=medium
 
   * unity::shel::application - changes for the miral way of doing things
 
