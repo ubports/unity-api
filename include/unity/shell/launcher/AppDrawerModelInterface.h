@@ -35,6 +35,7 @@ public:
     };
 
     AppDrawerModelInterface(QObject* parent = nullptr): QAbstractListModel(parent) {}
+    virtual ~AppDrawerModelInterface() {}
 
     QHash<int, QByteArray> roleNames() const override {
         QHash<int, QByteArray> roles;
