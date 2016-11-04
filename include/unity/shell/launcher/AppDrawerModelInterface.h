@@ -9,11 +9,13 @@ namespace launcher {
 class AppDrawerModelInterface: public QAbstractListModel
 {
     Q_OBJECT
+    Q_ENUMS(Roles)
 public:
     enum Roles {
         RoleAppId,
         RoleName,
-        RoleIcon
+        RoleIcon,
+        RoleUsage
     };
 
     AppDrawerModelInterface(QObject* parent = nullptr): QAbstractListModel(parent) {}
@@ -23,6 +25,7 @@ public:
         roles.insert(RoleAppId, "appId");
         roles.insert(RoleName, "name");
         roles.insert(RoleIcon, "icon");
+        roles.insert(RoleUsage, "usage");
         return roles;
     }
 };
