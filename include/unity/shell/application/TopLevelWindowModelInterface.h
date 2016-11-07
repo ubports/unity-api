@@ -69,7 +69,7 @@ public:
     /**
      * @brief The Roles supported by the model
      *
-     * WindowRole - A WindowInterface. It will be null if the application is still starting up
+     * WindowRole - A WindowInterface.
      * ApplicationRole - An ApplicationInfoInterface
      */
     enum Roles {
