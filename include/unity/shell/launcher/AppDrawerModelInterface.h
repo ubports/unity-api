@@ -16,17 +16,29 @@
 
 #pragma once
 
+#include <unity/SymbolExport.h>
+
 #include <QAbstractListModel>
 
 namespace unity {
 namespace shell {
 namespace launcher {
 
-class AppDrawerModelInterface: public QAbstractListModel
+/**
+ * @brief A list of app drawer items to be displayed
+ *
+ * This model exposes all the items that should be shown in the app drawer.
+ */
+class UNITY_API AppDrawerModelInterface: public QAbstractListModel
 {
     Q_OBJECT
     Q_ENUMS(Roles)
 public:
+    /**
+     * @brief The Roles supported by the model
+     *
+     * See LauncherItemInterface properties for details.
+     */
     enum Roles {
         RoleAppId,
         RoleName,
@@ -34,9 +46,13 @@ public:
         RoleUsage
     };
 
+    /// @cond
     AppDrawerModelInterface(QObject* parent = nullptr): QAbstractListModel(parent) {}
+    /// @endcond
+
     virtual ~AppDrawerModelInterface() {}
 
+    /// @cond
     QHash<int, QByteArray> roleNames() const override {
         QHash<int, QByteArray> roles;
         roles.insert(RoleAppId, "appId");
@@ -45,6 +61,7 @@ public:
         roles.insert(RoleUsage, "usage");
         return roles;
     }
+    /// @endcond
 };
 
 }
