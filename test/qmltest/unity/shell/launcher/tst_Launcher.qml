@@ -144,6 +144,7 @@ Item {
                 { tag: "Item.properties[appId]", constant: "appId", type: "string" },
                 { tag: "Item.properties[name]", constant: "name", type: "string" },
                 { tag: "Item.properties[icon]", constant: "icon", type: "string" },
+                { tag: "Item.properties[keywords]", constant: "keywords", type: "object" },
                 { tag: "Item.properties[pinned]", property: "pinned", type: "boolean" },
                 { tag: "Item.properties[recent]", property: "recent", type: "boolean" },
                 { tag: "Item.properties[running]", property: "running", type: "boolean" },
@@ -193,6 +194,7 @@ Item {
                 { tag: "Model.roles[appId]", role: "appId", type: "string" },
                 { tag: "Model.roles[name]", role: "name", type: "string" },
                 { tag: "Model.roles[icon]", role: "icon", type: "string" },
+                { tag: "Model.roles[keywords]", role: "keywords", type: "object" },
                 { tag: "Model.roles[usage]", role: "usage", type: "number" },
             ];
         }

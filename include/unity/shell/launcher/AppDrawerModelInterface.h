@@ -43,6 +43,7 @@ public:
         RoleAppId,
         RoleName,
         RoleIcon,
+        RoleKeywords,
         RoleUsage
     };
 
@@ -58,6 +59,7 @@ public:
         roles.insert(RoleAppId, "appId");
         roles.insert(RoleName, "name");
         roles.insert(RoleIcon, "icon");
+        roles.insert(RoleKeywords, "keywords");
         roles.insert(RoleUsage, "usage");
         return roles;
     }

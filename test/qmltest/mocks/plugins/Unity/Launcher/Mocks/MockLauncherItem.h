@@ -35,6 +35,9 @@ public:
     QString name() const;
     QString icon() const;
 
+    QStringList keywords() const;
+    void setKeywords(const QStringList &keywords);
+
     bool pinned() const;
     void setPinned(bool pinned);
 
@@ -67,6 +70,7 @@ private:
     QString m_desktopFile;
     QString m_name;
     QString m_icon;
+    QStringList m_keywords;
     bool m_pinned;
     bool m_running;
     bool m_recent;

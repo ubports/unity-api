@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013-2106 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -12,9 +12,6 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Authors:
- *      Michael Zanetti <michael.zanetti@canonical.com>
  */
 
 #ifndef UNITY_SHELL_LAUNCHER_LAUNCHERITEM_H
@@ -52,12 +49,17 @@ class UNITY_API LauncherItemInterface: public QObject
     /**
      * @brief The user visible name of the item.
      */
-    Q_PROPERTY(QString name READ name CONSTANT)
+    Q_PROPERTY(QString name READ name NOTIFY nameChanged)
 
     /**
      * @brief The full path to the icon to be shown for the item.
      */
-    Q_PROPERTY(QString icon READ icon CONSTANT)
+    Q_PROPERTY(QString icon READ icon NOTIFY iconChanged)
+
+    /**
+     * @brief The keywords for this item.
+     */
+    Q_PROPERTY(QStringList keywords READ keywords NOTIFY keywordsChanged)
 
     /**
      * @brief A flag whether the item is pinned or not
@@ -137,6 +139,7 @@ public:
     virtual QString appId() const = 0;
     virtual QString name() const = 0;
     virtual QString icon() const = 0;
+    virtual QStringList keywords() const = 0;
     virtual bool pinned() const = 0;
     virtual bool running() const = 0;
     virtual bool recent() const = 0;
@@ -151,6 +154,7 @@ public:
 Q_SIGNALS:
     void nameChanged(const QString &name);
     void iconChanged(const QString &icon);
+    void keywordsChanged(const QStringList &keywords);
     void pinnedChanged(bool pinned);
     void runningChanged(bool running);
     void recentChanged(bool running);

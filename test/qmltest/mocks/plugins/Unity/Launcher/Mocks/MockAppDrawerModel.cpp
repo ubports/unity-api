@@ -22,24 +22,34 @@ using namespace unity::shell::launcher;
 MockAppDrawerModel::MockAppDrawerModel(QObject* parent): AppDrawerModelInterface(parent)
 {
     MockLauncherItem *item = new MockLauncherItem("phone-app", "/usr/share/applications/phone-app.desktop", "Phone", "phone-app", this);
+    item->setKeywords({"keyword1", "keyword2"});
     m_list.append(item);
     item = new MockLauncherItem("camera-app", "/usr/share/applications/camera-app.desktop", "Camera", "camera", this);
+    item->setKeywords({"keyword1", "keyword2"});
     m_list.append(item);
     item = new MockLauncherItem("gallery-app", "/usr/share/applications/gallery-app.desktop", "Gallery", "gallery", this);
+    item->setKeywords({"keyword1", "keyword2"});
     m_list.append(item);
     item = new MockLauncherItem("facebook-webapp", "/usr/share/applications/facebook-webapp.desktop", "Facebook", "facebook", this);
+    item->setKeywords({"keyword1", "keyword2"});
     m_list.append(item);
     item = new MockLauncherItem("webbrowser-app", "/usr/share/applications/webbrowser-app.desktop", "Browser", "browser", this);
+    item->setKeywords({"keyword1", "keyword2"});
     m_list.append(item);
     item = new MockLauncherItem("twitter-webapp", "/usr/share/applications/twitter-webapp.desktop", "Twitter", "twitter", this);
+    item->setKeywords({"keyword1", "keyword2"});
     m_list.append(item);
     item = new MockLauncherItem("gmail-webapp", "/usr/share/applications/gmail-webapp.desktop", "GMail", "gmail", this);
+    item->setKeywords({"keyword1", "keyword2"});
     m_list.append(item);
     item = new MockLauncherItem("ubuntu-weather-app", "/usr/share/applications/ubuntu-weather-app.desktop", "Weather", "weather", this);
+    item->setKeywords({"keyword1", "keyword2"});
     m_list.append(item);
     item = new MockLauncherItem("notes-app", "/usr/share/applications/notes-app.desktop", "Notepad", "notepad", this);
+    item->setKeywords({"keyword1", "keyword2"});
     m_list.append(item);
     item = new MockLauncherItem("ubuntu-calendar-app", "/usr/share/applications/ubuntu-calendar-app.desktop","Calendar", "calendar", this);
+    item->setKeywords({"keyword1", "keyword2"});
     m_list.append(item);
 }
 
@@ -69,6 +79,8 @@ QVariant MockAppDrawerModel::data(const QModelIndex& index, int role) const
         return item->name();
     case RoleIcon:
         return item->icon();
+    case RoleKeywords:
+        return item->keywords();
     case RoleUsage:
         return 1;
     }
