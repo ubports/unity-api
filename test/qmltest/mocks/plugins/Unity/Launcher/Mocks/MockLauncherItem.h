@@ -22,6 +22,8 @@
 
 #include <LauncherItemInterface.h>
 
+#include <QStringList>
+
 using namespace unity::shell::launcher;
 
 class UNITY_API MockLauncherItem: public LauncherItemInterface
