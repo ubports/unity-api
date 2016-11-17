@@ -145,66 +145,74 @@ TEST(IniParser, failingQueries)
     try
     {
         conf.get_string("foo", "bar");
+        FAIL();
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Key file does not have group 'foo'"));
+        // LogicException is a good thing
     }
     try
     {
         conf.get_locale_string("foo", "bar");
+        FAIL();
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Key file does not have group 'foo'"));
+        // LogicException is a good thing
     }
     try
     {
         conf.get_int("foo", "bar");
+        FAIL();
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Key file does not have group 'foo'"));
+        // LogicException is a good thing
     }
     try
     {
         conf.get_int("first", "doublevalue");
+        FAIL();
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Key file contains key 'doublevalue' in group 'first' which has a value that cannot be interpreted."));
+        // LogicException is a good thing
     }
     try
     {
         conf.get_boolean("foo", "bar");
+        FAIL();
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Key file does not have group 'foo'"));
+        // LogicException is a good thing
     }
     try
     {
         conf.get_int_array("first", "array");
+        FAIL();
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Value 'foo' cannot be interpreted as a number."));
+        // LogicException is a good thing
     }
     try
     {
         conf.get_int_array("second", "doublearray");
+        FAIL();
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Value '4.5' cannot be interpreted as a number."));
+        // LogicException is a good thing
     }
     try
     {
         conf.get_boolean_array("first", "array");
+        FAIL();
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Value 'foo' cannot be interpreted as a boolean."));
+        // LogicException is a good thing
     }
 }
 
