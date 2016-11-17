@@ -33,6 +33,7 @@ namespace application
 {
 
 class ApplicationInfoInterface;
+class MirSurfaceInterface;
 
 /**
  * @brief The Application manager
@@ -133,6 +134,11 @@ public:
      * @returns The item, or null if not found.
      */
     Q_INVOKABLE virtual unity::shell::application::ApplicationInfoInterface *findApplication(const QString &appId) const = 0;
+
+    /*
+     * @brief Returns the AplicationInfo with the given surface
+     */
+    virtual ApplicationInfoInterface *findApplicationWithSurface(MirSurfaceInterface* surface) = 0;
 
     /**
      * @brief Request to focus a given application

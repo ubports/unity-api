@@ -264,6 +264,11 @@ Q_SIGNALS:
      * @brief Emitted in response to a requestFocus() call
      */
     void focusRequested();
+
+    /**
+     * @brief Emitted when close() is called
+     */
+    void closeRequested();
 };
 
 } // namespace application
