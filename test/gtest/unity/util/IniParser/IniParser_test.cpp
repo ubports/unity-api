@@ -142,14 +142,78 @@ TEST(IniParser, failingQueries)
 {
     IniParser conf(INI_FILE);
 
-    EXPECT_THROW(conf.get_string("foo", "bar"), LogicException);
-    EXPECT_THROW(conf.get_locale_string("foo", "bar"), LogicException);
-    EXPECT_THROW(conf.get_int("foo", "bar"), LogicException);
-    EXPECT_THROW(conf.get_int("first", "doublevalue"), LogicException);
-    EXPECT_THROW(conf.get_boolean("foo", "bar"), LogicException);
-    EXPECT_THROW(conf.get_int_array("first", "array"), LogicException);
-    EXPECT_THROW(conf.get_int_array("second", "doublearray"), LogicException);
-    EXPECT_THROW(conf.get_boolean_array("first", "array"), LogicException);
+    try
+    {
+        conf.get_string("foo", "bar");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get string value"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: foo"));
+    }
+    try
+    {
+        conf.get_locale_string("foo", "bar");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get localized string value"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: foo"));
+    }
+    try
+    {
+        conf.get_int("foo", "bar");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get integer value"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: foo"));
+    }
+    try
+    {
+        conf.get_int("first", "doublevalue");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get integer value"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: first"));
+    }
+    try
+    {
+        conf.get_boolean("foo", "bar");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get boolean value"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: foo"));
+    }
+    try
+    {
+        conf.get_int_array("first", "array");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get integer array"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: first"));
+    }
+    try
+    {
+        conf.get_int_array("second", "doublearray");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get integer array"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: second"));
+    }
+    try
+    {
+        conf.get_boolean_array("first", "array");
+    }
+    catch (const LogicException& e)
+    {
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get boolean array"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: first"));
+    }
 }
 
 TEST(IniParser, writeValues)
