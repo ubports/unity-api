@@ -142,78 +142,14 @@ TEST(IniParser, failingQueries)
 {
     IniParser conf(INI_FILE);
 
-    try
-    {
-        conf.get_string("foo", "bar");
-        FAIL();
-    }
-    catch (const LogicException& e)
-    {
-        // LogicException is a good thing
-    }
-    try
-    {
-        conf.get_locale_string("foo", "bar");
-        FAIL();
-    }
-    catch (const LogicException& e)
-    {
-        // LogicException is a good thing
-    }
-    try
-    {
-        conf.get_int("foo", "bar");
-        FAIL();
-    }
-    catch (const LogicException& e)
-    {
-        // LogicException is a good thing
-    }
-    try
-    {
-        conf.get_int("first", "doublevalue");
-        FAIL();
-    }
-    catch (const LogicException& e)
-    {
-        // LogicException is a good thing
-    }
-    try
-    {
-        conf.get_boolean("foo", "bar");
-        FAIL();
-    }
-    catch (const LogicException& e)
-    {
-        // LogicException is a good thing
-    }
-    try
-    {
-        conf.get_int_array("first", "array");
-        FAIL();
-    }
-    catch (const LogicException& e)
-    {
-        // LogicException is a good thing
-    }
-    try
-    {
-        conf.get_int_array("second", "doublearray");
-        FAIL();
-    }
-    catch (const LogicException& e)
-    {
-        // LogicException is a good thing
-    }
-    try
-    {
-        conf.get_boolean_array("first", "array");
-        FAIL();
-    }
-    catch (const LogicException& e)
-    {
-        // LogicException is a good thing
-    }
+    EXPECT_THROW(conf.get_string("foo", "bar"), LogicException);
+    EXPECT_THROW(conf.get_locale_string("foo", "bar"), LogicException);
+    EXPECT_THROW(conf.get_int("foo", "bar"), LogicException);
+    EXPECT_THROW(conf.get_int("first", "doublevalue"), LogicException);
+    EXPECT_THROW(conf.get_boolean("foo", "bar"), LogicException);
+    EXPECT_THROW(conf.get_int_array("first", "array"), LogicException);
+    EXPECT_THROW(conf.get_int_array("second", "doublearray"), LogicException);
+    EXPECT_THROW(conf.get_boolean_array("first", "array"), LogicException);
 }
 
 TEST(IniParser, writeValues)
