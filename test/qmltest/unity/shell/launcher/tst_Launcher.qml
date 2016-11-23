@@ -168,6 +168,7 @@ Item {
                 { tag: "Model.roles[label]", role: "label", type: "string" },
                 { tag: "Model.roles[icon]", role: "icon", type: "string" },
                 { tag: "Model.roles[clickable]", role: "clickable", type: "boolean" },
+                { tag: "Model.roles[hasSeparator]", role: "hasSeparator", type: "boolean" }
             ];
         }
 

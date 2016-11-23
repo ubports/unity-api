@@ -1,3 +1,9 @@
+unity-api (7.120) UNRELEASED; urgency=medium
+
+  * Add hasSeparator role to quicklistModel.
+
+ -- Andrea Azzarone <andrea.azzarone@canonical.com>  Fri, 28 Oct 2016 13:48:45 +0200
+
 unity-api (7.119+16.10.20160909-0ubuntu1) yakkety; urgency=medium
 
   [ Daniel d'Andrada ]
