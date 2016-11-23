@@ -148,7 +148,8 @@ TEST(IniParser, failingQueries)
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Key file does not have group 'foo'"));
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get string value"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: foo"));
     }
     try
     {
@@ -156,7 +157,8 @@ TEST(IniParser, failingQueries)
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Key file does not have group 'foo'"));
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get localized string value"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: foo"));
     }
     try
     {
@@ -164,7 +166,8 @@ TEST(IniParser, failingQueries)
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Key file does not have group 'foo'"));
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get integer value"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: foo"));
     }
     try
     {
@@ -172,7 +175,8 @@ TEST(IniParser, failingQueries)
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Key file contains key 'doublevalue' in group 'first' which has a value that cannot be interpreted."));
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get integer value"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: first"));
     }
     try
     {
@@ -180,7 +184,8 @@ TEST(IniParser, failingQueries)
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Key file does not have group 'foo'"));
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get boolean value"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: foo"));
     }
     try
     {
@@ -188,7 +193,8 @@ TEST(IniParser, failingQueries)
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Value 'foo' cannot be interpreted as a number."));
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get integer array"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: first"));
     }
     try
     {
@@ -196,7 +202,8 @@ TEST(IniParser, failingQueries)
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Value '4.5' cannot be interpreted as a number."));
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get integer array"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: second"));
     }
     try
     {
@@ -204,7 +211,8 @@ TEST(IniParser, failingQueries)
     }
     catch (const LogicException& e)
     {
-        EXPECT_NE(string::npos, string(e.what()).find("Value 'foo' cannot be interpreted as a boolean."));
+        EXPECT_NE(string::npos, string(e.what()).find("unity::LogicException: Could not get boolean array"));
+        EXPECT_NE(string::npos, string(e.what()).find("group: first"));
     }
 }
 
