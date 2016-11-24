@@ -213,22 +213,17 @@ public:
     /// @endcond
 
     /**
-     * @brief Requests focus for this surface
-     *
-     * Causes the emission of focusRequested()
-     */
-    Q_INVOKABLE virtual void requestFocus() = 0;
-
-    /**
      * @brief Sends a close request
      *
      */
     Q_INVOKABLE virtual void close() = 0;
 
     /**
-     * @brief Raises this surface to be the first/top one among its siblings
+     * @brief Activates this surface
+     *
+     * It will get focused and raised
      */
-    Q_INVOKABLE virtual void raise() = 0;
+    Q_INVOKABLE virtual void activate() = 0;
 
 public Q_SLOTS:
     /**
@@ -262,6 +257,8 @@ Q_SIGNALS:
 
     /**
      * @brief Emitted in response to a requestFocus() call
+     *
+     * If shell agrees with it, it should call activate() on this surface
      */
     void focusRequested();
 
