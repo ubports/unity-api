@@ -4,6 +4,17 @@ unity-api (8.0) UNRELEASED; urgency=medium
 
  -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Tue, 01 Nov 2016 17:25:38 -0200
 
+unity-api (7.120+17.04.20161123-0ubuntu1) zesty; urgency=medium
+
+  [ Andrea Azzarone ]
+  * Add hasSeparator role to quicklistModel.
+
+  [ Marcus Tomlinson ]
+  * Don't rely on glib error message strings in IniParser_test (LP:
+    #1642673)
+
+ -- Andrea Cimitan <andrea.cimitan@canonical.com>  Wed, 23 Nov 2016 12:11:04 +0000
+
 unity-api (7.119+16.10.20160909-0ubuntu1) yakkety; urgency=medium
 
   [ Daniel d'Andrada ]
