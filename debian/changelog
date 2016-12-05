@@ -1,8 +1,8 @@
-unity-api (7.121) UNRELEASED; urgency=medium
+unity-api (7.121+17.04.20161205-0ubuntu1) zesty; urgency=medium
 
   * Add AppDrawerModelInterface
 
- -- Michael Zanetti <michael.zanetti@canonical.com>  Thu, 10 Nov 2016 19:14:25 +0100
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Mon, 05 Dec 2016 15:20:31 +0000
 
 unity-api (7.120+17.04.20161123-0ubuntu1) zesty; urgency=medium
 
