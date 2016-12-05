@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Canonical Ltd.
+ * Copyright 2013-2016 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -12,9 +12,6 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Authors:
- *      Michael Zanetti <michael.zanetti@canonical.com>
  */
 
 import QtQuick 2.0
@@ -62,6 +59,15 @@ Item {
         Repeater {
             id: quickListRepeater
             model: LauncherModel.get(0).quickList
+            delegate: Item {
+                property var roles: model
+            }
+        }
+
+
+        Repeater {
+            id: appDrawerRepeater
+            model: AppDrawerModel {}
             delegate: Item {
                 property var roles: model
             }
@@ -138,6 +144,7 @@ Item {
                 { tag: "Item.properties[appId]", constant: "appId", type: "string" },
                 { tag: "Item.properties[name]", constant: "name", type: "string" },
                 { tag: "Item.properties[icon]", constant: "icon", type: "string" },
+                { tag: "Item.properties[keywords]", constant: "keywords", type: "object" },
                 { tag: "Item.properties[pinned]", property: "pinned", type: "boolean" },
                 { tag: "Item.properties[recent]", property: "recent", type: "boolean" },
                 { tag: "Item.properties[running]", property: "running", type: "boolean" },
@@ -176,6 +183,27 @@ Item {
             name = "QuickListModel"
             try {
                 object = quickListRepeater.itemAt(0).roles;
+            } catch(err) {
+                object = undefined;
+            }
+
+            verifyData(data);
+        }
+
+        function test_appdrawer_model_roles_data() {
+            return [
+                { tag: "Model.roles[appId]", role: "appId", type: "string" },
+                { tag: "Model.roles[name]", role: "name", type: "string" },
+                { tag: "Model.roles[icon]", role: "icon", type: "string" },
+                { tag: "Model.roles[keywords]", role: "keywords", type: "object" },
+                { tag: "Model.roles[usage]", role: "usage", type: "number" },
+            ];
+        }
+
+        function test_appdrawer_model_roles(data) {
+            name = "AppDrawerModel"
+            try {
+                object = appDrawerRepeater.itemAt(0).roles;
             } catch(err) {
                 object = undefined;
             }

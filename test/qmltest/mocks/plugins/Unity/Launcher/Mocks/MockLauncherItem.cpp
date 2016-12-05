@@ -61,6 +61,20 @@ QString MockLauncherItem::icon() const
     return m_icon;
 }
 
+QStringList MockLauncherItem::keywords() const
+{
+    return m_keywords;
+}
+
+void MockLauncherItem::setKeywords(const QStringList &keywords)
+{
+    if (m_keywords != keywords)
+    {
+        m_keywords = keywords;
+        Q_EMIT keywordsChanged(m_keywords);
+    }
+}
+
 bool MockLauncherItem::pinned() const
 {
     return m_pinned;
