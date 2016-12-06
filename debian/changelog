@@ -1,8 +1,19 @@
-unity-api (7.120) UNRELEASED; urgency=medium
+unity-api (8.1) UNRELEASED; urgency=medium
 
   * Added Mir::currentKeymap
 
  -- Lukáš Tinkl <lukas.tinkl@canonical.com>  Fri, 30 Sep 2016 13:20:00 +0200
+
+unity-api (7.120+17.04.20161123-0ubuntu1) zesty; urgency=medium
+
+  [ Andrea Azzarone ]
+  * Add hasSeparator role to quicklistModel.
+
+  [ Marcus Tomlinson ]
+  * Don't rely on glib error message strings in IniParser_test (LP:
+    #1642673)
+
+ -- Andrea Cimitan <andrea.cimitan@canonical.com>  Wed, 23 Nov 2016 12:11:04 +0000
 
 unity-api (7.119+16.10.20160909-0ubuntu1) yakkety; urgency=medium
 
