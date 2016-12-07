@@ -44,7 +44,7 @@ public:
 
     Q_INVOKABLE unity::shell::application::ApplicationInfoInterface *findApplication(const QString &appId) const;
 
-    ApplicationInfoInterface *findApplicationWithSurface(MirSurfaceInterface*) override { return nullptr; }
+    ApplicationInfoInterface *findApplicationWithSurface(MirSurfaceInterface*) const override { return nullptr; }
 
     Q_INVOKABLE bool requestFocusApplication(const QString &appId);
 
