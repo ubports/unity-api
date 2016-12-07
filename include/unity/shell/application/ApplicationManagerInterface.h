@@ -138,7 +138,7 @@ public:
     /*
      * @brief Returns the AplicationInfo with the given surface
      */
-    virtual ApplicationInfoInterface *findApplicationWithSurface(MirSurfaceInterface* surface) = 0;
+    virtual ApplicationInfoInterface *findApplicationWithSurface(MirSurfaceInterface* surface) const = 0;
 
     /**
      * @brief Request to focus a given application
