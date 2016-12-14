@@ -107,11 +107,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pedantic -Wall -Wextra")
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-permissive")
 
-# if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     if (NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS "5.0.0")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wsuggest-override" )
     endif()
-# endif()
 endif()
 
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "release" OR "${CMAKE_BUILD_TYPE}" STREQUAL "relwithdebinfo")
