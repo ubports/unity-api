@@ -166,7 +166,7 @@ public:
     virtual bool onlyPinned() const = 0;
     virtual void setOnlyPinned(bool onlyPinned) = 0;
 
-    virtual QHash<int, QByteArray> roleNames() const
+    QHash<int, QByteArray> roleNames() const override
     {
         return m_roleNames;
     }

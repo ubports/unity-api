@@ -111,7 +111,7 @@ void c()
 class E : public std::exception, public nested_exception
 {
 public:
-    virtual char const* what() const noexcept
+    char const* what() const noexcept override
     {
         return "E";
     }

@@ -32,40 +32,40 @@ class UNITY_API MockLauncherItem: public LauncherItemInterface
 public:
     MockLauncherItem(const QString &appId, const QString& desktopFile, const QString& name, const QString& icon, QObject* parent = 0);
 
-    QString appId() const;
+    QString appId() const override;
     QString desktopFile() const;
-    QString name() const;
-    QString icon() const;
+    QString name() const override;
+    QString icon() const override;
 
-    QStringList keywords() const;
+    QStringList keywords() const override;
     void setKeywords(const QStringList &keywords);
 
-    bool pinned() const;
+    bool pinned() const override;
     void setPinned(bool pinned);
 
-    bool running() const;
+    bool running() const override;
     void setRunning(bool running);
 
-    bool recent() const;
+    bool recent() const override;
     void setRecent(bool recent);
 
-    int progress() const;
+    int progress() const override;
     void setProgress(int progress);
 
-    int count() const;
+    int count() const override;
     void setCount(int count);
 
-    bool countVisible() const;
+    bool countVisible() const override;
     void setCountVisible(bool countVisible);
 
-    bool focused() const;
+    bool focused() const override;
     void setFocused(bool focused);
 
-    bool alerting() const;
+    bool alerting() const override;
 
     int surfaceCount() const override;
 
-    unity::shell::launcher::QuickListModelInterface *quickList() const;
+    unity::shell::launcher::QuickListModelInterface *quickList() const override;
 
 private:
     QString m_appId;

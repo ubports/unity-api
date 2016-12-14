@@ -50,9 +50,9 @@ class UNITY_API MockSource : public SourceInterface
 public:
     explicit MockSource(QObject *parent = 0);
 
-    ModelInterface* model() const;
+    ModelInterface* model() const override;
 
-    void setModel(ModelInterface* model);
+    void setModel(ModelInterface* model) override;
 
     Q_INVOKABLE void send(QVariantMap data);
 
