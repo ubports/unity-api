@@ -58,6 +58,16 @@ class MirSurfaceInterface : public QObject
     Q_PROPERTY(QString persistentId READ persistentId CONSTANT)
 
     /**
+     * @brief Position of the current surface buffer, in pixels.
+     */
+    Q_PROPERTY(QPoint position READ position NOTIFY positionChanged)
+
+    /**
+     * @brief Requested position of the current surface buffer, in pixels.
+     */
+    Q_PROPERTY(QPoint requestedPosition READ requestedPosition WRITE setRequestedPosition NOTIFY requestedPositionChanged)
+
+    /**
      * @brief Size of the current surface buffer, in pixels.
      */
     Q_PROPERTY(QSize size READ size NOTIFY sizeChanged)
@@ -65,7 +75,7 @@ class MirSurfaceInterface : public QObject
     /**
      * @brief State of the surface
      */
-    Q_PROPERTY(Mir::State state READ state WRITE setState NOTIFY stateChanged)
+    Q_PROPERTY(Mir::State state READ state NOTIFY stateChanged)
 
     /**
      * @brief True if it has a mir client bound to it.
@@ -165,12 +175,13 @@ public:
 
     virtual QString persistentId() const = 0;
 
+    virtual QPoint position() const = 0;
+
     virtual QSize size() const = 0;
     virtual void resize(int width, int height) = 0;
     virtual void resize(const QSize &size) = 0;
 
     virtual Mir::State state() const = 0;
-    virtual void setState(Mir::State qmlState) = 0;
 
     virtual bool live() const = 0;
 
@@ -196,14 +207,10 @@ public:
     virtual QRect inputBounds() const = 0;
 
     virtual bool confinesMousePointer() const = 0;
-    /// @endcond
 
-    /**
-     * @brief Requests focus for this surface
-     *
-     * Causes the emission of focusRequested()
-     */
-    Q_INVOKABLE virtual void requestFocus() = 0;
+    virtual QPoint requestedPosition() const = 0;
+    virtual void setRequestedPosition(const QPoint &) = 0;
+    /// @endcond
 
     /**
      * @brief Sends a close request
@@ -212,9 +219,17 @@ public:
     Q_INVOKABLE virtual void close() = 0;
 
     /**
-     * @brief Raises this surface to be the first/top one among its siblings
+     * @brief Activates this surface
+     *
+     * It will get focused and raised
      */
-    Q_INVOKABLE virtual void raise() = 0;
+    Q_INVOKABLE virtual void activate() = 0;
+
+public Q_SLOTS:
+    /**
+     * @brief Requests a change to the specified state
+     */
+    virtual void requestState(Mir::State state) = 0;
 
 Q_SIGNALS:
     /// @cond
@@ -223,6 +238,8 @@ Q_SIGNALS:
     void visibleChanged(bool visible);
     void stateChanged(Mir::State value);
     void orientationAngleChanged(Mir::OrientationAngle value);
+    void positionChanged(QPoint position);
+    void requestedPositionChanged(QPoint position);
     void sizeChanged(const QSize &value);
     void nameChanged(const QString &name);
     void minimumWidthChanged(int value);
@@ -240,8 +257,15 @@ Q_SIGNALS:
 
     /**
      * @brief Emitted in response to a requestFocus() call
+     *
+     * If shell agrees with it, it should call activate() on this surface
      */
     void focusRequested();
+
+    /**
+     * @brief Emitted when close() is called
+     */
+    void closeRequested();
 };
 
 } // namespace application
