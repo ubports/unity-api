@@ -16,11 +16,13 @@ set(LauncherMocks_SOURCES
     ${CMAKE_SOURCE_DIR}/include/unity/shell/launcher/LauncherModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/launcher/LauncherItemInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/launcher/QuickListModelInterface.h
+    ${CMAKE_SOURCE_DIR}/include/unity/shell/launcher/AppDrawerModelInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/application/ApplicationManagerInterface.h
     ${CMAKE_SOURCE_DIR}/include/unity/shell/application/ApplicationInfoInterface.h
     Mocks/MockLauncherModel.cpp
     Mocks/MockLauncherItem.cpp
     Mocks/MockQuickListModel.cpp
+    Mocks/MockAppDrawerModel.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../Application/Mocks/MockApplicationManager.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../Application/Mocks/MockApplicationInfo.cpp
 )
