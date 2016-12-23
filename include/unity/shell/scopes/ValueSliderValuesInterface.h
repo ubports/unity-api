@@ -31,13 +31,12 @@ class UNITY_API ValueSliderValuesInterface : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_ENUMS(SliderValueRoles)
-
 public:
     enum Roles {
         RoleValue = Qt::UserRole + 1,
         RoleLabel
     };
+    Q_ENUM(Roles)
 
     QHash<int, QByteArray> roleNames() const override
     {
