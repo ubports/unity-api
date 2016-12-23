@@ -36,8 +36,6 @@ class UNITY_API MockModel : public ModelInterface
 {
     Q_OBJECT
 
-    Q_ENUMS(RoleEnum)
-
 public:
     MockModel(QObject* parent = 0);
 
@@ -68,6 +66,7 @@ public:
         Hints,
         Actions
     };
+    Q_ENUM(RoleEnum)
 
 private:
     bool m_confirmationPlaceholder;

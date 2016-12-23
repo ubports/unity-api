@@ -38,8 +38,6 @@ class UNITY_API CategoriesInterface : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_ENUMS(Roles)
-
 protected:
     /// @cond
     explicit CategoriesInterface(QObject* parent = 0) : QAbstractListModel(parent) { }
@@ -60,6 +58,7 @@ public:
         RoleResults,
         RoleCount
     };
+    Q_ENUM(Roles)
 
     /**
      * @brief Override definition of a category by passing a custom JSON string.

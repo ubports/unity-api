@@ -42,8 +42,6 @@ class UNITY_API Urgency : public QObject
 {
     Q_OBJECT
 
-    Q_ENUMS(UrgencyEnum)
-
 public:
     /**
     \brief NotificationInterface's urgency enumeration.
@@ -57,6 +55,7 @@ public:
         Normal,         /**< Displayed before Low, after Critical. */
         Critical        /**< Displayed before Low and Normal. */
     };
+    Q_ENUM(UrgencyEnum)
 };
 
 
@@ -67,8 +66,6 @@ public:
 class UNITY_API Type : public QObject
 {
     Q_OBJECT
-
-    Q_ENUMS(TypeEnum)
 
 public:
     /**
@@ -85,6 +82,7 @@ public:
         SnapDecision,   /**< Snap decision (multi-button). */
         Placeholder     /**< Non-visible placeholder of default size. */
     };
+    Q_ENUM(TypeEnum)
 };
 
 

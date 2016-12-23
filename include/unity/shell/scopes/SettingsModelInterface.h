@@ -32,8 +32,6 @@ class UNITY_API SettingsModelInterface: public QAbstractListModel
 {
 Q_OBJECT
 
-Q_ENUMS(Roles)
-
 /**
  * @brief Integer representing the number of setting elements in the model.
  */
@@ -63,6 +61,7 @@ public:
         RoleProperties,
         RoleValue
     };
+    Q_ENUM(Roles)
 
     // @cond
     QHash<int, QByteArray> roleNames() const override
