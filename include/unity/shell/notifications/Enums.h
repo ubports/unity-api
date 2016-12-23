@@ -94,8 +94,6 @@ class UNITY_API Hint : public QObject
 {
     Q_OBJECT
 
-    Q_FLAGS(HintEnum)
-
 public:
     /**
     \brief NotificationInterface's hint flags.
@@ -108,6 +106,7 @@ public:
         ButtonTint = 1 << 1,    /**< Use a colour tint on the positive button in a snap decision. */
         IconOnly   = 1 << 2     /**< Only display the icon, no summary or body. */
     };
+    Q_FLAG(HintEnum)
 
     Q_DECLARE_FLAGS(Hints, HintEnum)
 };
