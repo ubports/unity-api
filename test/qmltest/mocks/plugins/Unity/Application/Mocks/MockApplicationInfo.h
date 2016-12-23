@@ -29,6 +29,8 @@ class UNITY_API MockApplicationInfo: public ApplicationInfoInterface
 public:
     MockApplicationInfo(const QString &appId, const QString& name, const QString& comment, const QUrl& icon, QObject* parent = 0);
 
+    void close() override {}
+
     QString appId() const override;
     QString name() const override;
     QString comment() const override;

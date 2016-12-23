@@ -56,7 +56,7 @@ class MirSurfaceItemInterface : public QQuickItem
     /**
      * @brief State of the given surface or Mir.UnknownState if no surface is set
      */
-    Q_PROPERTY(Mir::State surfaceState READ surfaceState WRITE setSurfaceState NOTIFY surfaceStateChanged)
+    Q_PROPERTY(Mir::State surfaceState READ surfaceState NOTIFY surfaceStateChanged)
 
     /**
      * @brief Name of the given surface or an empty string if no surface is set
@@ -128,7 +128,6 @@ public:
     virtual bool live() const = 0;
 
     virtual Mir::State surfaceState() const = 0;
-    virtual void setSurfaceState(Mir::State) = 0;
 
     virtual Mir::OrientationAngle orientationAngle() const = 0;
     virtual void setOrientationAngle(Mir::OrientationAngle angle) = 0;
