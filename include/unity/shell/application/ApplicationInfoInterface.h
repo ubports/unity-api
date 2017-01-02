@@ -282,6 +282,11 @@ public:
         RequestedSuspended = Suspended
     };
 
+    /**
+     * @brief Closes the application
+     */
+    virtual void close() = 0;
+
     /// @cond
     virtual ~ApplicationInfoInterface() {}
 

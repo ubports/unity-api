@@ -4,6 +4,12 @@ unity-api (8.1) UNRELEASED; urgency=medium
 
  -- Lukáš Tinkl <lukas.tinkl@canonical.com>  Fri, 30 Sep 2016 13:20:00 +0200
 
+unity-api (8.0+17.04.20161215-0ubuntu1) zesty; urgency=medium
+
+  * unity::shel::application - changes for the miral way of doing things
+
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Thu, 15 Dec 2016 16:16:07 +0000
+
 unity-api (7.121+17.04.20161205-0ubuntu1) zesty; urgency=medium
 
   * Add AppDrawerModelInterface

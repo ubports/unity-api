@@ -70,9 +70,15 @@ public:
         RestoredState,
         MinimizedState,
         MaximizedState,
-        VertMaximizedState,
         FullscreenState,
+        MaximizedLeftState,
+        MaximizedRightState,
         HorizMaximizedState,
+        VertMaximizedState,
+        MaximizedTopLeftState,
+        MaximizedTopRightState,
+        MaximizedBottomLeftState,
+        MaximizedBottomRightState,
         HiddenState,
     };
 
@@ -121,7 +127,10 @@ Q_SIGNALS:
     /// @endcond
 };
 
+Q_DECLARE_METATYPE(Mir::Type)
+Q_DECLARE_METATYPE(Mir::State)
 Q_DECLARE_METATYPE(Mir::OrientationAngle)
 Q_DECLARE_METATYPE(Mir::ShellChrome)
+Q_DECLARE_METATYPE(Mir::FormFactor)
 
 #endif // UNITY_SHELL_APPLICATION_MIR_H
