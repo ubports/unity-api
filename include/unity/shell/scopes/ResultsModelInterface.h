@@ -35,8 +35,6 @@ class UNITY_API ResultsModelInterface : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_ENUMS(Roles)
-
     /**
      * @brief Id of associated category.
      */
@@ -74,6 +72,7 @@ public:
         RoleQuickPreviewData, ///< Data for UI quick previewing. In case of audio should contain uri and duration
         RoleSocialActions  ///< Data for social actions (in-card actions such as "+1").
     };
+    Q_ENUM(Roles)
 
     // @cond
     virtual QString categoryId() const = 0;

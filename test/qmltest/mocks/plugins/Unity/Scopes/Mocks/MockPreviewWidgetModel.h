@@ -22,7 +22,7 @@
 
 #include <QSharedPointer>
 
-class MockPreviewData;
+struct MockPreviewData;
 
 class MockPreviewWidgetModel : public unity::shell::scopes::PreviewWidgetModelInterface
 {

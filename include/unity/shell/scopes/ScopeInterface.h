@@ -43,8 +43,6 @@ class UNITY_API ScopeInterface : public QObject
 {
     Q_OBJECT
 
-    Q_ENUMS(Status)
-
     /**
      * @brief Id of the scope.
      */
@@ -181,6 +179,7 @@ public:
         NoLocationData,                 // No location data available
         Unknown,                        // A code unknown to the run-time was used
     };
+    Q_ENUM(Status)
 
     // @cond
     virtual QString id() const = 0;

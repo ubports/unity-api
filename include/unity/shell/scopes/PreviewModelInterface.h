@@ -38,8 +38,6 @@ class UNITY_API PreviewModelInterface : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_ENUMS(Roles)
-
     /**
      * @brief Number of column models this preview should expose.
      *
@@ -75,6 +73,7 @@ public:
     enum Roles {
         RoleColumnModel
     };
+    Q_ENUM(Roles)
 
     // @cond
     virtual void setWidgetColumnCount(int count) = 0;

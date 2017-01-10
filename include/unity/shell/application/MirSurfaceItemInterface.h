@@ -41,8 +41,6 @@ class MirSurfaceItemInterface : public QQuickItem
 {
     Q_OBJECT
 
-    Q_ENUMS(FillMode)
-
     /**
      * @brief The surface to be displayed
      */
@@ -118,6 +116,7 @@ public:
         Stretch,
         PadOrCrop
     };
+    Q_ENUM(FillMode)
 
     /// @cond
     MirSurfaceItemInterface(QQuickItem *parent = 0) : QQuickItem(parent) {}
