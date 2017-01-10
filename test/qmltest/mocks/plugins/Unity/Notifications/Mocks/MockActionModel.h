@@ -35,9 +35,9 @@ class UNITY_API MockActionModel : public QAbstractListModel
 public:
     explicit MockActionModel(QObject *parent = 0);
 
-    int rowCount(const QModelIndex& parent) const;
-    QVariant data(const QModelIndex &index, int role) const;
-    QHash<int, QByteArray> roleNames() const;
+    int rowCount(const QModelIndex& parent) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
+    QHash<int, QByteArray> roleNames() const override;
 
     enum RoleEnum
     {

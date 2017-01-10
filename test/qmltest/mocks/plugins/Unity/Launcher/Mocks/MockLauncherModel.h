@@ -35,19 +35,19 @@ public:
     MockLauncherModel(QObject* parent = 0);
     ~MockLauncherModel();
 
-    int rowCount(const QModelIndex& parent) const;
+    int rowCount(const QModelIndex& parent) const override;
 
-    QVariant data(const QModelIndex& index, int role) const;
+    QVariant data(const QModelIndex& index, int role) const override;
 
-    Q_INVOKABLE unity::shell::launcher::LauncherItemInterface *get(int index) const;
-    Q_INVOKABLE void move(int oldIndex, int newIndex);
-    Q_INVOKABLE void pin(const QString &appId, int index = -1);
-    Q_INVOKABLE void requestRemove(const QString &appId);
-    Q_INVOKABLE void quickListActionInvoked(const QString &appId, int actionIndex);
-    Q_INVOKABLE void setUser(const QString &user);
+    Q_INVOKABLE unity::shell::launcher::LauncherItemInterface *get(int index) const override;
+    Q_INVOKABLE void move(int oldIndex, int newIndex) override;
+    Q_INVOKABLE void pin(const QString &appId, int index = -1) override;
+    Q_INVOKABLE void requestRemove(const QString &appId) override;
+    Q_INVOKABLE void quickListActionInvoked(const QString &appId, int actionIndex) override;
+    Q_INVOKABLE void setUser(const QString &user) override;
 
-    unity::shell::application::ApplicationManagerInterface *applicationManager() const;
-    void setApplicationManager(unity::shell::application::ApplicationManagerInterface *applicationManager);
+    unity::shell::application::ApplicationManagerInterface *applicationManager() const override;
+    void setApplicationManager(unity::shell::application::ApplicationManagerInterface *applicationManager) override;
 
     bool onlyPinned() const override;
     void setOnlyPinned(bool onlyPinned) override;

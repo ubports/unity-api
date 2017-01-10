@@ -109,7 +109,7 @@ public:
     virtual ~Exception() noexcept;
     //! @endcond
 
-    virtual char const* what() const noexcept;
+    char const* what() const noexcept override;
 
     /**
     \brief Returns a <code>std::exception_ptr</code> to <code>this</code>.

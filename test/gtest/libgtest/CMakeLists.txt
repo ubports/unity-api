@@ -2,6 +2,9 @@ if (NOT DEFINED GTEST_ROOT)
     set(GTEST_ROOT /usr/src/gtest)
 endif()
 
+# Do not use -Wsuggest-override here, we can't fix gtest
+string (REPLACE "-Wsuggest-override" ""     CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+
 set(GTEST_SRC_DIR "${GTEST_ROOT}/src")
 set(GTEST_INCLUDE_DIR ${GTEST_ROOT})
 

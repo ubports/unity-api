@@ -41,16 +41,16 @@ class UNITY_API MockModel : public ModelInterface
 public:
     MockModel(QObject* parent = 0);
 
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    QHash<int, QByteArray> roleNames() const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QHash<int, QByteArray> roleNames() const override;
 
-    bool confirmationPlaceholder() const
+    bool confirmationPlaceholder() const override
     {
         return m_confirmationPlaceholder;
     }
 
-    void setConfirmationPlaceholder(bool confirmationPlaceholder);
+    void setConfirmationPlaceholder(bool confirmationPlaceholder) override;
 
     void add(MockNotification* notification);
 
