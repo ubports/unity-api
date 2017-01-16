@@ -41,8 +41,6 @@ class MirSurfaceItemInterface : public QQuickItem
 {
     Q_OBJECT
 
-    Q_ENUMS(FillMode)
-
     /**
      * @brief The surface to be displayed
      */
@@ -118,6 +116,7 @@ public:
         Stretch,
         PadOrCrop
     };
+    Q_ENUM(FillMode)
 
     /// @cond
     MirSurfaceItemInterface(QQuickItem *parent = 0) : QQuickItem(parent) {}
@@ -156,7 +155,7 @@ Q_SIGNALS:
     void surfaceStateChanged(Mir::State);
     void liveChanged(bool live);
     void orientationAngleChanged(Mir::OrientationAngle angle);
-    void surfaceChanged(MirSurfaceInterface*);
+    void surfaceChanged(unity::shell::application::MirSurfaceInterface* surface);
     void consumesInputChanged(bool value);
     void surfaceWidthChanged(int value);
     void surfaceHeightChanged(int value);

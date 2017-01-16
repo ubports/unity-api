@@ -32,7 +32,6 @@ namespace launcher {
 class UNITY_API AppDrawerModelInterface: public QAbstractListModel
 {
     Q_OBJECT
-    Q_ENUMS(Roles)
 public:
     /**
      * @brief The Roles supported by the model
@@ -46,6 +45,7 @@ public:
         RoleKeywords,
         RoleUsage
     };
+    Q_ENUM(Roles)
 
     /// @cond
     AppDrawerModelInterface(QObject* parent = nullptr): QAbstractListModel(parent) {}

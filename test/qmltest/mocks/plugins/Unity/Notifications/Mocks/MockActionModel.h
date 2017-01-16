@@ -30,20 +30,19 @@ class MockNotification;
 class UNITY_API MockActionModel : public QAbstractListModel
 {
     Q_OBJECT
-
-    Q_ENUMS(RoleEnum)
 public:
     explicit MockActionModel(QObject *parent = 0);
 
-    int rowCount(const QModelIndex& parent) const;
-    QVariant data(const QModelIndex &index, int role) const;
-    QHash<int, QByteArray> roleNames() const;
+    int rowCount(const QModelIndex& parent) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
+    QHash<int, QByteArray> roleNames() const override;
 
     enum RoleEnum
     {
         Label = Qt::DisplayRole,
         Id = Qt::UserRole
     };
+    Q_ENUM(RoleEnum)
 
 private:
     QHash<int, QByteArray> m_roles;

@@ -31,14 +31,13 @@ class UNITY_API OptionSelectorOptionsInterface : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_ENUMS(OptionRoles)
-
 public:
     enum Roles {
         RoleOptionId = Qt::UserRole + 1,
         RoleOptionLabel,
         RoleOptionChecked
     };
+    Q_ENUM(Roles)
 
     Q_INVOKABLE virtual void setChecked(int index, bool checked) = 0;
 

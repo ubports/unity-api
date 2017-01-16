@@ -37,8 +37,8 @@ public:
     virtual void activate(MirSurfaceInterface *surface) = 0;
 
 Q_SIGNALS:
-    void surfaceCreated(MirSurfaceInterface *surface);
-    void surfacesRaised(const QVector<MirSurfaceInterface*> &surfaces);
+    void surfaceCreated(unity::shell::application::MirSurfaceInterface *surface);
+    void surfacesRaised(const QVector<unity::shell::application::MirSurfaceInterface*> &surfaces);
     void modificationsStarted();
     void modificationsEnded();
 };

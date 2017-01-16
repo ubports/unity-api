@@ -39,8 +39,6 @@ class UNITY_API ScopesInterface : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_ENUMS(Roles)
-
     /**
      * @brief Boolean indicating whether asynchronous populating of the model finished.
      */
@@ -72,6 +70,7 @@ public:
         RoleId,
         RoleTitle
     };
+    Q_ENUM(Roles)
 
     /**
      * @brief Get ScopeInterface instance associated with a row.

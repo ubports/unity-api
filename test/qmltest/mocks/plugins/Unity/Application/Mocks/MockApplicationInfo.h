@@ -31,15 +31,15 @@ public:
 
     void close() override {}
 
-    QString appId() const;
-    QString name() const;
-    QString comment() const;
-    QUrl icon() const;
+    QString appId() const override;
+    QString name() const override;
+    QString comment() const override;
+    QUrl icon() const override;
 
-    ApplicationInfoInterface::State state() const;
+    ApplicationInfoInterface::State state() const override;
     void setState(ApplicationInfoInterface::State state);
 
-    bool focused() const;
+    bool focused() const override;
     void setFocused(bool focused);
 
     QString splashTitle() const override;

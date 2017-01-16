@@ -4,6 +4,18 @@ unity-api (8.1) UNRELEASED; urgency=medium
 
  -- Lukáš Tinkl <lukas.tinkl@canonical.com>  Fri, 30 Sep 2016 13:20:00 +0200
 
+unity-api (8.0+17.04.20170110.1-0ubuntu1) zesty; urgency=medium
+
+  [ Albert Astals Cid ]
+  * Enable -Wsuggest-override
+  * Use the new Q_ENUM (Qt 5.5)
+
+  [ Nick Dedekind ]
+  * Fully qualify pointer type namespaces in signals so that the
+    parameters can be used in qml.
+
+ -- Timo Jyrinki <timo.jyrinki@canonical.com>  Tue, 10 Jan 2017 06:42:45 +0000
+
 unity-api (8.0+17.04.20161215-0ubuntu1) zesty; urgency=medium
 
   * unity::shel::application - changes for the miral way of doing things

@@ -44,10 +44,6 @@ class UNITY_API ApplicationInfoInterface: public QObject
 {
     Q_OBJECT
 
-    Q_ENUMS(Stage)
-    Q_ENUMS(State)
-    Q_ENUMS(RequestedState)
-
     /**
      * @brief The appId of the application.
      *
@@ -250,6 +246,7 @@ public:
         MainStage,
         SideStage
     };
+    Q_ENUM(Stage)
 
     /**
      * @brief An application's state.
@@ -269,6 +266,7 @@ public:
         Suspended,
         Stopped
     };
+    Q_ENUM(State)
 
     /**
      * @brief The desired state of an application
@@ -281,6 +279,7 @@ public:
         RequestedRunning = Running,
         RequestedSuspended = Suspended
     };
+    Q_ENUM(RequestedState)
 
     /**
      * @brief Closes the application

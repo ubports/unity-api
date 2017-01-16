@@ -47,7 +47,6 @@ actually displayed.
 class UNITY_API ModelInterface : public QAbstractListModel
 {
     Q_OBJECT
-    Q_ENUMS(Roles)
 
     /**
     \brief Whether a placeholder for confirmation should be kept at the beginning
@@ -91,6 +90,7 @@ public:
         RoleHints         = Qt::UserRole + 10, /** attached hints */
         RoleNotification  = Qt::UserRole + 11  /** notification object */
     };
+    Q_ENUM(Roles)
 
 Q_SIGNALS:
     /**

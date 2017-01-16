@@ -32,15 +32,13 @@ class UNITY_API FiltersInterface : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_ENUMS(Roles)
-    Q_ENUMS(FilterType)
-
 public:
     enum Roles {
         RoleFilterId = Qt::UserRole + 1,
         RoleFilterType,
         RoleFilter
     };
+    Q_ENUM(Roles)
 
     enum FilterType {
         Invalid,
@@ -50,6 +48,7 @@ public:
         ExpandableFilterWidget
         // TODO add remaining filters
     };
+    Q_ENUM(FilterType)
 
     QHash<int, QByteArray> roleNames() const override
     {

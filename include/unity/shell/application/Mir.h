@@ -25,11 +25,6 @@
 class Mir : public QObject
 {
     Q_OBJECT
-    Q_ENUMS(Type)
-    Q_ENUMS(State)
-    Q_ENUMS(OrientationAngle)
-    Q_ENUMS(ShellChrome)
-    Q_ENUMS(FormFactor)
 
     /**
         @brief Name of the mouse cursor to be used. Follows the X Cursor naming convention.
@@ -61,6 +56,7 @@ public:
         SatelliteType,
         TipType,
     };
+    Q_ENUM(Type)
 
     /**
         @brief Surface state
@@ -81,6 +77,7 @@ public:
         MaximizedBottomRightState,
         HiddenState,
     };
+    Q_ENUM(State)
 
     /**
         @brief Surface orientation angle
@@ -91,6 +88,7 @@ public:
         Angle180 = 180,
         Angle270 = 270
     };
+    Q_ENUM(OrientationAngle)
 
     /**
         @brief Shell chrome
@@ -99,6 +97,7 @@ public:
         NormalChrome,
         LowChrome,
     };
+    Q_ENUM(ShellChrome)
 
     /**
         @brief Form Factor
@@ -111,6 +110,7 @@ public:
         FormFactorTV,
         FormFactorProjector,
     };
+    Q_ENUM(FormFactor)
 
     /// @cond
     virtual void setCursorName(const QString &cursorName) = 0;

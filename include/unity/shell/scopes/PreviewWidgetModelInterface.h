@@ -37,8 +37,6 @@ class UNITY_API PreviewWidgetModelInterface : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_ENUMS(Roles)
-
 protected:
     /// @cond
     explicit PreviewWidgetModelInterface(QObject* parent = 0) : QAbstractListModel(parent) { }
@@ -53,6 +51,7 @@ public:
         RoleType,
         RoleProperties
     };
+    Q_ENUM(Roles)
 
     // @cond
     QHash<int, QByteArray> roleNames() const override

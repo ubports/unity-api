@@ -35,8 +35,6 @@ class UNITY_API NavigationInterface : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_ENUMS(Roles)
-
     /**
      * @brief Id of the navigation.
      */
@@ -98,6 +96,7 @@ public:
         RoleHasChildren,
         RoleIsActive
     };
+    Q_ENUM(Roles)
 
     // @cond
     virtual QString navigationId() const = 0;
