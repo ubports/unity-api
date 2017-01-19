@@ -1,3 +1,10 @@
+unity-api (8.1-0ubuntu1) UNRELEASED; urgency=medium
+
+  * unity::util - add GObject shared memory utility classes
+    and helper methods.
+
+ -- Pete <pete.woods@canonical.com>  Wed, 11 Jan 2017 16:07:23 +0000
+
 unity-api (8.0+17.04.20170110.1-0ubuntu1) zesty; urgency=medium
 
   [ Albert Astals Cid ]
