@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Canonical, Ltd.
+ * Copyright (C) 2015-2016 Canonical, Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,6 +32,13 @@ class Mir : public QObject
         Eg.: "left_ptr" is a left-sided pointer arrow
      */
     Q_PROPERTY(QString cursorName READ cursorName WRITE setCursorName NOTIFY cursorNameChanged)
+
+    /**
+      * Current (global) keymap, to be applied on the keyboard device
+      *
+      * E.g.: "cz+qwerty" -> "cz" layout, "qwerty" variant
+      */
+    Q_PROPERTY(QString currentKeymap READ currentKeymap WRITE setCurrentKeymap NOTIFY currentKeymapChanged)
 
 public:
     /**
@@ -108,11 +115,15 @@ public:
     /// @cond
     virtual void setCursorName(const QString &cursorName) = 0;
     virtual QString cursorName() const = 0;
+
+    virtual QString currentKeymap() const = 0;
+    virtual void setCurrentKeymap(const QString &currentKeymap) = 0;
     /// @endcond
 
 Q_SIGNALS:
     /// @cond
     void cursorNameChanged(const QString &cursorName);
+    void currentKeymapChanged(const QString &currentKeymap);
     /// @endcond
 };
 
