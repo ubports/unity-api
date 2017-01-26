@@ -164,6 +164,19 @@ class MirSurfaceInterface : public QObject
      */
     Q_PROPERTY(bool confinesMousePointer READ confinesMousePointer NOTIFY confinesMousePointerChanged)
 
+    /**
+     * @brief The parent MirSurface or null if this is a top-level surface
+     */
+    Q_PROPERTY(MirSurfaceInterface* parentSurface READ parentSurface CONSTANT)
+
+    /**
+     * @brief The list of child surfaces
+     *
+     * Ordered from top-most (index=0) to bottom (index=count-1)
+     * So the Z value for an item in this model would be z: count - index
+     */
+    Q_PROPERTY(unity::shell::application::MirSurfaceListInterface* childSurfaceList READ childSurfaceList CONSTANT)
+
 public:
     /// @cond
     MirSurfaceInterface(QObject *parent = nullptr) : QObject(parent) {}
@@ -210,6 +223,10 @@ public:
 
     virtual QPoint requestedPosition() const = 0;
     virtual void setRequestedPosition(const QPoint &) = 0;
+
+    virtual MirSurfaceInterface* parentSurface() const = 0;
+
+    virtual unity::shell::application::MirSurfaceListInterface* childSurfaceList() const = 0;
     /// @endcond
 
     /**
