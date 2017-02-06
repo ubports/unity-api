@@ -1,8 +1,9 @@
-unity-api (8.2) UNRELEASED; urgency=medium
+unity-api (8.2+17.04.20170206-0ubuntu1) zesty; urgency=medium
 
+  [ Daniel d'Andrada ]
   * MirSurfaceInterface: add childSurfaceList and parentSurface
 
- -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Thu, 26 Jan 2017 09:06:30 -0200
+ -- Albert Astals Cid <albert.astals@canonical.com>  Mon, 06 Feb 2017 09:11:03 +0000
 
 unity-api (8.1+17.04.20170120.1-0ubuntu1) zesty; urgency=medium
 
