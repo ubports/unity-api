@@ -31,13 +31,15 @@ namespace util
 #pragma push_macro("G_DEFINE_AUTOPTR_CLEANUP_FUNC")
 #undef G_DEFINE_AUTOPTR_CLEANUP_FUNC
 #define G_DEFINE_AUTOPTR_CLEANUP_FUNC(TypeName, func) \
-inline std::shared_ptr<TypeName> share_glib(TypeName* ptr) \
+typedef std::shared_ptr<TypeName> TypeName##SPtr; \
+inline TypeName##SPtr share_glib(TypeName* ptr) \
 { \
-    return std::shared_ptr<TypeName>(ptr, &func); \
+    return TypeName##SPtr(ptr, &func); \
 } \
-inline std::unique_ptr<TypeName, decltype(&func)> unique_glib(TypeName* ptr) \
+typedef std::unique_ptr<TypeName, decltype(&func)> TypeName##UPtr; \
+inline TypeName##UPtr unique_glib(TypeName* ptr) \
 { \
-    return std::unique_ptr<TypeName, decltype(&func)>(ptr, &func); \
+    return TypeName##UPtr(ptr, &func); \
 }
 
 #pragma push_macro("G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC")
