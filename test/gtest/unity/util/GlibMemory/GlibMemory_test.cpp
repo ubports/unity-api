@@ -54,24 +54,54 @@ protected:
         // Note that we don't g_free the data, because it's a reference to a static string
         values.emplace(string((gchar*) data));
     }
+
+    static GKeyFileUPtr newGKeyFile()
+    {
+        return unique_glib(g_key_file_new());
+    }
+
+    static GVariantUPtr newGVariant(const gchar* const value)
+    {
+        return unique_glib(g_variant_new_string(value));
+    }
+
+    static GHashTableUPtr newGHashTable()
+    {
+        return unique_glib(g_hash_table_new_full(g_str_hash, g_str_equal, deleteKey, deleteValue));
+    }
+
+    static GKeyFileSPtr sharedGKeyFile()
+    {
+        return share_glib(g_key_file_new());
+    }
+
+    static GVariantSPtr sharedGVariant(const gchar* const value)
+    {
+        return share_glib(g_variant_new_string(value));
+    }
+
+    static GHashTableSPtr sharedGHashTable()
+    {
+        return share_glib(g_hash_table_new_full(g_str_hash, g_str_equal, deleteKey, deleteValue));
+    }
 };
 
 TEST_F(GlibMemoryTest, Unique)
 {
     {
-        auto gkf = unique_glib(g_key_file_new());
+        auto gkf = newGKeyFile();
         g_key_file_set_boolean(gkf.get(), "group", "key", TRUE);
         EXPECT_EQ(TRUE, g_key_file_get_boolean(gkf.get(), "group", "key", NULL));
     }
 
     {
-        auto variant = unique_glib(g_variant_new_string("hello"));
+        auto variant = newGVariant("hello");
         EXPECT_STREQ("hello", g_variant_get_string(variant.get(), NULL));
     }
 
     {
         {
-            auto hash = unique_glib(g_hash_table_new_full(g_str_hash, g_str_equal, deleteKey, deleteValue));
+            auto hash = newGHashTable();
             g_hash_table_insert(hash.get(), (gpointer) "hello", (gpointer) "there");
             g_hash_table_insert(hash.get(), (gpointer) "hash", (gpointer) "world");
         }
@@ -83,19 +113,19 @@ TEST_F(GlibMemoryTest, Unique)
 TEST_F(GlibMemoryTest, Share)
 {
     {
-        auto gkf = share_glib(g_key_file_new());
+        auto gkf = sharedGKeyFile();
         g_key_file_set_boolean(gkf.get(), "group", "key", TRUE);
         EXPECT_EQ(TRUE, g_key_file_get_boolean(gkf.get(), "group", "key", NULL));
     }
 
     {
-        auto variant = share_glib(g_variant_new_string("hello"));
+        auto variant = sharedGVariant("hello");
         EXPECT_STREQ("hello", g_variant_get_string(variant.get(), NULL));
     }
 
     {
         {
-            auto hash = share_glib(g_hash_table_new_full(g_str_hash, g_str_equal, deleteKey, deleteValue));
+            auto hash = sharedGHashTable();
             g_hash_table_insert(hash.get(), (gpointer) "hello", (gpointer) "there");
             g_hash_table_insert(hash.get(), (gpointer) "hash", (gpointer) "world");
         }
