@@ -298,6 +298,7 @@ TEST_F(GObjectMemoryTest, null)
     auto u1 = unique_gobject(o1);
     auto u2 = unique_gobject<FooBar>(nullptr);
     auto u3 = unique_gobject(o3);
+    auto u4 = unique_gobject((FooBar *) NULL);
 
     EXPECT_TRUE(!u1);
     EXPECT_TRUE(!u2);

@@ -108,6 +108,10 @@ TEST_F(GlibMemoryTest, Unique)
         EXPECT_EQ(set<string>({"hello", "hash"}), keys);
         EXPECT_EQ(set<string>({"there", "world"}), values);
     }
+
+    {
+        auto emptyVariant = unique_glib((GVariant*) NULL);
+    }
 }
 
 TEST_F(GlibMemoryTest, Share)
@@ -131,6 +135,10 @@ TEST_F(GlibMemoryTest, Share)
         }
         EXPECT_EQ(set<string>({"hello", "hash"}), keys);
         EXPECT_EQ(set<string>({"there", "world"}), values);
+    }
+
+    {
+        auto emptyVariant = share_glib((GVariant*) NULL);
     }
 }
 
