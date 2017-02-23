@@ -28,18 +28,33 @@ namespace unity
 namespace util
 {
 
+template<typename T, typename D>
+struct GlibDeleter
+{
+    D _d;
+
+    void operator()(T* ptr)
+    {
+        if (ptr != nullptr)
+        {
+            _d(ptr);
+        }
+    }
+};
+
 #pragma push_macro("G_DEFINE_AUTOPTR_CLEANUP_FUNC")
 #undef G_DEFINE_AUTOPTR_CLEANUP_FUNC
 #define G_DEFINE_AUTOPTR_CLEANUP_FUNC(TypeName, func) \
+typedef GlibDeleter<TypeName, decltype(&func)> TypeName##Deleter; \
 typedef std::shared_ptr<TypeName> TypeName##SPtr; \
 inline TypeName##SPtr share_glib(TypeName* ptr) \
 { \
-    return TypeName##SPtr(ptr, &func); \
+    return TypeName##SPtr(ptr, TypeName##Deleter{&func}); \
 } \
-typedef std::unique_ptr<TypeName, decltype(&func)> TypeName##UPtr; \
+typedef std::unique_ptr<TypeName, TypeName##Deleter> TypeName##UPtr; \
 inline TypeName##UPtr unique_glib(TypeName* ptr) \
 { \
-    return TypeName##UPtr(ptr, &func); \
+    return TypeName##UPtr(ptr, TypeName##Deleter{&func}); \
 }
 
 #pragma push_macro("G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC")

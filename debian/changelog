@@ -1,3 +1,11 @@
+unity-api (8.4-0ubuntu1) UNRELEASED; urgency=medium
+
+  [ Pete Woods ]
+  * unity::util - Make Glib and GObject memory management
+    utilities handle NULL quietly.
+
+ -- Pete <pete.woods@canonical.com>  Tue, 21 Feb 2017 13:11:57 +0000
+
 unity-api (8.3+17.04.20170217-0ubuntu1) zesty; urgency=medium
 
   [ Pete ]

@@ -174,6 +174,11 @@ FooBar *foo_bar_new_full(const gchar* const name, guint id)
 class GObjectMemoryTest: public testing::Test
 {
 protected:
+    static void SetUpTestCase()
+    {
+        g_log_set_always_fatal((GLogLevelFlags) (G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL));
+    }
+
     void SetUp() override
     {
         DELETED_OBJECTS.clear();
@@ -298,6 +303,7 @@ TEST_F(GObjectMemoryTest, null)
     auto u1 = unique_gobject(o1);
     auto u2 = unique_gobject<FooBar>(nullptr);
     auto u3 = unique_gobject(o3);
+    auto u4 = unique_gobject((FooBar *) NULL);
 
     EXPECT_TRUE(!u1);
     EXPECT_TRUE(!u2);
