@@ -174,6 +174,11 @@ FooBar *foo_bar_new_full(const gchar* const name, guint id)
 class GObjectMemoryTest: public testing::Test
 {
 protected:
+    static void SetUpTestCase()
+    {
+        g_log_set_always_fatal((GLogLevelFlags) (G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL));
+    }
+
     void SetUp() override
     {
         DELETED_OBJECTS.clear();

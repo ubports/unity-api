@@ -59,11 +59,10 @@ struct GObjectDeleter
 {
     void operator()(gpointer ptr)
     {
-        if (G_IS_OBJECT(ptr) == FALSE)
+        if (G_IS_OBJECT(ptr))
         {
-            return;
+            g_object_unref(ptr);
         }
-        g_object_unref(ptr);
     }
 };
 

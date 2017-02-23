@@ -35,11 +35,10 @@ struct GlibDeleter
 
     void operator()(T* ptr)
     {
-        if (ptr == NULL)
+        if (ptr != nullptr)
         {
-            return;
+            _d(ptr);
         }
-        _d(ptr);
     }
 };
 

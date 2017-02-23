@@ -37,6 +37,11 @@ static set<string> values;
 class GlibMemoryTest: public testing::Test
 {
 protected:
+    static void SetUpTestCase()
+    {
+        g_log_set_always_fatal((GLogLevelFlags) (G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL));
+    }
+
     void SetUp() override
     {
         keys.clear();
