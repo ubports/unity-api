@@ -43,6 +43,7 @@ namespace launcher
 class UNITY_API QuickListModelInterface: public QAbstractListModel
 {
     Q_OBJECT
+    Q_ENUMS(Roles)
 
 protected:
     /// @cond
@@ -51,6 +52,7 @@ protected:
         m_roleNames.insert(RoleIcon, "icon");
         m_roleNames.insert(RoleClickable, "clickable");
         m_roleNames.insert(RoleHasSeparator, "hasSeparator");
+        m_roleNames.insert(RoleIsPrivate, "isPrivate");
     }
     /// @endcond
 public:
@@ -63,7 +65,8 @@ public:
         RoleLabel,
         RoleIcon,
         RoleClickable,
-        RoleHasSeparator
+        RoleHasSeparator,
+        RoleIsPrivate
     };
 
     /// @cond
