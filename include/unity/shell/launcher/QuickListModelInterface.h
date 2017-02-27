@@ -39,6 +39,7 @@ namespace launcher
   * - RoleIcon (icon): The icon to be shown for this entry (QString).
   * - RoleClickable (clickable): Determines if the entry can be triggered or is just a static text (boolean)
   * - RoleHasSeparator (hasSeparator): Determines if the entry has a separator (boolean)
+  * - RoleIsPrivate (isPrivate): Determines whether the entry should be shown or not in locked mode (e.g. greeter is locked)
   */
 class UNITY_API QuickListModelInterface: public QAbstractListModel
 {
