@@ -145,6 +145,7 @@ Item {
                 { tag: "Item.properties[name]", constant: "name", type: "string" },
                 { tag: "Item.properties[icon]", constant: "icon", type: "string" },
                 { tag: "Item.properties[keywords]", constant: "keywords", type: "object" },
+                { tag: "Item.properties[popularity]", constant: "popularity", type: "number" },
                 { tag: "Item.properties[pinned]", property: "pinned", type: "boolean" },
                 { tag: "Item.properties[recent]", property: "recent", type: "boolean" },
                 { tag: "Item.properties[running]", property: "running", type: "boolean" },
