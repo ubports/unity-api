@@ -43,7 +43,6 @@ namespace launcher
 class UNITY_API QuickListModelInterface: public QAbstractListModel
 {
     Q_OBJECT
-    Q_ENUMS(Roles)
 
 protected:
     /// @cond
@@ -68,6 +67,7 @@ public:
         RoleHasSeparator,
         RoleIsPrivate
     };
+    Q_ENUM(Roles)
 
     /// @cond
     virtual ~QuickListModelInterface() {}
