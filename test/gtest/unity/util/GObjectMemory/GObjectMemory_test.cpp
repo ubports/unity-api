@@ -276,10 +276,20 @@ TEST_F(GObjectMemoryTest, swap)
 
 TEST_F(GObjectMemoryTest, floating)
 {
-    GObject* o = G_OBJECT(g_object_new(G_TYPE_INITIALLY_UNOWNED, nullptr));
-    auto u = unique_gobject<GObject>(o);
-    // it should have sunk the reference
-    EXPECT_TRUE(g_object_is_floating(u.get()) == FALSE);
+    {
+        auto o = G_INITIALLY_UNOWNED(g_object_new(G_TYPE_INITIALLY_UNOWNED, nullptr));
+        EXPECT_THROW(unique_gobject(o), invalid_argument);
+        g_object_ref_sink(G_OBJECT(o));
+        unique_gobject(o);
+    }
+    {
+        auto o = G_INITIALLY_UNOWNED(g_object_new(G_TYPE_INITIALLY_UNOWNED, nullptr));
+        EXPECT_THROW(unique_gobject(o), invalid_argument);
+        g_object_ref_sink(G_OBJECT(o));
+        unique_gobject(o);
+    }
+
+    EXPECT_THROW(make_gobject<GInitiallyUnowned>(G_TYPE_INITIALLY_UNOWNED, nullptr), invalid_argument);
 }
 
 TEST_F(GObjectMemoryTest, move)
