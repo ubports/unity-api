@@ -4,10 +4,13 @@ unity-api (8.6) UNRELEASED; urgency=medium
 
  -- Michael Zanetti <michael.zanetti@canonical.com>  Wed, 15 Mar 2017 17:38:36 +0100
 
-unity-api (8.5) zesty; urgency=medium
+unity-api (8.5) UNRELEASED; urgency=medium
 
   [ Michael Zanetti ]
   * Add RoleIsPrivate to launcher's quicklist entries
+
+  [ Daniel d'Andrada ]
+  * MirSurfaceInterface::allowClientResize
 
  -- Michael Zanetti <michael.zanetti@canonical.com>  Fri, 24 Feb 2017 13:57:12 +0000
 
