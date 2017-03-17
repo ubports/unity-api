@@ -58,6 +58,11 @@ class MirSurfaceInterface : public QObject
     Q_PROPERTY(QString persistentId READ persistentId CONSTANT)
 
     /**
+     * @brief App Id of the app this surface belongs to
+     */
+    Q_PROPERTY(QString appId READ appId CONSTANT)
+
+    /**
      * @brief Position of the current surface buffer, in pixels.
      */
     Q_PROPERTY(QPoint position READ position NOTIFY positionChanged)
@@ -187,6 +192,8 @@ public:
     virtual QString name() const = 0;
 
     virtual QString persistentId() const = 0;
+
+    virtual QString appId() const = 0;
 
     virtual QPoint position() const = 0;
 
