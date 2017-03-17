@@ -1,3 +1,10 @@
+unity-api (8.5) zesty; urgency=medium
+
+  [ Michael Zanetti ]
+  * Add RoleIsPrivate to launcher's quicklist entries
+
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Fri, 24 Feb 2017 13:57:12 +0000
+
 unity-api (8.4+17.04.20170223-0ubuntu1) zesty; urgency=medium
 
   [ Pete Woods ]

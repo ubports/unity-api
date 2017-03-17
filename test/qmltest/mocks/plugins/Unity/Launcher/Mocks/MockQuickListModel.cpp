@@ -39,6 +39,8 @@ QVariant MockQuickListModel::data(const QModelIndex &index, int role) const
         return true;
     case RoleHasSeparator:
         return true;
+    case RoleIsPrivate:
+        return false;
     }
     return QVariant();
 }
