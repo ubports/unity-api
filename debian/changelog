@@ -1,8 +1,13 @@
-unity-api (8.6) UNRELEASED; urgency=medium
+unity-api (8.6+17.04.20170317-0ubuntu1) zesty; urgency=medium
 
+  [ Michael Zanetti ]
   * Add appId property to MirSurfaceInterface
 
- -- Michael Zanetti <michael.zanetti@canonical.com>  Wed, 15 Mar 2017 17:38:36 +0100
+  [ Pete Woods ]
+  * unity::util - unique_gobject and share_gobject now throw for
+    floating references (LP: #1672657)
+
+ -- Lukáš Tinkl <lukas.tinkl@canonical.com>  Fri, 17 Mar 2017 11:08:20 +0000
 
 unity-api (8.5) UNRELEASED; urgency=medium
 
