@@ -289,7 +289,10 @@ TEST_F(GObjectMemoryTest, floating)
         unique_gobject(o);
     }
 
-    EXPECT_THROW(make_gobject<GInitiallyUnowned>(G_TYPE_INITIALLY_UNOWNED, nullptr), invalid_argument);
+    {
+        auto o = make_gobject<GInitiallyUnowned>(G_TYPE_INITIALLY_UNOWNED, nullptr);
+        EXPECT_FALSE(g_object_is_floating(o.get()));
+    }
 }
 
 TEST_F(GObjectMemoryTest, move)

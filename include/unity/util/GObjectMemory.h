@@ -123,8 +123,6 @@ inline std::unique_ptr<T, GObjectDeleter> make_gobject(GType object_type, const 
     if (G_IS_OBJECT(ptr) && g_object_is_floating(ptr))
     {
         g_object_ref_sink(ptr);
-        g_object_unref(ptr);
-        throw std::invalid_argument("make_gobject should not be used for initially unowned types");
     }
     return unique_gobject(G_TYPE_CHECK_INSTANCE_CAST(ptr, object_type, T));
 }
