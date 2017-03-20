@@ -55,7 +55,28 @@ typedef std::unique_ptr<TypeName, TypeName##Deleter> TypeName##UPtr; \
 inline TypeName##UPtr unique_glib(TypeName* ptr) \
 { \
     return TypeName##UPtr(ptr, TypeName##Deleter{&func}); \
-}
+} \
+class TypeName##Assigner \
+{ \
+public: \
+    TypeName##Assigner(TypeName##UPtr& uptr) : \
+        _uptr(uptr) \
+    { \
+    } \
+    TypeName##Assigner(const TypeName##Assigner& other) = delete; \
+    ~TypeName##Assigner() \
+    { \
+        _uptr = unique_glib(_ptr); \
+    } \
+    TypeName##Assigner operator=(const TypeName##Assigner& other) = delete; \
+    operator TypeName**() \
+    { \
+        return &_ptr; \
+    } \
+private: \
+    TypeName* _ptr = nullptr; \
+    TypeName##UPtr& _uptr; \
+};
 
 #pragma push_macro("G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC")
 #undef G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC

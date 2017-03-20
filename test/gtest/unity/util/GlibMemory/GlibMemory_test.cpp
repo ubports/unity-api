@@ -147,4 +147,24 @@ TEST_F(GlibMemoryTest, Share)
     }
 }
 
+TEST_F(GlibMemoryTest, Assigner)
+{
+    auto gkf = unique_glib(g_key_file_new());
+
+    {
+        GErrorUPtr error;
+        EXPECT_FALSE(g_key_file_get_boolean(gkf.get(), "group", "key", GErrorAssigner(error)));
+        ASSERT_TRUE(bool(error));
+        EXPECT_STREQ("Key file does not have group 'group'", error->message);
+    }
+
+    g_key_file_set_boolean(gkf.get(), "group", "key", TRUE);
+
+    {
+        GErrorUPtr error;
+        EXPECT_TRUE(g_key_file_get_boolean(gkf.get(), "group", "key", GErrorAssigner(error)));
+        EXPECT_FALSE(bool(error));
+    }
+}
+
 }
