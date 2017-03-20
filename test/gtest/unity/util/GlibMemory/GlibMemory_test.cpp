@@ -155,7 +155,7 @@ TEST_F(GlibMemoryTest, Assigner)
         GErrorUPtr error;
         EXPECT_FALSE(g_key_file_get_boolean(gkf.get(), "group", "key", GErrorAssigner(error)));
         ASSERT_TRUE(bool(error));
-        EXPECT_STREQ("Key file does not have group 'group'", error->message);
+        EXPECT_EQ(G_KEY_FILE_ERROR_GROUP_NOT_FOUND, error->code);
     }
 
     g_key_file_set_boolean(gkf.get(), "group", "key", TRUE);
