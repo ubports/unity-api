@@ -127,6 +127,35 @@ inline std::unique_ptr<T, GObjectDeleter> make_gobject(GType object_type, const 
     return unique_gobject(G_TYPE_CHECK_INSTANCE_CAST(ptr, object_type, T));
 }
 
+template<typename T>
+class GObjectAssigner
+{
+public:
+    GObjectAssigner(std::unique_ptr<T, GObjectDeleter>& uptr) :
+        _uptr(uptr)
+    {
+    }
+
+    GObjectAssigner(const GObjectAssigner<T>& other) = delete;
+
+    ~GObjectAssigner()
+    {
+        _uptr = unique_gobject(_ptr);
+    }
+
+    GObjectAssigner<T> operator=(const GObjectAssigner<T>& other) = delete;
+
+    operator T**()
+    {
+        return &_ptr;
+    }
+
+private:
+    T* _ptr = nullptr;
+
+    std::unique_ptr<T, GObjectDeleter>& _uptr;
+};
+
 }  // namespace until
 
 }  // namespace unity

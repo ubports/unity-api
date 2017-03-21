@@ -17,6 +17,7 @@
  *              Pete Woods <pete.woods@canonical.com>
  */
 
+#include <unity/util/GlibMemory.h>
 #include <unity/util/GObjectMemory.h>
 #include <glib-object.h>
 #include <gtest/gtest.h>
@@ -46,7 +47,11 @@ G_DECLARE_FINAL_TYPE (FooBar, foo_bar, FOO, BAR, GObject)
 
 FooBar *foo_bar_new();
 
+void foo_bar_assigner(FooBar** in);
+
 FooBar *foo_bar_new_full(const gchar* const name, guint id);
+
+void foo_bar_assigner_full(const gchar* const name, guint id, FooBar** in);
 
 G_END_DECLS
 
@@ -165,6 +170,22 @@ FooBar *foo_bar_new()
 FooBar *foo_bar_new_full(const gchar* const name, guint id)
 {
     return FOO_BAR(g_object_new(FOO_TYPE_BAR, "name", name, "id", id, NULL));
+}
+
+void foo_bar_assigner(FooBar** in)
+{
+    if (in != nullptr)
+    {
+        *in = foo_bar_new();
+    }
+}
+
+void foo_bar_assigner_full(const gchar* const name, guint id, FooBar** in)
+{
+    if (in != nullptr)
+    {
+        *in = foo_bar_new_full(name, id);
+    }
 }
 
 //
@@ -403,6 +424,17 @@ TEST_F(GObjectMemoryTest, makeGObjectDeletesGObjects)
     EXPECT_EQ(list<Deleted>({{"c", 3}, {"b", 2}, {"a", 1}}), DELETED_OBJECTS);
 }
 
+TEST_F(GObjectMemoryTest, assignerDeletesGObjects)
+{
+    {
+        unique_ptr<FooBar, GObjectDeleter> a, b;
+        foo_bar_assigner_full("a", 1, GObjectAssigner<FooBar>(a));
+        foo_bar_assigner_full("b", 2, GObjectAssigner<FooBar>(b));
+    }
+    EXPECT_EQ(list<Deleted>({{"b", 2}, {"a", 1}}), DELETED_OBJECTS);
+}
+
+
 TEST_F(GObjectMemoryTest, foo)
 {
     {
@@ -431,14 +463,12 @@ protected:
      */
     static void checkProperties(gpointer obj, const char* expectedName, guint expectedId)
     {
-        char* name = NULL;
+        gcharUPtr name;
         guint id = 0;
 
-        g_object_get(obj, "name", &name, "id", &id, NULL);
-        EXPECT_STREQ(expectedName, name);
+        g_object_get(obj, "name", gcharAssigner(name), "id", &id, NULL);
+        EXPECT_STREQ(expectedName, name.get());
         EXPECT_EQ(expectedId, id);
-
-        g_free(name);
     }
 };
 
@@ -468,6 +498,14 @@ TEST_P(GObjectMemoryMakeHelperMethodsTest, share_foo_bar_new)
 {
     auto p = GetParam();
     auto obj = share_gobject(foo_bar_new_full(p.first, p.second));
+    checkProperties(obj.get(), p.first, p.second);
+}
+
+TEST_P(GObjectMemoryMakeHelperMethodsTest, assign_foo_bar_assigner)
+{
+    auto p = GetParam();
+    unique_ptr<FooBar, GObjectDeleter> obj;
+    foo_bar_assigner_full(p.first, p.second, GObjectAssigner<FooBar>(obj));
     checkProperties(obj.get(), p.first, p.second);
 }
 
