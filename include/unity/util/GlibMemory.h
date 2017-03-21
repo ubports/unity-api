@@ -42,9 +42,7 @@ struct GlibDeleter
     }
 };
 
-#pragma push_macro("G_DEFINE_AUTOPTR_CLEANUP_FUNC")
-#undef G_DEFINE_AUTOPTR_CLEANUP_FUNC
-#define G_DEFINE_AUTOPTR_CLEANUP_FUNC(TypeName, func) \
+#define UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(TypeName, func) \
 typedef GlibDeleter<TypeName, decltype(&func)> TypeName##Deleter; \
 typedef std::shared_ptr<TypeName> TypeName##SPtr; \
 inline TypeName##SPtr share_glib(TypeName* ptr) \
@@ -78,6 +76,10 @@ private: \
     TypeName##UPtr& _uptr; \
 };
 
+#pragma push_macro("G_DEFINE_AUTOPTR_CLEANUP_FUNC")
+#undef G_DEFINE_AUTOPTR_CLEANUP_FUNC
+#define G_DEFINE_AUTOPTR_CLEANUP_FUNC(TypeName, func) UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(TypeName, func)
+
 #pragma push_macro("G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC")
 #undef G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC
 #define G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(TypeName, func)
@@ -88,6 +90,10 @@ private: \
 
 #pragma pop_macro("G_DEFINE_AUTOPTR_CLEANUP_FUNC")
 #pragma pop_macro("G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC")
+
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(gchar, g_free)
+typedef gchar* gcharv;
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(gcharv, g_strfreev)
 
 }  // namespace until
 

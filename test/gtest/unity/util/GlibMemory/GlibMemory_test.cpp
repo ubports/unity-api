@@ -89,6 +89,14 @@ protected:
     {
         return share_glib(g_hash_table_new_full(g_str_hash, g_str_equal, deleteKey, deleteValue));
     }
+
+    static void assignGChar(gchar** in)
+    {
+        if (in != nullptr)
+        {
+            *in = g_strdup("hi");
+        }
+    }
 };
 
 TEST_F(GlibMemoryTest, Unique)
@@ -164,6 +172,30 @@ TEST_F(GlibMemoryTest, Assigner)
         GErrorUPtr error;
         EXPECT_TRUE(g_key_file_get_boolean(gkf.get(), "group", "key", GErrorAssigner(error)));
         EXPECT_FALSE(bool(error));
+    }
+
+    {
+        gcharUPtr str;
+        assignGChar(gcharAssigner(str));
+        ASSERT_TRUE(bool(str));
+        EXPECT_STREQ("hi", str.get());
+    }
+}
+
+TEST_F(GlibMemoryTest, GChar)
+{
+    {
+        auto strv = unique_glib(g_strsplit("a b c", " ", 0));
+        ASSERT_TRUE(bool(strv));
+        EXPECT_STREQ("a", strv.get()[0]);
+        EXPECT_STREQ("b", strv.get()[1]);
+        EXPECT_STREQ("c", strv.get()[2]);
+    }
+
+    {
+        auto str = unique_glib(g_strdup("hello"));
+        ASSERT_TRUE(bool(str));
+        EXPECT_STREQ("hello", str.get());
     }
 }
 
