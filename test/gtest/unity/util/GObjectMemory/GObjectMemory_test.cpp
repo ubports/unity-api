@@ -428,8 +428,8 @@ TEST_F(GObjectMemoryTest, uptrAssignerDeletesGObjects)
 {
     {
         unique_ptr<FooBar, GObjectDeleter> a, b;
-        foo_bar_assigner_full("a", 1, GObjectUPtrAssigner<FooBar>(a));
-        foo_bar_assigner_full("b", 2, GObjectUPtrAssigner<FooBar>(b));
+        foo_bar_assigner_full("a", 1, gobject_assign_uptr(a));
+        foo_bar_assigner_full("b", 2, gobject_assign_uptr(b));
     }
     EXPECT_EQ(list<Deleted>({{"b", 2}, {"a", 1}}), DELETED_OBJECTS);
 }
@@ -438,9 +438,9 @@ TEST_F(GObjectMemoryTest, sptrAssignerDeletesGObjects)
 {
     {
         shared_ptr<FooBar> a, b, c;
-        foo_bar_assigner_full("a", 3, GObjectSPtrAssigner<FooBar>(a));
-        foo_bar_assigner_full("b", 4, GObjectSPtrAssigner<FooBar>(b));
-        foo_bar_assigner_full("c", 5, GObjectSPtrAssigner<FooBar>(c));
+        foo_bar_assigner_full("a", 3, gobject_assign_sptr(a));
+        foo_bar_assigner_full("b", 4, gobject_assign_sptr(b));
+        foo_bar_assigner_full("c", 5, gobject_assign_sptr(c));
     }
     EXPECT_EQ(list<Deleted>({{"c", 5}, {"b", 4}, {"a", 3}}), DELETED_OBJECTS);
 }
@@ -476,7 +476,7 @@ protected:
         gcharUPtr name;
         guint id = 0;
 
-        g_object_get(obj, "name", gcharUPtrAssigner(name), "id", &id, NULL);
+        g_object_get(obj, "name", glib_assign_uptr(name), "id", &id, NULL);
         EXPECT_STREQ(expectedName, name.get());
         EXPECT_EQ(expectedId, id);
     }
@@ -515,7 +515,7 @@ TEST_P(GObjectMemoryMakeHelperMethodsTest, assign_foo_bar_uptr_assigner)
 {
     auto p = GetParam();
     unique_ptr<FooBar, GObjectDeleter> obj;
-    foo_bar_assigner_full(p.first, p.second, GObjectUPtrAssigner<FooBar>(obj));
+    foo_bar_assigner_full(p.first, p.second, gobject_assign_uptr(obj));
     checkProperties(obj.get(), p.first, p.second);
 }
 
@@ -523,7 +523,7 @@ TEST_P(GObjectMemoryMakeHelperMethodsTest, assign_foo_bar_sptr_assigner)
 {
     auto p = GetParam();
     shared_ptr<FooBar> obj;
-    foo_bar_assigner_full(p.first, p.second, GObjectSPtrAssigner<FooBar>(obj));
+    foo_bar_assigner_full(p.first, p.second, gobject_assign_sptr(obj));
     checkProperties(obj.get(), p.first, p.second);
 }
 

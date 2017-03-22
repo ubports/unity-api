@@ -71,9 +71,18 @@ public:
 
     GlibUPtrAssigner(const GlibUPtrAssigner& other) = delete;
 
+    GlibUPtrAssigner(GlibUPtrAssigner&& other) :
+        _ptr(other._ptr), _uptr(other._uptr)
+    {
+        other._ptr = nullptr;
+    }
+
     ~GlibUPtrAssigner()
     {
-        _uptr = unique_glib(_ptr);
+        if (_ptr)
+        {
+            _uptr = unique_glib(_ptr);
+        }
     }
 
     GlibUPtrAssigner operator=(const GlibUPtrAssigner& other) = delete;
@@ -100,9 +109,18 @@ public:
 
     GlibSPtrAssigner(const GlibSPtrAssigner& other) = delete;
 
+    GlibSPtrAssigner(GlibSPtrAssigner&& other) :
+        _ptr(other._ptr), _sptr(other._sptr)
+    {
+        other._ptr = nullptr;
+    }
+
     ~GlibSPtrAssigner()
     {
-        _sptr.reset(_ptr, GlibDeleter<typename S::element_type>());
+        if (_ptr)
+        {
+            _sptr.reset(_ptr, GlibDeleter<typename S::element_type>());
+        }
     }
 
     GlibSPtrAssigner operator=(const GlibSPtrAssigner& other) = delete;
@@ -118,6 +136,18 @@ private:
     S& _sptr;
 };
 
+template<typename U>
+inline GlibUPtrAssigner<U> glib_assign_uptr(U& uptr)
+{
+    return GlibUPtrAssigner<U>(uptr);
+}
+
+template<typename S>
+inline GlibSPtrAssigner<S> glib_assign_sptr(S& sptr)
+{
+    return GlibSPtrAssigner<S>(sptr);
+}
+
 #pragma push_macro("G_DEFINE_AUTOPTR_CLEANUP_FUNC")
 #undef G_DEFINE_AUTOPTR_CLEANUP_FUNC
 #define G_DEFINE_AUTOPTR_CLEANUP_FUNC(TypeName, func) UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(TypeName, func)
@@ -126,12 +156,17 @@ private:
 #undef G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC
 #define G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(TypeName, func)
 
+#pragma push_macro("G_DEFINE_AUTO_CLEANUP_FREE_FUNC")
+#undef G_DEFINE_AUTO_CLEANUP_FREE_FUNC
+#define G_DEFINE_AUTO_CLEANUP_FREE_FUNC(TypeName, func, none)
+
 #define __GLIB_H_INSIDE__
 #include <glib/glib-autocleanups.h>
 #undef __GLIB_H_INSIDE__
 
 #pragma pop_macro("G_DEFINE_AUTOPTR_CLEANUP_FUNC")
 #pragma pop_macro("G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC")
+#pragma pop_macro("G_DEFINE_AUTO_CLEANUP_FREE_FUNC")
 
 UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(gchar, g_free)
 typedef gchar* gcharv;

@@ -127,16 +127,22 @@ inline std::unique_ptr<T, GObjectDeleter> make_gobject(GType object_type, const 
     return unique_gobject(G_TYPE_CHECK_INSTANCE_CAST(ptr, object_type, T));
 }
 
-template<typename T>
+template<typename U>
 class GObjectUPtrAssigner
 {
 public:
-    GObjectUPtrAssigner(std::unique_ptr<T, GObjectDeleter>& uptr) :
+    GObjectUPtrAssigner(U& uptr) :
         _uptr(uptr)
     {
     }
 
     GObjectUPtrAssigner(const GObjectUPtrAssigner& other) = delete;
+
+    GObjectUPtrAssigner(GObjectUPtrAssigner&& other) :
+        _ptr(other._ptr), _uptr(other._uptr)
+    {
+        other._ptr = nullptr;
+    }
 
     ~GObjectUPtrAssigner()
     {
@@ -145,45 +151,66 @@ public:
 
     GObjectUPtrAssigner operator=(const GObjectUPtrAssigner& other) = delete;
 
-    operator T**()
+    operator typename U::element_type**()
     {
         return &_ptr;
     }
 
 private:
-    T* _ptr = nullptr;
+    typename U::element_type* _ptr = nullptr;
 
-    std::unique_ptr<T, GObjectDeleter>& _uptr;
+    U& _uptr;
 };
 
-template<typename T>
+template<typename S>
 class GObjectSPtrAssigner
 {
 public:
-    GObjectSPtrAssigner(std::shared_ptr<T>& sptr) :
+    GObjectSPtrAssigner(S& sptr) :
         _sptr(sptr)
     {
     }
 
-    GObjectSPtrAssigner(const GObjectSPtrAssigner<T>& other) = delete;
+    GObjectSPtrAssigner(const GObjectSPtrAssigner& other) = delete;
+
+    GObjectSPtrAssigner(GObjectSPtrAssigner&& other) :
+        _ptr(other._ptr), _sptr(other._sptr)
+    {
+        other._ptr = nullptr;
+    }
 
     ~GObjectSPtrAssigner()
     {
-        _sptr.reset(_ptr, GObjectDeleter());
+        if (_ptr)
+        {
+            _sptr.reset(_ptr, GObjectDeleter());
+        }
     }
 
-    GObjectSPtrAssigner<T> operator=(const GObjectSPtrAssigner<T>& other) = delete;
+    GObjectSPtrAssigner operator=(const GObjectSPtrAssigner& other) = delete;
 
-    operator T**()
+    operator typename S::element_type**()
     {
         return &_ptr;
     }
 
 private:
-    T* _ptr = nullptr;
+    typename S::element_type* _ptr = nullptr;
 
-    std::shared_ptr<T>& _sptr;
+    S& _sptr;
 };
+
+template<typename U>
+inline GObjectUPtrAssigner<U> gobject_assign_uptr(U& uptr)
+{
+    return GObjectUPtrAssigner<U>(uptr);
+}
+
+template<typename S>
+inline GObjectSPtrAssigner<S> gobject_assign_sptr(S& sptr)
+{
+    return GObjectSPtrAssigner<S>(sptr);
+}
 
 }  // namespace until
 
