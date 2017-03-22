@@ -128,22 +128,22 @@ inline std::unique_ptr<T, GObjectDeleter> make_gobject(GType object_type, const 
 }
 
 template<typename T>
-class GObjectAssigner
+class GObjectUPtrAssigner
 {
 public:
-    GObjectAssigner(std::unique_ptr<T, GObjectDeleter>& uptr) :
+    GObjectUPtrAssigner(std::unique_ptr<T, GObjectDeleter>& uptr) :
         _uptr(uptr)
     {
     }
 
-    GObjectAssigner(const GObjectAssigner<T>& other) = delete;
+    GObjectUPtrAssigner(const GObjectUPtrAssigner& other) = delete;
 
-    ~GObjectAssigner()
+    ~GObjectUPtrAssigner()
     {
         _uptr = unique_gobject(_ptr);
     }
 
-    GObjectAssigner<T> operator=(const GObjectAssigner<T>& other) = delete;
+    GObjectUPtrAssigner operator=(const GObjectUPtrAssigner& other) = delete;
 
     operator T**()
     {
@@ -154,6 +154,35 @@ private:
     T* _ptr = nullptr;
 
     std::unique_ptr<T, GObjectDeleter>& _uptr;
+};
+
+template<typename T>
+class GObjectSPtrAssigner
+{
+public:
+    GObjectSPtrAssigner(std::shared_ptr<T>& sptr) :
+        _sptr(sptr)
+    {
+    }
+
+    GObjectSPtrAssigner(const GObjectSPtrAssigner<T>& other) = delete;
+
+    ~GObjectSPtrAssigner()
+    {
+        _sptr.reset(_ptr, GObjectDeleter());
+    }
+
+    GObjectSPtrAssigner<T> operator=(const GObjectSPtrAssigner<T>& other) = delete;
+
+    operator T**()
+    {
+        return &_ptr;
+    }
+
+private:
+    T* _ptr = nullptr;
+
+    std::shared_ptr<T>& _sptr;
 };
 
 }  // namespace until

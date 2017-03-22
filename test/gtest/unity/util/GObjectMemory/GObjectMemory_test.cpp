@@ -424,16 +424,26 @@ TEST_F(GObjectMemoryTest, makeGObjectDeletesGObjects)
     EXPECT_EQ(list<Deleted>({{"c", 3}, {"b", 2}, {"a", 1}}), DELETED_OBJECTS);
 }
 
-TEST_F(GObjectMemoryTest, assignerDeletesGObjects)
+TEST_F(GObjectMemoryTest, uptrAssignerDeletesGObjects)
 {
     {
         unique_ptr<FooBar, GObjectDeleter> a, b;
-        foo_bar_assigner_full("a", 1, GObjectAssigner<FooBar>(a));
-        foo_bar_assigner_full("b", 2, GObjectAssigner<FooBar>(b));
+        foo_bar_assigner_full("a", 1, GObjectUPtrAssigner<FooBar>(a));
+        foo_bar_assigner_full("b", 2, GObjectUPtrAssigner<FooBar>(b));
     }
     EXPECT_EQ(list<Deleted>({{"b", 2}, {"a", 1}}), DELETED_OBJECTS);
 }
 
+TEST_F(GObjectMemoryTest, sptrAssignerDeletesGObjects)
+{
+    {
+        shared_ptr<FooBar> a, b, c;
+        foo_bar_assigner_full("a", 3, GObjectSPtrAssigner<FooBar>(a));
+        foo_bar_assigner_full("b", 4, GObjectSPtrAssigner<FooBar>(b));
+        foo_bar_assigner_full("c", 5, GObjectSPtrAssigner<FooBar>(c));
+    }
+    EXPECT_EQ(list<Deleted>({{"c", 5}, {"b", 4}, {"a", 3}}), DELETED_OBJECTS);
+}
 
 TEST_F(GObjectMemoryTest, foo)
 {
@@ -466,7 +476,7 @@ protected:
         gcharUPtr name;
         guint id = 0;
 
-        g_object_get(obj, "name", gcharAssigner(name), "id", &id, NULL);
+        g_object_get(obj, "name", gcharUPtrAssigner(name), "id", &id, NULL);
         EXPECT_STREQ(expectedName, name.get());
         EXPECT_EQ(expectedId, id);
     }
@@ -501,11 +511,19 @@ TEST_P(GObjectMemoryMakeHelperMethodsTest, share_foo_bar_new)
     checkProperties(obj.get(), p.first, p.second);
 }
 
-TEST_P(GObjectMemoryMakeHelperMethodsTest, assign_foo_bar_assigner)
+TEST_P(GObjectMemoryMakeHelperMethodsTest, assign_foo_bar_uptr_assigner)
 {
     auto p = GetParam();
     unique_ptr<FooBar, GObjectDeleter> obj;
-    foo_bar_assigner_full(p.first, p.second, GObjectAssigner<FooBar>(obj));
+    foo_bar_assigner_full(p.first, p.second, GObjectUPtrAssigner<FooBar>(obj));
+    checkProperties(obj.get(), p.first, p.second);
+}
+
+TEST_P(GObjectMemoryMakeHelperMethodsTest, assign_foo_bar_sptr_assigner)
+{
+    auto p = GetParam();
+    shared_ptr<FooBar> obj;
+    foo_bar_assigner_full(p.first, p.second, GObjectSPtrAssigner<FooBar>(obj));
     checkProperties(obj.get(), p.first, p.second);
 }
 

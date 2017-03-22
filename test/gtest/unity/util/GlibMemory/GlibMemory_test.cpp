@@ -155,13 +155,13 @@ TEST_F(GlibMemoryTest, Share)
     }
 }
 
-TEST_F(GlibMemoryTest, Assigner)
+TEST_F(GlibMemoryTest, UPtrAssigner)
 {
     auto gkf = unique_glib(g_key_file_new());
 
     {
         GErrorUPtr error;
-        EXPECT_FALSE(g_key_file_get_boolean(gkf.get(), "group", "key", GErrorAssigner(error)));
+        EXPECT_FALSE(g_key_file_get_boolean(gkf.get(), "group", "key", GErrorUPtrAssigner(error)));
         ASSERT_TRUE(bool(error));
         EXPECT_EQ(G_KEY_FILE_ERROR_GROUP_NOT_FOUND, error->code);
     }
@@ -170,19 +170,46 @@ TEST_F(GlibMemoryTest, Assigner)
 
     {
         GErrorUPtr error;
-        EXPECT_TRUE(g_key_file_get_boolean(gkf.get(), "group", "key", GErrorAssigner(error)));
+        EXPECT_TRUE(g_key_file_get_boolean(gkf.get(), "group", "key", GErrorUPtrAssigner(error)));
         EXPECT_FALSE(bool(error));
     }
 
     {
         gcharUPtr str;
-        assignGChar(gcharAssigner(str));
+        assignGChar(gcharUPtrAssigner(str));
         ASSERT_TRUE(bool(str));
         EXPECT_STREQ("hi", str.get());
     }
 }
 
-TEST_F(GlibMemoryTest, GChar)
+TEST_F(GlibMemoryTest, SPtrAssigner)
+{
+    auto gkf = share_glib(g_key_file_new());
+
+    {
+        GErrorSPtr error;
+        EXPECT_FALSE(g_key_file_get_boolean(gkf.get(), "group", "key", GErrorSPtrAssigner(error)));
+        ASSERT_TRUE(bool(error));
+        EXPECT_EQ(G_KEY_FILE_ERROR_GROUP_NOT_FOUND, error->code);
+    }
+
+    g_key_file_set_boolean(gkf.get(), "group", "key", TRUE);
+
+    {
+        GErrorSPtr error;
+        EXPECT_TRUE(g_key_file_get_boolean(gkf.get(), "group", "key", GErrorSPtrAssigner(error)));
+        EXPECT_FALSE(bool(error));
+    }
+
+    {
+        gcharSPtr str;
+        assignGChar(gcharSPtrAssigner(str));
+        ASSERT_TRUE(bool(str));
+        EXPECT_STREQ("hi", str.get());
+    }
+}
+
+TEST_F(GlibMemoryTest, GCharUPtr)
 {
     {
         auto strv = unique_glib(g_strsplit("a b c", " ", 0));
@@ -194,6 +221,23 @@ TEST_F(GlibMemoryTest, GChar)
 
     {
         auto str = unique_glib(g_strdup("hello"));
+        ASSERT_TRUE(bool(str));
+        EXPECT_STREQ("hello", str.get());
+    }
+}
+
+TEST_F(GlibMemoryTest, GCharSPtr)
+{
+    {
+        auto strv = share_glib(g_strsplit("a b c", " ", 0));
+        ASSERT_TRUE(bool(strv));
+        EXPECT_STREQ("a", strv.get()[0]);
+        EXPECT_STREQ("b", strv.get()[1]);
+        EXPECT_STREQ("c", strv.get()[2]);
+    }
+
+    {
+        auto str = share_glib(g_strdup("hello"));
         ASSERT_TRUE(bool(str));
         EXPECT_STREQ("hello", str.get());
     }

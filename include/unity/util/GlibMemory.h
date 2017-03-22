@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authored by: Pete Woods <pete.woods@canonical.com>
+ *              Michi Henning <michi.henning@canonical.com>
  */
 
 #ifndef UNITY_UTIL_GLIBMEMORY_H
@@ -28,52 +29,93 @@ namespace unity
 namespace util
 {
 
-template<typename T, typename D>
-struct GlibDeleter
-{
-    D _d;
-
-    void operator()(T* ptr)
-    {
-        if (ptr != nullptr)
-        {
-            _d(ptr);
-        }
-    }
-};
+template<typename T> struct GlibDeleter;
 
 #define UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(TypeName, func) \
-typedef GlibDeleter<TypeName, decltype(&func)> TypeName##Deleter; \
+typedef GlibDeleter<TypeName> TypeName##Deleter; \
 typedef std::shared_ptr<TypeName> TypeName##SPtr; \
-inline TypeName##SPtr share_glib(TypeName* ptr) \
-{ \
-    return TypeName##SPtr(ptr, TypeName##Deleter{&func}); \
-} \
 typedef std::unique_ptr<TypeName, TypeName##Deleter> TypeName##UPtr; \
-inline TypeName##UPtr unique_glib(TypeName* ptr) \
+template<> struct GlibDeleter<TypeName> \
 { \
-    return TypeName##UPtr(ptr, TypeName##Deleter{&func}); \
-} \
-class TypeName##Assigner \
-{ \
-public: \
-    TypeName##Assigner(TypeName##UPtr& uptr) : \
-        _uptr(uptr) \
+    void operator()(TypeName* ptr) \
     { \
+        if (ptr) \
+        { \
+            ::func(ptr); \
+        } \
     } \
-    TypeName##Assigner(const TypeName##Assigner& other) = delete; \
-    ~TypeName##Assigner() \
-    { \
-        _uptr = unique_glib(_ptr); \
-    } \
-    TypeName##Assigner operator=(const TypeName##Assigner& other) = delete; \
-    operator TypeName**() \
-    { \
-        return &_ptr; \
-    } \
-private: \
-    TypeName* _ptr = nullptr; \
-    TypeName##UPtr& _uptr; \
+}; \
+typedef GlibSPtrAssigner<std::shared_ptr<TypeName>> TypeName##SPtrAssigner; \
+typedef GlibUPtrAssigner<std::unique_ptr<TypeName, TypeName##Deleter>> TypeName##UPtrAssigner;
+
+template<typename T>
+inline std::shared_ptr<T> share_glib(T* ptr)
+{
+    return std::shared_ptr<T>(ptr, GlibDeleter<T>());
+}
+
+template<typename T>
+inline std::unique_ptr<T, GlibDeleter<T>> unique_glib(T* ptr)
+{
+    return std::unique_ptr<T, GlibDeleter<T>>(ptr, GlibDeleter<T>());
+}
+
+template<typename U>
+class GlibUPtrAssigner
+{
+public:
+    GlibUPtrAssigner(U& uptr) :
+            _uptr(uptr)
+    {
+    }
+
+    GlibUPtrAssigner(const GlibUPtrAssigner& other) = delete;
+
+    ~GlibUPtrAssigner()
+    {
+        _uptr = unique_glib(_ptr);
+    }
+
+    GlibUPtrAssigner operator=(const GlibUPtrAssigner& other) = delete;
+
+    operator typename U::element_type**()
+    {
+        return &_ptr;
+    }
+
+private:
+    typename U::element_type* _ptr = nullptr;
+
+    U& _uptr;
+};
+
+template<typename S>
+class GlibSPtrAssigner
+{
+public:
+    GlibSPtrAssigner(S& sptr) :
+            _sptr(sptr)
+    {
+    }
+
+    GlibSPtrAssigner(const GlibSPtrAssigner& other) = delete;
+
+    ~GlibSPtrAssigner()
+    {
+        _sptr.reset(_ptr, GlibDeleter<typename S::element_type>());
+    }
+
+    GlibSPtrAssigner operator=(const GlibSPtrAssigner& other) = delete;
+
+    operator typename S::element_type**()
+    {
+        return &_ptr;
+    }
+
+private:
+    typename S::element_type* _ptr = nullptr;
+
+    S& _sptr;
 };
 
 #pragma push_macro("G_DEFINE_AUTOPTR_CLEANUP_FUNC")
