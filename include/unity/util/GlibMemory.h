@@ -65,7 +65,7 @@ inline std::unique_ptr<T, GlibDeleter<T>> unique_glib(T* ptr)
 // a default conversion operator to ElementType**. This allows the glib method
 // to assign to the ptr_ member. From the destructor, we call the appropriate
 // reset() method to trigger a call to the smart pointer's deleter, which
-// invokes the the appropriate glib deleter (such as g_error_free()).
+// invokes the appropriate glib deleter (such as g_error_free()).
 
 template<typename SP>
 class GlibPtrAssigner
