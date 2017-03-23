@@ -22,6 +22,7 @@
 #define UNITY_UTIL_GLIBMEMORY_H
 
 #include <memory>
+#include <type_traits>
 #include <glib.h>
 
 namespace unity
@@ -45,7 +46,7 @@ template<> struct GlibDeleter<TypeName> \
             ::func(ptr); \
         } \
     } \
-}; \
+};
 
 template<typename T>
 inline std::shared_ptr<T> share_glib(T* ptr)
@@ -59,54 +60,76 @@ inline std::unique_ptr<T, GlibDeleter<T>> unique_glib(T* ptr)
     return std::unique_ptr<T, GlibDeleter<T>>(ptr, GlibDeleter<T>());
 }
 
+// Adapter class that allows passing a shared_ptr or unique_ptr where glib
+// expects a parameter of type ElementType** (such as GError**), by providing
+// a default conversion operator to ElementType**. This allows the glib method
+// to assign to the ptr_ member. From the destructor, we call the appropriate
+// reset() method to trigger a call to the smart pointer's deleter, which
+// invokes the the appropriate glib deleter (such as g_error_free()).
+
 template<typename SP>
 class GlibPtrAssigner
 {
 public:
     typedef typename SP::element_type ElementType;
 
-    GlibPtrAssigner(SP& smart_ptr) :
-            _smart_ptr(smart_ptr)
+    GlibPtrAssigner(SP& smart_ptr)
+        : smart_ptr_(smart_ptr)
     {
     }
 
     GlibPtrAssigner(const GlibPtrAssigner& other) = delete;
 
-    GlibPtrAssigner(GlibPtrAssigner&& other) :
-        _ptr(other._ptr), _smart_ptr(other._smart_ptr)
+    GlibPtrAssigner(GlibPtrAssigner&& other)
+        : ptr_(other.ptr_)
+        , smart_ptr_(other.smart_ptr_)
     {
-        other._smart_ptr = nullptr;
+        other.smart_ptr_ = nullptr;
     }
 
     ~GlibPtrAssigner()
     {
-        release(_smart_ptr, _ptr);
+        release<SP>(smart_ptr_, ptr_);
     }
 
     GlibPtrAssigner operator=(const GlibPtrAssigner& other) = delete;
 
-    operator typename SP::element_type**()
+    operator ElementType**()
     {
-        return &_ptr;
+        return &ptr_;
     }
 
 private:
-    void release(std::shared_ptr<ElementType>& smart, ElementType* p)
+    // Instantiate exactly one of the two release() methods below, depending
+    // on whether we were instantiated with a shared_ptr or a unique_ptr.
+
+    template<typename T> 
+    typename std::enable_if<
+        std::is_same<T, std::shared_ptr<typename T::element_type>>::value,
+        void
+    >::type
+    release(std::shared_ptr<ElementType>& smart, ElementType* p)
     {
-        smart.reset(p, GlibDeleter<typename SP::element_type>());
+        smart.reset(p, GlibDeleter<typename T::element_type>());
     }
 
-    void release(std::unique_ptr<ElementType, GlibDeleter<typename SP::element_type>>& smart, ElementType* p)
+    template<typename T> 
+    typename std::enable_if<
+        std::is_same<T, std::unique_ptr<typename T::element_type, typename T::deleter_type>>::value,
+        void
+    >::type
+    release(std::unique_ptr<ElementType, GlibDeleter<typename T::element_type>>& smart, ElementType* p)
     {
         smart.reset(p);
     }
 
-    ElementType* _ptr = nullptr;
-    SP& _smart_ptr;
+    ElementType* ptr_ = nullptr;
+    SP& smart_ptr_;
 };
 
 template<typename SP>
-inline GlibPtrAssigner<SP> glib_assign(SP& smart_ptr)
+inline
+GlibPtrAssigner<SP> glib_assign(SP& smart_ptr)
 {
     return GlibPtrAssigner<SP>(smart_ptr);
 }
