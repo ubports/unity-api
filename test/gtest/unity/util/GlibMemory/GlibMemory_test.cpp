@@ -161,7 +161,7 @@ TEST_F(GlibMemoryTest, UPtrAssigner)
 
     {
         GErrorUPtr error;
-        EXPECT_FALSE(g_key_file_get_boolean(gkf.get(), "group", "key", glib_assign_uptr(error)));
+        EXPECT_FALSE(g_key_file_get_boolean(gkf.get(), "group", "key", glib_assign(error)));
         ASSERT_TRUE(bool(error));
         EXPECT_EQ(G_KEY_FILE_ERROR_GROUP_NOT_FOUND, error->code);
     }
@@ -170,13 +170,13 @@ TEST_F(GlibMemoryTest, UPtrAssigner)
 
     {
         GErrorUPtr error;
-        EXPECT_TRUE(g_key_file_get_boolean(gkf.get(), "group", "key", glib_assign_uptr(error)));
+        EXPECT_TRUE(g_key_file_get_boolean(gkf.get(), "group", "key", glib_assign(error)));
         EXPECT_FALSE(bool(error));
     }
 
     {
         gcharUPtr str;
-        assignGChar(glib_assign_uptr(str));
+        assignGChar(glib_assign(str));
         ASSERT_TRUE(bool(str));
         EXPECT_STREQ("hi", str.get());
     }
@@ -188,7 +188,7 @@ TEST_F(GlibMemoryTest, SPtrAssigner)
 
     {
         GErrorSPtr error;
-        EXPECT_FALSE(g_key_file_get_boolean(gkf.get(), "group", "key", glib_assign_sptr(error)));
+        EXPECT_FALSE(g_key_file_get_boolean(gkf.get(), "group", "key", glib_assign(error)));
         ASSERT_TRUE(bool(error));
         EXPECT_EQ(G_KEY_FILE_ERROR_GROUP_NOT_FOUND, error->code);
     }
@@ -197,13 +197,13 @@ TEST_F(GlibMemoryTest, SPtrAssigner)
 
     {
         GErrorSPtr error;
-        EXPECT_TRUE(g_key_file_get_boolean(gkf.get(), "group", "key", glib_assign_sptr(error)));
+        EXPECT_TRUE(g_key_file_get_boolean(gkf.get(), "group", "key", glib_assign(error)));
         EXPECT_FALSE(bool(error));
     }
 
     {
         gcharSPtr str;
-        assignGChar(glib_assign_sptr(str));
+        assignGChar(glib_assign(str));
         ASSERT_TRUE(bool(str));
         EXPECT_STREQ("hi", str.get());
     }

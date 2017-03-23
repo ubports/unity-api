@@ -15,6 +15,7 @@
  *
  * Authored by: Pete Woods <pete.woods@canonical.com>
  *              Michi Henning <michi.henning@canonical.com>
+ *              James Henstridge <james.henstridge@canonical.com>
  */
 
 #ifndef UNITY_UTIL_GLIBMEMORY_H
@@ -45,8 +46,6 @@ template<> struct GlibDeleter<TypeName> \
         } \
     } \
 }; \
-typedef GlibSPtrAssigner<std::shared_ptr<TypeName>> TypeName##SPtrAssigner; \
-typedef GlibUPtrAssigner<std::unique_ptr<TypeName, TypeName##Deleter>> TypeName##UPtrAssigner;
 
 template<typename T>
 inline std::shared_ptr<T> share_glib(T* ptr)
@@ -60,92 +59,56 @@ inline std::unique_ptr<T, GlibDeleter<T>> unique_glib(T* ptr)
     return std::unique_ptr<T, GlibDeleter<T>>(ptr, GlibDeleter<T>());
 }
 
-template<typename U>
-class GlibUPtrAssigner
+template<typename SP>
+class GlibPtrAssigner
 {
 public:
-    GlibUPtrAssigner(U& uptr) :
-            _uptr(uptr)
+    typedef typename SP::element_type ElementType;
+
+    GlibPtrAssigner(SP& smart_ptr) :
+            _smart_ptr(smart_ptr)
     {
     }
 
-    GlibUPtrAssigner(const GlibUPtrAssigner& other) = delete;
+    GlibPtrAssigner(const GlibPtrAssigner& other) = delete;
 
-    GlibUPtrAssigner(GlibUPtrAssigner&& other) :
-        _ptr(other._ptr), _uptr(other._uptr)
+    GlibPtrAssigner(GlibPtrAssigner&& other) :
+        _ptr(other._ptr), _smart_ptr(other._smart_ptr)
     {
-        other._ptr = nullptr;
+        other._smart_ptr = nullptr;
     }
 
-    ~GlibUPtrAssigner()
+    ~GlibPtrAssigner()
     {
-        if (_ptr)
-        {
-            _uptr = unique_glib(_ptr);
-        }
+        release(_smart_ptr, _ptr);
     }
 
-    GlibUPtrAssigner operator=(const GlibUPtrAssigner& other) = delete;
+    GlibPtrAssigner operator=(const GlibPtrAssigner& other) = delete;
 
-    operator typename U::element_type**()
+    operator typename SP::element_type**()
     {
         return &_ptr;
     }
 
 private:
-    typename U::element_type* _ptr = nullptr;
+    void release(std::shared_ptr<ElementType>& smart, ElementType* p)
+    {
+        smart.reset(p, GlibDeleter<typename SP::element_type>());
+    }
 
-    U& _uptr;
+    void release(std::unique_ptr<ElementType, GlibDeleter<typename SP::element_type>>& smart, ElementType* p)
+    {
+        smart.reset(p);
+    }
+
+    ElementType* _ptr = nullptr;
+    SP& _smart_ptr;
 };
 
-template<typename S>
-class GlibSPtrAssigner
+template<typename SP>
+inline GlibPtrAssigner<SP> glib_assign(SP& smart_ptr)
 {
-public:
-    GlibSPtrAssigner(S& sptr) :
-            _sptr(sptr)
-    {
-    }
-
-    GlibSPtrAssigner(const GlibSPtrAssigner& other) = delete;
-
-    GlibSPtrAssigner(GlibSPtrAssigner&& other) :
-        _ptr(other._ptr), _sptr(other._sptr)
-    {
-        other._ptr = nullptr;
-    }
-
-    ~GlibSPtrAssigner()
-    {
-        if (_ptr)
-        {
-            _sptr.reset(_ptr, GlibDeleter<typename S::element_type>());
-        }
-    }
-
-    GlibSPtrAssigner operator=(const GlibSPtrAssigner& other) = delete;
-
-    operator typename S::element_type**()
-    {
-        return &_ptr;
-    }
-
-private:
-    typename S::element_type* _ptr = nullptr;
-
-    S& _sptr;
-};
-
-template<typename U>
-inline GlibUPtrAssigner<U> glib_assign_uptr(U& uptr)
-{
-    return GlibUPtrAssigner<U>(uptr);
-}
-
-template<typename S>
-inline GlibSPtrAssigner<S> glib_assign_sptr(S& sptr)
-{
-    return GlibSPtrAssigner<S>(sptr);
+    return GlibPtrAssigner<SP>(smart_ptr);
 }
 
 #pragma push_macro("G_DEFINE_AUTOPTR_CLEANUP_FUNC")
