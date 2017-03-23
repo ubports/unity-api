@@ -31,109 +31,138 @@ namespace unity
 namespace util
 {
 
+namespace internal
+{
+
 template<typename T> struct GlibDeleter;
+template<typename T> using GlibSPtr = std::shared_ptr<T>;
+template<typename T> using GlibUPtr = std::unique_ptr<T, GlibDeleter<T>>;
+
+/**
+ * \brief Adapter class to assign to smart pointers from functions that take a reference.
+ *
+ * Adapter class that allows passing a shared_ptr or unique_ptr where glib
+ * expects a parameter of type ElementType** (such as GError**), by providing
+ * a default conversion operator to ElementType**. This allows the glib method
+ * to assign to the ptr_ member. From the destructor, we assign to the
+ * provided smart pointer.
+ */
+template<typename SP>
+class GlibAssigner
+{
+public:
+    typedef typename SP::element_type ElementType;
+
+    GlibAssigner(SP& smart_ptr) noexcept :
+            smart_ptr_(smart_ptr)
+    {
+    }
+
+    GlibAssigner(const GlibAssigner& other) = delete;
+
+    GlibAssigner(GlibAssigner&& other) noexcept:
+            ptr_(other.ptr_), smart_ptr_(other.smart_ptr_)
+    {
+        other.ptr_ = nullptr;
+    }
+
+    ~GlibAssigner() noexcept
+    {
+        if (ptr_)
+        {
+            smart_ptr_ = SP(ptr_, GlibDeleter<ElementType>());
+        }
+    }
+
+    GlibAssigner operator=(const GlibAssigner& other) = delete;
+
+    operator ElementType**() noexcept
+    {
+        return &ptr_;
+    }
+
+private:
+    ElementType* ptr_ = nullptr;
+
+    SP& smart_ptr_;
+};
+
+}
 
 #define UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(TypeName, func) \
-typedef GlibDeleter<TypeName> TypeName##Deleter; \
-typedef std::shared_ptr<TypeName> TypeName##SPtr; \
-typedef std::unique_ptr<TypeName, TypeName##Deleter> TypeName##UPtr; \
+using TypeName##Deleter = internal::GlibDeleter<TypeName>; \
+using TypeName##SPtr = internal::GlibSPtr<TypeName>; \
+using TypeName##UPtr = internal::GlibUPtr<TypeName>; \
+namespace internal \
+{ \
 template<> struct GlibDeleter<TypeName> \
 { \
-    void operator()(TypeName* ptr) \
+    void operator()(TypeName* ptr) noexcept \
     { \
         if (ptr) \
         { \
             ::func(ptr); \
         } \
     } \
-};
+}; \
+}
 
+/**
+ \brief Helper method to wrap a shared_ptr around a Glib type.
+
+ Example:
+ \code{.cpp}
+ auto gkf = shared_glib(g_key_file_new());
+ \endcode
+ */
 template<typename T>
-inline std::shared_ptr<T> share_glib(T* ptr)
+inline internal::GlibSPtr<T> share_glib(T* ptr) noexcept
 {
-    return std::shared_ptr<T>(ptr, GlibDeleter<T>());
+    return internal::GlibSPtr<T>(ptr, internal::GlibDeleter<T>());
 }
 
+/**
+ \brief Helper method to wrap a unique_ptr around a Glib type.
+
+ Example:
+ \code{.cpp}
+ auto gkf = unique_glib(g_key_file_new());
+ \endcode
+ */
 template<typename T>
-inline std::unique_ptr<T, GlibDeleter<T>> unique_glib(T* ptr)
+inline internal::GlibUPtr<T> unique_glib(T* ptr) noexcept
 {
-    return std::unique_ptr<T, GlibDeleter<T>>(ptr, GlibDeleter<T>());
+    return internal::GlibUPtr<T>(ptr, internal::GlibDeleter<T>());
 }
 
-// Adapter class that allows passing a shared_ptr or unique_ptr where glib
-// expects a parameter of type ElementType** (such as GError**), by providing
-// a default conversion operator to ElementType**. This allows the glib method
-// to assign to the ptr_ member. From the destructor, we call the appropriate
-// reset() method to trigger a call to the smart pointer's deleter, which
-// invokes the appropriate glib deleter (such as g_error_free()).
+/**
+ \brief Helper method to take ownership of glib types assigned from a reference.
 
+ Example:
+ \code{.cpp}
+ GErrorSPtr error;
+ if (!g_key_file_get_boolean(gkf.get(), "group", "key", assign_glib(error)))
+ {
+     std::cerr << error->message << std::endl;
+     throw some_exception();
+ }
+ \endcode
+
+ Another example:
+ \code{.cpp}
+ gcharUPtr name;
+ g_object_get(obj, "name", assign_glib(name), nullptr);
+ \endcode
+ */
 template<typename SP>
-class GlibPtrAssigner
+inline internal::GlibAssigner<SP> assign_glib(SP& smart_ptr) noexcept
 {
-public:
-    typedef typename SP::element_type ElementType;
-
-    GlibPtrAssigner(SP& smart_ptr)
-        : smart_ptr_(smart_ptr)
-    {
-    }
-
-    GlibPtrAssigner(const GlibPtrAssigner& other) = delete;
-
-    GlibPtrAssigner(GlibPtrAssigner&& other)
-        : ptr_(other.ptr_)
-        , smart_ptr_(other.smart_ptr_)
-    {
-        other.smart_ptr_ = nullptr;
-    }
-
-    ~GlibPtrAssigner()
-    {
-        release<SP>(smart_ptr_, ptr_);
-    }
-
-    GlibPtrAssigner operator=(const GlibPtrAssigner& other) = delete;
-
-    operator ElementType**()
-    {
-        return &ptr_;
-    }
-
-private:
-    // Instantiate exactly one of the two release() methods below, depending
-    // on whether we were instantiated with a shared_ptr or a unique_ptr.
-
-    template<typename T> 
-    typename std::enable_if<
-        std::is_same<T, std::shared_ptr<typename T::element_type>>::value,
-        void
-    >::type
-    release(std::shared_ptr<ElementType>& smart, ElementType* p)
-    {
-        smart.reset(p, GlibDeleter<typename T::element_type>());
-    }
-
-    template<typename T> 
-    typename std::enable_if<
-        std::is_same<T, std::unique_ptr<typename T::element_type, typename T::deleter_type>>::value,
-        void
-    >::type
-    release(std::unique_ptr<ElementType, GlibDeleter<typename T::element_type>>& smart, ElementType* p)
-    {
-        smart.reset(p);
-    }
-
-    ElementType* ptr_ = nullptr;
-    SP& smart_ptr_;
-};
-
-template<typename SP>
-inline
-GlibPtrAssigner<SP> glib_assign(SP& smart_ptr)
-{
-    return GlibPtrAssigner<SP>(smart_ptr);
+    return internal::GlibAssigner<SP>(smart_ptr);
 }
 
+/**
+ * Below here is some hackery to extract the matching deleters for all built in glib types.
+ */
 #pragma push_macro("G_DEFINE_AUTOPTR_CLEANUP_FUNC")
 #undef G_DEFINE_AUTOPTR_CLEANUP_FUNC
 #define G_DEFINE_AUTOPTR_CLEANUP_FUNC(TypeName, func) UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(TypeName, func)
@@ -154,6 +183,9 @@ GlibPtrAssigner<SP> glib_assign(SP& smart_ptr)
 #pragma pop_macro("G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC")
 #pragma pop_macro("G_DEFINE_AUTO_CLEANUP_FREE_FUNC")
 
+/**
+ * Manually add extra definitions for gchar* and gchar**
+ */
 UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(gchar, g_free)
 typedef gchar* gcharv;
 UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(gcharv, g_strfreev)
