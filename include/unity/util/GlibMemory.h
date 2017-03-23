@@ -22,7 +22,6 @@
 #define UNITY_UTIL_GLIBMEMORY_H
 
 #include <memory>
-#include <type_traits>
 #include <glib.h>
 
 namespace unity

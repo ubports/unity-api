@@ -175,8 +175,8 @@ inline GObjectUPtr<T> make_gobject(GType object_type, const gchar *first_propert
 
  Example:
  \code{.cpp}
- std::shared_ptr< name;
- g_object_get(obj, "name", assign_glib(name), nullptr);
+ GObjectUPtr<FooBar> o;
+ method_that_assigns_a_foobar(assign_gobject(o));
  \endcode
  */
 template<typename SP>
