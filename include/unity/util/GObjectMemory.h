@@ -24,6 +24,8 @@
 #include <stdexcept>
 #include <glib-object.h>
 
+#include <unity/util/ResourcePtr.h>
+
 namespace unity
 {
 
@@ -109,6 +111,20 @@ private:
     SP& smart_ptr_;
 };
 
+template <typename T>
+struct GObjectSignalUnsubscriber
+{
+    void operator()(gulong handle) noexcept
+    {
+        if (handle != 0 && G_IS_OBJECT(obj_.get()))
+        {
+            g_signal_handler_disconnect(obj_.get(), handle);
+        }
+    }
+
+    GObjectSPtr<T> obj_;
+};
+
 }
 
 /**
@@ -187,6 +203,14 @@ inline internal::GObjectAssigner<SP> assign_gobject(SP& smart_ptr) noexcept
     return internal::GObjectAssigner<SP>(smart_ptr);
 }
 
+template<typename T>
+using GObjectSignalConnection = ResourcePtr<gulong, internal::GObjectSignalUnsubscriber<T>>;
+
+template <typename T>
+inline GObjectSignalConnection<T> gobject_signal_connection(gulong id, const GObjectSPtr<T>& obj)
+{
+    return GObjectSignalConnection<T>(id, internal::GObjectSignalUnsubscriber<T>{obj});
+}
 
 }  // namespace until
 

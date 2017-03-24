@@ -20,6 +20,7 @@
 #define UNITY_UTIL_RESOURCEPTR_H
 
 #include <mutex>
+#include <type_traits>
 
 namespace unity
 {
@@ -135,6 +136,7 @@ public:
     */
     typedef D deleter_type;
 
+    ResourcePtr();
     explicit ResourcePtr(D d);
     ResourcePtr(R r, D d);
     ResourcePtr(ResourcePtr&& r);
@@ -174,6 +176,14 @@ private:
     typedef std::lock_guard<decltype(m_)>  AutoLock;
     typedef LockAdopter<decltype(m_)>      AdoptLock;
 };
+
+template<typename R, typename D>
+ResourcePtr<R, D>::ResourcePtr()
+    : initialized_(false)
+{
+    static_assert(!std::is_pointer<deleter_type>::value,
+            "constructed with null function pointer deleter");
+}
 
 /**
 Constructs a ResourcePtr with the specified deleter. No resource is held, so a call to has_resource()
