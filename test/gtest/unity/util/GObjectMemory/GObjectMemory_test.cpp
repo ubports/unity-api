@@ -19,7 +19,6 @@
 
 #include <unity/util/GlibMemory.h>
 #include <unity/util/GObjectMemory.h>
-#include <glib-object.h>
 #include <gtest/gtest.h>
 #include <list>
 #include <string>

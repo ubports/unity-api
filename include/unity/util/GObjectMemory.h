@@ -69,6 +69,9 @@ struct GObjectDeleter
 template<typename T> using GObjectSPtr = std::shared_ptr<T>;
 template<typename T> using GObjectUPtr = std::unique_ptr<T, GObjectDeleter>;
 
+namespace internal
+{
+
 template<typename SP>
 class GObjectAssigner
 {
@@ -96,7 +99,7 @@ public:
         }
     }
 
-    GObjectAssigner operator=(const GObjectAssigner& other) = delete;
+    GObjectAssigner& operator=(const GObjectAssigner& other) = delete;
 
     operator ElementType**() noexcept
     {
@@ -180,9 +183,9 @@ inline GObjectUPtr<T> make_gobject(GType object_type, const gchar *first_propert
  \endcode
  */
 template<typename SP>
-inline GObjectAssigner<SP> assign_gobject(SP& smart_ptr) noexcept
+inline internal::GObjectAssigner<SP> assign_gobject(SP& smart_ptr) noexcept
 {
-    return GObjectAssigner<SP>(smart_ptr);
+    return internal::GObjectAssigner<SP>(smart_ptr);
 }
 
 

@@ -73,7 +73,7 @@ public:
         }
     }
 
-    GlibAssigner operator=(const GlibAssigner& other) = delete;
+    GlibAssigner& operator=(const GlibAssigner& other) = delete;
 
     operator ElementType**() noexcept
     {
