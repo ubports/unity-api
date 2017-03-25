@@ -18,12 +18,14 @@
 
 #include <unity/util/GioMemory.h>
 #include <unity/util/GlibMemory.h>
+#include <libqtdbustest/DBusTestRunner.h>
 #include <gtest/gtest.h>
 #include <list>
 #include <string>
 
 using namespace std;
 using namespace unity::util;
+using namespace QtDBusTest;
 
 namespace
 {
@@ -58,6 +60,21 @@ protected:
         return G_SOURCE_CONTINUE;
     }
 
+    static GObjectSPtr<GDBusConnection> getSessionBus()
+    {
+        auto address = unique_glib(g_dbus_address_get_for_bus_sync(G_BUS_TYPE_SESSION, nullptr, nullptr));
+
+        auto bus = unique_gobject(
+                g_dbus_connection_new_for_address_sync(address.get(), (GDBusConnectionFlags) (G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT | G_DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION), nullptr,
+                        nullptr, nullptr));
+
+        g_dbus_connection_set_exit_on_close(bus.get(), FALSE);
+
+        return bus;
+    }
+
+    DBusTestRunner dbusTestRunner;
+
     GDBusSignalConnection signalConnection_;
 
     GMainLoopSPtr mainloop_;
@@ -70,7 +87,7 @@ TEST_F(GioMemoryTest, signals)
 {
     mainloop_ = share_glib(g_main_loop_new(nullptr, false));
 
-    auto bus = share_gobject(g_bus_get_sync(G_BUS_TYPE_SYSTEM, nullptr, nullptr));
+    auto bus = getSessionBus();
     ASSERT_TRUE(bool(bus));
 
     signalConnection_ = gdbus_signal_connection(
