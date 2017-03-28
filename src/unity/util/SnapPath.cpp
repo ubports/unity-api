@@ -25,14 +25,11 @@ namespace util
 
 std::string prepend_snap_path(const std::string& path)
 {
-    auto get_snap_path = []() {
-        const char* env_snap = getenv("SNAP");
-        if (env_snap == nullptr) {
-            return "";
-        }
-        return env_snap;
-    };
-    return get_snap_path() + path;
+    const char* env_snap = getenv("SNAP");
+    if (env_snap == nullptr) {
+        return path;
+    }
+    return env_snap + path;
 }
 
 } // namespace util

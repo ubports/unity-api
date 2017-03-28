@@ -21,6 +21,8 @@
 
 using namespace unity::util;
 
+namespace {
+
 TEST(Utilities, testPrependSnapPathSet) {
     ASSERT_EQ(0, setenv("SNAP", "/snap", 1));
     EXPECT_EQ("/snap/bar", prepend_snap_path("/bar"));
@@ -31,3 +33,5 @@ TEST(Utilities, testPrependSnapPathUnset) {
     ASSERT_EQ(0, unsetenv("SNAP"));
     EXPECT_EQ("/bar", prepend_snap_path("/bar"));
 }
+
+} // namespace
