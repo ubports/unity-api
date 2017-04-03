@@ -58,6 +58,11 @@ class MirSurfaceInterface : public QObject
     Q_PROPERTY(QString persistentId READ persistentId CONSTANT)
 
     /**
+     * @brief App Id of the app this surface belongs to
+     */
+    Q_PROPERTY(QString appId READ appId CONSTANT)
+
+    /**
      * @brief Position of the current surface buffer, in pixels.
      */
     Q_PROPERTY(QPoint position READ position NOTIFY positionChanged)
@@ -165,6 +170,13 @@ class MirSurfaceInterface : public QObject
     Q_PROPERTY(bool confinesMousePointer READ confinesMousePointer NOTIFY confinesMousePointerChanged)
 
     /**
+     * @brief Whether to comply to resize requests coming from the client side
+     *
+     * It's true by default
+     */
+    Q_PROPERTY(bool allowClientResize READ allowClientResize WRITE setAllowClientResize NOTIFY allowClientResizeChanged)
+
+    /**
      * @brief The parent MirSurface or null if this is a top-level surface
      */
     Q_PROPERTY(MirSurfaceInterface* parentSurface READ parentSurface CONSTANT)
@@ -187,6 +199,8 @@ public:
     virtual QString name() const = 0;
 
     virtual QString persistentId() const = 0;
+
+    virtual QString appId() const = 0;
 
     virtual QPoint position() const = 0;
 
@@ -220,6 +234,9 @@ public:
     virtual QRect inputBounds() const = 0;
 
     virtual bool confinesMousePointer() const = 0;
+
+    virtual bool allowClientResize() const = 0;
+    virtual void setAllowClientResize(bool) = 0;
 
     virtual QPoint requestedPosition() const = 0;
     virtual void setRequestedPosition(const QPoint &) = 0;
@@ -270,6 +287,7 @@ Q_SIGNALS:
     void focusedChanged(bool value);
     void inputBoundsChanged(QRect value);
     void confinesMousePointerChanged(bool value);
+    void allowClientResizeChanged(bool value);
     /// @endcond
 
     /**

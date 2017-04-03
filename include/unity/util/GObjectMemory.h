@@ -33,11 +33,11 @@ namespace util
 namespace
 {
 
-inline static void sink_floating_gobject(gpointer t)
+inline static void check_floating_gobject(gpointer t)
 {
-    if (t != nullptr && g_object_is_floating(G_OBJECT(t)))
+    if (G_IS_OBJECT(t) && g_object_is_floating(G_OBJECT(t)))
     {
-        g_object_ref_sink(t);
+        throw std::invalid_argument("cannot manage floating GObject reference - call g_object_ref_sink(o) first");
     }
 }
 
@@ -81,7 +81,7 @@ struct GObjectDeleter
 template<typename T>
 inline std::unique_ptr<T, GObjectDeleter> unique_gobject(T* ptr)
 {
-    sink_floating_gobject(ptr);
+    check_floating_gobject(ptr);
     GObjectDeleter d;
     return std::unique_ptr<T, GObjectDeleter>(ptr, d);
 }
@@ -101,7 +101,7 @@ inline std::unique_ptr<T, GObjectDeleter> unique_gobject(T* ptr)
 template<typename T>
 inline std::shared_ptr<T> share_gobject(T* ptr)
 {
-    sink_floating_gobject(ptr);
+    check_floating_gobject(ptr);
     GObjectDeleter d;
     return std::shared_ptr<T>(ptr, d);
 }
@@ -120,6 +120,10 @@ template<typename T, typename ... Args>
 inline std::unique_ptr<T, GObjectDeleter> make_gobject(GType object_type, const gchar *first_property_name, Args&&... args)
 {
     gpointer ptr = g_object_new(object_type, first_property_name, std::forward<Args>(args)...);
+    if (G_IS_OBJECT(ptr) && g_object_is_floating(ptr))
+    {
+        g_object_ref_sink(ptr);
+    }
     return unique_gobject(G_TYPE_CHECK_INSTANCE_CAST(ptr, object_type, T));
 }
 
