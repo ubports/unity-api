@@ -569,5 +569,3 @@ INSTANTIATE_TEST_CASE_P(BunchOfNames,
                                           GObjectMemoryMakeSharedTestParam{"moe", 3}));
 
 }
-
-
