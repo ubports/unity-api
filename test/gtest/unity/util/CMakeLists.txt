@@ -1,6 +1,7 @@
 add_subdirectory(Daemon)
 add_subdirectory(DefinesPtrs)
 add_subdirectory(FileIO)
+add_subdirectory(GioMemory)
 add_subdirectory(GlibMemory)
 add_subdirectory(GObjectMemory)
 add_subdirectory(IniParser)

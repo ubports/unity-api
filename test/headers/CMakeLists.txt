@@ -11,6 +11,7 @@ set(subdirs
 )
 
 set(exclusions
+    "GioMemory.h"
     "GlibMemory.h"
     "GObjectMemory.h"
 )

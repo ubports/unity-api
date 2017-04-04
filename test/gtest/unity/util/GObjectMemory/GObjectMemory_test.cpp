@@ -54,6 +54,8 @@ void foo_bar_assigner_full(const gchar* const name, guint id, FooBar** in);
 
 void foo_bar_assigner_null(FooBar** in);
 
+void foo_bar_set_name(FooBar* fooBar, const gchar* const name);
+
 G_END_DECLS
 
 // private implementation
@@ -197,6 +199,11 @@ void foo_bar_assigner_null(FooBar** in)
     }
 }
 
+void foo_bar_set_name(FooBar* fooBar, const gchar* const name)
+{
+    g_object_set(fooBar, "name", name, nullptr);
+}
+
 //
 // Test cases
 //
@@ -213,6 +220,22 @@ protected:
     {
         DELETED_OBJECTS.clear();
     }
+
+    static void on_notify_name(GObject *object, GParamSpec *, gpointer user_data)
+    {
+        static_cast<GObjectMemoryTest*>(user_data)->onNotifyName(object);
+    }
+
+    void onNotifyName(GObject *object)
+    {
+        gcharUPtr name;
+        g_object_get(object, "name", assign_glib(name), nullptr);
+        nameChanges_.emplace_back(name.get());
+    }
+
+    list<string> nameChanges_;
+
+    GObjectSignalConnection<FooBar> nameConnection_;
 };
 
 TEST_F(GObjectMemoryTest, trivial)
@@ -494,6 +517,17 @@ TEST_F(GObjectMemoryTest, moveUptrSptr)
         GObjectSPtr<FooBar> s(unique_gobject(foo_bar_new_full("bye", 7)));
     }
     EXPECT_EQ(list<Deleted>({{"hi", 6}, {"bye", 7}}), DELETED_OBJECTS);
+}
+
+TEST_F(GObjectMemoryTest, signals)
+{
+    auto o(share_gobject(foo_bar_new_full("hi", 1)));
+    nameConnection_ = gobject_signal_connection(g_signal_connect(o.get(), "notify::name", G_CALLBACK(on_notify_name), this), o);
+    foo_bar_set_name(o.get(), "change1");
+    nameConnection_.dealloc();
+    foo_bar_set_name(o.get(), "change2");
+
+    EXPECT_EQ(list<string>{"change1"}, nameChanges_);
 }
 
 typedef pair<const char*, guint> GObjectMemoryMakeSharedTestParam;

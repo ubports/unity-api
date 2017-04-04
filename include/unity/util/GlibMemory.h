@@ -24,6 +24,8 @@
 #include <memory>
 #include <glib.h>
 
+#include <unity/util/ResourcePtr.h>
+
 namespace unity
 {
 
@@ -81,6 +83,17 @@ private:
     ElementType* ptr_ = nullptr;
 
     SP& smart_ptr_;
+};
+
+struct GSourceUnsubscriber
+{
+    void operator()(guint tag) noexcept
+    {
+        if (tag != 0)
+        {
+            g_source_remove(tag);
+        }
+    }
 };
 
 }
@@ -154,6 +167,21 @@ template<typename SP>
 inline internal::GlibAssigner<SP> assign_glib(SP& smart_ptr) noexcept
 {
     return internal::GlibAssigner<SP>(smart_ptr);
+}
+
+using GSourceManager = ResourcePtr<guint, internal::GSourceUnsubscriber>;
+
+/**
+ \brief Simple wrapper to manage the lifecycle of sources.
+
+ When 'timer' goes out of scope or is dealloc'ed, the source will be removed:
+ \code{.cpp}
+ auto timer = g_source_manager(g_timeout_add(5000, on_timeout, nullptr));
+ \endcode
+ */
+inline GSourceManager g_source_manager(guint id)
+{
+    return GSourceManager(id, internal::GSourceUnsubscriber());
 }
 
 /**
