@@ -136,7 +136,7 @@ inline internal::GlibUPtr<T> unique_glib(T* ptr) noexcept
 
  Example:
  \code{.cpp}
- GErrorSPtr error;
+ GErrorUPtr error;
  if (!g_key_file_get_boolean(gkf.get(), "group", "key", assign_glib(error)))
  {
      std::cerr << error->message << std::endl;
