@@ -57,7 +57,7 @@ inline static void check_floating_gobject(gpointer t)
  */
 struct GObjectDeleter
 {
-    void operator()(gpointer ptr)
+    void operator()(gpointer ptr) noexcept
     {
         if (G_IS_OBJECT(ptr))
         {
@@ -65,6 +65,51 @@ struct GObjectDeleter
         }
     }
 };
+
+template<typename T> using GObjectSPtr = std::shared_ptr<T>;
+template<typename T> using GObjectUPtr = std::unique_ptr<T, GObjectDeleter>;
+
+namespace internal
+{
+
+template<typename SP>
+class GObjectAssigner
+{
+public:
+    typedef typename SP::element_type ElementType;
+
+    GObjectAssigner(SP& smart_ptr) noexcept:
+            smart_ptr_(smart_ptr)
+    {
+    }
+
+    GObjectAssigner(const GObjectAssigner& other) = delete;
+
+    GObjectAssigner(GObjectAssigner&& other) noexcept:
+            ptr_(other.ptr_), smart_ptr_(other.smart_ptr_)
+    {
+        other.ptr_ = nullptr;
+    }
+
+    ~GObjectAssigner() noexcept
+    {
+        smart_ptr_ = SP(ptr_, GObjectDeleter());
+    }
+
+    GObjectAssigner& operator=(const GObjectAssigner& other) = delete;
+
+    operator ElementType**() noexcept
+    {
+        return &ptr_;
+    }
+
+private:
+    ElementType* ptr_ = nullptr;
+
+    SP& smart_ptr_;
+};
+
+}
 
 /**
  \brief Helper method to wrap a unique_ptr around an existing GObject.
@@ -79,11 +124,11 @@ struct GObjectDeleter
  \endcode
  */
 template<typename T>
-inline std::unique_ptr<T, GObjectDeleter> unique_gobject(T* ptr)
+inline GObjectUPtr<T> unique_gobject(T* ptr)
 {
     check_floating_gobject(ptr);
     GObjectDeleter d;
-    return std::unique_ptr<T, GObjectDeleter>(ptr, d);
+    return GObjectUPtr<T>(ptr, d);
 }
 
 /**
@@ -99,11 +144,11 @@ inline std::unique_ptr<T, GObjectDeleter> unique_gobject(T* ptr)
  \endcode
  */
 template<typename T>
-inline std::shared_ptr<T> share_gobject(T* ptr)
+inline GObjectSPtr<T> share_gobject(T* ptr)
 {
     check_floating_gobject(ptr);
     GObjectDeleter d;
-    return std::shared_ptr<T>(ptr, d);
+    return GObjectSPtr<T>(ptr, d);
 }
 
 /**
@@ -117,7 +162,7 @@ inline std::shared_ptr<T> share_gobject(T* ptr)
  \endcode
  */
 template<typename T, typename ... Args>
-inline std::unique_ptr<T, GObjectDeleter> make_gobject(GType object_type, const gchar *first_property_name, Args&&... args)
+inline GObjectUPtr<T> make_gobject(GType object_type, const gchar *first_property_name, Args&&... args) noexcept
 {
     gpointer ptr = g_object_new(object_type, first_property_name, std::forward<Args>(args)...);
     if (G_IS_OBJECT(ptr) && g_object_is_floating(ptr))
@@ -126,6 +171,22 @@ inline std::unique_ptr<T, GObjectDeleter> make_gobject(GType object_type, const 
     }
     return unique_gobject(G_TYPE_CHECK_INSTANCE_CAST(ptr, object_type, T));
 }
+
+/**
+ \brief Helper method to take ownership of GObjects assigned from a reference.
+
+ Example:
+ \code{.cpp}
+ GObjectUPtr<FooBar> o;
+ method_that_assigns_a_foobar(assign_gobject(o));
+ \endcode
+ */
+template<typename SP>
+inline internal::GObjectAssigner<SP> assign_gobject(SP& smart_ptr) noexcept
+{
+    return internal::GObjectAssigner<SP>(smart_ptr);
+}
+
 
 }  // namespace until
 

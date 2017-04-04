@@ -17,8 +17,8 @@
  *              Pete Woods <pete.woods@canonical.com>
  */
 
+#include <unity/util/GlibMemory.h>
 #include <unity/util/GObjectMemory.h>
-#include <glib-object.h>
 #include <gtest/gtest.h>
 #include <list>
 #include <string>
@@ -46,7 +46,13 @@ G_DECLARE_FINAL_TYPE (FooBar, foo_bar, FOO, BAR, GObject)
 
 FooBar *foo_bar_new();
 
+void foo_bar_assigner(FooBar** in);
+
 FooBar *foo_bar_new_full(const gchar* const name, guint id);
+
+void foo_bar_assigner_full(const gchar* const name, guint id, FooBar** in);
+
+void foo_bar_assigner_null(FooBar** in);
 
 G_END_DECLS
 
@@ -165,6 +171,30 @@ FooBar *foo_bar_new()
 FooBar *foo_bar_new_full(const gchar* const name, guint id)
 {
     return FOO_BAR(g_object_new(FOO_TYPE_BAR, "name", name, "id", id, NULL));
+}
+
+void foo_bar_assigner(FooBar** in)
+{
+    if (in != nullptr)
+    {
+        *in = foo_bar_new();
+    }
+}
+
+void foo_bar_assigner_full(const gchar* const name, guint id, FooBar** in)
+{
+    if (in != nullptr)
+    {
+        *in = foo_bar_new_full(name, id);
+    }
+}
+
+void foo_bar_assigner_null(FooBar** in)
+{
+    if (in != nullptr)
+    {
+        *in = nullptr;
+    }
 }
 
 //
@@ -337,12 +367,12 @@ TEST_F(GObjectMemoryTest, reset)
 }
 
 TEST_F(GObjectMemoryTest, sizeoftest) {
-    EXPECT_EQ(sizeof(FooBar*), sizeof(unique_ptr<FooBar>));
+    EXPECT_EQ(sizeof(FooBar*), sizeof(GObjectUPtr<FooBar>));
 }
 
 TEST_F(GObjectMemoryTest, hash)
 {
-    unordered_set<shared_ptr<FooBar>> s;
+    unordered_set<GObjectSPtr<FooBar>> s;
     auto a = share_gobject(foo_bar_new());
     auto b = share_gobject(foo_bar_new());
     auto c = share_gobject(foo_bar_new());
@@ -403,10 +433,57 @@ TEST_F(GObjectMemoryTest, makeGObjectDeletesGObjects)
     EXPECT_EQ(list<Deleted>({{"c", 3}, {"b", 2}, {"a", 1}}), DELETED_OBJECTS);
 }
 
-TEST_F(GObjectMemoryTest, foo)
+TEST_F(GObjectMemoryTest, uptrAssignerDeletesGObjects)
 {
     {
-        shared_ptr<FooBar> s;
+        GObjectUPtr<FooBar> a, b;
+        foo_bar_assigner_full("a", 1, assign_gobject(a));
+        foo_bar_assigner_full("b", 2, assign_gobject(b));
+    }
+    EXPECT_EQ(list<Deleted>({{"b", 2}, {"a", 1}}), DELETED_OBJECTS);
+}
+
+TEST_F(GObjectMemoryTest, sptrAssignerDeletesGObjects)
+{
+    {
+        GObjectSPtr<FooBar> a, b, c;
+        foo_bar_assigner_full("a", 3, assign_gobject(a));
+        foo_bar_assigner_full("b", 4, assign_gobject(b));
+        foo_bar_assigner_full("c", 5, assign_gobject(c));
+    }
+    EXPECT_EQ(list<Deleted>({{"c", 5}, {"b", 4}, {"a", 3}}), DELETED_OBJECTS);
+}
+
+TEST_F(GObjectMemoryTest, uptrAssignerAssignsNull)
+{
+    {
+       GObjectUPtr<FooBar> o;
+       foo_bar_assigner_full("o", 1, assign_gobject(o));
+       ASSERT_TRUE(bool(o));
+       foo_bar_assigner_null(assign_gobject(o));
+       ASSERT_FALSE(bool(o));
+
+    }
+    EXPECT_EQ(list<Deleted>({{"o", 1}}), DELETED_OBJECTS);
+}
+
+TEST_F(GObjectMemoryTest, sptrAssignerAssignsNull)
+{
+    {
+       GObjectSPtr<FooBar> o;
+       foo_bar_assigner_full("o", 1, assign_gobject(o));
+       ASSERT_TRUE(bool(o));
+       foo_bar_assigner_null(assign_gobject(o));
+       ASSERT_FALSE(bool(o));
+
+    }
+    EXPECT_EQ(list<Deleted>({{"o", 1}}), DELETED_OBJECTS);
+}
+
+TEST_F(GObjectMemoryTest, moveUptrSptr)
+{
+    {
+        GObjectSPtr<FooBar> s;
         auto u = unique_gobject(foo_bar_new_full("hi", 6));
         s = move(u);
         // unique instance has been stolen from
@@ -414,7 +491,7 @@ TEST_F(GObjectMemoryTest, foo)
     }
     EXPECT_EQ(list<Deleted>({{"hi", 6}}), DELETED_OBJECTS);
     {
-        shared_ptr<FooBar> s(unique_gobject(foo_bar_new_full("bye", 7)));
+        GObjectSPtr<FooBar> s(unique_gobject(foo_bar_new_full("bye", 7)));
     }
     EXPECT_EQ(list<Deleted>({{"hi", 6}, {"bye", 7}}), DELETED_OBJECTS);
 }
@@ -431,14 +508,12 @@ protected:
      */
     static void checkProperties(gpointer obj, const char* expectedName, guint expectedId)
     {
-        char* name = NULL;
+        gcharUPtr name;
         guint id = 0;
 
-        g_object_get(obj, "name", &name, "id", &id, NULL);
-        EXPECT_STREQ(expectedName, name);
+        g_object_get(obj, "name", assign_glib(name), "id", &id, nullptr);
+        EXPECT_STREQ(expectedName, name.get());
         EXPECT_EQ(expectedId, id);
-
-        g_free(name);
     }
 };
 
@@ -468,6 +543,22 @@ TEST_P(GObjectMemoryMakeHelperMethodsTest, share_foo_bar_new)
 {
     auto p = GetParam();
     auto obj = share_gobject(foo_bar_new_full(p.first, p.second));
+    checkProperties(obj.get(), p.first, p.second);
+}
+
+TEST_P(GObjectMemoryMakeHelperMethodsTest, assign_foo_bar_uptr_assigner)
+{
+    auto p = GetParam();
+    GObjectUPtr<FooBar> obj;
+    foo_bar_assigner_full(p.first, p.second, assign_gobject(obj));
+    checkProperties(obj.get(), p.first, p.second);
+}
+
+TEST_P(GObjectMemoryMakeHelperMethodsTest, assign_foo_bar_sptr_assigner)
+{
+    auto p = GetParam();
+    GObjectSPtr<FooBar> obj;
+    foo_bar_assigner_full(p.first, p.second, assign_gobject(obj));
     checkProperties(obj.get(), p.first, p.second);
 }
 
