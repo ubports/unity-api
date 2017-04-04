@@ -1,3 +1,9 @@
+unity-api (8.7) UNRELEASED; urgency=medium
+
+  * Add popularity field to LauncherItem
+
+ -- Michael Zanetti <michael.zanetti@canonical.com>  Tue, 04 Apr 2017 10:26:39 +0200
+
 unity-api (8.6+17.04.20170317-0ubuntu1) zesty; urgency=medium
 
   [ Michael Zanetti ]
