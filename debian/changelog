@@ -1,8 +1,15 @@
-unity-api (8.7-0ubuntu1) UNRELEASED; urgency=medium
+unity-api (8.7+17.04.20170404-0ubuntu1) zesty; urgency=medium
 
+  [ Pete ]
   * Add Glib and GObject Assigner helpers.
 
- -- Pete <pete.woods@canonical.com>  Fri, 24 Mar 2017 10:25:45 +0000
+  [ Pete Woods ]
+  * unity::util - Add glib signal managers
+
+  [ Rodney Dawes ]
+  * Add utility function to prepend $SNAP to directory paths.
+
+ -- Pete Woods <pete.woods@canonical.com>  Tue, 04 Apr 2017 09:37:43 +0000
 
 unity-api (8.6+17.04.20170317-0ubuntu1) zesty; urgency=medium
 
