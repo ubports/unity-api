@@ -49,6 +49,17 @@ public:
 
 typedef ResourcePtr<guint, internal::GDBusSignalUnsubscriber> GDBusSignalConnection;
 
+/**
+ \brief Simple wrapper to manage the lifecycle of manual GDBus signal connections.
+
+ When 'signalConnection_' goes out of scope or is dealloc'ed, the connection will be removed:
+ \code{.cpp}
+ GDBusSignalConnection signalConnection_;
+
+ signalConnection_ = gdbus_signal_connection(
+            g_dbus_connection_signal_subscribe(bus.get(), nullptr, "org.does.not.exist", nullptr, "/does/not/exist", nullptr, G_DBUS_SIGNAL_FLAGS_NONE, on_dbus_signal, this, nullptr), bus);
+ \endcode
+ */
 inline GDBusSignalConnection gdbus_signal_connection(guint id, GObjectSPtr<GDBusConnection> bus) noexcept
 {
     return GDBusSignalConnection(id, internal::GDBusSignalUnsubscriber{bus});

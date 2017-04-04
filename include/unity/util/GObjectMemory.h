@@ -206,6 +206,15 @@ inline internal::GObjectAssigner<SP> assign_gobject(SP& smart_ptr) noexcept
 template<typename T>
 using GObjectSignalConnection = ResourcePtr<gulong, internal::GObjectSignalUnsubscriber<T>>;
 
+/**
+ \brief Simple wrapper to manage the lifecycle of GObject signal connections.
+
+ When 'nameConnection_' goes out of scope or is dealloc'ed, the source will be removed:
+ \code{.cpp}
+ GObjectSignalConnection<FooBar> nameConnection_;
+ nameConnection_ = gobject_signal_connection(g_signal_connect(o.get(), "notify::name", G_CALLBACK(on_notify_name), this), o);
+ \endcode
+ */
 template <typename T>
 inline GObjectSignalConnection<T> gobject_signal_connection(gulong id, const GObjectSPtr<T>& obj)
 {
