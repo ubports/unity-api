@@ -97,6 +97,22 @@ protected:
             *in = g_strdup("hi");
         }
     }
+
+    static void assignGError(GError** in)
+    {
+        if (in != nullptr)
+        {
+            *in = g_error_new_literal(g_key_file_error_quark(), 1, "hello");
+        }
+    }
+
+    static void assignEmptyGError(GError** in)
+    {
+        if (in != nullptr)
+        {
+            *in = nullptr;
+        }
+    }
 };
 
 TEST_F(GlibMemoryTest, Unique)
@@ -180,6 +196,14 @@ TEST_F(GlibMemoryTest, UPtrAssigner)
         ASSERT_TRUE(bool(str));
         EXPECT_STREQ("hi", str.get());
     }
+
+    {
+       GErrorUPtr error;
+       assignGError(assign_glib(error));
+       ASSERT_TRUE(bool(error));
+       assignEmptyGError(assign_glib(error));
+       ASSERT_FALSE(bool(error));
+   }
 }
 
 TEST_F(GlibMemoryTest, SPtrAssigner)
@@ -207,6 +231,14 @@ TEST_F(GlibMemoryTest, SPtrAssigner)
         ASSERT_TRUE(bool(str));
         EXPECT_STREQ("hi", str.get());
     }
+
+    {
+       GErrorSPtr error;
+       assignGError(assign_glib(error));
+       ASSERT_TRUE(bool(error));
+       assignEmptyGError(assign_glib(error));
+       ASSERT_FALSE(bool(error));
+   }
 }
 
 TEST_F(GlibMemoryTest, GCharUPtr)

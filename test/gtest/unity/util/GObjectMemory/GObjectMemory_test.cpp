@@ -52,6 +52,8 @@ FooBar *foo_bar_new_full(const gchar* const name, guint id);
 
 void foo_bar_assigner_full(const gchar* const name, guint id, FooBar** in);
 
+void foo_bar_assigner_null(FooBar** in);
+
 G_END_DECLS
 
 // private implementation
@@ -184,6 +186,14 @@ void foo_bar_assigner_full(const gchar* const name, guint id, FooBar** in)
     if (in != nullptr)
     {
         *in = foo_bar_new_full(name, id);
+    }
+}
+
+void foo_bar_assigner_null(FooBar** in)
+{
+    if (in != nullptr)
+    {
+        *in = nullptr;
     }
 }
 
@@ -444,7 +454,33 @@ TEST_F(GObjectMemoryTest, sptrAssignerDeletesGObjects)
     EXPECT_EQ(list<Deleted>({{"c", 5}, {"b", 4}, {"a", 3}}), DELETED_OBJECTS);
 }
 
-TEST_F(GObjectMemoryTest, foo)
+TEST_F(GObjectMemoryTest, uptrAssignerAssignsNull)
+{
+    {
+       GObjectUPtr<FooBar> o;
+       foo_bar_assigner_full("o", 1, assign_gobject(o));
+       ASSERT_TRUE(bool(o));
+       foo_bar_assigner_null(assign_gobject(o));
+       ASSERT_FALSE(bool(o));
+
+    }
+    EXPECT_EQ(list<Deleted>({{"o", 1}}), DELETED_OBJECTS);
+}
+
+TEST_F(GObjectMemoryTest, sptrAssignerAssignsNull)
+{
+    {
+       GObjectSPtr<FooBar> o;
+       foo_bar_assigner_full("o", 1, assign_gobject(o));
+       ASSERT_TRUE(bool(o));
+       foo_bar_assigner_null(assign_gobject(o));
+       ASSERT_FALSE(bool(o));
+
+    }
+    EXPECT_EQ(list<Deleted>({{"o", 1}}), DELETED_OBJECTS);
+}
+
+TEST_F(GObjectMemoryTest, moveUptrSptr)
 {
     {
         GObjectSPtr<FooBar> s;
@@ -533,3 +569,5 @@ INSTANTIATE_TEST_CASE_P(BunchOfNames,
                                           GObjectMemoryMakeSharedTestParam{"moe", 3}));
 
 }
+
+

@@ -93,10 +93,7 @@ public:
 
     ~GObjectAssigner() noexcept
     {
-        if (ptr_)
-        {
-            smart_ptr_ = SP(ptr_, GObjectDeleter());
-        }
+        smart_ptr_ = SP(ptr_, GObjectDeleter());
     }
 
     GObjectAssigner& operator=(const GObjectAssigner& other) = delete;
@@ -111,6 +108,8 @@ private:
 
     SP& smart_ptr_;
 };
+
+}
 
 /**
  \brief Helper method to wrap a unique_ptr around an existing GObject.

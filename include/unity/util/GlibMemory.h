@@ -67,10 +67,7 @@ public:
 
     ~GlibAssigner() noexcept
     {
-        if (ptr_)
-        {
-            smart_ptr_ = SP(ptr_, GlibDeleter<ElementType>());
-        }
+        smart_ptr_ = SP(ptr_, GlibDeleter<ElementType>());
     }
 
     GlibAssigner& operator=(const GlibAssigner& other) = delete;
