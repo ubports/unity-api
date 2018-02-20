@@ -26,6 +26,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <functional>
 
 using namespace std;
 

@@ -21,6 +21,7 @@
 #include <unity/util/ResourcePtr.h>
 
 #include <set>
+#include <functional>
 
 using namespace std;
 using namespace unity;

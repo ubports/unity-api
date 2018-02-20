@@ -30,6 +30,7 @@
 #include <cassert>
 #include <sstream>
 #include <vector>
+#include <functional>
 
 using namespace std;
 
