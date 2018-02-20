@@ -28,6 +28,7 @@ MockLauncherItem::MockLauncherItem(const QString &appId, const QString& desktopF
     m_desktopFile(desktopFile),
     m_name(name),
     m_icon(icon),
+    m_popularity(0),
     m_pinned(false),
     m_running(false),
     m_recent(false),
@@ -72,6 +73,20 @@ void MockLauncherItem::setKeywords(const QStringList &keywords)
     {
         m_keywords = keywords;
         Q_EMIT keywordsChanged(m_keywords);
+    }
+}
+
+uint MockLauncherItem::popularity() const
+{
+    return m_popularity;
+}
+
+void MockLauncherItem::setPopularity(uint popularity)
+{
+    if (m_popularity != popularity)
+    {
+        m_popularity = popularity;
+        Q_EMIT popularityChanged(m_popularity);
     }
 }
 

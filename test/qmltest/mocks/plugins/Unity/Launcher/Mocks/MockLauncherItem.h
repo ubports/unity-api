@@ -40,6 +40,9 @@ public:
     QStringList keywords() const override;
     void setKeywords(const QStringList &keywords);
 
+    uint popularity() const override;
+    void setPopularity(uint popularity);
+
     bool pinned() const override;
     void setPinned(bool pinned);
 
@@ -73,6 +76,7 @@ private:
     QString m_name;
     QString m_icon;
     QStringList m_keywords;
+    uint m_popularity;
     bool m_pinned;
     bool m_running;
     bool m_recent;

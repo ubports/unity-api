@@ -62,6 +62,11 @@ class UNITY_API LauncherItemInterface: public QObject
     Q_PROPERTY(QStringList keywords READ keywords NOTIFY keywordsChanged)
 
     /**
+     * @brief The popularity of this application, e.g. usage count given by Zeitgeist
+     */
+    Q_PROPERTY(uint popularity READ popularity NOTIFY popularityChanged)
+
+    /**
      * @brief A flag whether the item is pinned or not
      */
     Q_PROPERTY(bool pinned READ pinned NOTIFY pinnedChanged)
@@ -140,6 +145,7 @@ public:
     virtual QString name() const = 0;
     virtual QString icon() const = 0;
     virtual QStringList keywords() const = 0;
+    virtual uint popularity() const = 0;
     virtual bool pinned() const = 0;
     virtual bool running() const = 0;
     virtual bool recent() const = 0;
@@ -155,6 +161,7 @@ Q_SIGNALS:
     void nameChanged(const QString &name);
     void iconChanged(const QString &icon);
     void keywordsChanged(const QStringList &keywords);
+    void popularityChanged(uint popularity);
     void pinnedChanged(bool pinned);
     void runningChanged(bool running);
     void recentChanged(bool running);
