@@ -21,7 +21,7 @@ set(NotificationsMocks_SOURCES
 
 add_library(NotificationsMocks SHARED ${NotificationsMocks_SOURCES})
 
-qt5_use_modules(NotificationsMocks Core)
+target_link_libraries(NotificationsMocks Qt5::Core)
 
 set(TestNotificationsPlugin_SOURCES
     TestNotificationsPlugin.cpp
@@ -29,7 +29,7 @@ set(TestNotificationsPlugin_SOURCES
 
 add_library(TestNotificationsPlugin MODULE ${TestNotificationsPlugin_SOURCES})
 
-qt5_use_modules(TestNotificationsPlugin Core Quick)
+target_link_libraries(TestNotificationsPlugin Qt5::Core Qt5::Quick)
 
 target_link_libraries(TestNotificationsPlugin NotificationsMocks)
 

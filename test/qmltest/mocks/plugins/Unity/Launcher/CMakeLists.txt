@@ -29,7 +29,8 @@ set(LauncherMocks_SOURCES
 
 add_library(LauncherMocks SHARED ${LauncherMocks_SOURCES})
 
-qt5_use_modules(LauncherMocks Core Gui)
+#find_package(Qt5Gui REQUIRED)
+target_link_libraries(LauncherMocks Qt5::Core Qt5::Gui)
 
 set(TestLauncherPlugin_SOURCES
     TestLauncherPlugin.cpp
@@ -37,7 +38,7 @@ set(TestLauncherPlugin_SOURCES
 
 add_library(TestLauncherPlugin MODULE ${TestLauncherPlugin_SOURCES})
 
-qt5_use_modules(TestLauncherPlugin Core Quick)
+target_link_libraries(TestLauncherPlugin Qt5::Core Qt5::Quick)
 
 target_link_libraries(TestLauncherPlugin LauncherMocks)
 
