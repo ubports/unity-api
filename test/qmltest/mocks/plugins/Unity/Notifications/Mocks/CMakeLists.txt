@@ -4,7 +4,9 @@ set(MockNotificationsPlugin_SOURCES
 
 add_library(MockNotificationsPlugin MODULE ${MockNotificationsPlugin_SOURCES})
 
-qt5_use_modules(MockNotificationsPlugin Core Quick)
+#find_package(Qt5Core REQUIRED)
+#find_package(Qt5Quick REQUIRED)
+target_link_libraries(MockNotificationsPlugin Qt5::Core Qt5::Quick)
 
 target_link_libraries(MockNotificationsPlugin NotificationsMocks)
 

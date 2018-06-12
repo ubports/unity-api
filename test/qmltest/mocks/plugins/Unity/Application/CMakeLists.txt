@@ -20,7 +20,7 @@ set(ApplicationMocks_SOURCES
 
 add_library(ApplicationMocks SHARED ${ApplicationMocks_SOURCES})
 
-qt5_use_modules(ApplicationMocks Core Gui)
+target_link_libraries(ApplicationMocks Qt5::Core Qt5::Gui)
 
 set(TestApplicationPlugin_SOURCES
     TestApplicationPlugin.cpp
@@ -28,7 +28,7 @@ set(TestApplicationPlugin_SOURCES
 
 add_library(TestApplicationPlugin MODULE ${TestApplicationPlugin_SOURCES})
 
-qt5_use_modules(TestApplicationPlugin Core Gui Quick)
+target_link_libraries(TestApplicationPlugin Qt5::Core Qt5::Gui Qt5::Quick)
 
 target_link_libraries(TestApplicationPlugin ApplicationMocks)
 

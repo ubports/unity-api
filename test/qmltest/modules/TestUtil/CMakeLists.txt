@@ -15,7 +15,7 @@ include_directories(
 
 add_library(TestUtilQml MODULE ${TestUtilQML_SOURCES})
 
-qt5_use_modules(TestUtilQml Core Quick)
+target_link_libraries(TestUtilQml Qt5::Core Qt5::Quick)
 
 # copy qmldir file into build directory for shadow builds
 file(GLOB QML_JS_FILES qmldir *.js *.qml)

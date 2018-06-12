@@ -39,7 +39,7 @@ set(ScopesMocks_SOURCES
 
 add_library(ScopesMocks SHARED ${ScopesMocks_SOURCES})
 
-qt5_use_modules(ScopesMocks Core)
+target_link_libraries(ScopesMocks Qt5::Core)
 
 set(TestScopesPlugin_SOURCES
     TestScopesPlugin.cpp
@@ -47,7 +47,7 @@ set(TestScopesPlugin_SOURCES
 
 add_library(TestScopesPlugin MODULE ${TestScopesPlugin_SOURCES})
 
-qt5_use_modules(TestScopesPlugin Core Quick)
+target_link_libraries(TestScopesPlugin Qt5::Core Qt5::Quick)
 
 target_link_libraries(TestScopesPlugin ScopesMocks)
 
