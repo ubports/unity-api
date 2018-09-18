@@ -210,7 +210,10 @@ inline GSourceManager g_source_manager(guint id)
 /**
  * Manually add extra definitions for gchar* and gchar**
  */
-#if !GLIB_CHECK_VERSION(2, 57, 2)
+#if GLIB_CHECK_VERSION(2, 57, 2)
+typedef GRefStringSPtr gcharSPtr;
+typedef GRefStringUPtr gcharUPtr;
+#else
 UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(gchar, g_free)
 #endif
 typedef gchar* gcharv;
