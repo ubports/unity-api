@@ -15,8 +15,3 @@ export CCACHE_SLOPPINESS=time_macros
 	dh $@ --parallel --fail-missing
 
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
-
-ifeq ($(DEB_HOST_ARCH),powerpc)
-# Qt 5.6.1 crashes on powerpc (LP: #1606927)
-override_dh_auto_test:
-endif
