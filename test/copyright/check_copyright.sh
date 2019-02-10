@@ -34,7 +34,7 @@ usage()
 [ $# -gt 2 ] && usage
 
 
-ignore_pat="\\.sci$|\\.bzr|\\.txt$|CMakeFiles|debian|qmldir|valgrind-suppress|astyle-config|\\.cmake$|\\.ini$|\\.in$"
+ignore_pat="\\.sci$|\\.git|\\.txt$|CMakeFiles|debian|qmldir|valgrind-suppress|astyle-config|\\.cmake$|\\.ini$|\\.in$|\\Jenkinsfile$"
 
 #
 # We don't use the -i option of licensecheck to add ignore_dir to the pattern because Jenkins creates directories
