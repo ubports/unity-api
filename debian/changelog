@@ -1,4 +1,4 @@
-unity-api (8.9+ubports) xenial; urgency=medium
+unity-api (8.9+ubports) bionic; urgency=medium
 
   [ Nick Dedekind ]
   * MirPlatformCursor - updates for multi-screen.
