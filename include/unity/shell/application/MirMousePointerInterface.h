@@ -54,6 +54,8 @@ public:
 
     virtual void setThemeName(const QString &themeName) = 0;
     virtual QString themeName() const = 0;
+
+    virtual void moveTo(const QPoint& position) = 0;
     /// @endcond
 
     /**
@@ -70,29 +72,6 @@ Q_SIGNALS:
     void cursorNameChanged(QString name);
     void themeNameChanged(QString name);
     /// @endcond
-
-public Q_SLOTS:
-    /**
-     * @brief Handler for Mir mouse events
-     * The implementation should respond to Mir mouse events by moving itself along its parent
-     * area.
-     * This is called by Mir's platform cursor.
-     *
-     * Note that we get only relative mouse movement, since the mouse pointer position is defined
-     * by this very item. Ie., it's up to this class to decide whether or not it (the mouse pointer)
-     * should move (and how much) due to movement in a mouse device.
-     *
-     * @param movement Movement vector
-     */
-    virtual void handleMouseEvent(ulong timestamp, QPointF movement, Qt::MouseButtons buttons,
-            Qt::KeyboardModifiers modifiers) = 0;
-
-    /**
-     * @brief Handler for Mir mouse wheel events
-     * This is called by Mir's platform cursor.
-     */
-    virtual void handleWheelEvent(ulong timestamp, QPoint angleDelta, Qt::KeyboardModifiers modifiers) = 0;
-
 };
 
 #endif // MIR_MOUSE_POINTER_INTERFACE_H
