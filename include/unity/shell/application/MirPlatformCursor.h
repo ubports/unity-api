@@ -30,9 +30,14 @@ class MirPlatformCursor : public QPlatformCursor
 {
 public:
     /**
-     * @brief Set the QML mouse pointer that this platform cursor will talk to
+     * @brief Register a mouse pointer that this platform cursor will talk to
      */
-    virtual void setMousePointer(MirMousePointerInterface *mousePointer) = 0;
+    virtual void registerMousePointer(MirMousePointerInterface *mousePointer) = 0;
+
+    /**
+     * @brief Unregister a mouse pointer that this platform cursor will talk to
+     */
+    virtual void unregisterMousePointer(MirMousePointerInterface *mousePointer) = 0;
 };
 
 #endif // MIR_PLATFORM_CURSOR_H
