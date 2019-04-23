@@ -1,0 +1,13 @@
+--- debian/changelog	2017-03-17 11:08:20 +0000
++++ debian/changelog	2017-04-05 11:27:14 +0000
+@@ -1,3 +1,10 @@
++unity-api (8.7ubuntu2) UNRELEASED; urgency=medium
++
++  [ Nick Dedekind ]
++  * MirPlatformCursor - updates for multi-screen.
++
++ -- Nick Dedekind <nick.dedekind@canonical.com>  Wed, 05 Apr 2017 12:26:08 +0100
++
+ unity-api (8.6+17.04.20170317-0ubuntu1) zesty; urgency=medium
+ 
+   [ Michael Zanetti ]
