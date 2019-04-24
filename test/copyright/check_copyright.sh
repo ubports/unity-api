@@ -33,7 +33,6 @@ usage()
 [ $# -lt 1 ] && usage
 [ $# -gt 2 ] && usage
 
-
 ignore_pat="\\.sci$|\\.git|\\.txt$|CMakeFiles|debian|qmldir|valgrind-suppress|astyle-config|\\.cmake$|\\.ini$|\\.in$|Jenkinsfile|build|\\.qmlc$"
 
 #

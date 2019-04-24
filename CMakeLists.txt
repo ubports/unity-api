@@ -16,7 +16,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/mod
 string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower) # Build types should always be lowercase but sometimes they are not.
 
 include(PrecompiledHeaders)
-include(EnableCoverageReport)
+find_package(CoverageReport)
 #####################################################################
 # Enable code coverage calculation with gcov/gcovr/lcov
 # Usage:
