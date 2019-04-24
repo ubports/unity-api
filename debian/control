@@ -3,6 +3,7 @@ Priority: optional
 Section: libs
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Build-Depends: cmake,
+               cmake-extras,
                debhelper (>= 9),
                devscripts,
                lsb-release,
