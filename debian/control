@@ -31,7 +31,7 @@ Homepage: https://launchpad.net/unity-api
 Vcs-Bzr: lp:unity-api
 Vcs-Browser: https://code.launchpad.net/unity-api
 
-Package: libunity-api0
+Package: libunity-api1
 Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends},
@@ -44,7 +44,7 @@ Package: libunity-api-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libunity-api0 (= ${binary:Version}),
+Depends: libunity-api1 (= ${binary:Version}),
          ${misc:Depends},
 Description: Header files for Unity API
  Library to integrate with the Unity shell (dev files)
