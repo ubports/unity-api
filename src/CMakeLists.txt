@@ -15,7 +15,7 @@ set_target_properties(${UNITY_API_LIB_OBJ} PROPERTIES COMPILE_FLAGS "-fPIC")
 add_pch(pch/unityapi_pch.hh ${UNITY_API_LIB_OBJ})
 
 # Use the object files to make the shared library.
-set(UNITY_API_SOVERSION 0)
+set(UNITY_API_SOVERSION 1)
 add_library(${UNITY_API_LIB} SHARED $<TARGET_OBJECTS:${UNITY_API_LIB_OBJ}>)
 set_target_properties(${UNITY_API_LIB} PROPERTIES
     VERSION "${UNITY_API_MAJOR}.${UNITY_API_MINOR}"

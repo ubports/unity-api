@@ -8,16 +8,12 @@ SET(CTEST_CUSTOM_MEMCHECK_IGNORE
     stand-alone-unity-internal-headers
     stand-alone-unity-api-headers
     stand-alone-unity-api-internal-headers
-    stand-alone-unity-scopes-headers
-    stand-alone-unity-scopes-internal-headers
     stand-alone-unity-util-headers
     stand-alone-unity-util-internal-headers
     clean-public-unity-headers
     clean-public-unity-internal-headers
     clean-public-unity-api-headers
     clean-public-unity-api-internal-headers
-    clean-public-unity-scopes-headers
-    clean-public-unity-scopes-internal-headers
     clean-public-unity-util-headers
     clean-public-unity-util-internal-headers
     copyright
