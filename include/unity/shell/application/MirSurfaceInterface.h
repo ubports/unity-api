@@ -253,6 +253,12 @@ public:
     Q_INVOKABLE virtual void close() = 0;
 
     /**
+     * @brief Sends a force close request
+     *
+     */
+    Q_INVOKABLE virtual void forceClose() = 0;
+
+    /**
      * @brief Activates this surface
      *
      * It will get focused and raised
