@@ -235,7 +235,7 @@ UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantIter, g_variant_iter_free)
 UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantDict, g_variant_dict_unref)
 UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantType, g_variant_type_free)
 #if GLIB_CHECK_VERSION(2, 58, 0)
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (GRefString, g_ref_string_release)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GRefString, g_ref_string_release)
 #endif
 
 /**
