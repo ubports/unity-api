@@ -22,8 +22,8 @@ Build-Depends: cmake,
                qtbase5-dev (>= 5.5),
                qtdeclarative5-dev,
                qtdeclarative5-dev-tools,
-               qtdeclarative5-qtquick2-plugin,
-               qtdeclarative5-test-plugin,
+               qml-module-qtquick2,
+               qml-module-qttest,
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/unity-api
 # If you aren't a member of ~unity-team but need to upload
