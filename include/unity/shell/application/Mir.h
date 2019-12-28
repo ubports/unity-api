@@ -76,6 +76,7 @@ public:
         MaximizedBottomLeftState,
         MaximizedBottomRightState,
         HiddenState,
+        AttachedState,
     };
     Q_ENUM(State)
 
