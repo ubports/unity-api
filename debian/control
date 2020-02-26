@@ -3,6 +3,7 @@ Priority: optional
 Section: libs
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Build-Depends: cmake,
+               cmake-extras,
                debhelper (>= 9),
                devscripts,
                lsb-release,
@@ -14,6 +15,7 @@ Build-Depends: cmake,
                graphviz,
                libglib2.0-dev,
                libgtest-dev,
+               google-mock,
                libqtdbustest1-dev,
                pkg-config,
                python3:any,

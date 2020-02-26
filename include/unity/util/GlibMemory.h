@@ -22,6 +22,7 @@
 #define UNITY_UTIL_GLIBMEMORY_H
 
 #include <memory>
+
 #include <glib.h>
 
 #include <unity/util/ResourcePtr.h>
@@ -185,27 +186,57 @@ inline GSourceManager g_source_manager(guint id)
 }
 
 /**
- * Below here is some hackery to extract the matching deleters for all built in glib types.
+ * As glib >= 2.60 has multilpe typedefs to void, we need to manually
+ * declare the definitions for the unique types.
  */
-#pragma push_macro("G_DEFINE_AUTOPTR_CLEANUP_FUNC")
-#undef G_DEFINE_AUTOPTR_CLEANUP_FUNC
-#define G_DEFINE_AUTOPTR_CLEANUP_FUNC(TypeName, func) UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(TypeName, func)
 
-#pragma push_macro("G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC")
-#undef G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC
-#define G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(TypeName, func)
-
-#pragma push_macro("G_DEFINE_AUTO_CLEANUP_FREE_FUNC")
-#undef G_DEFINE_AUTO_CLEANUP_FREE_FUNC
-#define G_DEFINE_AUTO_CLEANUP_FREE_FUNC(TypeName, func, none)
-
-#define __GLIB_H_INSIDE__
-#include <glib/glib-autocleanups.h>
-#undef __GLIB_H_INSIDE__
-
-#pragma pop_macro("G_DEFINE_AUTOPTR_CLEANUP_FUNC")
-#pragma pop_macro("G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC")
-#pragma pop_macro("G_DEFINE_AUTO_CLEANUP_FREE_FUNC")
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GAsyncQueue, g_async_queue_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GBookmarkFile, g_bookmark_file_free)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GBytes, g_bytes_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GChecksum, g_checksum_free)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GDateTime, g_date_time_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GDir, g_dir_close)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GError, g_error_free)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GHashTable, g_hash_table_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GHmac, g_hmac_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GIOChannel, g_io_channel_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GKeyFile, g_key_file_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GList, g_list_free)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GArray, g_array_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GPtrArray, g_ptr_array_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GByteArray, g_byte_array_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GMainContext, g_main_context_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GMainLoop, g_main_loop_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GSource, g_source_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GMappedFile, g_mapped_file_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GMarkupParseContext, g_markup_parse_context_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GNode, g_node_destroy)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GOptionContext, g_option_context_free)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GOptionGroup, g_option_group_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GPatternSpec, g_pattern_spec_free)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GQueue, g_queue_free)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GRand, g_rand_free)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GRegex, g_regex_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GMatchInfo, g_match_info_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GScanner, g_scanner_destroy)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GSequence, g_sequence_free)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GSList, g_slist_free)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GString, g_autoptr_cleanup_gstring_free)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GStringChunk, g_string_chunk_free)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GThread, g_thread_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GMutex, g_mutex_clear)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GCond, g_cond_clear)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GTimer, g_timer_destroy)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GTimeZone, g_time_zone_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GTree, g_tree_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariant, g_variant_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantBuilder, g_variant_builder_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantIter, g_variant_iter_free)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantDict, g_variant_dict_unref)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantType, g_variant_type_free)
+#if GLIB_CHECK_VERSION(2, 58, 0)
+UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GRefString, g_ref_string_release)
+#endif
 
 /**
  * Manually add extra definitions for gchar* and gchar**
