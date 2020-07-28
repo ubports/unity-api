@@ -19,12 +19,12 @@ Build-Depends: cmake,
                libqtdbustest1-dev,
                pkg-config,
                python3:any,
+               qml-module-qtquick2,
+               qml-module-qttest,
                qt5-default,
                qtbase5-dev (>= 5.5),
                qtdeclarative5-dev,
                qtdeclarative5-dev-tools,
-               qtdeclarative5-qtquick2-plugin,
-               qtdeclarative5-test-plugin,
 Standards-Version: 3.9.4
 Homepage: https://github.com/ubports/unity-api
 
