@@ -64,9 +64,15 @@ protected:
     {
         auto address = unique_glib(g_dbus_address_get_for_bus_sync(G_BUS_TYPE_SESSION, nullptr, nullptr));
 
+        GError *error = nullptr;
         auto bus = unique_gobject(
                 g_dbus_connection_new_for_address_sync(address.get(), (GDBusConnectionFlags) (G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT | G_DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION), nullptr,
-                        nullptr, nullptr));
+                        nullptr, &error));
+        if (!bus) {
+            g_printerr ("Error connecting to D-Bus address %s: %s\n", address.get(), error->message);
+            g_error_free (error);
+        }
+
 
         g_dbus_connection_set_exit_on_close(bus.get(), FALSE);
 
