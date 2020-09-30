@@ -1,3 +1,9 @@
+unity-api (8.9+ubports) xenial; urgency=medium
+
+  * Bump version number to match edge channel.
+
+ -- Rodney Dawes <dobey@ubports.com>  Wed, 30 Sep 2020 17:51:49 -0400
+
 unity-api (8.8+ubports) xenial; urgency=medium
 
   * Imported to UBports
