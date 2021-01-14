@@ -228,6 +228,13 @@ class UNITY_API ApplicationInfoInterface: public QObject
      */
      Q_PROPERTY(int surfaceCount READ surfaceCount NOTIFY surfaceCountChanged)
 
+    /**
+     * @brief Whether this app is visible
+     *
+     * If false, it will not show up in the panel or show any surfaces.
+     */
+    Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
+
 protected:
     /// @cond
     ApplicationInfoInterface(const QString &appId, QObject* parent = 0): QObject(parent) { Q_UNUSED(appId) }
@@ -313,6 +320,8 @@ public:
     virtual MirSurfaceListInterface* surfaceList() const = 0;
     virtual MirSurfaceListInterface* promptSurfaceList() const = 0;
     virtual int surfaceCount() const = 0;
+    virtual void setVisible(bool) = 0;
+    virtual bool visible() const = 0;
     /// @endcond
 
 Q_SIGNALS:
@@ -326,6 +335,7 @@ Q_SIGNALS:
     void exemptFromLifecycleChanged(bool exemptFromLifecycle);
     void initialSurfaceSizeChanged(const QSize &size);
     void surfaceCountChanged(int surfaceCount);
+    void visibleChanged(bool visible);
     /// @endcond
 
     /**

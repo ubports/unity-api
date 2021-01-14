@@ -65,6 +65,9 @@ public:
     MirSurfaceListInterface* promptSurfaceList() const override { return nullptr; }
     int surfaceCount() const override;
 
+    void setVisible(bool) override {};
+    bool visible() const override { return false; }
+
 private:
     QString m_appId;
     QString m_name;
