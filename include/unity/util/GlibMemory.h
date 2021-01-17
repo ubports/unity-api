@@ -234,19 +234,11 @@ UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantBuilder, g_variant_builder_unref)
 UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantIter, g_variant_iter_free)
 UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantDict, g_variant_dict_unref)
 UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantType, g_variant_type_free)
-#if GLIB_CHECK_VERSION(2, 58, 0)
-UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GRefString, g_ref_string_release)
-#endif
 
 /**
  * Manually add extra definitions for gchar* and gchar**
  */
-#if GLIB_CHECK_VERSION(2, 57, 2)
-typedef GRefStringSPtr gcharSPtr;
-typedef GRefStringUPtr gcharUPtr;
-#else
 UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(gchar, g_free)
-#endif
 typedef gchar* gcharv;
 UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(gcharv, g_strfreev)
 
